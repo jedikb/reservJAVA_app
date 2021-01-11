@@ -46,7 +46,7 @@ package="com.example.reservjava_app">
 
     <!-- Gallery -->
     <intent>
-        <actino android:name="android.intent.action.GET_CONTENT" />
+        <action android:name="android.intent.action.GET_CONTENT" />
     </intent>
     <intent>
         <action android:name="android.media.browse.MediaBrowserService" />

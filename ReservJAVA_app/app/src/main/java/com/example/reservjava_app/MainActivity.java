@@ -1,5 +1,6 @@
 package com.example.reservjava_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -7,9 +8,19 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.reservjava_app.fragment.HomeFragment;
+import com.example.reservjava_app.fragment.ListFragment;
+import com.example.reservjava_app.fragment.SearchFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class MainActivity extends AppCompatActivity {
+
+  HomeFragment homeFragment;
+  SearchFragment searchFragment;
+  ListFragment listFragment;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +34,44 @@ public class MainActivity extends AppCompatActivity {
     //1. 액티비티 화면이 A, B, C 를 만들어야 한다면
     //  액티비티 화면을 이름만 주어서 만든다.
 
+    //NavigationBar Setting
+    homeFragment = new HomeFragment();
+    searchFragment = new SearchFragment();
+    listFragment = new ListFragment();
 
-  }
+    getSupportFragmentManager().beginTransaction()
+            .replace(R.id.container, homeFragment).commit();
+    BottomNavigationView bottomNavigationView =
+            findViewById(R.id.bottom_navigation);
+
+    bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+      @Override
+      public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+          case R.id.homeItem:
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, homeFragment).commit();
+            return true;
+
+          case R.id.searchItem:
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, searchFragment).commit();
+            return true;
+
+          case R.id.listItem:
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, listFragment).commit();
+            return true;
+        }//switch
+        return false;
+      }//onNavigationItemSelected()
+    });
+
+
+
+
+
+  }//onCreat()
 
 
 
