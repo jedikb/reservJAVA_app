@@ -1,5 +1,7 @@
 package com.example.reservjava_app.fragment;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,75 +9,95 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 
+
 public class SearchFragment extends Fragment {
 
-    MainActivity activity;
+  MainActivity activity;
 
-    public SearchFragment() {}
-    //지워도 되나;;
+  //Button backBtn, searchBtn, setAddrBtn;
+  TextView tvAddr;
+  EditText addrSearch;
 
-    public static com.example.reservjava_app.fragment.SearchFragment newInstance(String param1, String param2) {
-        com.example.reservjava_app.fragment.SearchFragment fragment = new com.example.reservjava_app.fragment.SearchFragment();
-        Bundle args = new Bundle();
+  @Override
+  public void onAttach(@NonNull Context context) {
+    super.onAttach(context);
+    activity = (MainActivity) getActivity();
+  }
 
-        fragment.setArguments(args);
-        return fragment;
-    }
+  @Override
+  public void onDetach() {
+    super.onDetach();
+    activity = null;
+  }
+  @Nullable
+  @Override
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                           @Nullable Bundle savedInstanceState) {
+    ViewGroup viewGroup = (ViewGroup) inflater
+        .inflate(R.layout.fragment_search, container, false);
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+    //backBtn = viewGroup.findViewById(R.id.backBtn); 왜 인지 모르겠지만 이렇게 하면 다운된다;;
 
+    //백 버튼 (홈으로 돌아감)
+    viewGroup.findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        activity.onFragmentChange(1);
+      }
+    });
 
-        }
-    }
+    //검색버튼(whereList로 이동)
+    viewGroup.findViewById(R.id.searchBtn).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        activity.onFragmentChange(3);
+      }
+    });
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_search, container,false);
+    //주소 확정버튼(주소가 저장되었습니다 메시지 띄움)
+    viewGroup.findViewById(R.id.setAddrBtn).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Toast.makeText(getActivity(), "주소가 성공적으로 저장되었습니다", Toast.LENGTH_SHORT).show();
+        activity.onFragmentChange(1);
+      }
+    });
 
-        Button searchBtn = viewGroup.findViewById(R.id.searchBtn);
-        Button backBtn = viewGroup.findViewById(R.id.backBtn);
-        Button setAddrBtn = viewGroup.findViewById(R.id.setAddrBtn);
+    // (임시) 리뷰 등록 화면으로 이동
+    viewGroup.findViewById(R.id.moveToReview).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        activity.onFragmentChange(11);
+      }
+    });
 
-        EditText addrSearch = viewGroup.findViewById(R.id.addrSearch);
-        TextView tvAddr = viewGroup.findViewById(R.id.tvAddr);
-
-        //검색 버튼
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        //뒤로가기 버튼
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        //주소 추가(확정) 버튼
-        setAddrBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+    // (임시) 프로필 화면으로 이동
+    viewGroup.findViewById(R.id.moveToProfile).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        activity.onFragmentChange(6);
+      }
+    });
 
 
 
 
-        return inflater.inflate(R.layout.fragment_search, container, false);
-    }
+    tvAddr = viewGroup.findViewById(R.id.tvAddr);
+    addrSearch = viewGroup.findViewById(R.id.addrSearch);
+
+
+
+    return viewGroup;
+  }
+
+
 }

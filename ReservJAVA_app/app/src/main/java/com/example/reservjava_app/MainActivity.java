@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -14,6 +15,9 @@ import android.widget.Toast;
 import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
 import com.example.reservjava_app.fragment.SearchFragment;
+import com.example.reservjava_app.fragment.b_where.WhereListFragment;
+import com.example.reservjava_app.ui.f_profile.ProfileActivity;
+import com.example.reservjava_app.ui.f_profile.ReviewActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +25,12 @@ public class MainActivity extends AppCompatActivity {
   HomeFragment homeFragment;
   SearchFragment searchFragment;
   ListFragment listFragment;
+
+
+  //검색과 관련된 프래그먼트(광범)
+  WhereListFragment whereListFragment;
+  //프로필과 관련된 프래그먼트(광범)
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +77,34 @@ public class MainActivity extends AppCompatActivity {
       }//onNavigationItemSelected()
     });
 
+      //where
+      whereListFragment = new WhereListFragment();
 
 
 
 
   }//onCreat()
 
+  //  SearchFragment 이동(이건 나중에 다 모아서 올려야 할듯...)-일단 광범
+  public void onFragmentChange(int state){
+    if (state == 1) {
+      getSupportFragmentManager().beginTransaction()
+          .replace(R.id.container, homeFragment).commit();
+    } else if (state == 2) {
+      getSupportFragmentManager().beginTransaction()
+          .replace(R.id.container, searchFragment).commit();
+    } else if (state == 3) {
+      getSupportFragmentManager().beginTransaction()
+          .replace(R.id.container, whereListFragment).commit();
+    }else if (state == 6) {
+      Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+      startActivity(intent);
+
+    }else if (state == 11) {
+      Intent intent = new Intent(getApplicationContext(), ReviewActivity.class);
+      startActivity(intent);
+    }
+  }
 
 
   // 위험권한 설정(세부적인 것은 나중에 바꾸자)

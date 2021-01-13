@@ -12,6 +12,8 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        // minSdkVersion 20 이하 일 때 참조제한 해제
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -43,6 +45,8 @@ dependencies {
     implementation group: 'org.apache.httpcomponents', name: 'httpclient-android', version: '4.3.5.1'
     implementation('org.apache.httpcomponents:httpmime:4.3') {
         exclude module: "httpclient"
+    //버전 20이하 참조를 위한 multidex 라이브러리 추가
+    implementation 'androidx.multidex:multidex:2.0.1'
     }
 
     /* 리사이클러 뷰 사용하기 */

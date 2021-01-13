@@ -49,9 +49,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReservJAVA_app"
         android:usesCleartextTraffic="true">
+        <!-- https가 아니라 http로 오더라도 그냥 허가하는 부분 -->
         <activity android:name=".category.Exercise"></activity>
         <activity android:name=".category.Accommodation" />
-        <activity android:name=".category.Hospital" /> <!-- https가 아니라 http로 오더라도 그냥 허가하는 부분 -->
+        <activity android:name=".category.Hospital" />
+        android:name="android.support.multidex.MultiDexApplication"
+        <activity android:name=".ui.b_where.WhereListActivity" />
+        <activity android:name=".ui.f_profile.ProfileActivity" />
+
+
         <!-- http 라이브러리 사용 -->
         <uses-library
             android:name="org.apache.http.legacy"
