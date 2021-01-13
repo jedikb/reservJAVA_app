@@ -1,71 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
-package="com.example.reservjava_app">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.reservjava_app">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 권한, 통신, 프로바이더, 서비스 등 모든 것 -->
+    <queries>
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+        <!-- WebView -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
 
-<application
-    android:allowBackup="true"
-    android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:supportsRtl="true"
-    android:theme="@style/Theme.ReservJAVA_app"
+            <category android:name="android.intent.category.BROWSABLE" />
 
-    android:requestLegacyExternalStorage="true"
-    android:usesCleartextTraffic="true">
-    <!-- https가 아니라 http로 오더라도 그냥 허가하는 부분 -->
-    <!-- http 라이브러리 사용 -->
-    <uses-library
-        android:name="org.apache.http.legacy"
-        android:required="false" />
+            <data android:scheme="http" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
 
-    <!-- 네이버 맵 사용 -->
-    <meta-data
-        android:name="com.naver.maps.map.CLIENT_ID"
-        android:value="evbl7x2447" />
+            <category android:name="android.intent.category.BROWSABLE" />
 
-    <activity android:name=".MainActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <data android:scheme="https" />
+        </intent>
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-</application>
+        <!-- Camera -->
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
 
+        <!-- Gallery -->
+        <intent>
+            <action android:name="android.intent.action.GET_CONTENT" />
+        </intent>
+        <intent>
+            <action android:name="android.media.browse.MediaBrowserService" />
+        </intent>
+    </queries>
 
-<!-- 권한, 통신, 프로바이더, 서비스 등 모든 것 -->
-<queries>
-    <!-- WebView -->
-    <intent>
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="http" />
-    </intent>
-    <intent>
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="https" />
-    </intent>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ReservJAVA_app"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".category.Exercise"></activity>
+        <activity android:name=".category.Accommodation" />
+        <activity android:name=".category.Hospital" /> <!-- https가 아니라 http로 오더라도 그냥 허가하는 부분 -->
+        <!-- http 라이브러리 사용 -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" /> <!-- 네이버 맵 사용 -->
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="evbl7x2447" />
 
-    <!-- Camera -->
-    <intent>
-        <action android:name="android.media.action.IMAGE_CAPTURE" />
-    </intent>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-    <!-- Gallery -->
-    <intent>
-        <action android:name="android.intent.action.GET_CONTENT" />
-    </intent>
-    <intent>
-        <action android:name="android.media.browse.MediaBrowserService" />
-    </intent>
-</queries>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
 
 </manifest>

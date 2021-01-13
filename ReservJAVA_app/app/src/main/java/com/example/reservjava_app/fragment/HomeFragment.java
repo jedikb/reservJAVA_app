@@ -1,65 +1,73 @@
 package com.example.reservjava_app.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.reservjava_app.R;
+import com.example.reservjava_app.category.Accommodation;
+import com.example.reservjava_app.category.Exercise;
+import com.example.reservjava_app.category.Hospital;
+import com.example.reservjava_app.category.Restaurant;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link com.example.reservjava_app.fragment.HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class HomeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static com.example.reservjava_app.fragment.HomeFragment newInstance(String param1, String param2) {
-        com.example.reservjava_app.fragment.HomeFragment fragment = new com.example.reservjava_app.fragment.HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    ImageButton button1, button2, button3, button4,
+        button5, button6, button7, button8;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
+
+        button1 = rootView.findViewById(R.id.imageButton1);
+        button2 = rootView.findViewById(R.id.imageButton2);
+        button3 = rootView.findViewById(R.id.imageButton3);
+        button4 = rootView.findViewById(R.id.imageButton4);
+        button5 = rootView.findViewById(R.id.imageButton5);
+        button6 = rootView.findViewById(R.id.imageButton6);
+        button7 = rootView.findViewById(R.id.imageButton7);
+        button8 = rootView.findViewById(R.id.imageButton8);
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Hospital.class);
+                startActivity(intent);
+            }
+        });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Restaurant.class);
+                startActivity(intent);
+            }
+        });
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Accommodation.class);
+                startActivity(intent);
+            }
+        });
+
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Exercise.class);
+                startActivity(intent);
+            }
+        });
+
+
+        return rootView;
     }
 }
