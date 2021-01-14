@@ -75,10 +75,17 @@
 
 
     <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="376dp" />
+
+    <Button
+        android:id="@+id/loginBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        />
+        android:text="로그인화면(임시)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </LinearLayout>

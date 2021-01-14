@@ -1,22 +1,19 @@
 package com.example.reservjava_app;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
 import com.example.reservjava_app.fragment.SearchFragment;
-import com.example.reservjava_app.ui.f_profile.ProfileActivity;
-import com.example.reservjava_app.ui.f_profile.ReviewActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
     //위험권한 실행
     checkDangerousPermissions();
-
 
     //1. 액티비티 화면이 A, B, C 를 만들어야 한다면
     //  액티비티 화면을 이름만 주어서 만든다.
@@ -86,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
           .replace(R.id.container, listFragment).commit();
     }
   }
-
 
   // 위험권한 설정(세부적인 것은 나중에 바꾸자)
   private void checkDangerousPermissions() {
