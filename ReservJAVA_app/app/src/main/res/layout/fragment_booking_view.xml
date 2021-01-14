@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -99,24 +100,23 @@
             android:id="@+id/title"
             />
 
-        <TextView
-            app:layout_constraintTop_toBottomOf="@+id/title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-
-            android:text="예약한 상품 리스트"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:background="@drawable/solid_black"
-
+        <Spinner
+            android:id="@+id/product_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_height="30dp"
+
             android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
 
-            android:id="@+id/product_name"
-            />
+            android:entries="@array/product_name"
+            android:gravity="center"
+            android:text="예약한 상품 리스트"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
 
         <ImageView
             app:layout_constraintTop_toBottomOf="@+id/product_name"
@@ -211,7 +211,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
 
-            android:id="@+id/bookingCancelBtn"
+            android:id="@+id/cancelBtn"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
