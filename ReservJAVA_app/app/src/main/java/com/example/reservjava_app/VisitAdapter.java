@@ -23,7 +23,7 @@ public class VisitAdapter extends
   ArrayList<reviewDTO> reviewDTOS;
   LinearLayout parentLay;
 
-  public VisitAdapter(Context context, ArrayList<BusinessDTO> businessDTOS, ArrayList<reviewDTO> reviewDTOS{
+  public VisitAdapter(Context context, ArrayList<BusinessDTO> businessDTOS, ArrayList<reviewDTO> reviewDTOS){
     this.context = context;
     this.businessDTOS = businessDTOS;
     this.reviewDTOS = reviewDTOS;

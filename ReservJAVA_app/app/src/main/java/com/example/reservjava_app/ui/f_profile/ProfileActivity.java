@@ -30,6 +30,9 @@ public class ProfileActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_profile);
+
+
+
     //리스트를 담을 화면(방문, 리뷰 둘다 담을 예정)
     recyclerView = findViewById(R.id.ListView);
     faceImg = findViewById(R.id.faceImg);

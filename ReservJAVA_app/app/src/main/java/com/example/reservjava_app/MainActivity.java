@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
 import com.example.reservjava_app.fragment.SearchFragment;
-import com.example.reservjava_app.fragment.b_where.WhereListFragment;
 import com.example.reservjava_app.ui.f_profile.ProfileActivity;
 import com.example.reservjava_app.ui.f_profile.ReviewActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,12 +24,6 @@ public class MainActivity extends AppCompatActivity {
   HomeFragment homeFragment;
   SearchFragment searchFragment;
   ListFragment listFragment;
-
-
-  //검색과 관련된 프래그먼트(광범)
-  WhereListFragment whereListFragment;
-  //프로필과 관련된 프래그먼트(광범)
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -77,15 +70,10 @@ public class MainActivity extends AppCompatActivity {
       }//onNavigationItemSelected()
     });
 
-      //where
-      whereListFragment = new WhereListFragment();
-
-
-
 
   }//onCreat()
 
-  //  SearchFragment 이동(이건 나중에 다 모아서 올려야 할듯...)-일단 광범
+  // 주요 프래그먼트로 이동
   public void onFragmentChange(int state){
     if (state == 1) {
       getSupportFragmentManager().beginTransaction()
@@ -95,14 +83,7 @@ public class MainActivity extends AppCompatActivity {
           .replace(R.id.container, searchFragment).commit();
     } else if (state == 3) {
       getSupportFragmentManager().beginTransaction()
-          .replace(R.id.container, whereListFragment).commit();
-    }else if (state == 6) {
-      Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-      startActivity(intent);
-
-    }else if (state == 11) {
-      Intent intent = new Intent(getApplicationContext(), ReviewActivity.class);
-      startActivity(intent);
+          .replace(R.id.container, listFragment).commit();
     }
   }
 

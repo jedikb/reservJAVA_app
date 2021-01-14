@@ -31,9 +31,9 @@
 
         <!-- 검색창(주소or검색) -->
         <LinearLayout
-            android:layout_width="350dp"
+            android:layout_width="310dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
 
             <EditText
                 android:id="@+id/addrSearch"
-                android:layout_width="310dp"
+                android:layout_width="270dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
                 android:hint="찾으시는 주소를 입력하세요"
@@ -66,6 +66,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/listView"
         />
 
 

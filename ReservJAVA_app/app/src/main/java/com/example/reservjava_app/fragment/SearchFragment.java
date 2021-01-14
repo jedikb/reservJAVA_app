@@ -2,6 +2,7 @@ package com.example.reservjava_app.fragment;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
+import com.example.reservjava_app.ui.b_where.WhereListActivity;
+import com.example.reservjava_app.ui.f_profile.ProfileActivity;
+import com.example.reservjava_app.ui.f_profile.ReviewActivity;
 
 
 public class SearchFragment extends Fragment {
@@ -45,7 +49,8 @@ public class SearchFragment extends Fragment {
     ViewGroup viewGroup = (ViewGroup) inflater
         .inflate(R.layout.fragment_search, container, false);
 
-    //backBtn = viewGroup.findViewById(R.id.backBtn); 왜 인지 모르겠지만 이렇게 하면 다운된다;;
+    tvAddr = viewGroup.findViewById(R.id.tvAddr);
+    addrSearch = viewGroup.findViewById(R.id.addrSearch);
 
     //백 버튼 (홈으로 돌아감)
     viewGroup.findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
@@ -59,7 +64,8 @@ public class SearchFragment extends Fragment {
     viewGroup.findViewById(R.id.searchBtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        activity.onFragmentChange(3);
+        Intent intent = new Intent(activity.getApplicationContext(), WhereListActivity.class);
+        startActivity(intent);
       }
     });
 
@@ -76,7 +82,8 @@ public class SearchFragment extends Fragment {
     viewGroup.findViewById(R.id.moveToReview).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        activity.onFragmentChange(11);
+        Intent intent = new Intent(activity.getApplicationContext(), ReviewActivity.class);
+        startActivity(intent);
       }
     });
 
@@ -84,20 +91,11 @@ public class SearchFragment extends Fragment {
     viewGroup.findViewById(R.id.moveToProfile).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        activity.onFragmentChange(6);
+        Intent intent = new Intent(activity.getApplicationContext(), ProfileActivity.class);
+        startActivity(intent);
       }
     });
 
-
-
-
-    tvAddr = viewGroup.findViewById(R.id.tvAddr);
-    addrSearch = viewGroup.findViewById(R.id.addrSearch);
-
-
-
     return viewGroup;
   }
-
-
 }

@@ -27,7 +27,6 @@ public class ReviewActivity extends AppCompatActivity {
     editReview = findViewById(R.id.editReview);
     ratingBar = findViewById(R.id.ratingBar);
 
-
     // 뒤로가기 버튼(리스트 프래그먼트로 이동)
     findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
       @Override

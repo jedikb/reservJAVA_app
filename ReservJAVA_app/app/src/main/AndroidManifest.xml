@@ -56,6 +56,8 @@
         android:name="android.support.multidex.MultiDexApplication"
         <activity android:name=".ui.b_where.WhereListActivity" />
         <activity android:name=".ui.f_profile.ProfileActivity" />
+        <activity android:name=".ui.f_profile.ReviewActivity" />
+        <activity android:name=".ui.f_profile.ModProfileActivity" />
 
 
         <!-- http 라이브러리 사용 -->
