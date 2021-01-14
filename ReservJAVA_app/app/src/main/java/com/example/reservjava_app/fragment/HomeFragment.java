@@ -35,6 +35,7 @@ public class HomeFragment extends Fragment {
         button7 = rootView.findViewById(R.id.imageButton7);
         button8 = rootView.findViewById(R.id.imageButton8);
 
+        //병원 카테고리
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +44,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        //식당 카테고리
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +53,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        //숙박시설 카테고리
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +62,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        //운동 카테고리
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
