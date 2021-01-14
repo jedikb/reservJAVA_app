@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.reservjava_app.DTO.BusinessDTO;
-import com.example.reservjava_app.DTO.reviewDTO;
+import com.example.reservjava_app.DTO.ReviewDTO;
 
 import java.util.ArrayList;
 
@@ -20,13 +20,13 @@ public class VisitAdapter extends
 
   Context context;
   ArrayList<BusinessDTO> businessDTOS;
-  ArrayList<reviewDTO> reviewDTOS;
+  ArrayList<ReviewDTO> ReviewDTOS;
   LinearLayout parentLay;
 
-  public VisitAdapter(Context context, ArrayList<BusinessDTO> businessDTOS, ArrayList<reviewDTO> reviewDTOS){
+  public VisitAdapter(Context context, ArrayList<BusinessDTO> businessDTOS, ArrayList<ReviewDTO> ReviewDTOS){
     this.context = context;
     this.businessDTOS = businessDTOS;
-    this.reviewDTOS = reviewDTOS;
+    this.ReviewDTOS = ReviewDTOS;
   }
 
 
@@ -59,7 +59,7 @@ public class VisitAdapter extends
       date = itemView.findViewById(R.id.date);
       order = itemView.findViewById(R.id.order);
     }
-    public void setItem(BusinessDTO dto, reviewDTO reviewDTO){
+    public void setItem(BusinessDTO dto, ReviewDTO reviewDTO){
       name.setText(dto.getBusiness_name());
       //나중에 다 바꿔야 할듯;;; 일이 커진다
       date.setText((CharSequence) reviewDTO.getBooking_date_reservation());

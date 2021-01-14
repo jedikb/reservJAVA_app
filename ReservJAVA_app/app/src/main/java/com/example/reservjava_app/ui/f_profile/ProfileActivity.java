@@ -7,13 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.example.reservjava_app.DTO.BusinessDTO;
-import com.example.reservjava_app.DTO.reviewDTO;
-import com.example.reservjava_app.MainActivity;
+import com.example.reservjava_app.DTO.ReviewDTO;
 import com.example.reservjava_app.R;
 
 import java.util.ArrayList;
@@ -23,7 +20,7 @@ public class ProfileActivity extends AppCompatActivity {
   RecyclerView recyclerView;
 
   ArrayList<BusinessDTO> businessDTOS;
-  ArrayList<reviewDTO> reviewDTOS;
+  ArrayList<ReviewDTO> ReviewDTOS;
   ImageView faceImg;
 
 

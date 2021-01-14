@@ -49,7 +49,7 @@
                 android:gravity="center"
                 android:textColor="#000"
                 android:textSize="18sp"
-                android:background="@drawable/solid_black"/>
+                android:layout_marginLeft="10dp"/>
                 <!--예약한 매장이 많으면 검색하게 하려 했으나 필요없을듯.. 추후 삭제-->
 <!--            <EditText
                 android:id="@+id/addrSearch"
