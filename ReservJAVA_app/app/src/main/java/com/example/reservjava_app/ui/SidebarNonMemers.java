@@ -1,10 +1,8 @@
 package com.example.reservjava_app.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -25,8 +23,8 @@ public class SidebarNonMemers extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
 
   Toolbar toolbar;
-  LoginActivity loginActivity;
-  SignupActivity signupActivity;
+  LoginActivity fragment1;
+  SignupActivity fragment2;
   Fragment3 fragment3;
 
   @Override
@@ -47,8 +45,8 @@ public class SidebarNonMemers extends AppCompatActivity
     drawer.addDrawerListener(toggle);
     toggle.syncState();
 
-    loginActivity = new LoginActivity();
-    signupActivity = new SignupActivity();
+    fragment1 = new LoginActivity();
+    fragment2 = new SignupActivity();
     fragment3 = new Fragment3();
 
  /*   getSupportFragmentManager().beginTransaction()
@@ -73,21 +71,19 @@ public class SidebarNonMemers extends AppCompatActivity
   public boolean onNavigationItemSelected(@NonNull MenuItem item) {
     int id = item.getItemId();
 
-    if (id == R.id.nav_home) {
+/*    if (id == R.id.nav_home) {
       Toast.makeText(this,
           "로그인 메뉴 선택", Toast.LENGTH_SHORT).show();
-      Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-      startActivity(intent);
+      onFragmentSelected(0, null);
     } else if (id == R.id.nav_gallery) {
       Toast.makeText(this,
           "회원가입 메뉴 선택", Toast.LENGTH_SHORT).show();
-      Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-      startActivity(intent);
+      onFragmentSelected(1, null);
     } else if (id == R.id.nav_slideshow) {
       Toast.makeText(this,
           "문의하기 메뉴 선택", Toast.LENGTH_SHORT).show();
-      /*onFragmentSelected(2, null);*/
-    }
+      onFragmentSelected(2, null);
+    }*/
 
     DrawerLayout drawer = findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
@@ -108,12 +104,12 @@ public class SidebarNonMemers extends AppCompatActivity
     } else if (position == 2) {
       curFragment = fragment3;
       toolbar.setTitle("문의하기 화면");
-    }
+    }*/
 
-    getSupportFragmentManager().beginTransaction()
-        .replace(R.id.container, curFragment).commit();
+/*    getSupportFragmentManager().beginTransaction()
+        .replace(R.id.container, curFragment).commit();*/
 
-  }*/
+/*  }*/
 
   @Override
   public void onBackPressed() {

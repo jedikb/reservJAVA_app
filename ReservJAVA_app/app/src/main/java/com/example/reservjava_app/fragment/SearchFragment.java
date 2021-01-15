@@ -49,7 +49,6 @@ public class SearchFragment extends Fragment {
     tvAddr = viewGroup.findViewById(R.id.tvAddr);
     addrSearch = viewGroup.findViewById(R.id.addrSearch);
 
-
  /*   //사이드바(member)
     viewGroup.findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
       @Override

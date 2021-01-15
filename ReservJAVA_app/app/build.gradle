@@ -40,9 +40,6 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    //툴바 사용하기 // 안됨;;
-    //implementation 'com.android.support:appcompat-v7:27.1.1'
-
 
     /* 안드로이드와 통신할수 있는 버전 가져오기  */
     implementation group: 'org.apache.httpcomponents', name: 'httpclient-android', version: '4.3.5.1'
