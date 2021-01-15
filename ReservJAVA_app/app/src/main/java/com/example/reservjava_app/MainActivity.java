@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +18,7 @@ import com.example.reservjava_app.fragment.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-
+  Toolbar toolbar;
   HomeFragment homeFragment;
   SearchFragment searchFragment;
   ListFragment listFragment;
@@ -32,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
 
     //1. 액티비티 화면이 A, B, C 를 만들어야 한다면
     //  액티비티 화면을 이름만 주어서 만든다.
+
+    //사이드바(member) - 안됨;;
+    //toolbar = (android.support.v7.widget.toolbar) findViewById(R.id.toolbar);
+    //setSupportActionBar(toolbar);
 
     //NavigationBar Setting
     homeFragment = new HomeFragment();

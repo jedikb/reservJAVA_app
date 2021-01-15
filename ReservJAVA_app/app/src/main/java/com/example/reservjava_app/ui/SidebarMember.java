@@ -5,7 +5,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.reservjava_app.R;
@@ -50,11 +48,11 @@ public class SidebarMember extends AppCompatActivity
 
 /*      fragment1 = new LoginFragment();
       fragment2 = new SignupFragment();
-      fragment3 = new Fragment3();*/
+      fragment3 = new Fragment3();
 
-  /*    getSupportFragmentManager().beginTransaction()
-          .replace(R.id.container, fragment1).commit();
-*/
+      getSupportFragmentManager().beginTransaction()
+          .replace(R.id.container, fragment1).commit();*/
+
       NavigationView navigationView = findViewById(R.id.nav_view);
       navigationView.setNavigationItemSelectedListener(this);
 
@@ -91,7 +89,7 @@ public class SidebarMember extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
       int id = item.getItemId();
 
-      if (id == R.id.nav_home) {
+/*      if (id == R.id.nav_home) {
         Toast.makeText(this,
             "회원정보 메뉴 선택", Toast.LENGTH_SHORT).show();
         onFragmentSelected(0, null);
@@ -107,7 +105,7 @@ public class SidebarMember extends AppCompatActivity
         Toast.makeText(this,
             "로그아웃 메뉴 선택", Toast.LENGTH_SHORT).show();
         onFragmentSelected(3, null);
-      }
+      }*/
 
       DrawerLayout drawer = findViewById(R.id.drawer_layout);
       drawer.closeDrawer(GravityCompat.START);
@@ -115,11 +113,11 @@ public class SidebarMember extends AppCompatActivity
       return true;
     }
 
-    // 메뉴 선택될때 프레그먼트 바꾸기
-    public void onFragmentSelected(int position, Bundle bundle) {
+
+/*    public void onFragmentSelected(int position, Bundle bundle) {
       Fragment curFragment = null;
 
-/*      if (position == 0) {
+      if (position == 0) {
         curFragment = fragment1;
         toolbar.setTitle("첫번째 화면");
       } else if (position == 1) {
@@ -143,13 +141,13 @@ public class SidebarMember extends AppCompatActivity
           .replace(R.id.container, curFragment).commit();
     }*/
 
-/*    @Override
+    @Override
     public void onBackPressed() {
       DrawerLayout drawer = findViewById(R.id.drawer_layout);
       if (drawer.isDrawerOpen(GravityCompat.START)) {
         drawer.closeDrawer(GravityCompat.START);
       } else {
         super.onBackPressed();
-      }*/
+      }
     }
   }
