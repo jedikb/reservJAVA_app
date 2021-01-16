@@ -1,13 +1,13 @@
 package com.example.reservjava_app.ui.f_profile;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.DTO.ReviewDTO;
@@ -22,6 +22,7 @@ public class ProfileActivity extends AppCompatActivity {
   ArrayList<BusinessDTO> businessDTOS;
   ArrayList<ReviewDTO> ReviewDTOS;
   ImageView faceImg;
+
 
 
   @Override
@@ -41,6 +42,9 @@ public class ProfileActivity extends AppCompatActivity {
     findViewById(R.id.editProfileBtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+
+
+
         Intent intent = new Intent(getApplicationContext(), ModProfileActivity.class);
         startActivity(intent);
         finish();
@@ -72,4 +76,5 @@ public class ProfileActivity extends AppCompatActivity {
     });
 
   }
+
 }

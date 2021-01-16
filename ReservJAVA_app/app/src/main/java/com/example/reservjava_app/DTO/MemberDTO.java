@@ -18,6 +18,9 @@ public class MemberDTO {
     this.member_addr = member_addr;
   }
 
+  public MemberDTO(String member_id, String member_name, String member_nick, String member_tel) {
+  }
+
   public int getMember_code() {
     return member_code;
   }
