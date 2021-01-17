@@ -18,7 +18,7 @@ import com.example.reservjava_app.R;
 import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
-
+  private static final String TAG = "main:LoginActivity";
   // 로그인이 성공하면 static 로그인DTO 변수에 담아서
   // 어느곳에서나 접근할 수 있게 한다
   public static MemberDTO loginDTO = null;
@@ -30,8 +30,8 @@ public class LoginActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
 
-    login = findViewById(R.id.login);
-    signup = findViewById(R.id.signup);
+    login = findViewById(R.id.loginBtn);
+    signup = findViewById(R.id.signupBtn);
     editID = findViewById(R.id.editID);
     editPW = findViewById(R.id.editPW);
 
@@ -40,10 +40,12 @@ public class LoginActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         if(editID.getText().toString().length() != 0 && editPW.getText().toString().length() != 0){
-          String id = editID.getText().toString();
-          String passwd = editPW.getText().toString();
+          String member_id = editID.getText().toString();
+          String member_pw = editPW.getText().toString();
+          Log.d(TAG, "onClick: " + member_id);
+          Log.d(TAG, "onClick: " + member_pw);
 
-          LoginSelect loginSelect = new LoginSelect(id, passwd);
+          LoginSelect loginSelect = new LoginSelect(member_id, member_pw);
           try {
             loginSelect.execute().get();
           } catch (ExecutionException e) {
@@ -74,8 +76,6 @@ public class LoginActivity extends AppCompatActivity {
           editID.setText(""); editPW.setText("");
           editID.requestFocus();
         }
-
-        Toast.makeText(LoginActivity.this, "로그인 되었습니다", Toast.LENGTH_SHORT).show();
       }
     });
 
