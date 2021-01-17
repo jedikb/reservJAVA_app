@@ -106,26 +106,30 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
   public MemberDTO readMessage(InputStream inputStream) throws IOException {
     JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
     Log.d(TAG, "readMessage: 12");
-    String member_id = "", member_name = "", member_nick = "", member_tel = "";
+    int member_code = -1;
+    String member_id = "", member_name = "", member_nick = "", member_tel = "", member_email = "";
 
     reader.beginObject();
     while (reader.hasNext()) {
       String readStr = reader.nextName();
-      if (readStr.equals("member_id")) {
+      if (readStr.equals("member_code")) {
+        member_code = reader.nextInt();
+      } else if (readStr.equals("member_id")) {
         member_id = reader.nextString();
-        Log.d(TAG, "readMessage: " + member_id);
       } else if (readStr.equals("member_name")) {
         member_name = reader.nextString();
       } else if (readStr.equals("member_nick")) {
         member_nick = reader.nextString();
       } else if (readStr.equals("member_tel")) {
         member_tel = reader.nextString();
+      } else if (readStr.equals("member_email")) {
+        member_email = reader.nextString();
       }else {
         reader.skipValue();
       }
     }
     reader.endObject();
-    Log.d("main:loginselect : ", member_id + "," + member_name + "," + member_nick + "," + member_tel);
-    return new MemberDTO(member_id, member_name, member_nick, member_tel);
+    Log.d("main:loginselect : ", member_code + ", " + member_id + "," + member_name + "," + member_nick + "," + member_tel + "," + member_email);
+    return new MemberDTO(member_code, member_id, member_name, member_nick, member_tel, member_email);
   }
 }

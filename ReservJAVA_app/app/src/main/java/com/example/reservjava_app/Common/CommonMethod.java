@@ -7,10 +7,9 @@ import android.util.Log;
 
 public class CommonMethod {
 
-  /*public static String  ipConfig = "http://192.168.200.151:8989";*/
-  //public static String  ipConfig = "http://112.164.58.217:8989";
+  //실험하려면 자신의 스프링 서버 주소 넣어야 함
   public static String  ipConfig = "http://192.168.0.17:80";
-  //public static String ipConfig = "http://121.148.239.200:80";
+  //public static String  ipConfig = "http://112.164.58.217:8989";
 
   // 네트워크에 연결되어 있는가
   public static boolean isNetworkConnected(Context context) {

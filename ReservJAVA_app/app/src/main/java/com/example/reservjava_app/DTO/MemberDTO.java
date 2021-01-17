@@ -17,8 +17,24 @@ public class MemberDTO {
     this.member_email = member_email;
     this.member_addr = member_addr;
   }
+  //멤버 정보 업데이트
+  public MemberDTO(String member_id, String member_pw, String member_name, String member_nick, String member_tel, String member_email) {
+    this.member_id = member_id;
+    this.member_pw = member_pw;
+    this.member_name = member_name;
+    this.member_nick = member_nick;
+    this.member_tel = member_tel;
+    this.member_email = member_email;
+  }
 
-  public MemberDTO(String member_id, String member_name, String member_nick, String member_tel) {
+  //로그인
+  public MemberDTO(int member_code, String member_id, String member_name, String member_nick, String member_tel, String member_email) {
+    this.member_code = member_code;
+    this.member_id = member_id;
+    this.member_name = member_name;
+    this.member_nick = member_nick;
+    this.member_tel = member_tel;
+    this.member_email = member_email;
   }
 
   public int getMember_code() {
