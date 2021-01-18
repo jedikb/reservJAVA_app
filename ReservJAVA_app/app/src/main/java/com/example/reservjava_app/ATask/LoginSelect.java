@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.sql.Date;
 
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
@@ -107,7 +108,9 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
     JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
     Log.d(TAG, "readMessage: 12");
     int member_code = -1;
-    String member_id = "", member_name = "", member_nick = "", member_tel = "", member_email = "";
+    String member_id = "", member_name = "", member_nick = "", member_tel = "", member_email = "", member_image="";
+    Date member_date=null;
+    //오류나면 여기 일 수 있음
 
     reader.beginObject();
     while (reader.hasNext()) {
@@ -124,12 +127,16 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
         member_tel = reader.nextString();
       } else if (readStr.equals("member_email")) {
         member_email = reader.nextString();
-      }else {
+      } else if (readStr.equals("member_image")) {
+        member_image = reader.nextString();
+      } else if (readStr.equals("member_date")) {
+        member_date = Date.valueOf(reader.nextString());
+      } else {
         reader.skipValue();
       }
     }
     reader.endObject();
     Log.d("main:loginselect : ", member_code + ", " + member_id + "," + member_name + "," + member_nick + "," + member_tel + "," + member_email);
-    return new MemberDTO(member_code, member_id, member_name, member_nick, member_tel, member_email);
+    return new MemberDTO(member_code, member_id, member_name, member_nick, member_tel, member_email, member_image, member_date);
   }
 }

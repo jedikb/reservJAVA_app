@@ -1,13 +1,16 @@
 package com.example.reservjava_app.DTO;
 
+import java.sql.Date;
+
 public class MemberDTO {
   private int member_code;
   private String member_id, member_pw;
   private int member_kind;
-  private String member_name, member_nick, member_tel, member_email, member_addr;
+  private String member_name, member_nick, member_tel, member_email, member_addr, member_image;
+  private Date member_date;
 
-  public MemberDTO(int member_code, String member_id, String member_pw, int member_kind, String member_name, String member_nick, String member_tel, String member_email, String member_addr) {
-    this.member_code = member_code;
+  //전체 정보
+  public MemberDTO(int member_code, String member_id, String member_pw, int member_kind, String member_name, String member_nick, String member_tel, String member_email, String member_addr, String member_image, Date member_date) {    this.member_code = member_code;
     this.member_id = member_id;
     this.member_pw = member_pw;
     this.member_kind = member_kind;
@@ -16,25 +19,32 @@ public class MemberDTO {
     this.member_tel = member_tel;
     this.member_email = member_email;
     this.member_addr = member_addr;
+    this.member_image = member_image;
+    this.member_date = member_date;
   }
+
   //멤버 정보 업데이트
-  public MemberDTO(String member_id, String member_pw, String member_name, String member_nick, String member_tel, String member_email) {
+  public MemberDTO(String member_id, String member_pw, String member_name, String member_nick, String member_tel, String member_email, String member_image, Date member_date) {
     this.member_id = member_id;
     this.member_pw = member_pw;
     this.member_name = member_name;
     this.member_nick = member_nick;
     this.member_tel = member_tel;
     this.member_email = member_email;
+    this.member_image = member_image;
+    this.member_date = member_date;
   }
 
   //로그인
-  public MemberDTO(int member_code, String member_id, String member_name, String member_nick, String member_tel, String member_email) {
+  public MemberDTO(int member_code, String member_id, String member_name, String member_nick, String member_tel, String member_email, String member_image, Date member_date) {
     this.member_code = member_code;
     this.member_id = member_id;
     this.member_name = member_name;
     this.member_nick = member_nick;
     this.member_tel = member_tel;
     this.member_email = member_email;
+    this.member_image = member_image;
+    this.member_date = member_date;
   }
 
   public int getMember_code() {
@@ -105,7 +115,21 @@ public class MemberDTO {
     return member_addr;
   }
 
-  public void setMember_addr(String member_addr) {
-    this.member_addr = member_addr;
+  public void setMember_addr(String member_addr) { this.member_addr = member_addr; }
+
+  public String getMember_image() {
+    return member_image;
+  }
+
+  public void setMember_image(String member_image) {
+    this.member_image = member_image;
+  }
+
+  public Date getMember_date() {
+    return member_date;
+  }
+
+  public void setMember_date(Date member_date) {
+    this.member_date = member_date;
   }
 }

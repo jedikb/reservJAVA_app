@@ -21,22 +21,23 @@ public class LoginActivity extends AppCompatActivity {
   private static final String TAG = "main:LoginActivity";
   // 로그인이 성공하면 static 로그인DTO 변수에 담아서
   // 어느곳에서나 접근할 수 있게 한다
+  // 적용할 곳에서 import만 해주면 된다.(다시 선언하면 안 됨)
   public static MemberDTO loginDTO = null;
 
-  Button signup, login;
+  Button signupBtn, loginBtn;
   EditText editID, editPW;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
 
-    login = findViewById(R.id.loginBtn);
-    signup = findViewById(R.id.signupBtn);
+    loginBtn = findViewById(R.id.loginBtn);
+    signupBtn = findViewById(R.id.signupBtn);
     editID = findViewById(R.id.editID);
     editPW = findViewById(R.id.editPW);
 
     // 로그인하고 메인화면으로 이동
-    login.setOnClickListener(new View.OnClickListener() {
+    loginBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         if(editID.getText().toString().length() != 0 && editPW.getText().toString().length() != 0){
@@ -65,10 +66,8 @@ public class LoginActivity extends AppCompatActivity {
           Log.d("main:login", loginDTO.getMember_name() + "님 로그인 되었습니다 !!!");
 
           // 로그인 정보에 값이 있으면 로그인이 되었으므로 메인화면으로 이동
-          if(loginDTO != null){
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-          }
+          Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+          startActivity(intent);
 
         }else {
           Toast.makeText(LoginActivity.this, "아이디나 비밀번호가 일치안함 !!!", Toast.LENGTH_SHORT).show();
@@ -79,8 +78,9 @@ public class LoginActivity extends AppCompatActivity {
       }
     });
 
+
     // 회원가입 화면으로 이동
-    signup.setOnClickListener(new View.OnClickListener() {
+    signupBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
@@ -89,4 +89,5 @@ public class LoginActivity extends AppCompatActivity {
     });
 
   }
+
 }
