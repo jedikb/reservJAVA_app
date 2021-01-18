@@ -35,6 +35,7 @@ public class BookingViewFragment extends Fragment {
         super.onDetach();
         activity = null;
     }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -43,14 +44,14 @@ public class BookingViewFragment extends Fragment {
         ViewGroup viewGroup = (ViewGroup) inflater.inflate  //viewGroup 정의
                 (R.layout.fragment_booking_view, container, false);
 
-        activity = (MainActivity) getActivity();
+        //activity = (MainActivity) getActivity();
 
 // 상단바 처리 ------------------------------------------------------------------------
         //backBtn = viewGroup.findViewById(R.id.backBtn); 왜 인지 모르겠지만 이렇게 하면 다운된다;;
 
         // 상단 바() 객체 목록
-        ImageView backBtn, searchBtn;
-        EditText addrSearch;
+        //ImageView backBtn, searchBtn;
+        //EditText addrSearch;
 
         //백 버튼 (홈으로 이동) <-- 이전화면 이동 으로 바꾸는게 좋을것 같음.
         viewGroup.findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
@@ -72,7 +73,7 @@ public class BookingViewFragment extends Fragment {
 
 // 예약 확인 화면 처리 ------------------------------------------------------------------------
         // 예약 확인 화면(fragment_booking_view.xml) 객체 목록
-        TextView title;
+        //TextView title;
         Spinner product_name;
         ImageView business_image;
         TextView business_name, booking_date_reservation, booking_price;

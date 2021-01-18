@@ -35,6 +35,7 @@ public class PaymentFragment extends Fragment {
         super.onDetach();
         activity = null;
     }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -43,14 +44,14 @@ public class PaymentFragment extends Fragment {
         ViewGroup viewGroup = (ViewGroup) inflater.inflate  //viewGroup 정의
                 (R.layout.fragment_payment, container, false);
 
-        activity = (MainActivity) getActivity();
+        //activity = (MainActivity) getActivity();
 
 // 상단바 처리 ------------------------------------------------------------------------
         //backBtn = viewGroup.findViewById(R.id.backBtn); 왜 인지 모르겠지만 이렇게 하면 다운된다;;
 
         // 상단 바() 객체 목록
-        ImageView backBtn, searchBtn;
-        EditText addrSearch;
+        //ImageView backBtn, searchBtn;
+        //EditText addrSearch;
 
         //백 버튼 (홈으로 이동) <-- 이전화면 이동 으로 바꾸는게 좋을것 같음.
         viewGroup.findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
@@ -70,35 +71,23 @@ public class PaymentFragment extends Fragment {
             }
         });
 
-// 결재 화면 처리 ------------------------------------------------------------------------
-        // 결재 화면(fragment_payment.xml) 객체 목록
-        TextView title;
-        Spinner product_name;
+// 결재하기 화면 처리 ------------------------------------------------------------------------
+        // 결재하기 화면(fragment_payment.xml) 객체 목록
+
+        //TextView title;
+        TextView product_name, booking_date_reserv, booking_price1, booking_price2, booking_price3, booking_price4,
+                business_name, booking_date_reservation, booking_price;
         ImageView business_image;
-        TextView business_name, booking_date_reservation, booking_price;
-        Button cancelBtn;
+        Button dateChangeBtn, submitBtn;
 
-        // 결재하기 버튼이 눌려지면,
-        viewGroup.findViewById(R.id.cancelBtn).setOnClickListener(new View.OnClickListener() {
+        // 결재하기 버튼(submitBtn)이 눌려지면,
+        viewGroup.findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "상품 예약을 취소하였습니다.", Toast.LENGTH_SHORT).show();
-                /* 예약 취소 처리 - 시작 */
+                Toast.makeText(getActivity(), "결재요청 하였습니다.", Toast.LENGTH_SHORT).show();
+                /* 결재하기 처리 - 시작 */
 
-                /* 예약 취소 처리 - 끝 */
-
-                activity.onFragmentChange(1);   //처리후 화면 전환
-            }
-        });
-
-        // 결재 취소 버튼이 눌려지면,
-        viewGroup.findViewById(R.id.cancelBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "상품 예약을 취소하였습니다.", Toast.LENGTH_SHORT).show();
-                /* 예약 취소 처리 - 시작 */
-
-                /* 예약 취소 처리 - 끝 */
+                /* 결재하기  처리 - 끝 */
 
                 activity.onFragmentChange(1);   //처리후 화면 전환
             }
@@ -106,4 +95,5 @@ public class PaymentFragment extends Fragment {
 
         return viewGroup;
     }
+
 }
