@@ -2,3 +2,5 @@ app/build/
 .idea/
 .gralde/
 ReservJAVA_app/app/src/main/AndroidManifest_bak.xml
+
+reservJAVA_app/ReservJAVA_app/app/src/main/java/com/example/reservjava_app/Common/CommonMethod.java
