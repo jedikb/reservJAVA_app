@@ -134,7 +134,7 @@
             app:layout_constraintTop_toBottomOf="@+id/mod_editPW" />
 
         <TextView
-            android:id="@+id/mod_tv_nic"
+            android:id="@+id/mod_tv_nick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -145,7 +145,7 @@
             app:layout_constraintTop_toBottomOf="@+id/mod_tv_pw2" />
 
         <EditText
-            android:id="@+id/mod_editNicName"
+            android:id="@+id/mod_editNick"
             android:layout_width="234dp"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
@@ -159,7 +159,7 @@
             app:layout_constraintTop_toBottomOf="@+id/mod_editPW2" />
 
         <TextView
-            android:id="@+id/mod_tv_phoneNum"
+            android:id="@+id/mod_tv_tel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -167,10 +167,10 @@
             android:text="전화번호"
             android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mod_tv_nic" />
+            app:layout_constraintTop_toBottomOf="@+id/mod_tv_nick" />
 
         <EditText
-            android:id="@+id/mod_editPhoneNum"
+            android:id="@+id/mod_editTel"
             android:layout_width="234dp"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
@@ -181,7 +181,32 @@
             android:text="전화번호 불러옴"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mod_editNicName" />
+            app:layout_constraintTop_toBottomOf="@+id/mod_editNick" />
+
+        <TextView
+            android:id="@+id/mod_tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="35dp"
+            android:text="이메일"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mod_tv_tel" />
+
+        <EditText
+            android:id="@+id/mod_editEmail"
+            android:layout_width="234dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:text="이메일 불러옴"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mod_editTel" />
 
 
         <Button
@@ -195,7 +220,7 @@
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mod_editPhoneNum" />
+            app:layout_constraintTop_toBottomOf="@+id/mod_editEmail" />
 
         <Button
             android:id="@+id/mod_cancelBtn"
@@ -208,7 +233,19 @@
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mod_editPhoneNum" />
+            app:layout_constraintTop_toBottomOf="@+id/mod_editEmail" />
+
+        <TextView
+            android:id="@+id/mod_tv_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text=""
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mod_tv_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

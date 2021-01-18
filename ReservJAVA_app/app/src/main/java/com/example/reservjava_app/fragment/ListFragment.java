@@ -48,7 +48,7 @@ public class ListFragment extends Fragment {
 
         //검색하기 버튼(예약한 리스트가 많은 경우 검색하게 하려고 한건데 필요없을 것 같아 삭제.
 
-        viewGroup.findViewById(R.id.loginBtn).setOnClickListener(new View.OnClickListener() {
+        viewGroup.findViewById(R.id.tologinBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity.getApplicationContext(), LoginActivity.class);

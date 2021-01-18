@@ -80,7 +80,7 @@
         android:layout_height="376dp" />
 
     <Button
-        android:id="@+id/loginBtn"
+        android:id="@+id/tologinBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="로그인화면(임시)"
