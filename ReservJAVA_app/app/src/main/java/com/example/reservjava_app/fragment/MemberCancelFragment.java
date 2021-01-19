@@ -73,7 +73,7 @@ public class MemberCancelFragment extends Fragment {
         // 회원탈퇴 화면(fragment_member_cancel.xml) 객체 목록
 
         //TextView title;
-        TextView textView1, textView2, textView3, textView4,
+        TextView textView1, textView2, textView3, textView4;
         Button cancelBtn;
 
         // 회원탈퇴 버튼이 눌려지면,
