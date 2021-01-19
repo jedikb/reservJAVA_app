@@ -5,8 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.Adapter;
-import android.widget.LinearLayout;
 
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.adapter.StoreMenuAdapter;

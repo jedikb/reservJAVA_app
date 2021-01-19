@@ -7,6 +7,8 @@ public class BusinessDTO {
   private  String business_addr, business_tel, business_image, business_info;
   private int business_star_avg;
 
+  public BusinessDTO(){}
+
   public BusinessDTO(int business_code, String business_name, int business_member_code, int business_category_code1, int business_category_code2, String business_addr, String business_tel, String business_image, String business_info, int business_star_avg) {
     this.business_code = business_code;
     this.business_name = business_name;

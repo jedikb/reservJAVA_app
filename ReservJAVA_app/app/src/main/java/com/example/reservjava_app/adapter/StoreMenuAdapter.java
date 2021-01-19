@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class StoreMenuAdapter extends RecyclerView.Adapter<StoreMenuAdapter.ViewHolder> {
 
     //adapter에 들어갈 list
-    private ArrayList<ProductDTO> pdList = new ArrayList<>();
+    private ArrayList<ProductDTO> productList = new ArrayList<>();
 
     //아이템 뷰를 정장하는 ViewHolder.Class
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -32,9 +32,9 @@ public class StoreMenuAdapter extends RecyclerView.Adapter<StoreMenuAdapter.View
 
         }
 
-        public void onBind(ProductDTO pddto){
-            product_name.setText(pddto.getProduct_name());
-            product_info.setText(pddto.getProduct_info());
+        public void onBind(ProductDTO productDTO){
+            product_name.setText(productDTO.getProduct_name());
+            product_info.setText(productDTO.getProduct_info());
         }
 
     }
@@ -52,18 +52,18 @@ public class StoreMenuAdapter extends RecyclerView.Adapter<StoreMenuAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //item  bind 함수
-        holder.onBind(pdList.get(position));
+        holder.onBind(productList.get(position));
     }
 
     @Override
     public int getItemCount() {
         // RecyclerView 개수
-        return pdList.size();
+        return productList.size();
     }
 
     //아이템 추가 메소드
     public void addItem(ProductDTO productDTO){
-        pdList.add(productDTO);
+        productList.add(productDTO);
     }
 
 }
