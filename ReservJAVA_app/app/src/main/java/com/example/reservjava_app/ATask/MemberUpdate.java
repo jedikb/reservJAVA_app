@@ -27,7 +27,7 @@ public class MemberUpdate extends AsyncTask<Void, Void, Void> {
   HttpEntity httpEntity;
 
   // 사진 정보 추가
-  String member_id, member_name, member_pw, member_pw2, member_nick, member_tel, member_email;
+  String member_id, member_name, member_pw, member_pw2, member_nick, member_tel, member_email, member_image;
 
 
   public MemberUpdate(String member_id, String member_pw, String member_name, String member_nick, String member_tel, String member_email) {
