@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.reservjava_app.R;
 
+import static com.example.reservjava_app.Common.CommonMethod.imgPath;
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
+import static com.example.reservjava_app.Common.CommonMethod.pServer;
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -37,8 +39,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     // 사진
     faceImg = findViewById(R.id.faceImg);
+    imagePath = ipConfig + pServer + imgPath + loginDTO.getMember_image();
 
-    imagePath = ipConfig + "/reservjava_app/resources/images/profile/" + loginDTO.getMember_image();
     faceImg.setVisibility(View.VISIBLE);
     //선택된 이미지 보여주기(움직이는 그림도 됨)
     Glide.with(this).load(imagePath).into(faceImg);

@@ -22,6 +22,7 @@ import java.nio.charset.Charset;
 import java.sql.Date;
 
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
+import static com.example.reservjava_app.Common.CommonMethod.pServer;
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
 public class LoginSelect extends AsyncTask<Void, Void, Void> {
@@ -58,7 +59,9 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
       builder.addTextBody("member_pw", member_pw, ContentType.create("Multipart/related", "UTF-8"));
 
       Log.d(TAG, "doInBackground: "+ member_id + ", " + member_pw);
-      String postURL = ipConfig + "/reservjava_app/anLogin";
+
+      //접속 경로
+      String postURL = ipConfig + pServer + "/anLogin";
 
       //Log.d(TAG, "doInBackground: "+ipConfig);
       // 전송
