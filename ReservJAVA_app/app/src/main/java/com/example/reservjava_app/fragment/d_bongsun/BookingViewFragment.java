@@ -71,8 +71,8 @@ public class BookingViewFragment extends Fragment {
             }
         });
 
-// 예약 확인 화면 처리 ------------------------------------------------------------------------
-        // 예약 확인 화면(fragment_booking_view.xml) 객체 목록
+// 예약확인 화면 처리 ------------------------------------------------------------------------
+        // 예약확인 화면(fragment_booking_view.xml) 객체 목록
         //TextView title;
         Spinner product_name;
         ImageView business_image;

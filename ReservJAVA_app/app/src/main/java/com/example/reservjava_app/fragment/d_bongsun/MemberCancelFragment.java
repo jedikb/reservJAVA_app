@@ -74,10 +74,10 @@ public class MemberCancelFragment extends Fragment {
 
         //TextView title;
         TextView textView1, textView2, textView3, textView4;
-        Button cancelBtn;
+        Button submitBtn;
 
         // 회원탈퇴 버튼이 눌려지면,
-        viewGroup.findViewById(R.id.memberCancelBtn).setOnClickListener(new View.OnClickListener() {
+        viewGroup.findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "회원이 탈퇴 하였습니다.", Toast.LENGTH_SHORT).show();

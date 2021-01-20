@@ -75,10 +75,12 @@ public class PaymentFragment extends Fragment {
         // 결재하기 화면(fragment_payment.xml) 객체 목록
 
         //TextView title;
-        TextView product_name, booking_date_reserv, booking_price1, booking_price2, booking_price3, booking_price4,
-                business_name, booking_date_reservation, booking_price;
+        TextView product_name, booking_date_reserv;
+        Button dateChangeBtn;
+        TextView booking_price1, booking_price2, booking_price3, booking_price4;
         ImageView business_image;
-        Button dateChangeBtn, submitBtn;
+        TextView business_name, booking_date_reservation, booking_price;
+        Button submitBtn;
 
         // 결재하기 버튼(submitBtn)이 눌려지면,
         viewGroup.findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
