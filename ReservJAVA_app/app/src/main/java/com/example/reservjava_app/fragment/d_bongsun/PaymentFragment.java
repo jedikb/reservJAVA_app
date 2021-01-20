@@ -1,4 +1,4 @@
-package com.example.reservjava_app.fragment;
+package com.example.reservjava_app.fragment.d_bongsun;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 
-public class QnAFragment extends Fragment {
+public class PaymentFragment extends Fragment {
 
     MainActivity activity;
 
@@ -42,7 +42,7 @@ public class QnAFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         ViewGroup viewGroup = (ViewGroup) inflater.inflate  //viewGroup 정의
-                (R.layout.fragment_qn_a, container, false);
+                (R.layout.fragment_payment, container, false);
 
         //activity = (MainActivity) getActivity();
 
@@ -71,22 +71,23 @@ public class QnAFragment extends Fragment {
             }
         });
 
-// 문의하기(QnA) 화면 처리 ------------------------------------------------------------------------
-        // 문의하기(QnA) 화면(fragment_qn_a.xml) 객체 목록
-        //TextView title;
-        Spinner product_name;
-        ImageView business_image;
-        TextView business_name, booking_date_reservation, booking_price;
-        Button cancelBtn;
+// 결재하기 화면 처리 ------------------------------------------------------------------------
+        // 결재하기 화면(fragment_payment.xml) 객체 목록
 
-        // 문의하기등록 버튼이 눌려지면,
-        viewGroup.findViewById(R.id.cancelBtn).setOnClickListener(new View.OnClickListener() {
+        //TextView title;
+        TextView product_name, booking_date_reserv, booking_price1, booking_price2, booking_price3, booking_price4,
+                business_name, booking_date_reservation, booking_price;
+        ImageView business_image;
+        Button dateChangeBtn, submitBtn;
+
+        // 결재하기 버튼(submitBtn)이 눌려지면,
+        viewGroup.findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "문의하기를 등록하였습니다.", Toast.LENGTH_SHORT).show();
-                /* 예약 취소 처리 - 시작 */
+                Toast.makeText(getActivity(), "결재요청 하였습니다.", Toast.LENGTH_SHORT).show();
+                /* 결재하기 처리 - 시작 */
 
-                /* 예약 취소 처리 - 끝 */
+                /* 결재하기  처리 - 끝 */
 
                 activity.onFragmentChange(1);   //처리후 화면 전환
             }

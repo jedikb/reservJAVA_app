@@ -1,4 +1,4 @@
-package com.example.reservjava_app.fragment;
+package com.example.reservjava_app.fragment.d_bongsun;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,15 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 
-public class PaymentFragment extends Fragment {
+public class MemberCancelFragment extends Fragment {
 
     MainActivity activity;
 
@@ -42,7 +40,7 @@ public class PaymentFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         ViewGroup viewGroup = (ViewGroup) inflater.inflate  //viewGroup 정의
-                (R.layout.fragment_payment, container, false);
+                (R.layout.fragment_member_cancel, container, false);
 
         //activity = (MainActivity) getActivity();
 
@@ -71,23 +69,21 @@ public class PaymentFragment extends Fragment {
             }
         });
 
-// 결재하기 화면 처리 ------------------------------------------------------------------------
-        // 결재하기 화면(fragment_payment.xml) 객체 목록
+// 회원탈퇴 화면 처리 ------------------------------------------------------------------------
+        // 회원탈퇴 화면(fragment_member_cancel.xml) 객체 목록
 
         //TextView title;
-        TextView product_name, booking_date_reserv, booking_price1, booking_price2, booking_price3, booking_price4,
-                business_name, booking_date_reservation, booking_price;
-        ImageView business_image;
-        Button dateChangeBtn, submitBtn;
+        TextView textView1, textView2, textView3, textView4;
+        Button cancelBtn;
 
-        // 결재하기 버튼(submitBtn)이 눌려지면,
-        viewGroup.findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
+        // 회원탈퇴 버튼이 눌려지면,
+        viewGroup.findViewById(R.id.memberCancelBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "결재요청 하였습니다.", Toast.LENGTH_SHORT).show();
-                /* 결재하기 처리 - 시작 */
+                Toast.makeText(getActivity(), "회원이 탈퇴 하였습니다.", Toast.LENGTH_SHORT).show();
+                /* 회원탈퇴 처리 - 시작 */
 
-                /* 결재하기  처리 - 끝 */
+                /* 회원탈퇴  처리 - 끝 */
 
                 activity.onFragmentChange(1);   //처리후 화면 전환
             }

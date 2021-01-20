@@ -1,4 +1,4 @@
-package com.example.reservjava_app.fragment;
+package com.example.reservjava_app.fragment.d_bongsun;
 
 import android.content.Context;
 import android.os.Bundle;
