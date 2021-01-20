@@ -39,15 +39,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout1"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
+        android:layout_height="240dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/topLayout">
 
         <ImageView
-            android:id="@+id/mod_faceImg"
+            android:id="@+id/faceImg"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="24dp"
             android:src="@mipmap/ic_launcher_round"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -62,45 +62,45 @@
             android:layout_marginTop="77dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.063"
-            app:layout_constraintStart_toStartOf="@+id/mod_faceImg"
-            app:layout_constraintTop_toTopOf="@+id/mod_faceImg"
+            app:layout_constraintStart_toStartOf="@+id/faceImg"
+            app:layout_constraintTop_toTopOf="@+id/faceImg"
             app:srcCompat="@android:drawable/ic_menu_preferences" />
 
         <TextView
-            android:id="@+id/mod_tv_name"
+            android:id="@+id/pro_tv_name"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:text="소중한 OOO님"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mod_faceImg" />
+            app:layout_constraintTop_toBottomOf="@+id/faceImg" />
 
         <Button
             android:id="@+id/visitListBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="65dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="12dp"
             android:text="방문"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mod_tv_name" />
+            app:layout_constraintTop_toBottomOf="@+id/pro_tv_name" />
 
         <Button
             android:id="@+id/reviewListBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="65dp"
             android:text="리뷰"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/visitListBtn"
-            app:layout_constraintTop_toBottomOf="@+id/mod_tv_name" />
+            app:layout_constraintTop_toBottomOf="@+id/pro_tv_name" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -110,6 +110,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout1" />
 

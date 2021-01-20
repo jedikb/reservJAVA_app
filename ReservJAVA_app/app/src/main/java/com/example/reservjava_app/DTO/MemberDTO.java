@@ -24,6 +24,8 @@ public class MemberDTO {
     this.member_date = member_date;
   }
 
+  public  MemberDTO() {}
+
   //로그인(하다보니 자꾸 추가하게 되어,, 비밀번호를 제외하고 다 넣음)
   public MemberDTO(int member_code, String member_id, int member_kind, String member_name, String member_nick, String member_tel, String member_email, String member_addr, String member_image, Date member_date) {
     this.member_code = member_code;
