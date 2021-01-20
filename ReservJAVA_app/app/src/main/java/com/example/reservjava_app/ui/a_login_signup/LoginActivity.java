@@ -1,9 +1,11 @@
 package com.example.reservjava_app.ui.a_login_signup;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.reservjava_app.ATask.LoginSelect;
 import com.example.reservjava_app.DTO.MemberDTO;
-import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 
 import java.util.concurrent.ExecutionException;
@@ -36,7 +37,15 @@ public class LoginActivity extends AppCompatActivity {
     editID = findViewById(R.id.editID);
     editPW = findViewById(R.id.editPW);
 
-    // 로그인하고 메인화면으로 이동
+    //(임시: 작업하는 동안 아이디, 비번 치는게 귀찮음)
+    editID.setText("aaa");
+    editPW.setText("aaa");
+    //아이디 입력하는 곳에 포커스 주기
+    editID.requestFocus();
+    //자동으로 키보드 띄우기
+    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+    // 로그인하고 전에 있던 화면으로 이동
     loginBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -65,9 +74,8 @@ public class LoginActivity extends AppCompatActivity {
           Toast.makeText(LoginActivity.this, "로그인 되었습니다 !!!", Toast.LENGTH_SHORT).show();
           Log.d("main:login", loginDTO.getMember_name() + "님 로그인 되었습니다 !!!");
 
-          // 로그인 정보에 값이 있으면 로그인이 되었으므로 메인화면으로 이동
-          Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-          startActivity(intent);
+          // 로그인 정보에 값이 있으면 로그인이 되었다는 것이므로 화면을 종료시킨다
+          finish();
 
         }else {
           Toast.makeText(LoginActivity.this, "아이디나 비밀번호가 일치안함 !!!", Toast.LENGTH_SHORT).show();

@@ -21,7 +21,7 @@ import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDT
 public class ProfileActivity extends AppCompatActivity {
   private static final String TAG = "main:ProfileActivity";
   RecyclerView recyclerView;
-  TextView mod_tv_name;
+  TextView pro_tv_name;
 
   ImageView faceImg;
   String member_name;
@@ -34,11 +34,11 @@ public class ProfileActivity extends AppCompatActivity {
     setContentView(R.layout.activity_profile);
 
     // 이름
-    mod_tv_name = findViewById(R.id.mod_tv_name);
-    mod_tv_name.setText("소중한 " + loginDTO.getMember_name() + "님");
+    pro_tv_name = findViewById(R.id.pro_tv_name);
+    pro_tv_name.setText("소중한 " + loginDTO.getMember_name() + "님");
 
     // 사진
-    faceImg = findViewById(R.id.mod_faceImg);
+    faceImg = findViewById(R.id.faceImg);
     imagePath = ipConfig + pServer + imgPath + loginDTO.getMember_image();
 
     faceImg.setVisibility(View.VISIBLE);

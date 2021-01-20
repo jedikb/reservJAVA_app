@@ -4,8 +4,6 @@ import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.reservjava_app.DTO.MemberDTO;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -14,9 +12,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
@@ -34,6 +30,7 @@ public class MemberUpdate extends AsyncTask<Void, Void, Void> {
   // 사진 정보 추가
   String member_id, member_name, member_pw, member_pw2, member_nick, member_tel, member_email, member_image, member_date;
 
+  public MemberUpdate(String member_id, String member_pw, String member_name, String member_nick) {}
 
   public MemberUpdate(String member_id, String member_pw, String member_name, String member_nick, String member_tel, String member_email, String member_image, String member_date) {
     this.member_id = member_id;
@@ -109,30 +106,49 @@ public class MemberUpdate extends AsyncTask<Void, Void, Void> {
   protected void onPostExecute(Void aVoid) {
 
   }
-
-/*  public MemberDTO readMessage(InputStream inputStream) throws IOException {
+ /* public MemberDTO readMessage(InputStream inputStream) throws IOException {
     JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
-
-    String member_id = "", member_name = "", member_nick = "", member_tel = "";
+    Log.d(TAG, "readMessage: 12");
+    int member_code = -1, member_kind = -1;
+    String member_id = "", member_name = "", member_nick = "", member_tel = "", member_email = "", member_addr = "", member_image = "";
+    Date member_date = null;
+    //오류나면 여기 일 수 있음
 
     reader.beginObject();
     while (reader.hasNext()) {
       String readStr = reader.nextName();
-      if (readStr.equals("member_id")) {
+      if (readStr.equals("member_code")) {
+        member_code = reader.nextInt();
+      } else if (readStr.equals("member_id")) {
         member_id = reader.nextString();
+      } else if (readStr.equals("member_kind")) {
+        member_kind = reader.nextInt();
       } else if (readStr.equals("member_name")) {
         member_name = reader.nextString();
       } else if (readStr.equals("member_nick")) {
         member_nick = reader.nextString();
       } else if (readStr.equals("member_tel")) {
         member_tel = reader.nextString();
-      }else {
+      } else if (readStr.equals("member_email")) {
+        member_email = reader.nextString();
+      } else if (readStr.equals("member_addr")) {
+        member_addr = reader.nextString();
+      } else if (readStr.equals("member_image")) {
+        member_image = reader.nextString();
+      } else if (readStr.equals("member_date")) {
+        // 이부분은 나중에 다시 하자
+        //Log.d(TAG, "readMessage: date1");
+        //String d = reader.nextString();
+        //Log.d(TAG, "readMessage: date : " + d);
+        member_date = Date.valueOf(reader.nextString());
+        //Log.d(TAG, "readMessage: date2");
+        //member_date = Date.valueOf("2021-01-01");
+      } else {
         reader.skipValue();
       }
     }
     reader.endObject();
-    Log.d("main:loginselect : ", member_id + "," + member_name + "," + member_nick + "," + member_tel);
-    return new MemberDTO(member_id, member_name, member_nick, member_tel);
-
+    Log.d("main:loginselect : ", member_code + ", " + member_id + "," + member_name + "," + member_nick + "," + member_tel + "," + member_email);
+    return new MemberDTO(member_code, member_id, member_kind, member_name, member_nick, member_tel, member_email, member_addr, member_image, member_date);
   }*/
 }
