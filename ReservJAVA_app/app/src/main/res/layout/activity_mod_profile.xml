@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/topLayout">
 
         <ImageView
-            android:id="@+id/faceImg"
+            android:id="@+id/mod_faceImg"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="36dp"
@@ -80,7 +80,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/faceImg" />
+            app:layout_constraintTop_toBottomOf="@+id/mod_faceImg" />
 
         <!--수정할 내용-->
         <TextView
@@ -236,7 +236,7 @@
             app:layout_constraintTop_toBottomOf="@+id/mod_editEmail" />
 
         <TextView
-            android:id="@+id/mod_tv_code"
+            android:id="@+id/mod_tv_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

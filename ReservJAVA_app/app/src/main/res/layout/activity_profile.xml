@@ -44,10 +44,9 @@
         app:layout_constraintTop_toBottomOf="@+id/topLayout">
 
         <ImageView
-            android:id="@+id/faceImg"
+            android:id="@+id/mod_faceImg"
             android:layout_width="100dp"
             android:layout_height="100dp"
-
             android:layout_marginTop="36dp"
             android:src="@mipmap/ic_launcher_round"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,8 +62,8 @@
             android:layout_marginTop="77dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.063"
-            app:layout_constraintStart_toStartOf="@+id/faceImg"
-            app:layout_constraintTop_toTopOf="@+id/faceImg"
+            app:layout_constraintStart_toStartOf="@+id/mod_faceImg"
+            app:layout_constraintTop_toTopOf="@+id/mod_faceImg"
             app:srcCompat="@android:drawable/ic_menu_preferences" />
 
         <TextView
@@ -77,7 +76,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/faceImg" />
+            app:layout_constraintTop_toBottomOf="@+id/mod_faceImg" />
 
         <Button
             android:id="@+id/visitListBtn"

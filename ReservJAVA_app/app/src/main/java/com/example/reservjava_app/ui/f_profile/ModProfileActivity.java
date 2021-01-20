@@ -8,19 +8,25 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 
 import java.io.File;
 
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
+import static com.example.reservjava_app.Common.CommonMethod.pServer;
+import static com.example.reservjava_app.Common.CommonMethod.imgPath;
+
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
 public class ModProfileActivity extends AppCompatActivity {
   private static final String TAG = "main:ModProfileActivity";
+
+  MainActivity activity;
   EditText mod_editPW, mod_editPW2, mod_editNick, mod_editTel, mod_editEmail;
   //Button mod_saveBtn, mod_cancelBtn;
   TextView mod_tv_name, mod_tv_id;
-  ImageView faceImg;
+  ImageView mod_faceImg;
 
   public String imagePath;
 
@@ -37,29 +43,30 @@ public class ModProfileActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_mod_profile);
- /*   findViewById(R.id.mod_tv_code);
+    findViewById(R.id.mod_tv_id);
     findViewById(R.id.mod_tv_name);
     findViewById(R.id.mod_editPW);
     findViewById(R.id.mod_editPW2);
     findViewById(R.id.mod_editNick);
     findViewById(R.id.mod_editTel);
-    findViewById(R.id.mod_editEmail);*/
+    findViewById(R.id.mod_editEmail);
 
     //사진
-    findViewById(R.id.faceImg);
+    findViewById(R.id.mod_faceImg);
 
-    imagePath = ipConfig + "/reservjava_app/resources/images/profile/" + loginDTO.getMember_image();
-//    faceImg.setVisibility(View.VISIBLE);
+
+    imagePath = ipConfig + pServer + imgPath + loginDTO.getMember_image();
+    //mod_faceImg.setVisibility(View.VISIBLE);
     //선택된 이미지 보여주기(움직이는 그림도 됨)
-//    Glide.with(this).load(imagePath).into(faceImg);
+    //Glide.with(this).load(imagePath).into(mod_faceImg);
 
     //새로 불러오지 말고 loginDTO사용하자
     //수정시 확인 메시지 띄움
     //폰이라서 변경시 비번 입력할 필요는 없을 듯..
     //결제 정보 변경에는 비번이 필요
-    Log.d(TAG, "onCreate: 2" );
+    Log.d(TAG, "onCreate: 2" +imagePath );
 
- /*   member_id = loginDTO.getMember_id();
+    member_id = loginDTO.getMember_id();
     member_pw = loginDTO.getMember_pw();
     member_name = loginDTO.getMember_name();
     member_nick = loginDTO.getMember_nick();
@@ -67,11 +74,12 @@ public class ModProfileActivity extends AppCompatActivity {
     member_email = loginDTO.getMember_email();
     Log.d(TAG, "onCreate: 3" + member_email);
 
-    mod_tv_id.setText(member_id);
-    mod_editPW.setText(member_pw);
-    mod_editPW2.setText(member_pw);
+    //아마 값을 비워야 하는 것 같음
+    //mod_tv_id.setText(member_id);
+    //mod_editPW.setText(member_pw);
+    //mod_editPW2.setText(member_pw);
     mod_tv_name.setText("소중한 " + member_name + "님");
-    mod_editNick.setText(member_nick);
+    /*mod_editNick.setText(member_nick);
     mod_editTel.setText(member_tel);
     mod_editEmail.setText(member_email);*/
 

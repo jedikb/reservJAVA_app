@@ -38,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     mod_tv_name.setText("소중한 " + loginDTO.getMember_name() + "님");
 
     // 사진
-    faceImg = findViewById(R.id.faceImg);
+    faceImg = findViewById(R.id.mod_faceImg);
     imagePath = ipConfig + pServer + imgPath + loginDTO.getMember_image();
 
     faceImg.setVisibility(View.VISIBLE);
