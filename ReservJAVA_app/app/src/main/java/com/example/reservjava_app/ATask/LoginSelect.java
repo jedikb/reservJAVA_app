@@ -22,6 +22,7 @@ import java.nio.charset.Charset;
 import java.sql.Date;
 
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
+import static com.example.reservjava_app.Common.CommonMethod.pServer;
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
 public class LoginSelect extends AsyncTask<Void, Void, Void> {
@@ -58,7 +59,9 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
       builder.addTextBody("member_pw", member_pw, ContentType.create("Multipart/related", "UTF-8"));
 
       Log.d(TAG, "doInBackground: "+ member_id + ", " + member_pw);
-      String postURL = ipConfig + "/reservjava_app/anLogin";
+
+      //접속 경로
+      String postURL = ipConfig + pServer + "/anLogin";
 
       //Log.d(TAG, "doInBackground: "+ipConfig);
       // 전송
@@ -107,9 +110,9 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
   public MemberDTO readMessage(InputStream inputStream) throws IOException {
     JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
     Log.d(TAG, "readMessage: 12");
-    int member_code = -1;
-    String member_id = "", member_name = "", member_nick = "", member_tel = "", member_email = "", member_image="";
-    Date member_date=null;
+    int member_code = -1, member_kind = -1;
+    String member_id = "", member_name = "", member_nick = "", member_tel = "", member_email = "", member_addr = "", member_image="";
+    Date member_date = null;
     //오류나면 여기 일 수 있음
 
     reader.beginObject();
@@ -119,6 +122,8 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
         member_code = reader.nextInt();
       } else if (readStr.equals("member_id")) {
         member_id = reader.nextString();
+      } else if (readStr.equals("member_kind")) {
+        member_kind = reader.nextInt();
       } else if (readStr.equals("member_name")) {
         member_name = reader.nextString();
       } else if (readStr.equals("member_nick")) {
@@ -127,16 +132,24 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
         member_tel = reader.nextString();
       } else if (readStr.equals("member_email")) {
         member_email = reader.nextString();
+      } else if (readStr.equals("member_addr")) {
+        member_addr = reader.nextString();
       } else if (readStr.equals("member_image")) {
         member_image = reader.nextString();
       } else if (readStr.equals("member_date")) {
+        // 이부분은 나중에 다시 하자
+        //Log.d(TAG, "readMessage: date1");
+        //String d = reader.nextString();
+        //Log.d(TAG, "readMessage: date : " + d);
         member_date = Date.valueOf(reader.nextString());
+        //Log.d(TAG, "readMessage: date2");
+        //member_date = Date.valueOf("2021-01-01");
       } else {
         reader.skipValue();
       }
     }
     reader.endObject();
     Log.d("main:loginselect : ", member_code + ", " + member_id + "," + member_name + "," + member_nick + "," + member_tel + "," + member_email);
-    return new MemberDTO(member_code, member_id, member_name, member_nick, member_tel, member_email, member_image, member_date);
+    return new MemberDTO(member_code, member_id, member_kind, member_name, member_nick, member_tel, member_email, member_addr, member_image, member_date);
   }
 }

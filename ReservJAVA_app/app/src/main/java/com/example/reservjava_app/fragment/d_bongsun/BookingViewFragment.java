@@ -1,4 +1,4 @@
-package com.example.reservjava_app.fragment;
+package com.example.reservjava_app.fragment.d_bongsun;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 
-public class QnAFragment extends Fragment {
+public class BookingViewFragment extends Fragment {
 
     MainActivity activity;
 
@@ -42,7 +42,7 @@ public class QnAFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         ViewGroup viewGroup = (ViewGroup) inflater.inflate  //viewGroup 정의
-                (R.layout.fragment_qn_a, container, false);
+                (R.layout.fragment_booking_view, container, false);
 
         //activity = (MainActivity) getActivity();
 
@@ -71,19 +71,19 @@ public class QnAFragment extends Fragment {
             }
         });
 
-// 문의하기(QnA) 화면 처리 ------------------------------------------------------------------------
-        // 문의하기(QnA) 화면(fragment_qn_a.xml) 객체 목록
+// 예약확인 화면 처리 ------------------------------------------------------------------------
+        // 예약확인 화면(fragment_booking_view.xml) 객체 목록
         //TextView title;
         Spinner product_name;
         ImageView business_image;
         TextView business_name, booking_date_reservation, booking_price;
         Button cancelBtn;
 
-        // 문의하기등록 버튼이 눌려지면,
+        // 예약 취소 버튼이 눌려지면,
         viewGroup.findViewById(R.id.cancelBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "문의하기를 등록하였습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "상품 예약을 취소하였습니다.", Toast.LENGTH_SHORT).show();
                 /* 예약 취소 처리 - 시작 */
 
                 /* 예약 취소 처리 - 끝 */

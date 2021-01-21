@@ -9,8 +9,9 @@ public class MemberDTO {
   private String member_name, member_nick, member_tel, member_email, member_addr, member_image;
   private Date member_date;
 
-  //전체 정보
-  public MemberDTO(int member_code, String member_id, String member_pw, int member_kind, String member_name, String member_nick, String member_tel, String member_email, String member_addr, String member_image, Date member_date) {    this.member_code = member_code;
+  //전체 정보(수정할 때)
+  public MemberDTO(int member_code, String member_id, String member_pw, int member_kind, String member_name, String member_nick, String member_tel, String member_email, String member_addr, String member_image, Date member_date) {
+    this.member_code = member_code;
     this.member_id = member_id;
     this.member_pw = member_pw;
     this.member_kind = member_kind;
@@ -23,26 +24,18 @@ public class MemberDTO {
     this.member_date = member_date;
   }
 
-  //멤버 정보 업데이트
-  public MemberDTO(String member_id, String member_pw, String member_name, String member_nick, String member_tel, String member_email, String member_image, Date member_date) {
-    this.member_id = member_id;
-    this.member_pw = member_pw;
-    this.member_name = member_name;
-    this.member_nick = member_nick;
-    this.member_tel = member_tel;
-    this.member_email = member_email;
-    this.member_image = member_image;
-    this.member_date = member_date;
-  }
+  public  MemberDTO() {}
 
-  //로그인
-  public MemberDTO(int member_code, String member_id, String member_name, String member_nick, String member_tel, String member_email, String member_image, Date member_date) {
+  //로그인(하다보니 자꾸 추가하게 되어,, 비밀번호를 제외하고 다 넣음)
+  public MemberDTO(int member_code, String member_id, int member_kind, String member_name, String member_nick, String member_tel, String member_email, String member_addr, String member_image, Date member_date) {
     this.member_code = member_code;
     this.member_id = member_id;
+    this.member_kind = getMember_kind();
     this.member_name = member_name;
     this.member_nick = member_nick;
     this.member_tel = member_tel;
     this.member_email = member_email;
+    this.member_addr = getMember_addr();
     this.member_image = member_image;
     this.member_date = member_date;
   }

@@ -46,8 +46,7 @@ public class ListFragment extends Fragment {
             }
         });
 
-        //검색하기 버튼(예약한 리스트가 많은 경우 검색하게 하려고 한건데 필요없을 것 같아 삭제.
-
+        //로그인 이동(임시)
         viewGroup.findViewById(R.id.tologinBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +54,42 @@ public class ListFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        //예약 이동(임시)
+        viewGroup.findViewById(R.id.moveBtn2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.onFragmentChange(4);
+            }
+        });
+
+        //회원탈퇴 이동(임시)
+        viewGroup.findViewById(R.id.moveBtn3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.onFragmentChange(5);
+            }
+        });
+
+        //결제 이동(임시)
+        viewGroup.findViewById(R.id.moveBtn4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.onFragmentChange(6);
+            }
+        });
+
+        //문의 이동(임시)
+        viewGroup.findViewById(R.id.moveBtn5).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.onFragmentChange(7);
+            }
+        });
+
         return viewGroup;
+
+
+
     }
 }

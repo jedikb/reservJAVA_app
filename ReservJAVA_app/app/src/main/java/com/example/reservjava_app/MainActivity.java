@@ -14,6 +14,10 @@ import androidx.core.content.ContextCompat;
 import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
 import com.example.reservjava_app.fragment.SearchFragment;
+import com.example.reservjava_app.fragment.d_bongsun.BookingViewFragment;
+import com.example.reservjava_app.fragment.d_bongsun.MemberCancelFragment;
+import com.example.reservjava_app.fragment.d_bongsun.PaymentFragment;
+import com.example.reservjava_app.fragment.d_bongsun.QnAFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
   HomeFragment homeFragment;
   SearchFragment searchFragment;
   ListFragment listFragment;
+  BookingViewFragment bookingViewFragment;
+  MemberCancelFragment memberCancelFragment;
+  PaymentFragment paymentFragment;
+  QnAFragment qnAFragment;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
     homeFragment = new HomeFragment();
     searchFragment = new SearchFragment();
     listFragment = new ListFragment();
+    bookingViewFragment = new BookingViewFragment();
+    memberCancelFragment = new MemberCancelFragment();
+    paymentFragment = new PaymentFragment();
+    qnAFragment = new QnAFragment();
 
     getSupportFragmentManager().beginTransaction()
             .replace(R.id.container, homeFragment).commit();
@@ -80,6 +92,18 @@ public class MainActivity extends AppCompatActivity {
     } else if (state == 3) {
       getSupportFragmentManager().beginTransaction()
           .replace(R.id.container, listFragment).commit();
+    } else if (state == 4) {
+      getSupportFragmentManager().beginTransaction()
+          .replace(R.id.container, bookingViewFragment).commit();
+    } else if (state == 5) {
+      getSupportFragmentManager().beginTransaction()
+          .replace(R.id.container, memberCancelFragment).commit();
+    } else if (state == 6) {
+      getSupportFragmentManager().beginTransaction()
+          .replace(R.id.container, paymentFragment).commit();
+    } else if (state == 7) {
+      getSupportFragmentManager().beginTransaction()
+          .replace(R.id.container, qnAFragment).commit();
     }
   }
 

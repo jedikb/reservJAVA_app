@@ -1,4 +1,4 @@
-package com.example.reservjava_app.fragment;
+package com.example.reservjava_app.fragment.d_bongsun;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,13 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 
-public class MemberCancelFragment extends Fragment {
+public class QnAFragment extends Fragment {
 
     MainActivity activity;
 
@@ -40,7 +42,7 @@ public class MemberCancelFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         ViewGroup viewGroup = (ViewGroup) inflater.inflate  //viewGroup 정의
-                (R.layout.fragment_member_cancel, container, false);
+                (R.layout.fragment_qn_a, container, false);
 
         //activity = (MainActivity) getActivity();
 
@@ -69,21 +71,33 @@ public class MemberCancelFragment extends Fragment {
             }
         });
 
-// 회원탈퇴 화면 처리 ------------------------------------------------------------------------
-        // 회원탈퇴 화면(fragment_member_cancel.xml) 객체 목록
-
+// 문의하기(QnA) 화면 처리 ------------------------------------------------------------------------
+        // 문의하기(QnA) 화면(fragment_qn_a.xml) 객체 목록
         //TextView title;
-        TextView textView1, textView2, textView3, textView4;
-        Button cancelBtn;
+        EditText board_subject, board_content, member_email, board_file;
+        Button submitBtn, cancelBtn;
 
-        // 회원탈퇴 버튼이 눌려지면,
+        // 문의하기 등록 버튼이 눌려지면,
+        viewGroup.findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "문의하기를 등록하였습니다.", Toast.LENGTH_SHORT).show();
+                /* 문의하기(QnA) 등록 처리 - 시작 */
+
+                /* 문의하기(QnA) 등록 처리 - 끝 */
+
+                activity.onFragmentChange(1);   //처리후 화면 전환
+            }
+        });
+
+        // 문의하기 취소 버튼이 눌려지면,
         viewGroup.findViewById(R.id.cancelBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "회원이 탈퇴 하였습니다.", Toast.LENGTH_SHORT).show();
-                /* 회원탈퇴 처리 - 시작 */
+                Toast.makeText(getActivity(), "문의하기를 취소하였습니다.", Toast.LENGTH_SHORT).show();
+                /* 문의하기(QnA) 취소 처리 - 시작 */
 
-                /* 회원탈퇴  처리 - 끝 */
+                /* 문의하기(QnA) 취소 처리 - 끝 */
 
                 activity.onFragmentChange(1);   //처리후 화면 전환
             }
