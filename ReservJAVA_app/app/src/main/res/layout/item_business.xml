@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:textSize="25sp"
-                    android:text="phoneNum"
+                    android:text="info"
                     android:textColor="@android:color/holo_blue_bright"/>
 
             </LinearLayout>

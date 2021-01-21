@@ -24,17 +24,21 @@ public class Accommodation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accommodation);
 
-        recyclerView = findViewById(R.id.store_recycler);
+        businessList = new ArrayList<>();
+
+        //리사이클러뷰어 설정
+        recyclerView = findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager layoutManager =
                 new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new StoreListAdapter(Accommodation.this, businessList);
 
+        adapter = new StoreListAdapter(Accommodation.this, businessList);
+        
         //adapter 추가 db연동해야됨!
-        BusinessDTO dto = new BusinessDTO();
-        dto.setBusiness_name("test");
-        dto.setBusiness_info("testSet");
-        adapter.addItem(dto);
+        BusinessDTO dto;
+
+
+        adapter.addItem(new BusinessDTO());
 
 
 

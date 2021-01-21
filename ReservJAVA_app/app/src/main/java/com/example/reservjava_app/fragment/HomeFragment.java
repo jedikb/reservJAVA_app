@@ -18,25 +18,26 @@ import com.example.reservjava_app.category.Restaurant;
 
 public class HomeFragment extends Fragment {
 
-    ImageButton button1, button2, button3, button4,
+    ImageButton hospital, restaurant, accommodation, exercise,
         button5, button6, button7, button8;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
 
-        button1 = rootView.findViewById(R.id.imageButton1);
-        button2 = rootView.findViewById(R.id.imageButton2);
-        button3 = rootView.findViewById(R.id.imageButton3);
-        button4 = rootView.findViewById(R.id.imageButton4);
+        hospital = rootView.findViewById(R.id.imageButton1);
+        restaurant = rootView.findViewById(R.id.imageButton2);
+        accommodation = rootView.findViewById(R.id.imageButton3);
+        exercise = rootView.findViewById(R.id.imageButton4);
         button5 = rootView.findViewById(R.id.imageButton5);
         button6 = rootView.findViewById(R.id.imageButton6);
         button7 = rootView.findViewById(R.id.imageButton7);
         button8 = rootView.findViewById(R.id.imageButton8);
 
         //병원 카테고리
-        button1.setOnClickListener(new View.OnClickListener() {
+        hospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Hospital.class);
@@ -45,7 +46,7 @@ public class HomeFragment extends Fragment {
         });
 
         //식당 카테고리
-        button2.setOnClickListener(new View.OnClickListener() {
+        restaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Restaurant.class);
@@ -54,7 +55,7 @@ public class HomeFragment extends Fragment {
         });
 
         //숙박시설 카테고리
-        button3.setOnClickListener(new View.OnClickListener() {
+        accommodation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Accommodation.class);
@@ -63,7 +64,7 @@ public class HomeFragment extends Fragment {
         });
 
         //운동 카테고리
-        button4.setOnClickListener(new View.OnClickListener() {
+        exercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Exercise.class);
