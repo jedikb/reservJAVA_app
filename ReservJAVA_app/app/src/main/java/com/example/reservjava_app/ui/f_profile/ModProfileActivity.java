@@ -21,12 +21,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
+import com.example.reservjava_app.ATask.FileUploadUtils;
 import com.example.reservjava_app.ATask.MemberUpdate;
 import com.example.reservjava_app.R;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
 
 import static com.example.reservjava_app.Common.CommonMethod.imgPath;
@@ -106,7 +109,24 @@ public class ModProfileActivity extends AppCompatActivity {
     //이미지를 클릭하면 갤러리창을 띄워 사진을 변경할 수 있게 한다
     //카메라 띄워서 바로 저장하는 건 나중에~~
     //그리고 서버에 그림 파일을 저장할 때,, 그림 파일명이 겹치지 않게 해줘야 한다.
+    //**
     mod_faceImg.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_PICK);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CODE);
+
+
+
+
+      }
+    });
+
+
+    //이건 사진찍는 것
+  /*  mod_faceImg.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         try{
@@ -128,34 +148,25 @@ public class ModProfileActivity extends AppCompatActivity {
           }else {
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
           }
-
           if (intent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(intent, CAMERA_REQUEST);
           }
-
         }catch(Exception e){
           Log.d("ModProfile:error2", "Something Wrong", e);
         }
       }
-    });
-
-    mod_faceImg.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_PICK);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), LOAD_IMAGE);
-      }
-    });
+    }); */
 
 
     //저장버튼(수정한 정보를 저장한다)
     findViewById(R.id.mod_saveBtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+        member_pw = mod_editPW.getText().toString();
+        member_pw2 = mod_editPW2.getText().toString();
 
-        if(mod_editPW == mod_editPW2) {
+        //입력한 두 비밀번호가 맞는지 확인
+        /*if(member_pw == member_pw2) {
           member_pw = mod_editPW.getText().toString();
         } else {
           AlertDialog.Builder builder = new AlertDialog.Builder(ModProfileActivity.this);
@@ -169,24 +180,26 @@ public class ModProfileActivity extends AppCompatActivity {
           });
           builder.show();
           mod_editPW.requestFocus();
-        }
+        }*/
 
-        //imagePath = mod_faceImg.get.toString();
-        Log.d(TAG, "onClick: " + imagePath);
         member_nick = mod_editNick.getText().toString();
         member_tel = mod_editTel.getText().toString();
         member_email = mod_editEmail.getText().toString();
 
-        MemberUpdate memberUpdate = new MemberUpdate(member_pw, member_nick, member_tel, member_email);
-        memberUpdate.execute();
+        //파일 업로드
+        String Path = "1";
+        FileUploadUtils.send2Server(file, Path);
 
-        Toast.makeText(getApplicationContext(), "수정성공", Toast.LENGTH_LONG).show();
+        Log.d(TAG, "onClick: " + file.getName());
 
-        //수정한 정보를 저장하고 프로필 화면으로 이동
-        Toast.makeText(ModProfileActivity.this, "수정한 내용이 저장되었습니다", Toast.LENGTH_SHORT).show();
+        //MemberUpdate memberUpdate = new MemberUpdate(member_pw, member_nick, member_tel, member_email);
+        //memberUpdate.execute();
+
+        // 확인 메시지 띄우고 프로필 화면으로 이동
+/*        Toast.makeText(ModProfileActivity.this, "수정한 내용이 저장되었습니다", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
         startActivity(intent);
-        finish();
+        finish();*/
       }
     });
 
@@ -210,19 +223,20 @@ public class ModProfileActivity extends AppCompatActivity {
         finish();
       }
     });
-
   }
 
-  //서버에 저장할 이미지 파일 만들기
+/*  //서버에 저장할 이미지 파일 만들기
+  //이렇게 하면 폰에서 위치 찾음(이게 맞긴한데.. 나중에 불러들이는 것을 바꿔야 할듯??)
   private File createFile() throws IOException {
 
     String imageFileName = "My" + tmpDateFormat.format(new Date()) + ".jpg";
     Log.d(TAG, "createFile: " + imageFileName);
     File storageDir = Environment.getExternalStorageDirectory();
     File curFile = new File(storageDir, imageFileName);
+    Log.d(TAG, "createFile: " +storageDir);
 
     return curFile;
-  }
+  }*/
 
   //갤러리
   @Override
@@ -237,6 +251,13 @@ public class ModProfileActivity extends AppCompatActivity {
           in.close();
 
           mod_faceImg.setImageBitmap(img);
+          String imgSavaFileName = loginDTO.getMember_id() + tmpDateFormat.format(new Date());
+
+          file = new File(Environment.getExternalStorageDirectory()+"/Pictures/ResevJava/", imgSavaFileName + ".jpeg");
+          Log.d(TAG, "onActivityResult: filepath" + file);
+          OutputStream out = new FileOutputStream(file);
+          img.compress(Bitmap.CompressFormat.JPEG, 100, out);
+
         } catch (Exception e) {
 
         }
@@ -245,6 +266,7 @@ public class ModProfileActivity extends AppCompatActivity {
       }
     }
   }
+
 
 /* //이미지 변경
   public void mod_saveBtnClicked(View view){
