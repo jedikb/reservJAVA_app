@@ -1,8 +1,9 @@
 package com.example.reservjava_app.DTO;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Board_replyDTO {
+public class Board_replyDTO implements Serializable {
   private int reply_code, reply_status, reply_sub_code, reply_parent_code, reply_member_code;
   private String reply_content;
   private Date reply_write_date, reply_update_date;

@@ -1,9 +1,10 @@
 package com.example.reservjava_app.DTO;
 
 
+import java.io.Serializable;
 import java.sql.Date;
 /* 리사이클러뷰 테스트를 위해 임시로 만든 것임 삭제해야 함*/
-public class ReviewDTO {
+public class ReviewDTO implements Serializable {
   private int booking_code, booking_member_code, booking_business_code, booking_product_code;
   private Date booking_date_reservation;
   private int booking_appraisal_star;

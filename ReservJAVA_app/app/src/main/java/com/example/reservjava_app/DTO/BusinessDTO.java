@@ -1,6 +1,8 @@
 package com.example.reservjava_app.DTO;
 
-public class BusinessDTO {
+import java.io.Serializable;
+
+public class BusinessDTO implements Serializable {
   private int business_code;
   private String business_name;
   private int business_member_code, business_category_code1, business_category_code2;
@@ -22,7 +24,13 @@ public class BusinessDTO {
     this.business_star_avg = business_star_avg;
   }
 
-  public int getBusiness_code() {
+  //RecyclerView 테스트용
+  public BusinessDTO(String business_name, String business_info) {
+    this.business_name = business_name;
+    this.business_info = business_info;
+  }
+
+    public int getBusiness_code() {
     return business_code;
   }
 

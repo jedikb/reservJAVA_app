@@ -1,8 +1,9 @@
 package com.example.reservjava_app.DTO;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class BoardDTO {
+public class BoardDTO implements Serializable {
   private int board_code, board_status, board_group_code, board_member_code;
   private String board_title, board_content;
   private Date board_write_date, board_update_date;

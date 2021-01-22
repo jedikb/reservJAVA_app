@@ -1,6 +1,8 @@
 package com.example.reservjava_app.DTO;
 
-public class CategoryDTO {
+import java.io.Serializable;
+
+public class CategoryDTO implements Serializable {
   private int category_code, category_parent_code;
   private String category_name, category_info;
 
