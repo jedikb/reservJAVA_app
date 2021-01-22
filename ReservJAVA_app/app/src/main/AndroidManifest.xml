@@ -50,6 +50,8 @@
         android:theme="@style/Theme.ReservJAVA_app"
         android:usesCleartextTraffic="true">
         <!-- https가 아니라 http로 오더라도 그냥 허가하는 부분 -->
+        <activity android:name=".reservation.Reservation"/>
+        <activity android:name=".reservation.Store" />
         <activity android:name=".ui.a_login_signup.SignupActivity"></activity>
         <activity android:name=".ui.a_login_signup.LoginActivity" />
         <activity android:name=".ui.SidebarNonMemers" />

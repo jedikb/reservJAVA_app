@@ -1,5 +1,6 @@
 package com.example.reservjava_app.ui.a_login_signup;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.reservjava_app.ATask.LoginSelect;
 import com.example.reservjava_app.DTO.MemberDTO;
 import com.example.reservjava_app.R;
+import com.example.reservjava_app.ui.f_profile.ModProfileActivity;
 
 import java.util.concurrent.ExecutionException;
 
@@ -42,9 +44,9 @@ public class LoginActivity extends AppCompatActivity {
     editPW.setText("aaa");
     //아이디 입력하는 곳에 포커스 주기
     editID.requestFocus();
-    //자동으로 키보드 띄우기
-    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+    //자동으로 키보드 띄우기(귀찮으니 주석처리;;)
+    //InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+    //imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     // 로그인하고 전에 있던 화면으로 이동
     loginBtn.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -75,6 +77,8 @@ public class LoginActivity extends AppCompatActivity {
           Log.d("main:login", loginDTO.getMember_name() + "님 로그인 되었습니다 !!!");
 
           // 로그인 정보에 값이 있으면 로그인이 되었다는 것이므로 화면을 종료시킨다
+          Intent intent = new Intent(getApplicationContext(), ModProfileActivity.class);
+          startActivity(intent);
           finish();
 
         }else {
@@ -86,7 +90,6 @@ public class LoginActivity extends AppCompatActivity {
       }
     });
 
-
     // 회원가입 화면으로 이동
     signupBtn.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -95,7 +98,5 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
       }
     });
-
   }
-
 }

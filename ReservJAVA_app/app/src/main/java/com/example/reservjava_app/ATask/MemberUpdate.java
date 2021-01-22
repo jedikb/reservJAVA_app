@@ -30,17 +30,13 @@ public class MemberUpdate extends AsyncTask<Void, Void, Void> {
   // 사진 정보 추가
   String member_id, member_name, member_pw, member_pw2, member_nick, member_tel, member_email, member_image, member_date;
 
-  public MemberUpdate(String member_id, String member_pw, String member_name, String member_nick) {}
-
-  public MemberUpdate(String member_id, String member_pw, String member_name, String member_nick, String member_tel, String member_email, String member_image, String member_date) {
+  public MemberUpdate(String member_id, String member_pw, String member_nick, String member_tel, String member_email, String member_image) {
     this.member_id = member_id;
     this.member_pw = member_pw;
-    this.member_name = member_name;
     this.member_nick = member_nick;
     this.member_tel = member_tel;
     this.member_email = member_email;
     this.member_image = member_image;
-    this.member_date = member_date;
   }
 
   @Override
@@ -61,14 +57,12 @@ public class MemberUpdate extends AsyncTask<Void, Void, Void> {
       // 문자열 및 데이터 추가
       builder.addTextBody("member_id", member_id, ContentType.create("Multipart/related", "UTF-8"));
       builder.addTextBody("member_pw", member_pw, ContentType.create("Multipart/related", "UTF-8"));
-      builder.addTextBody("member_name", member_name, ContentType.create("Multipart/related", "UTF-8"));
       builder.addTextBody("member_nick", member_nick, ContentType.create("Multipart/related", "UTF-8"));
       builder.addTextBody("member_tel", member_tel, ContentType.create("Multipart/related", "UTF-8"));
       builder.addTextBody("member_email", member_email, ContentType.create("Multipart/related", "UTF-8"));
       builder.addTextBody("member_image", member_image, ContentType.create("Multipart/related", "UTF-8"));
-      builder.addTextBody("member_date", member_date, ContentType.create("Multipart/related", "UTF-8"));
 
-      postURL = ipConfig + pServer + "/anUpdate";
+      postURL = ipConfig + pServer + "/memberUpdate";
       Log.d(TAG, "doInBackground: " + member_email);
       // 전송
       InputStream inputStream = null;

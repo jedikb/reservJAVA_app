@@ -16,11 +16,11 @@ public class CommonMethod {
 
     //각자 자신의 아이피를 넣으세요!!
     //봉선
-    public static String  ipConfig = "http://192.168.0.116:80";
+    //public static String  ipConfig = "http://192.168.0.116:80";
 
     //광범
     //public static String  ipConfig = "http://192.168.0.17:80";
-    //public static String ipConfig = "http://192.168.0.34:80";
+    public static String ipConfig = "http://192.168.0.34:80";
 
     //경선
     //public static String  ipConfig = "http://192.168.0.61:80";
@@ -28,12 +28,25 @@ public class CommonMethod {
     //민혁
     //public static String  ipConfig = "http://192.168.0.65:80";
 
+    //종훈
+    //public static String  ipConfig = "http://192.168.0.62:80";
 
     //서버 저장 경로
     //프로젝트 서버
     public static String  pServer = "/reservjava_app";
+
     //프로필 사진
-    public static String  imgPath = "/resources/images/profile/";
+    public static String  member_imgPath = "/resources/images/member/";
+    public static String  member_upImgPath = "/resources/images/member";
+    //회사로고
+    public static String  logo_imgPath = "/resources/images/logo/";
+    public static String  logo_upImgPath = "/resources/images/logo/";
+    //회사 소개 이미지
+    public static String  business_imgPath = "/resources/images/business/";
+    public static String  business_upImgPath = "/resources/images/business/";
+    //제품 소개 이미지
+    public static String  product_imgPath = "/resources/images/product/";
+    public static String  product_upImgPath = "/resources/images/product/";
 
 
     // 네트워크에 연결되어 있는가

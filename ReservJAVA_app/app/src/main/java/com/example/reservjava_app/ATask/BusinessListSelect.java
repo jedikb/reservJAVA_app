@@ -24,7 +24,7 @@ import java.io.InputStreamReader;
 import java.net.HttpRetryException;
 import java.util.ArrayList;
 
-public class ListSelect extends
+class ListSelect extends
         AsyncTask<Void, Void, Void> {
     //생성자
     ArrayList<BusinessDTO> businessList;

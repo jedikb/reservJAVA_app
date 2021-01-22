@@ -32,8 +32,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
 
-import static com.example.reservjava_app.Common.CommonMethod.imgPath;
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
+import static com.example.reservjava_app.Common.CommonMethod.member_imgPath;
 import static com.example.reservjava_app.Common.CommonMethod.pServer;
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
@@ -59,7 +59,7 @@ public class ModProfileActivity extends AppCompatActivity {
   // 여기까지 사진 관련
 
 
-  String member_id, member_name, member_pw, member_pw2, member_nick, member_tel, member_email;
+  String member_id, member_name, member_pw, member_pw2, member_nick, member_tel, member_email, member_image;
 
 
   @Override
@@ -68,27 +68,24 @@ public class ModProfileActivity extends AppCompatActivity {
     setContentView(R.layout.activity_mod_profile);
 
     //사진
-    imagePath = ipConfig + pServer + imgPath + loginDTO.getMember_image();
+    //만약 사진 필드가 비어 있다면... 디폴트 이미지
+
+    imagePath = ipConfig + pServer + member_imgPath + loginDTO.getMember_image();
     mod_faceImg = findViewById(R.id.mod_faceImg);
     mod_faceImg.setVisibility(View.VISIBLE);
     //선택된 이미지 보여주기(움직이는 그림도 됨)
     Glide.with(ModProfileActivity.this).load(imagePath).into(mod_faceImg);
-    //이건 추후 사진 저장을 위함
+    //사진 저장시 파일명을 위한 시간포멧
     tmpDateFormat = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss");
 
 
-    //새로 불러오지 말고 loginDTO사용하자
-    // --- 비번은 가지고 오지 않는다. 단 값이 입력되어 있다면 두 값을 비교해서 같으면 저장, 아니면 다르다고 메시지 띄운다
-    //수정시 확인 메시지 띄움
+    //loginDTO사용하여 정보 가지고 옴,,
+    //비번은 가지고 오지 않는다.
+    //단 값이 입력되어 있다면 두 값을 비교해서 같으면 저장, 아니면 다르다고 메시지 띄운다
+    //수정 시 확인 메시지 띄움
     //폰이라 정보 수정에는 비번 필요 x,  결제 정보 변경에는 비번이 필요
 
-    //값을 불러와서
-    member_id = loginDTO.getMember_id();
-    member_name = loginDTO.getMember_name();
-    member_pw = loginDTO.getMember_pw();
-    member_nick = loginDTO.getMember_nick();
-    member_tel = loginDTO.getMember_tel();
-    member_email = loginDTO.getMember_email();
+    // ** 이미 저장 된 값을 불러와서 자동으로 표시해 줌
     //화면상에 표시할 곳을 지정해주고
     mod_tv_id = findViewById(R.id.mod_tv_id);
     mod_tv_name = findViewById(R.id.mod_tv_name);
@@ -97,10 +94,17 @@ public class ModProfileActivity extends AppCompatActivity {
     mod_editNick = findViewById(R.id.mod_editNick);
     mod_editTel = findViewById(R.id.mod_editTel);
     mod_editEmail = findViewById(R.id.mod_editEmail);
-    //저장 된 값 불러오기
+    //값을 불러와서
+    member_id = loginDTO.getMember_id();
+    member_name = loginDTO.getMember_name();
+    //member_pw = loginDTO.getMember_pw();
+    member_nick = loginDTO.getMember_nick();
+    member_tel = loginDTO.getMember_tel();
+    member_email = loginDTO.getMember_email();
+    //저장 된 값 화면에 표시
     mod_tv_id.setText(member_id);
-    mod_editPW.setText(member_pw);
-    mod_editPW2.setText(member_pw);
+    //mod_editPW.setText(member_pw);
+    //mod_editPW2.setText(member_pw);
     mod_tv_name.setText("소중한 " + member_name + "님");
     mod_editNick.setText(member_nick);
     mod_editTel.setText(member_tel);
@@ -115,17 +119,13 @@ public class ModProfileActivity extends AppCompatActivity {
       public void onClick(View v) {
         Intent intent = new Intent();
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_PICK);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CODE);
-
-
-
-
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, REQUEST_CODE);
       }
     });
 
 
-    //이건 사진찍는 것
+        //이건 사진찍는 것
   /*  mod_faceImg.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -164,11 +164,8 @@ public class ModProfileActivity extends AppCompatActivity {
       public void onClick(View v) {
         member_pw = mod_editPW.getText().toString();
         member_pw2 = mod_editPW2.getText().toString();
-
         //입력한 두 비밀번호가 맞는지 확인
-        /*if(member_pw == member_pw2) {
-          member_pw = mod_editPW.getText().toString();
-        } else {
+        if(!(member_pw.equals(member_pw2))) {
           AlertDialog.Builder builder = new AlertDialog.Builder(ModProfileActivity.this);
           builder.setTitle("알림");
           builder.setMessage("비밀번호가 일치하지 않습니다");
@@ -180,24 +177,35 @@ public class ModProfileActivity extends AppCompatActivity {
           });
           builder.show();
           mod_editPW.requestFocus();
-        }*/
-
-        member_nick = mod_editNick.getText().toString();
-        member_tel = mod_editTel.getText().toString();
-        member_email = mod_editEmail.getText().toString();
+        }
+          Log.d(TAG, "onClick: 1" + member_pw );
 
         //파일 업로드
         String Path = "1";
         FileUploadUtils.send2Server(file, Path);
 
-        Log.d(TAG, "onClick: " + file.getName());
 
-        //MemberUpdate memberUpdate = new MemberUpdate(member_pw, member_nick, member_tel, member_email);
-        //memberUpdate.execute();
+        // 이미지 변경이 없을 때와 있을 때~~
+
+        Log.d(TAG, "onClick: 2" + file.getName());
+
+
+        // ** 수정 된 값을 변수에 저장
+        member_id = mod_tv_id.getText().toString();
+        member_pw = mod_editPW.getText().toString();
+        member_nick = mod_editNick.getText().toString();
+        member_tel = mod_editTel.getText().toString();
+        member_email = mod_editEmail.getText().toString();
+        member_image = file.getName();
+
+        Log.d(TAG, "onClick: 3" + member_id + member_pw + member_nick + member_tel + member_email + member_image);
+        // 저장된 변수를 ATack로 넘긴다
+        MemberUpdate memberUpdate = new MemberUpdate(member_id, member_pw, member_nick, member_tel, member_email, member_image);
+        memberUpdate.execute();
 
         // 확인 메시지 띄우고 프로필 화면으로 이동
-/*        Toast.makeText(ModProfileActivity.this, "수정한 내용이 저장되었습니다", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+        Toast.makeText(ModProfileActivity.this, "수정한 내용이 저장되었습니다", Toast.LENGTH_SHORT).show();
+/*        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
         startActivity(intent);
         finish();*/
       }
@@ -244,20 +252,23 @@ public class ModProfileActivity extends AppCompatActivity {
     super.onActivityResult(requestCode, resultCode, data);
     if (requestCode == REQUEST_CODE) {
       if (resultCode == RESULT_OK) {
+
+
+
         try {
           InputStream in = getContentResolver().openInputStream(data.getData());
 
           Bitmap img = BitmapFactory.decodeStream(in);
+          mod_faceImg.setImageBitmap(img);
           in.close();
 
-          mod_faceImg.setImageBitmap(img);
-          String imgSavaFileName = loginDTO.getMember_id() + tmpDateFormat.format(new Date());
 
+          String imgSavaFileName = loginDTO.getMember_id() + tmpDateFormat.format(new Date());
           file = new File(Environment.getExternalStorageDirectory()+"/Pictures/ResevJava/", imgSavaFileName + ".jpeg");
           Log.d(TAG, "onActivityResult: filepath" + file);
           OutputStream out = new FileOutputStream(file);
           img.compress(Bitmap.CompressFormat.JPEG, 100, out);
-
+          Log.d(TAG, "onActivityResult: img" + img);
         } catch (Exception e) {
 
         }
