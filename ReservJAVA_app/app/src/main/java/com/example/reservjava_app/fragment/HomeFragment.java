@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.reservjava_app.R;
@@ -17,6 +18,7 @@ import com.example.reservjava_app.category.Restaurant;
 
 
 public class HomeFragment extends Fragment {
+
 
     ImageButton hospital, restaurant, accommodation, exercise,
         button5, button6, button7, button8;

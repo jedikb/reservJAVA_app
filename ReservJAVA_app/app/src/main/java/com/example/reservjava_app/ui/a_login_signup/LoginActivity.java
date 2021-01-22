@@ -1,5 +1,6 @@
 package com.example.reservjava_app.ui.a_login_signup;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -91,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
     signupBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+        Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
         startActivity(intent);
       }
     });
