@@ -10,7 +10,7 @@ public class MemberDTO implements Serializable {
   private String member_name, member_nick, member_tel, member_email, member_addr, member_image;
   private Date member_date;
 
-  //전체 정보(수정할 때)
+  //전체 정보
   public MemberDTO(int member_code, String member_id, String member_pw, int member_kind, String member_name, String member_nick, String member_tel, String member_email, String member_addr, String member_image, Date member_date) {
     this.member_code = member_code;
     this.member_id = member_id;
@@ -26,6 +26,16 @@ public class MemberDTO implements Serializable {
   }
 
   public  MemberDTO() {}
+
+  //정보 수정
+/*  public MemberDTO(String member_id, String member_pw, String member_nick, String member_tel, String member_email, String member_image) {
+    this.member_id = member_id;
+    this.member_pw = member_pw;
+    this.member_nick = member_nick;
+    this.member_tel = member_tel;
+    this.member_email = member_email;
+    this.member_image = member_image;
+  }*/
 
   //로그인(하다보니 자꾸 추가하게 되어,, 비밀번호를 제외하고 다 넣음)
   public MemberDTO(int member_code, String member_id, int member_kind, String member_name, String member_nick, String member_tel, String member_email, String member_addr, String member_image, Date member_date) {

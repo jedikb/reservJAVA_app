@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,8 +33,8 @@ public class Store extends AppCompatActivity {
 
         productList = new ArrayList<>();
 
-        Intent intent = getIntent();
-        BusinessDTO businessDTO = (BusinessDTO) intent
+        final Intent getintent = getIntent();
+        BusinessDTO businessDTO = (BusinessDTO) getintent
                 .getSerializableExtra("businessdto");
 
         name = findViewById(R.id.business_name);
@@ -40,6 +42,17 @@ public class Store extends AppCompatActivity {
 
         name.setText(businessDTO.getBusiness_name());
         info.setText(businessDTO.getBusiness_info());
+
+        //테스트용 버튼 입니다.
+        Button testBtn = findViewById(R.id.testBtn);
+        testBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Store.this, Reservation.class);
+                startActivity(intent);
+            }
+        });
+        //테스트용 버튼 입니다.
 
         //Toast.makeText(this, "name : " +businessDTO.getBusiness_name() +
         //        "info" + businessDTO.getBusiness_info(), Toast.LENGTH_SHORT).show();

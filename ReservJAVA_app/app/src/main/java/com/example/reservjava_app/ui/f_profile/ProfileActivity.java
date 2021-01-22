@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.reservjava_app.R;
 
-import static com.example.reservjava_app.Common.CommonMethod.imgPath;
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
+import static com.example.reservjava_app.Common.CommonMethod.member_imgPath;
 import static com.example.reservjava_app.Common.CommonMethod.pServer;
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
@@ -24,7 +24,6 @@ public class ProfileActivity extends AppCompatActivity {
   TextView pro_tv_name;
 
   ImageView faceImg;
-  String member_name;
 
   public String imagePath;
 
@@ -38,18 +37,13 @@ public class ProfileActivity extends AppCompatActivity {
     pro_tv_name.setText("소중한 " + loginDTO.getMember_name() + "님");
 
     // 사진
+    //만약 사진 필드가 비어 있다면... 디폴트 이미지
     faceImg = findViewById(R.id.faceImg);
-    imagePath = ipConfig + pServer + imgPath + loginDTO.getMember_image();
+    imagePath = ipConfig + pServer + member_imgPath + loginDTO.getMember_image();
 
     faceImg.setVisibility(View.VISIBLE);
     //선택된 이미지 보여주기(움직이는 그림도 됨)
     Glide.with(this).load(imagePath).into(faceImg);
-
-
-
-
-
-
 
 
     //리스트를 담을 화면(방문, 리뷰 둘다 담을 예정)
