@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.R;
+import com.example.reservjava_app.adapter.OnItemClickListener;
 import com.example.reservjava_app.adapter.StoreListAdapter;
-import com.example.reservjava_app.adapter.StoreMenuAdapter;
+import com.example.reservjava_app.reservation.Store;
 
 import java.util.ArrayList;
 
@@ -43,6 +46,21 @@ public class Accommodation extends AppCompatActivity {
 
 
 
+
+
         recyclerView.setAdapter(adapter);
+
+        //Item 클릭시 Store 페이지로 전환
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(StoreListAdapter.ViewHolder holderm, View view, int position) {
+                BusinessDTO dto = adapter.getItem(position);
+
+                //Toast.makeText(Exercise.this, "Choice Item : " + dto.getBusiness_name(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Accommodation.this, Store.class);
+                intent.putExtra("businessdto", dto);
+                startActivity(intent);
+            }
+        });
     }
 }

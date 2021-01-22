@@ -101,4 +101,8 @@ public class StoreListAdapter extends
         }
     }
 
+    public BusinessDTO getItem(int position){
+        return businessList.get(position);
+    }
+
 }
