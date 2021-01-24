@@ -49,9 +49,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReservJAVA_app"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.MapFragmentActivity"></activity>
         <!-- https가 아니라 http로 오더라도 그냥 허가하는 부분 -->
-        <activity android:name=".reservation.Reservation"/>
-        <activity android:name=".reservation.Store"/>
+        <activity android:name=".reservation.Reservation" />
+        <activity android:name=".reservation.Store" />
         <activity android:name=".ui.a_login_signup.LoginActivity" />
         <activity android:name=".ui.a_login_signup.FinishActivity" />
         <activity android:name=".category.Exercise" />
@@ -60,12 +61,10 @@
         <activity android:name=".ui.b_where.WhereListActivity" />
         <activity android:name=".ui.f_profile.ProfileActivity" />
         <activity android:name=".ui.f_profile.ReviewActivity" />
-        <activity android:name=".ui.f_profile.ModProfileActivity" />
-        <!-- http 라이브러리 사용 -->
+        <activity android:name=".ui.f_profile.ModProfileActivity" /> <!-- http 라이브러리 사용 -->
         <uses-library
             android:name="org.apache.http.legacy"
-            android:required="false" />
-        <!-- 네이버 맵 사용 -->
+            android:required="false" /> <!-- 네이버 맵 사용 -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="evbl7x2447" />
