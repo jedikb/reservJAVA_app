@@ -61,7 +61,7 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
       Log.d(TAG, "doInBackground: "+ member_id + ", " + member_pw);
 
       //접속 경로
-      String postURL = ipConfig + pServer + "/anLogin";
+      String postURL = ipConfig + pServer + "/anMemberLogin";
 
       //Log.d(TAG, "doInBackground: "+ipConfig);
       // 전송

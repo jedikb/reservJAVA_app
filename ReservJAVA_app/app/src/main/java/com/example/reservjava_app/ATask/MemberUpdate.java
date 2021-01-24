@@ -83,11 +83,11 @@ public class MemberUpdate extends AsyncTask<Void, Void, Void> {
         // 실제 이미지 파일
         builder.addPart("image", new FileBody(new File(imageRealPathU)));
 
-        postURL = ipConfig + pServer + "/memberUpdate";
+        postURL = ipConfig + pServer + "/anMemberUpdate";
 
       }else if(imageRealPathU.equals("")){  // 이미지를 바꾸지 않았다면
         Log.d("memberUpdate:postURL", "3");
-        postURL = ipConfig + pServer + "/memberUpdateNoimg";
+        postURL = ipConfig + pServer + "/anMemberUpdateNoimg";
       }else{
         Log.d("memberUpdate:postURL", "5 : error");
       }
