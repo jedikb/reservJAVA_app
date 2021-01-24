@@ -73,13 +73,10 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
       httpEntity = httpResponse.getEntity();
       inputStream = httpEntity.getContent();
 
-      Log.d(TAG, "doInBackground: 1");
       // 하나의 오브젝트 가져올때
       loginDTO = readMessage(inputStream);
 
-      Log.d(TAG, "doInBackground: 2" + loginDTO.getMember_id());
       inputStream.close();
-      Log.d(TAG, "doInBackground: 3");
 
     } catch (Exception e) {
       Log.d("main:loginselect", e.getMessage());
@@ -109,7 +106,6 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
 
   public MemberDTO readMessage(InputStream inputStream) throws IOException {
     JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
-    Log.d(TAG, "readMessage: 12");
     int member_code = -1, member_kind = -1;
     String member_id = "", member_name = "", member_nick = "", member_tel = "", member_email = "", member_addr = "", member_image="";
     Date member_date = null;

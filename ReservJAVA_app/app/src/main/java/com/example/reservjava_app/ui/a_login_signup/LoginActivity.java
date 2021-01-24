@@ -1,12 +1,9 @@
 package com.example.reservjava_app.ui.a_login_signup;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -54,8 +51,8 @@ public class LoginActivity extends AppCompatActivity {
         if(editID.getText().toString().length() != 0 && editPW.getText().toString().length() != 0){
           String member_id = editID.getText().toString();
           String member_pw = editPW.getText().toString();
-          Log.d(TAG, "onClick: " + member_id);
-          Log.d(TAG, "onClick: " + member_pw);
+          //Log.d(TAG, "onClick: " + member_id);
+          //Log.d(TAG, "onClick: " + member_pw);
 
           LoginSelect loginSelect = new LoginSelect(member_id, member_pw);
           try {
