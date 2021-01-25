@@ -73,7 +73,7 @@ dependencies {
     //네이버맵 API
     implementation 'com.naver.maps:map-sdk:3.7.1'
     // 네이버 지도 위치추적
-    implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
 
 
 }

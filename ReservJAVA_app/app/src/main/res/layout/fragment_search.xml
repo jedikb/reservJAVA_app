@@ -12,15 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <fragment
+        <FrameLayout
             android:id="@+id/map"
-            android:name="com.naver.maps.map.MapFragment"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_height="470dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-        </fragment>
+        </FrameLayout>
+            <!-- 제일 권장한다며,,, 안되는게 왜 이렇게 많냐
+            android:name="com.naver.maps.map.MapFragment"-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
