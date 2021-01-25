@@ -40,7 +40,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     faceImg.setVisibility(View.VISIBLE);
     //선택된 이미지 보여주기(움직이는 그림도 됨)
-    Glide.with(this).load(member_image).into(faceImg);
+    Glide.with(this).load(member_image)
+        .error(R.drawable.user).into(faceImg);
 
 
     //리스트를 담을 화면(방문, 리뷰 둘다 담을 예정)

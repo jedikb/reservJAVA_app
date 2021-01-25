@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -69,8 +70,12 @@ public class ModProfileActivity extends AppCompatActivity {
     Log.d(TAG, "onCreate: 1" + member_image);
     mod_faceImg = findViewById(R.id.mod_faceImg);
     mod_faceImg.setVisibility(View.VISIBLE);
+
     //선택된 이미지 보여주기(움직이는 그림도 됨)
-    Glide.with(ModProfileActivity.this).load(member_image).into(mod_faceImg);
+    // 그림이 비어 있다면 디폴트 이미지 보이게
+
+    Glide.with(ModProfileActivity.this).load(member_image)
+        .error(R.drawable.user).into(mod_faceImg);
 
     //loginDTO사용하여 정보 가지고 옴,,
     //비번은 가지고 오지 않는다.
