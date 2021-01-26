@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.reservjava_app.Common.GpsTracker;
 import com.example.reservjava_app.MainActivity;
@@ -26,8 +27,13 @@ import com.example.reservjava_app.ui.b_where.WhereListActivity;
 import com.example.reservjava_app.ui.f_profile.ProfileActivity;
 import com.example.reservjava_app.ui.f_profile.ReviewActivity;
 import com.naver.maps.geometry.LatLng;
+import com.naver.maps.map.CameraAnimation;
+import com.naver.maps.map.CameraPosition;
+import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
+import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
+import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.util.FusedLocationSource;
@@ -38,7 +44,7 @@ import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDT
 public class SearchFragment extends Fragment implements OnMapReadyCallback {
 
   MainActivity activity;
-  private static final String TAG = "main:SearchFragment";
+  private static final String TAG = "main::SearchFragment";
 
   private GpsTracker gpsTracker;
   private static final int PERMISSION_REQUEST_CODE = 100;
@@ -58,6 +64,7 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
     super.onDetach();
     activity = null;
   }
+
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -68,6 +75,21 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
     final TextView tvAddr = (TextView)viewGroup.findViewById(R.id.tvAddr);
 
     addrSearch = viewGroup.findViewById(R.id.addrSearch);
+
+    // 지도 객체 띄우기
+    FragmentManager fm = getChildFragmentManager();
+    MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map);
+    if (mapFragment == null) {
+      mapFragment = MapFragment.newInstance();
+      fm.beginTransaction().add(R.id.map, mapFragment).commit();
+    }
+    // getMapAsync를 호출하여 비동기로 onMapReady 콜백 메서드 호출
+    // onMapReady에서 NaverMap 객체를 받음
+    mapFragment.getMapAsync(this);
+
+    // 위치를 반환하는 구현체인 FusedLocationSource 생성
+    mLocationSource =
+        new FusedLocationSource(this, PERMISSION_REQUEST_CODE);
 
     //(임시) 누르면 현재 위치 찾는 것으로 구현해보자
     viewGroup.findViewById(R.id.setAddrBtn).setOnClickListener(new View.OnClickListener() {
@@ -80,17 +102,16 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
 
         String address = activity.getCurrentAddress(latitude, longitude);
         tvAddr.setText(address);
-
         Toast.makeText(activity, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
+
+        CameraUpdate cameraUpdate = CameraUpdate.scrollTo(new LatLng(latitude, longitude))
+            .animate(CameraAnimation.Easing, 2000);
+
+        mNaverMap.moveCamera(cameraUpdate);
+
       }
     });
 
-    // getMapAsync를 호출하여 비동기로 onMapReady 콜백 메서드 호출
-    // onMapReady에서 NaverMap 객체를 받음
-    //mapFragment.getMapAsync(this);
-    // 위치를 반환하는 구현체인 FusedLocationSource 생성
-    mLocationSource =
-        new FusedLocationSource(this, PERMISSION_REQUEST_CODE);
 
  /*   //사이드바(member)
     viewGroup.findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
@@ -159,22 +180,31 @@ public class SearchFragment extends Fragment implements OnMapReadyCallback {
   @Override
   public void onMapReady(@NonNull NaverMap naverMap) {
     Log.d( TAG, "onMapReady");
-    gpsTracker = new GpsTracker(activity);
 
-    double latitude = gpsTracker.getLatitude();
-    double longitude = gpsTracker.getLongitude();
-
-    String address = activity.getCurrentAddress(latitude, longitude);
-
-    // 지도상에 마커 표시
-    Marker marker = new Marker();
-    marker.setPosition(new LatLng(latitude, longitude));
-    marker.setMap(naverMap);
+    // 초기 위치(현재 위치로 로딩)
+    NaverMapOptions options = new NaverMapOptions()
+        .camera(new CameraPosition(new LatLng(37.5666102, 126.9783881), 8))
+        .mapType(NaverMap.MapType.Terrain);
+    MapFragment mapFragment = MapFragment.newInstance(options);
+    mapFragment.getMapAsync(this);
 
     // NaverMap 객체 받아서 NaverMap 객체에 위치 소스 지정
     mNaverMap = naverMap;
     mNaverMap.setLocationSource(mLocationSource);
 
+    gpsTracker = new GpsTracker(activity);
+
+    double latitude = gpsTracker.getLatitude();
+    double longitude = gpsTracker.getLongitude();
+
+
+
+
+    Log.d(TAG, "onMapReady: " + latitude +" : " +longitude );
+    // 지도상에 마커 표시
+    //Marker marker = new Marker();
+    //marker.setPosition(new LatLng(latitude, longitude));
+    //marker.setMap(naverMap);
 
   }
 

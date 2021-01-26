@@ -107,13 +107,13 @@ public class MainActivity extends AppCompatActivity {
       checkRunTimePermission();
     }*/
 
-    //네이버맵 생성
+/*    //네이버맵 생성
     FragmentManager fm = getSupportFragmentManager();
     MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map);
     if (mapFragment == null) {
       mapFragment = MapFragment.newInstance();
       fm.beginTransaction().add(R.id.map, mapFragment).commit();
-    }
+    }*/
 
   }//onCreat()
 
