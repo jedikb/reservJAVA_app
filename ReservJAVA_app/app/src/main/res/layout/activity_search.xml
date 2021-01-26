@@ -12,16 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <FrameLayout
+        <fragment
             android:id="@+id/map"
             android:layout_width="match_parent"
             android:layout_height="470dp"
+            android:name="com.naver.maps.map.MapFragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-        </FrameLayout>
-            <!-- 제일 권장한다며,,, 안되는게 왜 이렇게 많냐
-            android:name="com.naver.maps.map.MapFragment"-->
+        </fragment>
+        <!-- 제일 권장한다며,,, 안되는게 왜 이렇게 많냐
+        android:name="com.naver.maps.map.MapFragment"-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -146,7 +147,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvAddr" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </LinearLayout>
