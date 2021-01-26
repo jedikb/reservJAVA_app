@@ -1,13 +1,5 @@
 package com.example.reservjava_app.ui.b_where;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.UiThread;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -19,10 +11,16 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.UiThread;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.reservjava_app.Common.GpsTracker;
 import com.example.reservjava_app.R;
@@ -31,15 +29,12 @@ import com.example.reservjava_app.ui.f_profile.ProfileActivity;
 import com.example.reservjava_app.ui.f_profile.ReviewActivity;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraAnimation;
-import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
-import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.util.FusedLocationSource;
-
 
 import java.io.IOException;
 import java.util.List;
@@ -178,7 +173,7 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     mNaverMap = naverMap;
     mNaverMap.setLocationSource(mLocationSource);
 
-    ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
+    //ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
 
     gpsTracker = new GpsTracker(this);
 
@@ -186,11 +181,11 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     double longitude = gpsTracker.getLongitude();
 
     // 초기 위치(현재 위치로 로딩)
-    NaverMapOptions options = new NaverMapOptions()
+/*   NaverMapOptions options = new NaverMapOptions()
         .camera(new CameraPosition(new LatLng(latitude, longitude), 8))
         .mapType(NaverMap.MapType.Terrain);
     MapFragment mapFragment = MapFragment.newInstance(options);
-    mapFragment.getMapAsync(this);
+    mapFragment.getMapAsync(this);*/
 
     Log.d(TAG, "onMapReady: " + latitude +" : " +longitude );
 

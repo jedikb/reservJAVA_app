@@ -30,7 +30,6 @@ public class GpsTracker extends Service implements LocationListener {
     getLocation();
   }
 
-
   //위치 가져오기
   public Location getLocation(){
     try {
