@@ -4,19 +4,37 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_loginbtn"
             android:icon="@android:drawable/ic_menu_camera"
             android:title="로그인" />
         <item
-            android:id="@+id/nav_login"
+            android:id="@+id/nav_signupbtn"
             android:icon="@android:drawable/ic_menu_gallery"
             android:title="회원가입" />
         <item
-            android:id="@+id/nav_signup"
+            android:id="@+id/nav_contactbtn"
             android:icon="@android:drawable/ic_menu_slideshow"
             android:title="문의하기" />
     </group>
 
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_membershipbtn"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="회원정보" />
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="예약확인" />
+        <item
+            android:id="@+id/nav_signup"
+            android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="문의하기" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@android:drawable/btn_dialog"
+            android:title="로그아웃" />
+    </group>
     <item
         android:id="@+id/communi"
         android:title="Communicate"

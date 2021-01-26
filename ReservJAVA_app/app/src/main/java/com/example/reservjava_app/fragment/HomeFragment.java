@@ -3,6 +3,7 @@ package com.example.reservjava_app.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -15,20 +16,22 @@ import com.example.reservjava_app.category.Accommodation;
 import com.example.reservjava_app.category.Exercise;
 import com.example.reservjava_app.category.Hospital;
 import com.example.reservjava_app.category.Restaurant;
+import com.google.android.material.navigation.NavigationView;
 
 
 public class HomeFragment extends Fragment {
 
 
-    ImageButton hospital, restaurant, accommodation, exercise,
+    ImageButton iv_hamburger, hospital, restaurant, accommodation, exercise,
         button5, button6, button7, button8;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
+        final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
 
+        iv_hamburger = rootView.findViewById(R.id.iv_hamburger);
         hospital = rootView.findViewById(R.id.imageButton1);
         restaurant = rootView.findViewById(R.id.imageButton2);
         accommodation = rootView.findViewById(R.id.imageButton3);

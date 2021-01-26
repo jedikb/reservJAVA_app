@@ -18,6 +18,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
+import static com.example.reservjava_app.Common.CommonMethod.pServer;
 
 public class JoinInsert extends AsyncTask<Void, Void, String> {
     String id, passwd, passwdchk, name, phonenumber, email;
@@ -56,7 +57,7 @@ public class JoinInsert extends AsyncTask<Void, Void, String> {
             builder.addTextBody("email", email, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("phonenumber", phonenumber, ContentType.create("Multipart/related", "UTF-8"));
 
-            String postURL = ipConfig + "/app/anJoin";
+            String postURL = ipConfig + pServer + "/app/MemberJoin";
 
             // 전송
             InputStream inputStream = null;
