@@ -5,8 +5,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!--FINE_LOCATION 정확한 위치에 접근할 수 있는 권한
-        COARSE_LOCATION 대략적인 위치에 접근할 수 있는 권한-->
+    <!--
+FINE_LOCATION 정확한 위치에 접근할 수 있는 권한
+        COARSE_LOCATION 대략적인 위치에 접근할 수 있는 권한
+    -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -53,8 +55,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReservJAVA_app"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.MapFragmentActivity"></activity>
-        <!-- https가 아니라 http로 오더라도 그냥 허가하는 부분 -->
+        <activity android:name=".ui.d_bongsun.PaymentActivity"></activity>
+        <activity android:name=".ui.d_bongsun.MemberCancelActivity" />
+        <activity android:name=".ui.d_bongsun.BookingViewActivity" />
+        <activity android:name=".ui.MapFragmentActivity" /> <!-- https가 아니라 http로 오더라도 그냥 허가하는 부분 -->
         <activity android:name=".reservation.Reservation" />
         <activity android:name=".reservation.Store" />
         <activity android:name=".ui.a_login_signup.LoginActivity" />
