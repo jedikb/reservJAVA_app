@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<searchable xmlns:android="http://schemas.android.com/apk/res/android"
+    android:label="@string/app_label"
+    android:hint="@string/search_hint" >
+</searchable>-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -59,7 +63,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 >
 
-                <EditText
+                <SearchView
                     android:id="@+id/addrSearch"
                     android:layout_width="270dp"
                     android:layout_height="25dp"
