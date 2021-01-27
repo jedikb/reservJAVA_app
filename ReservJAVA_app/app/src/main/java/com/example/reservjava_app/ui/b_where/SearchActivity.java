@@ -58,7 +58,7 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
   private NaverMap mNaverMap, naverMap;
 
   // 지하라 GPS 안 잡히니 기능부터 구현하자
-  double latitude, longitude;
+
 
   EditText addrSearch;
 
@@ -76,13 +76,6 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     } else {
       checkRunTimePermission();
     }
-
-
-
-    gpsTracker = new GpsTracker(this);
-
-    latitude = gpsTracker.getLatitude();
-    longitude = gpsTracker.getLongitude();
 
     //지도 객체 띄우기
     FragmentManager fm = getSupportFragmentManager();
@@ -187,6 +180,14 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
   @Override
   public void onMapReady(@NonNull NaverMap naverMap) {
     Log.d( TAG, "onMapReady");
+
+    double latitude, longitude;
+
+    gpsTracker = new GpsTracker(this);
+
+    latitude = gpsTracker.getLatitude();
+    longitude = gpsTracker.getLongitude();
+
     UiSettings uiSettings = naverMap.getUiSettings();
     //uiSettings.setCompassEnabled(true); 버튼이 안 뜸
     uiSettings.setLocationButtonEnabled(true);
