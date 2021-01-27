@@ -7,7 +7,9 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.reservjava_app.ATask.MemberUpdate;
@@ -24,6 +27,7 @@ import com.example.reservjava_app.Common.CommonMethod;
 import com.example.reservjava_app.R;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
@@ -115,8 +119,8 @@ public class ModProfileActivity extends AppCompatActivity {
     });
 
 
-  //이건 사진찍는 것
-/*  mod_faceImg.setOnClickListener(new View.OnClickListener() {
+  //이건 사진찍는 것 29까지 됨
+ /* mod_faceImg.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         try{
@@ -144,8 +148,9 @@ public class ModProfileActivity extends AppCompatActivity {
         }catch(Exception e){
           Log.d("ModProfile:error2", "Something Wrong", e);
         }
+
       }
-    }); */
+    });*/
 
     //뒤로가기 버튼(프로필 화면으로 돌아간다)
     findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
@@ -159,15 +164,15 @@ public class ModProfileActivity extends AppCompatActivity {
   }
 
   //사진찍기 기능의 파일 생성 메소드
-/*  private File createFile() throws IOException {
+  private File createFile() throws IOException {
     java.text.SimpleDateFormat tmpDateFormat = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss");
 
-    String imageFileName = member_id + tmpDateFormat.format(new Date()) + ".jpg";
+    String imageFileName = member_id + tmpDateFormat.format(new Date(System.currentTimeMillis())) + ".jpg";
     File storageDir = Environment.getExternalStorageDirectory();
     File curFile = new File(storageDir, imageFileName);
 
     return curFile;
-  }*/
+  }
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -290,8 +295,8 @@ public class ModProfileActivity extends AppCompatActivity {
           Intent showIntent = new Intent(getApplicationContext(), ProfileActivity.class);
           // 이 명령을 넣으면 자동으로 새로 고침이 안됨
           //showIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |   // 이 엑티비티 플래그를 사용하여 엑티비티를 호출하게 되면 새로운 태스크를 생성하여 그 태스크안에 엑티비티를 추가하게 됩니다. 단, 기존에 존재하는 태스크들중에 생성하려는 엑티비티와 동일한 affinity(관계, 유사)를 가지고 있는 태스크가 있다면 그곳으로 새 엑티비티가 들어가게됩니다.
-          //    Intent.FLAG_ACTIVITY_SINGLE_TOP | // 엑티비티를 호출할 경우 호출된 엑티비티가 현재 태스크의 최상단에 존재하고 있었다면 새로운 인스턴스를 생성하지 않습니다. 예를 들어 ABC가 엑티비티 스택에 존재하는 상태에서 C를 호출하였다면 여전히 ABC가 존재하게 됩니다.
-          //    Intent.FLAG_ACTIVITY_CLEAR_TOP); // 만약에 엑티비티스택에 호출하려는 엑티비티의 인스턴스가 이미 존재하고 있을 경우에 새로운 인스턴스를 생성하는 것 대신에 존재하고 있는 엑티비티를 포그라운드로 가져옵니다. 그리고 엑티비티스택의 최상단 엑티비티부터 포그라운드로 가져올 엑티비티까지의 모든 엑티비티를 삭제합니다.
+          //          //    Intent.FLAG_ACTIVITY_SINGLE_TOP | // 엑티비티를 호출할 경우 호출된 엑티비티가 현재 태스크의 최상단에 존재하고 있었다면 새로운 인스턴스를 생성하지 않습니다. 예를 들어 ABC가 엑티비티 스택에 존재하는 상태에서 C를 호출하였다면 여전히 ABC가 존재하게 됩니다.
+          //          //    Intent.FLAG_ACTIVITY_CLEAR_TOP); // 만약에 엑티비티스택에 호출하려는 엑티비티의 인스턴스가 이미 존재하고 있을 경우에 새로운 인스턴스를 생성하는 것 대신에 존재하고 있는 엑티비티를 포그라운드로 가져옵니다. 그리고 엑티비티스택의 최상단 엑티비티부터 포그라운드로 가져올 엑티비티까지의 모든 엑티비티를 삭제합니다.
           startActivity(showIntent);
 
           finish();

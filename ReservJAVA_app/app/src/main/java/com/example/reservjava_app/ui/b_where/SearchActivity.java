@@ -29,12 +29,16 @@ import com.example.reservjava_app.ui.f_profile.ProfileActivity;
 import com.example.reservjava_app.ui.f_profile.ReviewActivity;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraAnimation;
+import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
+import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.util.FusedLocationSource;
+
 
 import java.io.IOException;
 import java.util.List;
@@ -51,7 +55,10 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
   private static final int PERMISSIONS_REQUEST_CODE = 100;
   String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
   private FusedLocationSource mLocationSource;
-  private NaverMap mNaverMap;
+  private NaverMap mNaverMap, naverMap;
+
+  // 지하라 GPS 안 잡히니 기능부터 구현하자
+
 
   EditText addrSearch;
 
@@ -74,7 +81,12 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     FragmentManager fm = getSupportFragmentManager();
     MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map);
     if (mapFragment == null) {
-      mapFragment = MapFragment.newInstance();
+      mapFragment = MapFragment.newInstance(new NaverMapOptions()
+          .camera(new CameraPosition(new LatLng(37.5116620, 127.0594274), 16, 0, 90))
+          .locationButtonEnabled(true)
+          //.compassEnabled(true)  // 버튼이 안 뜸... 버전이 낮아서 그런지 모르겠음
+          );
+
       fm.beginTransaction().add(R.id.map, mapFragment).commit();
     }
 
@@ -169,23 +181,20 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
   public void onMapReady(@NonNull NaverMap naverMap) {
     Log.d( TAG, "onMapReady");
 
-    // NaverMap 객체 받아서 NaverMap 객체에 위치 소스 지정
-    mNaverMap = naverMap;
-    mNaverMap.setLocationSource(mLocationSource);
-
-    //ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
+    double latitude, longitude;
 
     gpsTracker = new GpsTracker(this);
 
-    double latitude = gpsTracker.getLatitude();
-    double longitude = gpsTracker.getLongitude();
+    latitude = gpsTracker.getLatitude();
+    longitude = gpsTracker.getLongitude();
 
-    // 초기 위치(현재 위치로 로딩)
-/*   NaverMapOptions options = new NaverMapOptions()
-        .camera(new CameraPosition(new LatLng(latitude, longitude), 8))
-        .mapType(NaverMap.MapType.Terrain);
-    MapFragment mapFragment = MapFragment.newInstance(options);
-    mapFragment.getMapAsync(this);*/
+    UiSettings uiSettings = naverMap.getUiSettings();
+    //uiSettings.setCompassEnabled(true); 버튼이 안 뜸
+    uiSettings.setLocationButtonEnabled(true);
+
+    // NaverMap 객체 받아서 NaverMap 객체에 위치 소스 지정
+    mNaverMap = naverMap;
+    mNaverMap.setLocationSource(mLocationSource);
 
     Log.d(TAG, "onMapReady: " + latitude +" : " +longitude );
 
