@@ -8,9 +8,12 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
@@ -20,6 +23,7 @@ import com.example.reservjava_app.fragment.d_bongsun.PaymentFragment;
 import com.example.reservjava_app.fragment.d_bongsun.QnAFragment;
 import com.example.reservjava_app.ui.b_where.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
   MemberCancelFragment memberCancelFragment;
   PaymentFragment paymentFragment;
   QnAFragment qnAFragment;
+  Toolbar toolbar;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,31 @@ public class MainActivity extends AppCompatActivity {
 
     //1. 액티비티 화면이 A, B, C 를 만들어야 한다면
     //  액티비티 화면을 이름만 주어서 만든다.
+
+    toolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+
+    //햄버거
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24);
+    getSupportActionBar().setTitle("주소");
+
+    //측면메뉴
+    DrawerLayout drawer = findViewById(R.id.drawer_layout);
+    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    drawer.addDrawerListener(toggle);
+    toggle.syncState();
+
+    //측면메뉴 버튼 작업
+    NavigationView navigationView = findViewById(R.id.navigation_drawer);
+    navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+      @Override
+      public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+
+        return false;
+      }
+    });
 
     //NavigationBar Setting
     homeFragment = new HomeFragment();
@@ -151,5 +181,9 @@ public class MainActivity extends AppCompatActivity {
         }
       }
     }
+  }
+
+  public String getCurrentAddress(double latitude, double longitude) {
+    return "";
   }
 }
