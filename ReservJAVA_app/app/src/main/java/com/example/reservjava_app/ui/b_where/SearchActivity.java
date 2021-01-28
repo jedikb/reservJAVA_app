@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,7 +61,7 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
   // 지하라 GPS 안 잡히니 기능부터 구현하자
 
 
-  EditText addrSearch;
+  SearchView addrSearch;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
