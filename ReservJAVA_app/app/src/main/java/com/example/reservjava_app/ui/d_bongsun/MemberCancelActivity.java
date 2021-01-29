@@ -18,6 +18,8 @@ import com.example.reservjava_app.ui.b_where.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import com.example.reservjava_app.R;
+
 public class MemberCancelActivity extends AppCompatActivity {
 
     HomeFragment homeFragment;
