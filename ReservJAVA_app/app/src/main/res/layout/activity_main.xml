@@ -28,9 +28,9 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="#FFFFFF"
+                    android:background="#2196F3"
                     app:popupTheme="@style/Widget.AppCompat.Toolbar"
-                    app:titleTextColor="#000000"/>
+                    app:titleTextColor="#000000" />
 
 
             </com.google.android.material.appbar.AppBarLayout>
