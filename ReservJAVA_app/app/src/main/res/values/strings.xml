@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ReservJAVA_app</string>
     <string name="hello_blank_fragment">ListFragment</string>
+
+    <string name="navigation_drawer_open">Navigation Drawer Open</string>
+    <string name="navigation_drawer_close">Navigation Drawer Close</string>
 </resources>

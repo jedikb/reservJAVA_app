@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <!-- 햄버거바 -->
-        <ImageView
+        <ImageButton
             android:id="@+id/iv_hamburger"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +29,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"
+            android:background="#FFFFFF"/>
 
         <!-- 검색창(주소or검색) -->
         <LinearLayout
@@ -86,13 +87,22 @@
                 android:layout_marginRight="2dp"
                 android:text="1"
                 android:textColor="#fff"
-                app:layout_constraintBottom_toBottomOf="@+id/Id"
-                app:layout_constraintEnd_toStartOf="@+id/Id"
-                app:layout_constraintTop_toTopOf="@+id/Id" />
+                app:layout_constraintBottom_toBottomOf="@+id/s_Id"
+                app:layout_constraintEnd_toStartOf="@+id/s_Id"
+                app:layout_constraintTop_toTopOf="@+id/s_Id" />
 
 
             <TextView
-                android:id="@+id/Id"
+                android:id="@+id/s_Id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/sign_Id"
+                app:layout_constraintEnd_toStartOf="@+id/sign_Id"
+                app:layout_constraintTop_toTopOf="@+id/sign_Id" />
+
+
+            <TextView
+                android:id="@+id/sign_Id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -131,7 +141,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/Phone"
+            android:id="@+id/sign_Phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

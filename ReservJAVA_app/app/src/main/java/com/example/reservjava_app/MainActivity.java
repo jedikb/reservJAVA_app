@@ -1,56 +1,39 @@
 package com.example.reservjava_app;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
+import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.reservjava_app.Common.GpsTracker;
 import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
-import com.example.reservjava_app.fragment.SearchFragment;
 import com.example.reservjava_app.fragment.d_bongsun.BookingViewFragment;
 import com.example.reservjava_app.fragment.d_bongsun.MemberCancelFragment;
 import com.example.reservjava_app.fragment.d_bongsun.PaymentFragment;
 import com.example.reservjava_app.fragment.d_bongsun.QnAFragment;
+import com.example.reservjava_app.ui.b_where.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.naver.maps.map.MapFragment;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
   HomeFragment homeFragment;
-  SearchFragment searchFragment;
   ListFragment listFragment;
   BookingViewFragment bookingViewFragment;
   MemberCancelFragment memberCancelFragment;
   PaymentFragment paymentFragment;
   QnAFragment qnAFragment;
-
-  // GPS관련
-
-  private GpsTracker gpsTracker;
-  private static final int GPS_ENABLE_REQUEST_CODE = 2001;
-  private static final int PERMISSIONS_REQUEST_CODE = 100;
-  String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
-
+  Toolbar toolbar;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +46,33 @@ public class MainActivity extends AppCompatActivity {
     //1. 액티비티 화면이 A, B, C 를 만들어야 한다면
     //  액티비티 화면을 이름만 주어서 만든다.
 
+    toolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+
+    //햄버거
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24);
+    getSupportActionBar().setTitle("주소");
+
+    //측면메뉴
+    DrawerLayout drawer = findViewById(R.id.drawer_layout);
+    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    drawer.addDrawerListener(toggle);
+    toggle.syncState();
+
+    //측면메뉴 버튼 작업
+    NavigationView navigationView = findViewById(R.id.navigation_drawer);
+    navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+      @Override
+      public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+
+        return false;
+      }
+    });
+
     //NavigationBar Setting
     homeFragment = new HomeFragment();
-    searchFragment = new SearchFragment();
     listFragment = new ListFragment();
     bookingViewFragment = new BookingViewFragment();
     memberCancelFragment = new MemberCancelFragment();
@@ -87,8 +94,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
 
           case R.id.searchItem:
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, searchFragment).commit();
+           Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+            startActivity(intent);
             return true;
 
           case R.id.listItem:
@@ -100,20 +107,6 @@ public class MainActivity extends AppCompatActivity {
       }//onNavigationItemSelected()
     });
 
-    //네이버 맵 권한 체크(중복)
-/*    if (!checkLocationServicesStatus()) {
-      showDialogForLocationServiceSetting();
-    }else {
-      checkRunTimePermission();
-    }*/
-
-/*    //네이버맵 생성
-    FragmentManager fm = getSupportFragmentManager();
-    MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map);
-    if (mapFragment == null) {
-      mapFragment = MapFragment.newInstance();
-      fm.beginTransaction().add(R.id.map, mapFragment).commit();
-    }*/
 
   }//onCreat()
 
@@ -123,8 +116,8 @@ public class MainActivity extends AppCompatActivity {
       getSupportFragmentManager().beginTransaction()
           .replace(R.id.container, homeFragment).commit();
     } else if (state == 2) {
-      getSupportFragmentManager().beginTransaction()
-          .replace(R.id.container, searchFragment).commit();
+      Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+      startActivity(intent);
     } else if (state == 3) {
       getSupportFragmentManager().beginTransaction()
           .replace(R.id.container, listFragment).commit();
@@ -190,84 +183,7 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  //네이버 맵 관련
-  public String getCurrentAddress( double latitude, double longitude) {
-
-    //지오코더... GPS를 주소로 변환
-    Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
-
-    List<Address> addresses;
-
-    try {
-      addresses = geocoder.getFromLocation(latitude, longitude, 7);
-    } catch (IOException ioException) {
-      //네트워크 문제
-      Toast.makeText(MainActivity.this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
-      return "지오코더 서비스 사용불가";
-    } catch (IllegalArgumentException illegalArgumentException) {
-      Toast.makeText(MainActivity.this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
-      return "잘못된 GPS 좌표";
-    }
-
-    if (addresses == null || addresses.size() == 0) {
-      Toast.makeText(MainActivity.this, "주소 미발견", Toast.LENGTH_LONG).show();
-      return "주소 미발견";
-    }
-
-    Address address = addresses.get(0);
-    return address.getAddressLine(0).toString()+"\n";
-  }
-
-  //여기부터는 GPS 활성화를 위한 메소드들
-  private void showDialogForLocationServiceSetting() {
-
-    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-    builder.setTitle("위치 서비스 비활성화");
-    builder.setMessage("앱을 사용하기 위해서는 위치 서비스가 필요합니다.\n"
-        + "위치 설정을 수정하시겠습니까?");
-    builder.setCancelable(true);
-    builder.setPositiveButton("설정", new DialogInterface.OnClickListener() {
-      @Override
-      public void onClick(DialogInterface dialog, int id) {
-        Intent callGPSSettingIntent
-            = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE);
-      }
-    });
-    builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-      @Override
-      public void onClick(DialogInterface dialog, int id) {
-        dialog.cancel();
-      }
-    });
-    builder.create().show();
-  }
-
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-
-    switch (requestCode) {
-
-      case GPS_ENABLE_REQUEST_CODE:
-        //사용자가 GPS 활성 시켰는지 검사
-        if (checkLocationServicesStatus()) {
-          if (checkLocationServicesStatus()) {
-            //@@@로 하면 이름이 나오는 건가;;
-            Log.d("@@@", "onActivityResult : GPS 활성화 되있음");
-            //어짜피 어플 뜰 때 체크함
-            //checkRunTimePermission();
-            return;
-          }
-        }
-        break;
-    }
-  }
-
-  public boolean checkLocationServicesStatus() {
-    LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-    return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-        || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+  public String getCurrentAddress(double latitude, double longitude) {
+    return "";
   }
 }
