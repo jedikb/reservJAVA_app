@@ -1,9 +1,282 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- 전체화면(햄버거화면을 위한) 시작 -->
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.d_bongsun.BookingViewActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
+    tools:context=".ui.d_bongsun.BookingViewActivity"
+    >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- 전체화면(햄버거화면 제외) 시작 -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <!-- 전체화면(하단바 배치를 위한) 시작 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <!-- 상단(햄버거버튼,툴바,액션바 배치를 위한) 시작 -->
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat"
+                >
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="#FFFFFF"
+                    app:popupTheme="@style/Widget.AppCompat.Toolbar"
+                    app:titleTextColor="#000000"
+                    >
+                    <!-- 상단바 시작 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        >
+                        <!-- 뒤로가기 아이콘(아이콘 상단여백 조절을위해 검색입력창과 분리시킴) -->
+                        <ImageView
+                            android:id="@+id/backBtn"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="13dp"
+                            android:src="@drawable/navigate_before"
+                            />
+                        <LinearLayout
+                            android:layout_height="30dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_marginTop="13dp"
+                            >
+                            <!-- 검색입력창(주소or검색) -->
+                            <EditText
+                                android:id="@+id/addrSearch"
+                                android:layout_width="0dp"
+                                android:layout_height="25dp"
+                                android:layout_weight="1"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/solid_black"
+                                android:gravity="center"
+                                android:hint=""
+                                android:textColor="#000"
+                                android:textSize="18sp"
+                                />
+                            <!-- 검색아이콘 -->
+                            <ImageView
+                                android:id="@+id/searchBtn"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="30dp"
+                                android:src="@drawable/ic_search_black_24dp"
+                                />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!-- 상단바 끝 -->
+
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.AppBarLayout>
+            <!-- 상단(햄버거버튼,툴바,액션바 배치를 위한) 끝 -->
+
+            <!-- 중단(내용화면 배치를 위한) 시작 -->
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+                >
+                <!-- 내용 화면 시작 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+
+                        android:text="예약확인"
+                        android:textSize="30sp"
+                        android:gravity="center"
+                        android:background="@drawable/solid_black"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+
+                        android:id="@+id/title"
+                        />
+
+                    <Spinner
+                        android:id="@+id/product_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="24dp"
+
+                        android:entries="@array/product_name"
+                        android:gravity="center"
+                        android:text="예약한 상품 리스트"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+                    <ImageView
+                        app:layout_constraintTop_toBottomOf="@+id/product_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+
+                        android:text="사업장 이미지"
+                        android:textSize="24sp"
+                        android:gravity="center"
+                        android:background="@drawable/solid_black"
+                        android:src="@drawable/ic_launcher_foreground"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+
+                        android:id="@+id/business_image"
+                        />
+
+                    <TextView
+                        app:layout_constraintTop_toBottomOf="@+id/business_image"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+
+                        android:text="사업장 이름"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/solid_black"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+
+                        android:id="@+id/business_name"
+                        />
+
+                    <TextView
+                        app:layout_constraintTop_toBottomOf="@+id/business_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+
+                        android:text="예약시간"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/solid_black"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+
+                        android:id="@+id/booking_date_reservation"
+                        />
+
+                    <TextView
+                        app:layout_constraintTop_toBottomOf="@+id/booking_date_reservation"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+
+                        android:text="가격"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="@drawable/solid_black"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+
+                        android:id="@+id/booking_price"
+                        />
+
+                    <Button
+                        app:layout_constraintTop_toBottomOf="@+id/booking_price"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+
+                        android:text="예약취소"
+                        android:textSize="24sp"
+                        android:gravity="center"
+                        android:background="@drawable/solid_black"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+
+                        android:id="@+id/cancelBtn"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- 내용 화면 끝 -->
+            </FrameLayout>
+            <!-- 중단(내용화면 배치를 위한) 끝 -->
+
+            <!-- 하단바 시작 -->
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:menu="@menu/bottom_menu"
+                />
+            <!-- 하단바 끝 -->
+
+        </LinearLayout>
+        <!-- 전체화면(하단바 배치를 위한) 시작 -->
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <!-- 전체화면(햄버거화면 제외) 끝 -->
+
+    <!-- 햄버거화면(Navigation Drawer,바로가기) 시작 -->
+<!--
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_drawer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/main_drawer_menu" />
+-->
+    <!-- 햄버거화면(Navigation Drawer,바로가기) 끝 -->
+
+</androidx.drawerlayout.widget.DrawerLayout>
+<!-- 전체화면(햄버거화면을 위한) 끝 -->
