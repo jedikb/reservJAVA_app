@@ -23,6 +23,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.reservjava_app.ATask.MemberUpdate;
+import com.example.reservjava_app.ATask.SearchBusiness;
 import com.example.reservjava_app.Common.GpsTracker;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
@@ -57,11 +59,12 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
   String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
   private FusedLocationSource mLocationSource;
   private NaverMap mNaverMap, naverMap;
-
+  private String searchText;
   // 지하라 GPS 안 잡히니 기능부터 구현하자
 
-
-  SearchView addrSearch;
+  // 일단 Searchview는 힘드니 EditText로 기능을 구현하고 나서
+  //Searchview 사용을 고민해보자..
+  EditText addrSearch;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -123,8 +126,15 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     findViewById(R.id.searchBtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent intent = new Intent(getApplicationContext(), WhereListActivity.class);
+
+        searchText = addrSearch.getText().toString();
+        Toast.makeText(SearchActivity.this, searchText + "를 검색합니다", Toast.LENGTH_SHORT).show();
+        SearchBusiness searchBusiness = new SearchBusiness(searchText);
+        searchBusiness.execute();
+
+        Intent intent = new Intent(SearchActivity.this, WhereListActivity.class);
         startActivity(intent);
+        finish();
       }
     });
 
