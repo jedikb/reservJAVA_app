@@ -13,11 +13,13 @@ import android.widget.Toast;
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.fragment.ListFragment;
+import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
 public class ReviewActivity extends AppCompatActivity {
 
   EditText editReview;
   RatingBar ratingBar;
+  Button submitBtn;
   MainActivity mainActivity;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,8 @@ public class ReviewActivity extends AppCompatActivity {
       }
     });
     // 리뷰 등록 버튼(ratingbar 점수와 editReview 내용을 담고 간다
+
+
     // 고객 아이디, 매장 코드와 연동// 예약한 항목과 시간)
     findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
       @Override
@@ -52,7 +56,19 @@ public class ReviewActivity extends AppCompatActivity {
       }
     });
 
+    //1번.RatingBar 값 가지고 오기
+    submitBtn.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+
+      }
+    });
 
 
-  }
+    }
+
+
+
+
+
 }
