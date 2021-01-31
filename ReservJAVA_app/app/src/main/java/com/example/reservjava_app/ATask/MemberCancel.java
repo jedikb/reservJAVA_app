@@ -5,13 +5,10 @@ import android.os.AsyncTask;
 import android.util.JsonReader;
 import android.util.Log;
 
-import com.example.reservjava_app.DTO.MemberDTO;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 
@@ -20,8 +17,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
-import static com.example.reservjava_app.Common.CommonMethod.ipConfig;  //스프링서버 IP
-import static com.example.reservjava_app.Common.CommonMethod.pServer;   //스프링서버 경로
+import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
+import static com.example.reservjava_app.Common.CommonMethod.pServer;
 
 public class MemberCancel extends AsyncTask<Void, Void, Void> {
 
@@ -52,7 +49,7 @@ public class MemberCancel extends AsyncTask<Void, Void, Void> {
             builder.setCharset(Charset.forName("UTF-8"));
 
             // 문자열 및 데이터 추가
-            builder.addTextBody("member_code", member_code, ContentType.create("Multipart/related", "UTF-8"));
+            //builder.addTextBody("member_code", member_code, ContentType.create("Multipart/related", "UTF-8"));
 
             Log.d(TAG, "doInBackground: member_code: "+ member_code + " 회원탈퇴 처리 시작.");
 
@@ -69,7 +66,7 @@ public class MemberCancel extends AsyncTask<Void, Void, Void> {
             httpEntity = httpResponse.getEntity();
             inputStream = httpEntity.getContent();
 
-            loginDTO = readMessage(inputStream);
+            //loginDTO = readMessage(inputStream);
 
 
             /*StringBuilder stringBuilder = new StringBuilder();
@@ -108,7 +105,7 @@ public class MemberCancel extends AsyncTask<Void, Void, Void> {
 
     }
 
-    public MemberDTO readMessage(InputStream inputStream) throws IOException {
+    public void readMessage(InputStream inputStream) throws IOException {
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
 
         String id = "", name = "", phonenumber = "", address = "";
@@ -130,7 +127,7 @@ public class MemberCancel extends AsyncTask<Void, Void, Void> {
         }
         reader.endObject();
         Log.d("main:loginselect : ", id + "," + name + "," + phonenumber + "," + address);
-        return new MemberDTO(id, name, phonenumber, address);
+        return ;//new MemberDTO(id, name, phonenumber, address);
 
     }
 }

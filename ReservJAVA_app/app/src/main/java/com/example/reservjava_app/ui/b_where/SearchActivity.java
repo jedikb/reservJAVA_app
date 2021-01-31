@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +22,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.reservjava_app.ATask.MemberUpdate;
 import com.example.reservjava_app.ATask.SearchBusiness;
 import com.example.reservjava_app.Common.GpsTracker;
+import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
 import com.example.reservjava_app.ui.f_profile.ProfileActivity;
@@ -42,7 +41,6 @@ import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.util.FusedLocationSource;
 
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -52,6 +50,7 @@ import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDT
 public class SearchActivity extends AppCompatActivity implements OnMapReadyCallback  {
 
   private static final String TAG = "main:SearchActivity";
+  public static BusinessDTO busiSetItem = null;
 
   private GpsTracker gpsTracker;
   private static final int GPS_ENABLE_REQUEST_CODE = 2001;
@@ -132,7 +131,7 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
         SearchBusiness searchBusiness = new SearchBusiness(searchText);
         searchBusiness.execute();
 
-        Intent intent = new Intent(SearchActivity.this, WhereListActivity.class);
+        Intent intent = new Intent(getApplicationContext(), WhereListActivity.class);
         startActivity(intent);
         finish();
       }

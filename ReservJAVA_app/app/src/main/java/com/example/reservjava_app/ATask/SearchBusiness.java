@@ -7,8 +7,7 @@ import android.util.JsonReader;
 import android.util.Log;
 
 import com.example.reservjava_app.DTO.BusinessDTO;
-import com.example.reservjava_app.DTO.MemberDTO;
-import com.example.reservjava_app.adapter.StoreListAdapter;
+import com.example.reservjava_app.adapter.SearchBusinessAdapter;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -17,10 +16,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -29,7 +25,6 @@ import java.util.ArrayList;
 
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
 import static com.example.reservjava_app.Common.CommonMethod.pServer;
-import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
 public class SearchBusiness extends AsyncTask<Void, Void, Void> {
 
@@ -38,9 +33,16 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
 
   //검색한 리스트를 담을 변수
   ArrayList<BusinessDTO> businessList;
-  StoreListAdapter adapter;
+  SearchBusinessAdapter searchBusinessAdapter;
   ProgressDialog progressDialog;
   String searchText;
+
+  public SearchBusiness(ArrayList<BusinessDTO> businessList, String searchText, ProgressDialog progressDialog, SearchBusinessAdapter searchBusinessAdapter) {
+    this.searchText = searchText;
+    this.businessList = businessList;
+    this.progressDialog = progressDialog;
+    this.searchBusinessAdapter = searchBusinessAdapter;
+  }
 
   public SearchBusiness(String searchText) {
     this.searchText = searchText;
@@ -59,7 +61,7 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
   @Override
   protected Void doInBackground(Void... voids) {
 
-    //    businessList.clear();
+    //  businessList.clear();
 
 
     try {
@@ -114,7 +116,8 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
 
     Log.d("SearchBusiness", "SearchBusiness Select Complete!!!");
 
-    adapter.notifyDataSetChanged();
+    //여기부터 다시 작업하자
+    //adapter.notifyDataSetChanged();
   }
 
   public void readJsonStream(InputStream inputStream) throws IOException {

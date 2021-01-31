@@ -69,7 +69,7 @@
                             android:layout_marginLeft="10dp"/>
 
                         <TextView
-                            android:id="@+id/search_bSRateNum"
+                            android:id="@+id/search_bSRateAvg"
                             android:layout_width="wrap_content"
                             android:layout_height="25dp"
                             android:layout_marginLeft="5dp"
