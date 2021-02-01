@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
   Button signupBtn, loginBtn;
   EditText editID, editPW;
+  TextView idpw;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -35,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     signupBtn = findViewById(R.id.signupBtn);
     editID = findViewById(R.id.editID);
     editPW = findViewById(R.id.editPW);
+    idpw = (TextView) findViewById(R.id.idpw);
 
     //(임시: 작업하는 동안 아이디, 비번 치는게 귀찮음)
     editID.setText("aaa");
@@ -94,6 +97,15 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
         startActivity(intent);
         finish();
+      }
+    });
+
+    // 아이디 비밀번호 찾기 화면으로 넘어가는 이벤트
+    idpw.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = new Intent(LoginActivity.this, LogPwSearchActivity.class);
+        startActivity(intent);
       }
     });
 

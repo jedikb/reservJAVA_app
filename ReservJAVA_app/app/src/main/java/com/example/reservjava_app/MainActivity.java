@@ -29,9 +29,11 @@ public class MainActivity extends AppCompatActivity {
 
   HomeFragment homeFragment;
   ListFragment listFragment;
+/*
   BookingViewFragment bookingViewFragment;
   MemberCancelFragment memberCancelFragment;
   PaymentFragment paymentFragment;
+*/
   QnAFragment qnAFragment;
   Toolbar toolbar;
 
@@ -74,9 +76,11 @@ public class MainActivity extends AppCompatActivity {
     //NavigationBar Setting
     homeFragment = new HomeFragment();
     listFragment = new ListFragment();
+/*
     bookingViewFragment = new BookingViewFragment();
     memberCancelFragment = new MemberCancelFragment();
     paymentFragment = new PaymentFragment();
+*/
     qnAFragment = new QnAFragment();
 
     getSupportFragmentManager().beginTransaction()
@@ -121,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
     } else if (state == 3) {
       getSupportFragmentManager().beginTransaction()
           .replace(R.id.container, listFragment).commit();
+/*
     } else if (state == 4) {
       getSupportFragmentManager().beginTransaction()
           .replace(R.id.container, bookingViewFragment).commit();
@@ -130,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
     } else if (state == 6) {
       getSupportFragmentManager().beginTransaction()
           .replace(R.id.container, paymentFragment).commit();
+*/
     } else if (state == 7) {
       getSupportFragmentManager().beginTransaction()
           .replace(R.id.container, qnAFragment).commit();

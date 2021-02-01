@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
+            <LinearLayout
+                android:id="@+id/parentLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/search_bLogo"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/ic_baseline_home_24" />
+
+                    <TextView
+                        android:id="@+id/search_bName"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:gravity="center_vertical"
+                        android:text="상호명"
+                        android:textColor="@color/purple_500"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/search_bAddr"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:text="매장 주소(혹은 이벤트나 매장이 하고 싶은 말)"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/search_bSRateImg"
+                            android:src="@drawable/ic_baseline_star_rate_24"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:linksClickable="true"
+                            android:layout_marginLeft="10dp"/>
+
+                        <TextView
+                            android:id="@+id/search_bSRateAvg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="4.96"
+                            android:linksClickable="true"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/search_bReview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="55dp"
+                            android:gravity="center_vertical"
+                            android:text="방문자 리뷰"
+                            android:linksClickable="true"
+                            android:textColor="@color/black"/>
+
+                        <TextView
+                            android:id="@+id/search_bReviewNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="123"
+                            android:linksClickable="true"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        >
+
+
+                        <Button
+                            android:id="@+id/search_bButton1"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="50dp"
+                            android:layout_weight="1"
+                            android:text="가게보기"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            app:backgroundTint="#FFFFFF"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/search_bButton2"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="50dp"
+                            android:layout_weight="1"
+                            android:text="예약하기"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            app:backgroundTint="#FFFFFF"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

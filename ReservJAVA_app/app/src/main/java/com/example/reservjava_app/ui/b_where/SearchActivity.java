@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +22,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.reservjava_app.ATask.SearchBusiness;
 import com.example.reservjava_app.Common.GpsTracker;
+import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
 import com.example.reservjava_app.ui.f_profile.ProfileActivity;
@@ -40,7 +41,6 @@ import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.util.FusedLocationSource;
 
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -50,6 +50,7 @@ import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDT
 public class SearchActivity extends AppCompatActivity implements OnMapReadyCallback  {
 
   private static final String TAG = "main:SearchActivity";
+  public static BusinessDTO busiSetItem = null;
 
   private GpsTracker gpsTracker;
   private static final int GPS_ENABLE_REQUEST_CODE = 2001;
@@ -57,11 +58,12 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
   String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
   private FusedLocationSource mLocationSource;
   private NaverMap mNaverMap, naverMap;
-
+  private String searchText;
   // 지하라 GPS 안 잡히니 기능부터 구현하자
 
-
-  SearchView addrSearch;
+  // 일단 Searchview는 힘드니 EditText로 기능을 구현하고 나서
+  //Searchview 사용을 고민해보자..
+  EditText addrSearch;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -123,8 +125,15 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     findViewById(R.id.searchBtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+
+        searchText = addrSearch.getText().toString();
+        Toast.makeText(SearchActivity.this, searchText + "를 검색합니다", Toast.LENGTH_SHORT).show();
+        SearchBusiness searchBusiness = new SearchBusiness(searchText);
+        searchBusiness.execute();
+
         Intent intent = new Intent(getApplicationContext(), WhereListActivity.class);
         startActivity(intent);
+        finish();
       }
     });
 

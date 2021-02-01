@@ -40,11 +40,6 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
   }
 
 
-    /*@Override  // 없어도 됨
-    protected void onPreExecute() {
-
-    }*/
-
   @Override
   protected Void doInBackground(Void... voids) {
 
