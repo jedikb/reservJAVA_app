@@ -30,18 +30,17 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
 
   private static final String TAG = "main:SearchBusiness";
 
-
   //검색한 리스트를 담을 변수
-  ArrayList<BusinessDTO> businessList;
-  SearchBusinessAdapter searchBusinessAdapter;
+  ArrayList<BusinessDTO> busiList;
+  SearchBusinessAdapter Adapter;
   ProgressDialog progressDialog;
   String searchText;
 
-  public SearchBusiness(ArrayList<BusinessDTO> businessList, String searchText, ProgressDialog progressDialog, SearchBusinessAdapter searchBusinessAdapter) {
+  public SearchBusiness(ArrayList<BusinessDTO> busiList, String searchText, ProgressDialog progressDialog, SearchBusinessAdapter adapter) {
+    this.busiList = busiList;
     this.searchText = searchText;
-    this.businessList = businessList;
     this.progressDialog = progressDialog;
-    this.searchBusinessAdapter = searchBusinessAdapter;
+    this.Adapter = adapter;
   }
 
   public SearchBusiness(String searchText) {
@@ -61,8 +60,7 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
   @Override
   protected Void doInBackground(Void... voids) {
 
-    //  businessList.clear();
-
+    //businessList.clear();
 
     try {
       // MultipartEntityBuild 생성
@@ -117,7 +115,7 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
     Log.d("SearchBusiness", "SearchBusiness Select Complete!!!");
 
     //여기부터 다시 작업하자
-    //adapter.notifyDataSetChanged();
+    //searchBusinessAdapter.notifyDataSetChanged();
   }
 
   public void readJsonStream(InputStream inputStream) throws IOException {
@@ -125,7 +123,7 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
     try {
       reader.beginArray();
       while (reader.hasNext()) {
-        businessList.add(readMessage(reader));
+        busiList.add(readMessage(reader));
       }
       reader.endArray();
     } finally {
@@ -138,7 +136,7 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
     String business_name = "";
     int business_member_code= 0, business_category_code1 =0, business_category_code2 =0;
     String business_addr= "", business_tel="", business_image = "", business_info="";
-    int business_star_avg = 0;
+    double business_star_avg = 0;
 
     reader.beginObject();
     while (reader.hasNext()){
@@ -162,7 +160,7 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
       } else if(readStr.equals("business_info")) {
         business_info = reader.nextString();
       } else if(readStr.equals("business_star_avg")) {
-        business_star_avg = reader.nextInt();
+        business_star_avg = reader.nextDouble();
       } else {
         reader.skipValue();
       }

@@ -7,11 +7,11 @@ public class BusinessDTO implements Serializable {
   private String business_name;
   private int business_member_code, business_category_code1, business_category_code2;
   private  String business_addr, business_tel, business_image, business_info;
-  private int business_star_avg;
+  private double business_star_avg;
 
   public BusinessDTO(){}
 
-  public BusinessDTO(int business_code, String business_name, int business_member_code, int business_category_code1, int business_category_code2, String business_addr, String business_tel, String business_image, String business_info, int business_star_avg) {
+  public BusinessDTO(int business_code, String business_name, int business_member_code, int business_category_code1, int business_category_code2, String business_addr, String business_tel, String business_image, String business_info, double business_star_avg) {
     this.business_code = business_code;
     this.business_name = business_name;
     this.business_member_code = business_member_code;
@@ -25,12 +25,19 @@ public class BusinessDTO implements Serializable {
   }
 
   //RecyclerView 테스트용
-  public BusinessDTO(String business_name, String business_info) {
+  public BusinessDTO(String business_name, String business_addr) {
     this.business_name = business_name;
-    this.business_info = business_info;
+    this.business_addr = business_addr;
   }
 
-    public int getBusiness_code() {
+  //SearchBusiness
+  public BusinessDTO(String business_name, String business_addr, double business_star_avg) {
+    this.business_name = business_name;
+    this.business_addr = business_addr;
+    this.business_star_avg = business_star_avg;
+  }
+
+  public int getBusiness_code() {
     return business_code;
   }
 
@@ -102,11 +109,11 @@ public class BusinessDTO implements Serializable {
     this.business_info = business_info;
   }
 
-  public int getBusiness_star_avg() {
+  public double getBusiness_star_avg() {
     return business_star_avg;
   }
 
-  public void setBusiness_star_avg(int business_star_avg) {
+  public void setBusiness_star_avg(double business_star_avg) {
     this.business_star_avg = business_star_avg;
   }
 }

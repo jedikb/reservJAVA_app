@@ -68,12 +68,12 @@
                     android:layout_width="270dp"
                     android:layout_height="25dp"
                     android:layout_gravity="center"
-                    android:hint="찾으시는 주소를 입력하세요"
-                    android:gravity="center"
-                    android:textColor="#000"
-                    android:textSize="18sp"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/solid_black"/>
+                    android:background="@drawable/solid_black"
+                    android:gravity="center"
+                    android:hint="찾으시는 매장 이름을 입력하세요"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:id="@+id/searchBtn"
@@ -143,13 +143,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
-            android:text="이 위치로 주소 설정"
+            android:text="새로운 주소 찾기"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvAddr" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
