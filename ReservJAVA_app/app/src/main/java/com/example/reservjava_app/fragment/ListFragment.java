@@ -14,6 +14,9 @@ import androidx.fragment.app.Fragment;
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
+import com.example.reservjava_app.ui.d_bongsun.BookingViewActivity;
+import com.example.reservjava_app.ui.d_bongsun.MemberCancelActivity;
+import com.example.reservjava_app.ui.d_bongsun.PaymentActivity;
 
 public class ListFragment extends Fragment {
 
@@ -59,7 +62,8 @@ public class ListFragment extends Fragment {
         viewGroup.findViewById(R.id.moveBtn2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.onFragmentChange(4);
+                Intent intent = new Intent(activity.getApplicationContext(), BookingViewActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -67,7 +71,8 @@ public class ListFragment extends Fragment {
         viewGroup.findViewById(R.id.moveBtn3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.onFragmentChange(5);
+                Intent intent = new Intent(activity.getApplicationContext(), MemberCancelActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -75,7 +80,8 @@ public class ListFragment extends Fragment {
         viewGroup.findViewById(R.id.moveBtn4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.onFragmentChange(6);
+                Intent intent = new Intent(activity.getApplicationContext(), PaymentActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -55,8 +55,6 @@ public class MemberCancelActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리 내용
-
-
                 return false;
             }
         });
@@ -94,7 +92,6 @@ public class MemberCancelActivity extends AppCompatActivity {
                 return false;
             }//onNavigationItemSelected()
         });
-
 
     }//onCreat()
 
