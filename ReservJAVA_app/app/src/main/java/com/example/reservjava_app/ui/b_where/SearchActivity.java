@@ -58,20 +58,21 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
   String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
   private FusedLocationSource mLocationSource;
   private NaverMap mNaverMap, naverMap;
-  private String searchText;
+  private String searchText, address;
   // 지하라 GPS 안 잡히니 기능부터 구현하자
 
   // 일단 Searchview는 힘드니 EditText로 기능을 구현하고 나서
   //Searchview 사용을 고민해보자..
   EditText addrSearch;
+  TextView tvAddr;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_search);
 
-    final TextView tvAddr = findViewById(R.id.tvAddr);
     addrSearch = findViewById(R.id.addrSearch);
+    tvAddr = findViewById(R.id.tvAddr);
 
     //네이버 맵 권한 체크(중복)
     if (!checkLocationServicesStatus()) {
@@ -110,7 +111,7 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
         double latitude = gpsTracker.getLatitude();
         double longitude = gpsTracker.getLongitude();
 
-        String address = getCurrentAddress(latitude, longitude);
+        address = getCurrentAddress(latitude, longitude);
         tvAddr.setText(address);
         Toast.makeText(SearchActivity.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
 
@@ -128,21 +129,20 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
 
         searchText = addrSearch.getText().toString();
         Toast.makeText(SearchActivity.this, searchText + "를 검색합니다", Toast.LENGTH_SHORT).show();
-        SearchBusiness searchBusiness = new SearchBusiness(searchText);
-        searchBusiness.execute();
+        //Log.d(TAG, "onClick searchText : " + searchText);
 
-        Intent intent = new Intent(getApplicationContext(), WhereListActivity.class);
+        Intent intent = new Intent(SearchActivity.this, WhereListActivity.class);
+        intent.putExtra("searchText", searchText);
         startActivity(intent);
-        finish();
       }
     });
 
-/*    //주소 확정버튼(주소가 저장되었습니다 메시지 띄움)
+
+/*    //새로운 주소 찾기
     findViewById(R.id.setAddrBtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Toast.makeText(getActivity(), "주소가 성공적으로 저장되었습니다", Toast.LENGTH_SHORT).show();
-        activity.onFragmentChange(1);
+
       }
     });*/
 
@@ -205,6 +205,9 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     // NaverMap 객체 받아서 NaverMap 객체에 위치 소스 지정
     mNaverMap = naverMap;
     mNaverMap.setLocationSource(mLocationSource);
+
+    address = getCurrentAddress(latitude, longitude);
+    tvAddr.setText(address);
 
     Log.d(TAG, "onMapReady: " + latitude +" : " +longitude );
 
