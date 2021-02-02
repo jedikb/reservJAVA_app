@@ -18,7 +18,7 @@ public class ReviewActivity extends AppCompatActivity {
 
   EditText editReview;
   RatingBar ratingBar;
-  MainActivity mainActivity;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
