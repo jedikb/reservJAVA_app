@@ -1,14 +1,20 @@
 package com.example.reservjava_app.ui.b_where;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +22,7 @@ import com.example.reservjava_app.ATask.SearchBusiness;
 import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.adapter.SearchBusinessAdapter;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
@@ -31,11 +38,41 @@ public class WhereListActivity extends AppCompatActivity {
   SearchBusinessAdapter adapter;
   ProgressDialog progressDialog;
   String searchText;
-
+  EditText addrSearch;
+  Toolbar toolbar;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_where_list);
+
+//-------------------------툴바
+ /*   toolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+
+    //햄버거
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24);
+    getSupportActionBar().setTitle("주소");
+
+    //측면메뉴
+    DrawerLayout drawer = findViewById(R.id.drawer_layout);
+    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    drawer.addDrawerListener(toggle);
+    toggle.syncState();
+
+    //측면메뉴 버튼 작업
+    NavigationView navigationView = findViewById(R.id.navigation_drawer);
+    navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+      @Override
+      public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+
+        return false;
+      }
+    });
+*/
+//--------------------- 툴바 ::: 일단 안되네  나중에 하자
+
 
     Intent intent = getIntent();
 
@@ -61,37 +98,33 @@ public class WhereListActivity extends AppCompatActivity {
               Toast.LENGTH_SHORT).show();
     }
 
-    //평균 int로 되어 있는거 double로 바꾸자
-    //adapter.addItem(new BusinessDTO("가계 이름", "주소", 4.4));
-    //adapter.addItem(new BusinessDTO("가계 이름1", "주소1", 4.54));
-
     for (BusinessDTO dto : busiList){
       Log.d(TAG, "onCreate: " + dto.getBusiness_name());
-      //튕김
       adapter.addItem(new BusinessDTO(dto.getBusiness_name(), dto.getBusiness_addr(), dto.getBusiness_star_avg()));
-      //튕김
-      //adapter.addItem(dto.getBusiness_name().toString(), dto.getBusiness_addr().toString(), dto.getBusiness_star_avg());
-      //
     }
 
-
-
-/*    if(isNetworkConnected(this) == true) {
-      searchBusiness = new SearchBusiness(busiList, searchText, progressDialog, adapter);
-      searchBusiness.execute();
-    } else {
-      Toast.makeText(this, "인터넷이 연결되어 있지 않습니다",
-              Toast.LENGTH_SHORT).show();
-    }*/
-
     // 상단 검색버튼
+    findViewById(R.id.searchBtn).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        addrSearch = findViewById(R.id.addrSearch);
+        searchText = addrSearch.getText().toString();
+        Toast.makeText(WhereListActivity.this, searchText + "를 검색합니다", Toast.LENGTH_SHORT).show();
+        //Log.d(TAG, "onClick searchText : " + searchText);
 
-
+        //화면 갱신시 옆으로 이동하는 것 없애려고 했는데 일단 너무 시간이 걸려 나중으로 넘김
+        Intent intent = new Intent(WhereListActivity.this, WhereListActivity.class);
+        intent.putExtra("searchText", searchText);
+        finish();
+        startActivity(intent);
+      }
+    });
   }
 
     // 이미 화면이 있을 때 받는 곳
     @Override
     protected void onNewIntent(Intent intent) {
+      super.onNewIntent(intent);
       Log.d("Sub1", "onNewIntent() 호출됨");
 
       // 새로고침하면서 이미지가 겹치는 현상 없애기 위해...
@@ -103,7 +136,6 @@ public class WhereListActivity extends AppCompatActivity {
       progressDialog.setCanceledOnTouchOutside(false);
       progressDialog.show();
       processIntent(intent);
-
     }
 
     private void processIntent(Intent intent){

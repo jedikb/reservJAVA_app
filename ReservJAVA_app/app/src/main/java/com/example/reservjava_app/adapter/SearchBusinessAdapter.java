@@ -1,6 +1,7 @@
 package com.example.reservjava_app.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.R;
+import com.example.reservjava_app.reservation.Store;
+import com.example.reservjava_app.ui.b_where.WhereListActivity;
 
 import java.util.ArrayList;
 import static com.example.reservjava_app.ui.b_where.SearchActivity.busiSetItem;
@@ -61,6 +64,9 @@ public class SearchBusinessAdapter extends
         busiSetItem = busiList.get(position);
 
         Toast.makeText(mContext, "OnClick " + busiList.get(position).getBusiness_name(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(v.getContext(), Store.class);
+        intent.putExtra("businessdto", busiSetItem);
+        v.getContext().startActivity(intent);
       }
     });
   }
