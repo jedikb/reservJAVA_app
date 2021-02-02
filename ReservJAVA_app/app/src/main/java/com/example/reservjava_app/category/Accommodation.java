@@ -36,14 +36,13 @@ public class Accommodation extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new StoreListAdapter(Accommodation.this, businessList);
-        
+
         //adapter 추가 db연동해야됨!
         BusinessDTO dto;
 
 
-        adapter.addItem(new BusinessDTO());
-
-
+        adapter.addItem(new BusinessDTO("test", "testInfo"));
+        adapter.addItem(new BusinessDTO("test2", "testInfo"));
 
 
 
