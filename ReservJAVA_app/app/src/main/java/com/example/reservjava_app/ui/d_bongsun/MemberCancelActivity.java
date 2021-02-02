@@ -64,8 +64,8 @@ public class MemberCancelActivity extends AppCompatActivity {
         listFragment = new ListFragment();
         qnAFragment = new QnAFragment();
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, homeFragment).commit();    //기본 첫화면 띄우기
+        //getSupportFragmentManager().beginTransaction()
+        //        .replace(R.id.container, homeFragment).commit();    //기본 첫화면 띄우기
         BottomNavigationView bottomNavigationView =
                 findViewById(R.id.bottom_navigation);
 
@@ -77,16 +77,19 @@ public class MemberCancelActivity extends AppCompatActivity {
                     case R.id.homeItem:
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.container, homeFragment).commit();
+                        finish();
                         return true;
 
                     case R.id.searchItem:
                         Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
                         startActivity(intent);
+                        finish();
                         return true;
 
                     case R.id.listItem:
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.container, listFragment).commit();
+                        finish();
                         return true;
                 }//switch
                 return false;
@@ -100,15 +103,19 @@ public class MemberCancelActivity extends AppCompatActivity {
         if (state == 1) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, homeFragment).commit();
+            finish();
         } else if (state == 2) {
             Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
             startActivity(intent);
+            finish();
         } else if (state == 3) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, listFragment).commit();
+            finish();
         } else if (state == 7) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, qnAFragment).commit();
+            finish();
         }
     }
 
