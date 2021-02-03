@@ -55,7 +55,7 @@ FINE_LOCATION 정확한 위치에 접근할 수 있는 권한
         android:supportsRtl="true"
         android:theme="@style/Theme.ReservJAVA_app"
         android:usesCleartextTraffic="true">
-        <activity android:name=".fragment.d_bongsun.MemberCancelActivity"></activity>
+        <activity android:name=".ListActivity" />
         <activity android:name=".ui.a_login_signup.QnAMainActivity" />
         <activity android:name=".ui.a_login_signup.PwSearchActivity" />
         <activity android:name=".ui.a_login_signup.IdSearchActivity" />
@@ -64,6 +64,7 @@ FINE_LOCATION 정확한 위치에 접근할 수 있는 권한
         <activity android:name=".ui.d_bongsun.PaymentActivity" />
         <activity android:name=".ui.d_bongsun.MemberCancelActivity" />
         <activity android:name=".ui.d_bongsun.BookingViewActivity" />
+        <activity android:name=".fragment.d_bongsun.MemberCancelActivity"/>
         <activity android:name=".reservation.Reservation" />
         <activity android:name=".reservation.Store" />
         <activity android:name=".ui.a_login_signup.LoginActivity" />
