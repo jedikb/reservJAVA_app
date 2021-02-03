@@ -79,7 +79,7 @@ public class ProfileActivity extends AppCompatActivity {
     });
 
     //뒤로가기 버튼(이전 화면으로 돌아간다-임시:Search)
-    findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
+    findViewById(R.id.backQnABtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         finish();

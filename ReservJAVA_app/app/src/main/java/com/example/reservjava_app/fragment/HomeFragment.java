@@ -22,7 +22,7 @@ import com.google.android.material.navigation.NavigationView;
 public class HomeFragment extends Fragment {
 
 
-    ImageButton iv_hamburger, hospital, restaurant, accommodation, exercise,
+    ImageButton hospital, restaurant, accommodation, exercise,
         button5, button6, button7, button8;
 
 
@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
 
-        iv_hamburger = rootView.findViewById(R.id.iv_hamburger);
+
         hospital = rootView.findViewById(R.id.imageButton1);
         restaurant = rootView.findViewById(R.id.imageButton2);
         accommodation = rootView.findViewById(R.id.imageButton3);

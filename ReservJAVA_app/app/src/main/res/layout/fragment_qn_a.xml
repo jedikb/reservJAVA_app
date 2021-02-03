@@ -19,7 +19,7 @@
 
         <!-- 뒤로가기 -->
         <ImageView
-            android:id="@+id/backBtn"
+            android:id="@+id/backQnABtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="10dp"
@@ -76,43 +76,42 @@
         >
 
         <TextView
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-
-            android:text="문의하기"
-            android:textSize="30sp"
-            android:gravity="center"
-            android:background="@drawable/solid_black"
-
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
 
-            android:id="@+id/title"
-            />
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/solid_black"
+
+            android:gravity="center"
+            android:text="문의하기"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            app:layout_constraintTop_toBottomOf="@+id/title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-
-            android:inputType="text"
-            android:text="제목을 입력해 주세요"
-            android:textSize="24sp"
-            android:gravity="center"
-            android:background="@drawable/solid_black"
-
+            android:id="@+id/board_subject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
 
-            android:id="@+id/board_subject"
-            />
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/solid_black"
+
+            android:gravity="center"
+            android:hint="제목을 입력해 주세요"
+            android:inputType="text"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
 
         <EditText
             android:id="@+id/board_content"
@@ -125,10 +124,10 @@
             android:background="@drawable/solid_black"
 
             android:gravity="center_horizontal"
+            android:hint="문의접수 후 답변은 4일 이상 소요됩니다."
             android:inputType="textMultiLine"
-            android:padding="10dp"
-            android:text="문의접수 후 답변은 4일 이상 소요됩니다."
 
+            android:padding="10dp"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -145,12 +144,12 @@
             android:background="@drawable/solid_black"
             android:gravity="center"
 
+            android:hint="답변받을 이메일 주소"
             android:inputType="textEmailAddress"
-            android:text="답변받을 이메일 주소"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
 
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/board_content" />
 
         <EditText
@@ -189,40 +188,40 @@
             >
 
             <Button
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/submitBtn"
+                android:layout_width="wrap_content"
 
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="24dp"
+
+                android:background="@drawable/solid_black"
+                android:gravity="center"
                 android:text="문의등록"
                 android:textSize="24sp"
-                android:gravity="center"
-                android:background="@drawable/solid_black"
+                app:backgroundTint="#2196F3"
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-
-                android:id="@+id/submitBtn"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-
-                android:text="취소"
-                android:textSize="24sp"
-                android:gravity="center"
-                android:background="@drawable/solid_black"
-
+                android:id="@+id/cancelBtn"
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
                 android:layout_marginStart="24dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginEnd="24dp"
 
-                android:id="@+id/cancelBtn"
-                />
+                android:background="@drawable/solid_black"
+                android:gravity="center"
+                android:text="취소"
+                android:textSize="24sp"
+                app:backgroundTint="#2196F3"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

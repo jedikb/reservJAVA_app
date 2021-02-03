@@ -55,8 +55,6 @@ public class MemberCancelActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리 내용
-
-
                 return false;
             }
         });
@@ -66,8 +64,8 @@ public class MemberCancelActivity extends AppCompatActivity {
         listFragment = new ListFragment();
         qnAFragment = new QnAFragment();
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, homeFragment).commit();    //기본 첫화면 띄우기
+        //getSupportFragmentManager().beginTransaction()
+        //        .replace(R.id.container, homeFragment).commit();    //기본 첫화면 띄우기
         BottomNavigationView bottomNavigationView =
                 findViewById(R.id.bottom_navigation);
 
@@ -79,22 +77,24 @@ public class MemberCancelActivity extends AppCompatActivity {
                     case R.id.homeItem:
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.container, homeFragment).commit();
+                        finish();
                         return true;
 
                     case R.id.searchItem:
                         Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
                         startActivity(intent);
+                        finish();
                         return true;
 
                     case R.id.listItem:
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.container, listFragment).commit();
+                        finish();
                         return true;
                 }//switch
                 return false;
             }//onNavigationItemSelected()
         });
-
 
     }//onCreat()
 
@@ -103,15 +103,19 @@ public class MemberCancelActivity extends AppCompatActivity {
         if (state == 1) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, homeFragment).commit();
+            finish();
         } else if (state == 2) {
             Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
             startActivity(intent);
+            finish();
         } else if (state == 3) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, listFragment).commit();
+            finish();
         } else if (state == 7) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, qnAFragment).commit();
+            finish();
         }
     }
 

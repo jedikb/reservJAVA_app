@@ -9,6 +9,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 
@@ -24,8 +25,8 @@ public class MemberCancel extends AsyncTask<Void, Void, Void> {
 
     private static final String TAG = "main:MemberCancel";
 
-    int member_code;
-    public MemberCancel(int member_code) {
+    String member_code;
+    public MemberCancel(String member_code) {
         this.member_code = member_code;
     }
 
@@ -49,13 +50,13 @@ public class MemberCancel extends AsyncTask<Void, Void, Void> {
             builder.setCharset(Charset.forName("UTF-8"));
 
             // 문자열 및 데이터 추가
-            //builder.addTextBody("member_code", member_code, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("member_code", member_code, ContentType.create("Multipart/related", "UTF-8"));
 
             Log.d(TAG, "doInBackground: member_code: "+ member_code + " 회원탈퇴 처리 시작.");
 
 
             //스프링서버 응답 URL
-            String postURL = ipConfig + pServer + "/anMemberLogin";
+            String postURL = ipConfig + pServer + "/anMemberCancel";
 
             // 전송
             InputStream inputStream = null;
@@ -79,7 +80,7 @@ public class MemberCancel extends AsyncTask<Void, Void, Void> {
             inputStream.close();
 
         } catch (Exception e) {
-            Log.d("main:loginselect", e.getMessage());
+            Log.d(TAG, "doInBackground: " + e.getMessage() );
             e.printStackTrace();
         }finally {
             if(httpEntity != null){

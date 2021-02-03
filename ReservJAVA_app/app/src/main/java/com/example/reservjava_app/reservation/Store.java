@@ -34,7 +34,7 @@ public class Store extends AppCompatActivity {
         productList = new ArrayList<>();
 
         final Intent getintent = getIntent();
-        BusinessDTO businessDTO = (BusinessDTO) getintent
+        final BusinessDTO businessDTO = (BusinessDTO) getintent
                 .getSerializableExtra("businessdto");
 
         name = findViewById(R.id.business_name);
@@ -49,6 +49,7 @@ public class Store extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Store.this, Reservation.class);
+                //intent.putExtra("business_Code", businessDTO.getBusiness_code());
                 startActivity(intent);
             }
         });

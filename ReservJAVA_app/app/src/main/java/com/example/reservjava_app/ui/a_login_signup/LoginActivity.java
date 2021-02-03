@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.reservjava_app.ATask.LoginSelect;
 import com.example.reservjava_app.DTO.MemberDTO;
+import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.ui.f_profile.ModProfileActivity;
 
@@ -77,8 +78,11 @@ public class LoginActivity extends AppCompatActivity {
           Log.d("main:login", loginDTO.getMember_name() + "님 로그인 되었습니다 !!!");
 
           // 로그인 정보에 값이 있으면 로그인이 되었다는 것이므로 화면을 종료시킨다
-          Intent intent = new Intent(getApplicationContext(), ModProfileActivity.class);
+          Intent intent = new Intent(getApplicationContext(), MainActivity.class);
           startActivity(intent);
+          intent = new Intent(getApplicationContext(), ModProfileActivity.class);
+          startActivity(intent);
+
           finish();
 
         }else {

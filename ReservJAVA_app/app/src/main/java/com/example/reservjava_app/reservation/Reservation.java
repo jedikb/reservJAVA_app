@@ -1,48 +1,66 @@
 package com.example.reservjava_app.reservation;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.CalendarView;
+import android.widget.TextView;
 
+import com.example.reservjava_app.DTO.ProductDTO;
 import com.example.reservjava_app.R;
-import com.example.reservjava_app.adapter.ExpandableListAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
+
 
 public class Reservation extends AppCompatActivity {
-    private RecyclerView recyclerview;
+
+    CalendarView calendar;
+    ProductDTO productDTO;
+    TextView calendar_text, time_text, product_text, person_text;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
 
-        recyclerview = findViewById(R.id.recyclerview);
-        recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        List<ExpandableListAdapter.Item> data = new ArrayList<>();
+        //Intent getintent = getIntent();
+        //int business_code = Integer.parseInt(getintent.getStringExtra("business_Code"));
 
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "날짜"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Apple"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Orange"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Banana"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "시간"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Audi"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Aston Martin"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "BMW"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Cadillac"));
 
-        ExpandableListAdapter.Item places = new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "인원");
-        places.invisibleChildren = new ArrayList<>();
-        places.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Kerala"));
-        places.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Tamil Nadu"));
-        places.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Karnataka"));
-        places.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Maharashtra"));
 
-        data.add(places);
+        //캘린더에서 날짜 값 뽑기 및 지난 날짜 회색 처리
+        calendar_text = findViewById(R.id.calendar_text);
+        calendar = findViewById(R.id.calendarView);
 
-        recyclerview.setAdapter(new ExpandableListAdapter(data));
+        Calendar cal = Calendar.getInstance();
+
+        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                month += 1;
+                calendar_text.setText(String.format("%d년 %d월 %d일", year, month, dayOfMonth));
+            }
+        });
+
+
+
+        //product → List로 담기 꽉찬 물건 색처리해야됨
+
+
+
+
+        //product DB연동
+
+
+
+        //인원 textView 숫자 처리 및 인원 제한 걸어 보기
+
+
+
     }
 }

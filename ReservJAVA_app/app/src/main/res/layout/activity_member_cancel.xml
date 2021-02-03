@@ -35,7 +35,6 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="#FFFFFF"
                     app:popupTheme="@style/Widget.AppCompat.Toolbar"
                     app:titleTextColor="#000000"
                     >
@@ -47,7 +46,7 @@
                         >
                         <!-- 뒤로가기 아이콘(아이콘 상단여백 조절을위해 검색입력창과 분리시킴) -->
                         <ImageView
-                            android:id="@+id/backBtn"
+                            android:id="@+id/backQnABtn"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_marginTop="13dp"
@@ -208,23 +207,23 @@
                         />
 
                     <Button
-                        app:layout_constraintTop_toBottomOf="@+id/textView4"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-
-                        android:text="회원 탈퇴하기"
-                        android:textSize="16sp"
-                        android:gravity="center"
-                        android:background="@drawable/solid_black"
-
+                        android:id="@+id/submitBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
 
-                        android:id="@+id/submitBtn"
-                        />
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/solid_black"
+
+                        android:gravity="center"
+                        android:text="회원 탈퇴하기"
+                        android:textSize="18sp"
+                        app:backgroundTint="#2196F3"
+                        app:layout_constraintEnd_toEndOf="parent"
+
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <!-- 내용 화면 끝 -->
@@ -250,17 +249,7 @@
     <!-- 전체화면(햄버거화면 제외) 끝 -->
 
     <!-- 햄버거화면(Navigation Drawer,바로가기) 시작 -->
-<!--
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_drawer"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/main_drawer_menu" />
--->
     <!-- 햄버거화면(Navigation Drawer,바로가기) 끝 -->
 
 </androidx.drawerlayout.widget.DrawerLayout>
-<!-- 전체화면(햄버거화면을 위한) 끝 -->
+    <!-- 전체화면(햄버거화면을 위한) 끝 -->

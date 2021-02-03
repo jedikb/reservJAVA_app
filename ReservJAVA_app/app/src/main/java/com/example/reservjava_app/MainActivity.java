@@ -17,13 +17,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
-import com.example.reservjava_app.fragment.d_bongsun.BookingViewFragment;
-import com.example.reservjava_app.fragment.d_bongsun.MemberCancelFragment;
-import com.example.reservjava_app.fragment.d_bongsun.PaymentFragment;
 import com.example.reservjava_app.fragment.d_bongsun.QnAFragment;
+import com.example.reservjava_app.ui.a_login_signup.JoinActivity;
+import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
+import com.example.reservjava_app.ui.a_login_signup.QnAMainActivity;
 import com.example.reservjava_app.ui.b_where.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+
+import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 */
   QnAFragment qnAFragment;
   Toolbar toolbar;
+  int member_kind=0;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     //햄버거
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24);
-    getSupportActionBar().setTitle("주소");
+    getSupportActionBar().setTitle("");
 
     //측면메뉴
     DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -62,16 +65,64 @@ public class MainActivity extends AppCompatActivity {
     drawer.addDrawerListener(toggle);
     toggle.syncState();
 
+    //로그인 정보 표시하기
+
+
+
     //측면메뉴 버튼 작업
     NavigationView navigationView = findViewById(R.id.navigation_drawer);
+    if(loginDTO == null) {  //로그인 안했을 때
+      navigationView.getMenu().findItem(R.id.nav_membershipbtn)
+              .setVisible(false);
+      navigationView.getMenu().findItem(R.id.nav_logout)
+              .setVisible(false);
+      navigationView.getMenu().findItem(R.id.nav_listchk)
+              .setVisible(false);
+      navigationView.getMenu().findItem(R.id.nav_loginbtn)
+              .setVisible(true);
+      navigationView.getMenu().findItem(R.id.nav_signupbtn)
+              .setVisible(true);
+      navigationView.getMenu().findItem(R.id.nav_qna)
+              .setVisible(true);
+    } else {  //로그인 했을 때
+      navigationView.getMenu().findItem(R.id.nav_membershipbtn)
+              .setVisible(true);
+      navigationView.getMenu().findItem(R.id.nav_logout)
+              .setVisible(true);
+      navigationView.getMenu().findItem(R.id.nav_listchk)
+              .setVisible(true);
+      navigationView.getMenu().findItem(R.id.nav_loginbtn)
+              .setVisible(false);
+      navigationView.getMenu().findItem(R.id.nav_signupbtn)
+              .setVisible(false);
+      navigationView.getMenu().findItem(R.id.nav_qna)
+              .setVisible(true);
+    }
+
     navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
       @Override
       public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
 
-
+        //햄버거바 메뉴 누르면 이동
+        if(id == R.id.nav_loginbtn){
+          Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+          startActivity(intent);
+        }else if(id == R.id.nav_signupbtn){
+          Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
+          startActivity(intent);
+        }else if(id == R.id.nav_qna){
+          Intent intent = new Intent(getApplicationContext(), QnAMainActivity.class);
+          startActivity(intent);
+        }
         return false;
       }
+
+
+
     });
+
+
 
     //NavigationBar Setting
     homeFragment = new HomeFragment();
@@ -122,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
     } else if (state == 2) {
       Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
       startActivity(intent);
+      finish();
     } else if (state == 3) {
       getSupportFragmentManager().beginTransaction()
           .replace(R.id.container, listFragment).commit();
