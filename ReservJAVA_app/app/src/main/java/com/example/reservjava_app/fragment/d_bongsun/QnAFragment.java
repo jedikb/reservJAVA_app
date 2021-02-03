@@ -12,9 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.reservjava_app.MainActivity;
@@ -54,7 +51,7 @@ public class QnAFragment extends Fragment {
         //EditText addrSearch;
 
         //백 버튼 (홈으로 이동) <-- 이전화면 이동 으로 바꾸는게 좋을것 같음.
-        viewGroup.findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
+        viewGroup.findViewById(R.id.backQnABtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Home화면(fragment_home.xml)을 activity_main.container 에 띄운다.

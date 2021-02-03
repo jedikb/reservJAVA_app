@@ -2,17 +2,13 @@ package com.example.reservjava_app.ui.f_profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
-import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
-import com.example.reservjava_app.fragment.ListFragment;
 
 public class ReviewActivity extends AppCompatActivity {
 
@@ -28,7 +24,7 @@ public class ReviewActivity extends AppCompatActivity {
     ratingBar = findViewById(R.id.ratingBar);
 
     // 뒤로가기 버튼(리스트 프래그먼트로 이동)
-    findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
+    findViewById(R.id.backQnABtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         finish();
