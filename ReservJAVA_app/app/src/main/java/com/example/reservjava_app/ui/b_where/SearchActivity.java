@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -49,27 +50,29 @@ import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDT
 
 public class SearchActivity extends AppCompatActivity implements OnMapReadyCallback  {
 
-  private static final String TAG = "main:SearchActivity";
+  private static final String TAG = "main::SearchActivity";
   public static BusinessDTO busiSetItem = null;
 
   private GpsTracker gpsTracker;
   private static final int GPS_ENABLE_REQUEST_CODE = 2001;
   private static final int PERMISSIONS_REQUEST_CODE = 100;
+  private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
   String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
   private FusedLocationSource mLocationSource;
   private NaverMap mNaverMap, naverMap;
   private String searchText, address;
-  // 지하라 GPS 안 잡히니 기능부터 구현하자
 
   // 일단 Searchview는 힘드니 EditText로 기능을 구현하고 나서
   //Searchview 사용을 고민해보자..
   EditText addrSearch;
   TextView tvAddr;
-
+  int newAddr = 0;
+  Geocoder geocoder = new Geocoder(this);
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_search);
+
 
     addrSearch = findViewById(R.id.addrSearch);
     tvAddr = findViewById(R.id.tvAddr);
@@ -81,6 +84,20 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
       checkRunTimePermission();
     }
 
+    //(임시) 누르면 현재 위치 찾는 것으로 구현해보자(종료?)
+    //자동으로 위치 찾기가 안되었을 때,, 지금으로서는 다른 화면으로
+    //이동했다가 다시 Search화면으로 와야 검색이 된다.
+    //자동 refresh 되는 옵션 추가하자.
+    // 누르면 새로운 지도 검색화면으로 연결하자
+    findViewById(R.id.setAddrBtn).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Toast.makeText(SearchActivity.this, "11", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(SearchActivity.this, AddrListActivity.class);
+        startActivityForResult(intent, SEARCH_ADDRESS_ACTIVITY);
+      }
+    });
+
     //지도 객체 띄우기
     FragmentManager fm = getSupportFragmentManager();
     MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map);
@@ -88,7 +105,7 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
       mapFragment = MapFragment.newInstance(new NaverMapOptions()
           .camera(new CameraPosition(new LatLng(37.5116620, 127.0594274), 16, 0, 90))
           .locationButtonEnabled(true)
-          //.compassEnabled(true)  // 버튼이 안 뜸... 버전이 낮아서 그런지 모르겠음
+          .compassEnabled(true)  // 이동을 할 때?? 뜸,, 바로 안 뜬다//이건 나중에
           );
 
       fm.beginTransaction().add(R.id.map, mapFragment).commit();
@@ -102,27 +119,8 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     mLocationSource =
         new FusedLocationSource(this, PERMISSIONS_REQUEST_CODE);
 
-    //(임시) 누르면 현재 위치 찾는 것으로 구현해보자
-    findViewById(R.id.setAddrBtn).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        gpsTracker = new GpsTracker(SearchActivity.this);
 
-        double latitude = gpsTracker.getLatitude();
-        double longitude = gpsTracker.getLongitude();
-
-        address = getCurrentAddress(latitude, longitude);
-        tvAddr.setText(address);
-        Toast.makeText(SearchActivity.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
-
-        CameraUpdate cameraUpdate = CameraUpdate.scrollTo(new LatLng(latitude, longitude))
-            .animate(CameraAnimation.Easing, 2000);
-
-        mNaverMap.moveCamera(cameraUpdate);
-      }
-    });
-
-    //검색버튼(whereList로 이동)
+    //상단바 - 검색버튼(whereList로 이동)
     findViewById(R.id.searchBtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -136,15 +134,6 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
         startActivity(intent);
       }
     });
-
-
-/*    //새로운 주소 찾기
-    findViewById(R.id.setAddrBtn).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-
-      }
-    });*/
 
     // (임시) 리뷰 등록 화면으로 이동
     findViewById(R.id.moveToReview).setOnClickListener(new View.OnClickListener() {
@@ -179,35 +168,67 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
         }
       }
     });
-
   }
 
   public void setLayerGroupEnabled​(@NonNull String group, boolean enabled) {
-
   }
 
   @UiThread
   @Override
   public void onMapReady(@NonNull NaverMap naverMap) {
     Log.d( TAG, "onMapReady");
-
-    double latitude, longitude;
-
-    gpsTracker = new GpsTracker(this);
-
-    latitude = gpsTracker.getLatitude();
-    longitude = gpsTracker.getLongitude();
+    double latitude =0, longitude = 0;
 
     UiSettings uiSettings = naverMap.getUiSettings();
-    //uiSettings.setCompassEnabled(true); 버튼이 안 뜸
+    uiSettings.setCompassEnabled(true);
     uiSettings.setLocationButtonEnabled(true);
 
     // NaverMap 객체 받아서 NaverMap 객체에 위치 소스 지정
     mNaverMap = naverMap;
     mNaverMap.setLocationSource(mLocationSource);
 
-    address = getCurrentAddress(latitude, longitude);
-    tvAddr.setText(address);
+    //새로운 주소를 설정했을 경우 주소를 자동으로 불러오는 기능을 멈춰야 한다
+
+    if(newAddr == 0) {
+      gpsTracker = new GpsTracker(this);
+
+      latitude = gpsTracker.getLatitude();
+      longitude = gpsTracker.getLongitude();
+
+      //위 경도를 도로명 주소로 변경 // 주소 자동으로 입력하기
+      address = getCurrentAddress(latitude, longitude);
+      address = address.substring(address.indexOf(" "));
+      tvAddr.setText(address);
+
+    } else if(newAddr ==1) {
+      // 지오코더를 이용하여 주소를 위도 경도로 변환
+
+      List<Address> list = null;
+
+      String str = tvAddr.getText().toString();
+      try {
+        list = geocoder.getFromLocationName
+            (str, // 지역 이름
+                10); // 읽을 개수
+      } catch (IOException e) {
+        e.printStackTrace();
+        Log.e("test","입출력 오류 - 서버에서 주소변환시 에러발생");
+      }
+
+      if (list != null) {
+        if (list.size() == 0) {
+          tvAddr.setText("해당되는 주소 정보는 없습니다");
+        } else {
+          // 해당되는 주소로 인텐트 날리기
+          Address addr = list.get(0);
+          latitude = addr.getLatitude();
+          longitude = addr.getLongitude();
+
+          String sss = String.format("geo:%f,%f", latitude, longitude);
+        }
+      }
+    }
+
 
     Log.d(TAG, "onMapReady: " + latitude +" : " +longitude );
 
@@ -216,6 +237,7 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     marker.setPosition(new LatLng(latitude, longitude));
     marker.setMap(naverMap);
 
+    // 지정된 위치로 이동
     CameraUpdate cameraUpdate = CameraUpdate.scrollTo(new LatLng(latitude, longitude))
         .animate(CameraAnimation.Easing, 2000);
 
@@ -223,12 +245,11 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
 
   }
 
-
   //네이버 맵 관련
   public String getCurrentAddress( double latitude, double longitude) {
 
     //지오코더... GPS를 주소로 변환
-    Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+    geocoder = new Geocoder(this, Locale.getDefault());
 
     List<Address> addresses;
 
@@ -251,6 +272,68 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     Address address = addresses.get(0);
     return address.getAddressLine(0).toString()+"\n";
   }
+
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+    super.onActivityResult(requestCode, resultCode, intent);
+
+    switch (requestCode) {
+      //주소 검색한 뒤 결과를 입력
+      case SEARCH_ADDRESS_ACTIVITY:
+        if (resultCode == RESULT_OK) {
+          String data = intent.getExtras().getString("data");
+          if (data != null) {
+            newAddr = 1;
+            String addrText = data.substring(data.indexOf(" "));
+            tvAddr.setText(addrText);
+            Log.d(TAG, "onActivityResult: newAddr  " + data);
+
+            //지도 객체 띄우기
+            FragmentManager fm = getSupportFragmentManager();
+            MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map);
+            if (mapFragment == null) {
+              mapFragment = MapFragment.newInstance(new NaverMapOptions()
+                  .locationButtonEnabled(true)
+                  .compassEnabled(true)  // 이동을 할 때?? 뜸,, 바로 안 뜬다//이건 나중에
+              );
+
+              fm.beginTransaction().add(R.id.map, mapFragment).commit();
+            }
+
+            mapFragment.getMapAsync(this);
+          }
+        }
+        break;
+      //GPS 활성화 여부 확인
+      case GPS_ENABLE_REQUEST_CODE:
+        //사용자가 GPS 활성 시켰는지 검사
+        if (checkLocationServicesStatus()) {
+          if (checkLocationServicesStatus()) {
+            //@@@로 하면 이름이 나오는 건가;;
+            Log.d("@@@", "onActivityResult : GPS 활성화 되있음");
+            //어짜피 어플 뜰 때 체크함
+            //checkRunTimePermission();
+            return;
+          }
+        }
+        break;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   //여기부터는 GPS 활성화를 위한 메소드들
@@ -276,27 +359,6 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
       }
     });
     builder.create().show();
-  }
-
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-
-    switch (requestCode) {
-
-      case GPS_ENABLE_REQUEST_CODE:
-        //사용자가 GPS 활성 시켰는지 검사
-        if (checkLocationServicesStatus()) {
-          if (checkLocationServicesStatus()) {
-            //@@@로 하면 이름이 나오는 건가;;
-            Log.d("@@@", "onActivityResult : GPS 활성화 되있음");
-            //어짜피 어플 뜰 때 체크함
-            //checkRunTimePermission();
-            return;
-          }
-        }
-        break;
-    }
   }
 
 /*  @Override  // 네이버 맵 권한 부여 중복

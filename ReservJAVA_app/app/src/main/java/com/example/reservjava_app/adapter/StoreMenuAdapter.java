@@ -13,17 +13,10 @@ import com.example.reservjava_app.R;
 
 import java.util.ArrayList;
 
-public class StoreMenuAdapter extends
-        RecyclerView.Adapter<StoreMenuAdapter.ViewHolder>
-        implements OnItemClickListener {
+public class StoreMenuAdapter extends RecyclerView.Adapter<StoreMenuAdapter.ViewHolder> {
 
     //adapter에 들어갈 list
     private ArrayList<ProductDTO> productList = new ArrayList<>();
-
-    @Override
-    public void onItemClick(StoreListAdapter.ViewHolder holderm, View view, int position) {
-
-    }
 
     //아이템 뷰를 정장하는 ViewHolder.Class
     public class ViewHolder extends RecyclerView.ViewHolder {

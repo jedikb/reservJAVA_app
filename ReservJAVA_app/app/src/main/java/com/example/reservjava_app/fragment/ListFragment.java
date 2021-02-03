@@ -41,6 +41,7 @@ public class ListFragment extends Fragment {
         ViewGroup viewGroup = (ViewGroup) inflater
             .inflate(R.layout.fragment_list, container, false);
 
+/*
         //뒤로 가기 버튼
         viewGroup.findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +49,7 @@ public class ListFragment extends Fragment {
                 activity.onFragmentChange(3);
             }
         });
+*/
 
         //로그인 이동(임시)
         viewGroup.findViewById(R.id.tologinBtn).setOnClickListener(new View.OnClickListener() {

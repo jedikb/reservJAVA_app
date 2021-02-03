@@ -35,7 +35,6 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="#FFFFFF"
                     app:popupTheme="@style/Widget.AppCompat.Toolbar"
                     app:titleTextColor="#000000"
                     >
