@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -108,6 +109,7 @@ public class WhereListActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         addrSearch = findViewById(R.id.addrSearch);
+        searchText = "";
         searchText = addrSearch.getText().toString();
         Toast.makeText(WhereListActivity.this, searchText + "를 검색합니다", Toast.LENGTH_SHORT).show();
         //Log.d(TAG, "onClick searchText : " + searchText);
@@ -117,8 +119,34 @@ public class WhereListActivity extends AppCompatActivity {
         intent.putExtra("searchText", searchText);
         finish();
         startActivity(intent);
+
       }
     });
+
+    findViewById(R.id.addrSearch).setOnKeyListener(new View.OnKeyListener() {
+      @Override
+      public boolean onKey(View v, int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_ENTER) {
+          switch (keyCode) {
+            case KeyEvent.KEYCODE_ENTER:
+              searchText = "";
+              searchText = addrSearch.getText().toString();
+              Toast.makeText(WhereListActivity.this, searchText + "를 검색합니다", Toast.LENGTH_SHORT).show();
+              //Log.d(TAG, "onClick searchText : " + searchText);
+
+              //화면 갱신시 옆으로 이동하는 것 없애려고 했는데 일단 너무 시간이 걸려 나중으로 넘김
+              Intent intent = new Intent(WhereListActivity.this, WhereListActivity.class);
+              intent.putExtra("searchText", searchText);
+              //finish();
+              startActivity(intent);
+              break;
+          }
+          return true;
+        }
+        return false;
+      }
+    });
+
   }
 
     // 이미 화면이 있을 때 받는 곳
