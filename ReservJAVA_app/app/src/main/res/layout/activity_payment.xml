@@ -100,315 +100,319 @@
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
                 >
                 <!-- 내용 화면 시작 -->
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent"
-                    android:orientation="vertical"
-                    >
-
-                    <TextView
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-
-                        android:text="결재하기"
-                        android:textSize="30sp"
-                        android:gravity="center"
-                        android:background="@drawable/solid_black"
-
+                    android:layout_height="match_parent">
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-
-                        android:id="@+id/title"
-                        />
-
-                    <TextView
-                        app:layout_constraintTop_toBottomOf="@+id/title"
-                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_height="match_parent"
                         app:layout_constraintEnd_toEndOf="parent"
-
-                        android:text="예약상품 이름"
-                        android:textSize="20sp"
-                        android:gravity="center"
-                        android:background="@drawable/solid_black"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-
-                        android:id="@+id/product_name"
-                        />
-
-                    <LinearLayout
-                        app:layout_constraintTop_toBottomOf="@+id/product_name"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-
-                        android:gravity="center"
-                        android:orientation="horizontal"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-
-                        android:id="@+id/layout1"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        android:orientation="vertical"
                         >
 
                         <TextView
+                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
 
-                            android:text="예약 시각"
+                            android:text="결재하기"
+                            android:textSize="30sp"
+                            android:gravity="center"
+                            android:background="@drawable/solid_black"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginEnd="24dp"
+
+                            android:id="@+id/title"
+                            />
+
+                        <TextView
+                            app:layout_constraintTop_toBottomOf="@+id/title"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+
+                            android:text="예약상품 이름"
                             android:textSize="20sp"
                             android:gravity="center"
                             android:background="@drawable/solid_black"
 
-                            android:layout_width="200dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="0dp"
+                            android:layout_marginTop="8dp"
                             android:layout_marginStart="24dp"
                             android:layout_marginEnd="24dp"
 
-                            android:id="@+id/booking_date_reserv"
+                            android:id="@+id/product_name"
                             />
 
-                        <Button
+                        <LinearLayout
+                            app:layout_constraintTop_toBottomOf="@+id/product_name"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
 
-                            android:text="변경"
-                            android:textSize="16sp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginEnd="24dp"
+
+                            android:id="@+id/layout1"
+                            >
+
+                            <TextView
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+
+                                android:text="예약 시각"
+                                android:textSize="20sp"
+                                android:gravity="center"
+                                android:background="@drawable/solid_black"
+
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginEnd="24dp"
+
+                                android:id="@+id/booking_date_reserv"
+                                />
+
+                            <Button
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+
+                                android:text="변경"
+                                android:textSize="16sp"
+                                android:gravity="center"
+                                android:background="@drawable/solid_black"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginEnd="24dp"
+
+                                android:id="@+id/dateChangeBtn"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            app:layout_constraintTop_toBottomOf="@+id/layout1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+
+                            android:gravity="center"
+                            android:orientation="horizontal"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginEnd="24dp"
+
+                            android:id="@+id/layout2"
+                            >
+
+                            <TextView
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+
+                                android:text="금액 단가"
+                                android:textSize="20sp"
+                                android:gravity="center"
+                                android:background="@drawable/solid_black"
+
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginEnd="24dp"
+
+                                android:id="@+id/booking_price1"
+                                />
+
+                            <TextView
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+
+                                android:text="금액 소계"
+                                android:textSize="16sp"
+                                android:gravity="center"
+                                android:background="@drawable/solid_black"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginEnd="24dp"
+
+                                android:id="@+id/booking_price2"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            app:layout_constraintTop_toBottomOf="@+id/layout2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+
+                            android:gravity="center"
+                            android:orientation="horizontal"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginEnd="24dp"
+
+                            android:id="@+id/layout3"
+                            >
+
+                            <TextView
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+
+                                android:text="합계"
+                                android:textSize="20sp"
+                                android:gravity="center"
+                                android:background="@drawable/solid_black"
+
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginEnd="24dp"
+
+                                android:id="@+id/booking_price3"
+                                />
+
+                            <TextView
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+
+                                android:text="합계 금액"
+                                android:textSize="16sp"
+                                android:gravity="center"
+                                android:background="@drawable/solid_black"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginEnd="24dp"
+
+                                android:id="@+id/booking_price4"
+                                />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            app:layout_constraintTop_toBottomOf="@+id/layout3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+
+                            android:text="사업장 이미지"
+                            android:textSize="24sp"
+                            android:gravity="center"
+                            android:background="@drawable/solid_black"
+                            android:src="@drawable/ic_launcher_foreground"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginEnd="24dp"
+
+                            android:id="@+id/business_image"
+                            />
+
+                        <TextView
+                            app:layout_constraintTop_toBottomOf="@+id/business_image"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+
+                            android:text="사업장 이름"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:background="@drawable/solid_black"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginEnd="24dp"
+
+                            android:id="@+id/business_name"
+                            />
+
+                        <TextView
+                            app:layout_constraintTop_toBottomOf="@+id/business_name"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+
+                            android:text="예약시간"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:background="@drawable/solid_black"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginEnd="24dp"
+
+                            android:id="@+id/booking_date_reservation"
+                            />
+
+                        <TextView
+                            app:layout_constraintTop_toBottomOf="@+id/booking_date_reservation"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+
+                            android:text="가격"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:background="@drawable/solid_black"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginEnd="24dp"
+
+                            android:id="@+id/booking_price"
+                            />
+
+                        <Button
+                            app:layout_constraintTop_toBottomOf="@+id/booking_price"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+
+                            android:text="결재하기"
+                            android:textSize="24sp"
                             android:gravity="center"
                             android:background="@drawable/solid_black"
 
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="0dp"
+                            android:layout_marginTop="8dp"
                             android:layout_marginStart="24dp"
                             android:layout_marginEnd="24dp"
 
-                            android:id="@+id/dateChangeBtn"
+                            android:id="@+id/submitBtn"
                             />
 
-                    </LinearLayout>
-
-                    <LinearLayout
-                        app:layout_constraintTop_toBottomOf="@+id/layout1"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-
-                        android:gravity="center"
-                        android:orientation="horizontal"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-
-                        android:id="@+id/layout2"
-                        >
-
-                        <TextView
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-
-                            android:text="금액 단가"
-                            android:textSize="20sp"
-                            android:gravity="center"
-                            android:background="@drawable/solid_black"
-
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginEnd="24dp"
-
-                            android:id="@+id/booking_price1"
-                            />
-
-                        <TextView
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-
-                            android:text="금액 소계"
-                            android:textSize="16sp"
-                            android:gravity="center"
-                            android:background="@drawable/solid_black"
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginEnd="24dp"
-
-                            android:id="@+id/booking_price2"
-                            />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        app:layout_constraintTop_toBottomOf="@+id/layout2"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-
-                        android:gravity="center"
-                        android:orientation="horizontal"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-
-                        android:id="@+id/layout3"
-                        >
-
-                        <TextView
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-
-                            android:text="합계"
-                            android:textSize="20sp"
-                            android:gravity="center"
-                            android:background="@drawable/solid_black"
-
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginEnd="24dp"
-
-                            android:id="@+id/booking_price3"
-                            />
-
-                        <TextView
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-
-                            android:text="합계 금액"
-                            android:textSize="16sp"
-                            android:gravity="center"
-                            android:background="@drawable/solid_black"
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginEnd="24dp"
-
-                            android:id="@+id/booking_price4"
-                            />
-
-                    </LinearLayout>
-
-                    <ImageView
-                        app:layout_constraintTop_toBottomOf="@+id/layout3"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-
-                        android:text="사업장 이미지"
-                        android:textSize="24sp"
-                        android:gravity="center"
-                        android:background="@drawable/solid_black"
-                        android:src="@drawable/ic_launcher_foreground"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-
-                        android:id="@+id/business_image"
-                        />
-
-                    <TextView
-                        app:layout_constraintTop_toBottomOf="@+id/business_image"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-
-                        android:text="사업장 이름"
-                        android:textSize="20sp"
-                        android:gravity="center"
-                        android:background="@drawable/solid_black"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-
-                        android:id="@+id/business_name"
-                        />
-
-                    <TextView
-                        app:layout_constraintTop_toBottomOf="@+id/business_name"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-
-                        android:text="예약시간"
-                        android:textSize="20sp"
-                        android:gravity="center"
-                        android:background="@drawable/solid_black"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-
-                        android:id="@+id/booking_date_reservation"
-                        />
-
-                    <TextView
-                        app:layout_constraintTop_toBottomOf="@+id/booking_date_reservation"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-
-                        android:text="가격"
-                        android:textSize="20sp"
-                        android:gravity="center"
-                        android:background="@drawable/solid_black"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-
-                        android:id="@+id/booking_price"
-                        />
-
-                    <Button
-                        app:layout_constraintTop_toBottomOf="@+id/booking_price"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-
-                        android:text="결재하기"
-                        android:textSize="24sp"
-                        android:gravity="center"
-                        android:background="@drawable/solid_black"
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-
-                        android:id="@+id/submitBtn"
-                        />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </ScrollView>
                 <!-- 내용 화면 끝 -->
             </FrameLayout>
             <!-- 중단(내용화면 배치를 위한) 끝 -->

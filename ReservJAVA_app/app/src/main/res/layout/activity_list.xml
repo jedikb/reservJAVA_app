@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 전체화면(햄버거화면을 위한) 시작 -->
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
+    tools:context=".ListActivity"
+    >
+
+    <!-- 전체화면(햄버거화면 제외) 시작 -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <!-- 전체화면(하단바 배치를 위한) 시작 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <!-- 상단(햄버거버튼,툴바,액션바 배치를 위한) 시작 -->
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat"
+                >
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:popupTheme="@style/Widget.AppCompat.Toolbar"
+                    app:titleTextColor="#000000"
+                    >
+                    <!-- 상단바 시작 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        >
+                        <!-- 뒤로가기 아이콘(아이콘 상단여백 조절을위해 검색입력창과 분리시킴) -->
+                        <ImageView
+                            android:id="@+id/backBtn"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="13dp"
+                            android:src="@drawable/navigate_before"
+                            />
+                        <LinearLayout
+                            android:layout_height="30dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_marginTop="13dp"
+                            >
+                            <!-- 검색입력창(주소or검색) -->
+                            <EditText
+                                android:id="@+id/addrSearch"
+                                android:layout_width="0dp"
+                                android:layout_height="25dp"
+                                android:layout_weight="1"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/solid_black"
+                                android:gravity="center"
+                                android:hint=""
+                                android:textColor="#000"
+                                android:textSize="18sp"
+                                />
+                            <!-- 검색아이콘 -->
+                            <ImageView
+                                android:id="@+id/searchBtn"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="30dp"
+                                android:src="@drawable/ic_search_black_24dp"
+                                />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!-- 상단바 끝 -->
+
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.AppBarLayout>
+            <!-- 상단(햄버거버튼,툴바,액션바 배치를 위한) 끝 -->
+
+            <!-- 중단(내용화면 배치를 위한) 시작 -->
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+                >
+                <!-- 내용 화면 시작 -->
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- 사이드바 완성되기 까지 이쪽에서 연결한다. 시작-->
+                    <ListView
+                        android:id="@+id/listView"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp" />
+
+                    <Button
+                        android:id="@+id/tologinBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="로그인화면(임시)"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Button
+                        android:id="@+id/moveBtn2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="예약"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Button
+                        android:id="@+id/moveBtn3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="회원탈퇴"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Button
+                        android:id="@+id/moveBtn4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="결제"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Button
+                        android:id="@+id/moveBtn5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="문의하기"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                    <!-- 사이드바 완성되기 까지 이쪽에서 연결한다. 끝-->
+
+                </ScrollView>
+                <!-- 내용 화면 끝 -->
+            </FrameLayout>
+            <!-- 중단(내용화면 배치를 위한) 끝 -->
+
+            <!-- 하단바 시작 -->
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:menu="@menu/bottom_menu"
+                />
+            <!-- 하단바 끝 -->
+
+        </LinearLayout>
+        <!-- 전체화면(하단바 배치를 위한) 시작 -->
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <!-- 전체화면(햄버거화면 제외) 끝 -->
+
+    <!-- 햄버거화면(Navigation Drawer,바로가기) 시작 -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_drawer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/main_drawer_menu" />
+    <!-- 햄버거화면(Navigation Drawer,바로가기) 끝 -->
+
+</androidx.drawerlayout.widget.DrawerLayout>
+    <!-- 전체화면(햄버거화면을 위한) 끝 -->

@@ -1,4 +1,4 @@
-package com.example.reservjava_app.ui.d_bongsun;
+package com.example.reservjava_app;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -10,8 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.reservjava_app.ListActivity;
-import com.example.reservjava_app.R;
 import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
 import com.example.reservjava_app.fragment.d_bongsun.QnAFragment;
@@ -19,9 +17,7 @@ import com.example.reservjava_app.ui.b_where.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-import com.example.reservjava_app.R;
-
-public class MemberCancelActivity extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity {
 
     HomeFragment homeFragment;
     ListFragment listFragment;
@@ -31,7 +27,7 @@ public class MemberCancelActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_member_cancel);
+        setContentView(R.layout.activity_list);
 
         //1. 액티비티 화면이 A, B, C 를 만들어야 한다면
         //  액티비티 화면을 이름만 주어서 만든다.
