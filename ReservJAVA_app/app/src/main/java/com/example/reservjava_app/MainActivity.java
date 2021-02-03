@@ -54,12 +54,13 @@ public class MainActivity extends AppCompatActivity {
     toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
-    //햄버거
+    //햄버거, 액션바 내용 변경
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24);
-    getSupportActionBar().setTitle("");
+    getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24);   //햄버거 아이콘 변경
+    getSupportActionBar().setTitle("");   //상단액션바(default: app_name @res.values.strings.xml)
 
     //측면메뉴
+    //햄버거 버튼과 Navigation Drawer( 바로가기 메뉴)연결
     DrawerLayout drawer = findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
     drawer.addDrawerListener(toggle);
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //측면메뉴 버튼 작업
+    //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리
     NavigationView navigationView = findViewById(R.id.navigation_drawer);
     if(loginDTO == null) {  //로그인 안했을 때
       navigationView.getMenu().findItem(R.id.nav_membershipbtn)
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
               .setVisible(true);
     }
 
+    //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리 내용
     navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
       @Override
       public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -126,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
     //NavigationBar Setting
     homeFragment = new HomeFragment();
-    listFragment = new ListFragment();
+    //listFragment = new ListFragment();  //ListFragment를 ListActivity로 변경함(임시)이봉선
 /*
     bookingViewFragment = new BookingViewFragment();
     memberCancelFragment = new MemberCancelFragment();
@@ -135,13 +138,15 @@ public class MainActivity extends AppCompatActivity {
     qnAFragment = new QnAFragment();
 
     getSupportFragmentManager().beginTransaction()
-            .replace(R.id.container, homeFragment).commit();
+            .replace(R.id.container, homeFragment).commit();    //기본 첫화면(homeFragment) 띄우기
     BottomNavigationView bottomNavigationView =
             findViewById(R.id.bottom_navigation);
 
+    //하단바 아이템 클릭 이벤트 처리
     bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
       @Override
       public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent intent; //액티비티 콜을 위한 지역변수 선언
         switch (item.getItemId()){
           case R.id.homeItem:
             getSupportFragmentManager().beginTransaction()
@@ -149,13 +154,15 @@ public class MainActivity extends AppCompatActivity {
             return true;
 
           case R.id.searchItem:
-           Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+            intent = new Intent(getApplicationContext(), SearchActivity.class);
             startActivity(intent);
             return true;
 
           case R.id.listItem:
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, listFragment).commit();
+            intent = new Intent(getApplicationContext(), ListActivity.class);
+            startActivity(intent);
+            //getSupportFragmentManager().beginTransaction()
+            //        .replace(R.id.container, listFragment).commit();
             return true;
         }//switch
         return false;
@@ -167,27 +174,19 @@ public class MainActivity extends AppCompatActivity {
 
   // 주요 프래그먼트로 이동
   public void onFragmentChange(int state){
+    Intent intent; //액티비티 콜을 위한 지역변수 선언
     if (state == 1) {
       getSupportFragmentManager().beginTransaction()
           .replace(R.id.container, homeFragment).commit();
     } else if (state == 2) {
-      Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+      intent = new Intent(getApplicationContext(), SearchActivity.class);
       startActivity(intent);
       finish();
     } else if (state == 3) {
-      getSupportFragmentManager().beginTransaction()
-          .replace(R.id.container, listFragment).commit();
-/*
-    } else if (state == 4) {
-      getSupportFragmentManager().beginTransaction()
-          .replace(R.id.container, bookingViewFragment).commit();
-    } else if (state == 5) {
-      getSupportFragmentManager().beginTransaction()
-          .replace(R.id.container, memberCancelFragment).commit();
-    } else if (state == 6) {
-      getSupportFragmentManager().beginTransaction()
-          .replace(R.id.container, paymentFragment).commit();
-*/
+      intent = new Intent(getApplicationContext(), ListActivity.class);
+      startActivity(intent);
+      //getSupportFragmentManager().beginTransaction()
+      //        .replace(R.id.container, listFragment).commit();
     } else if (state == 7) {
       getSupportFragmentManager().beginTransaction()
           .replace(R.id.container, qnAFragment).commit();
