@@ -4,30 +4,23 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 
 import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
-import com.example.reservjava_app.fragment.d_bongsun.BookingViewFragment;
-import com.example.reservjava_app.fragment.d_bongsun.MemberCancelFragment;
-import com.example.reservjava_app.fragment.d_bongsun.PaymentFragment;
 import com.example.reservjava_app.fragment.d_bongsun.QnAFragment;
+import com.example.reservjava_app.ui.a_login_signup.JoinActivity;
 import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
+import com.example.reservjava_app.ui.a_login_signup.QnAMainActivity;
 import com.example.reservjava_app.ui.b_where.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -107,17 +100,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-
       @Override
       public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
 
-
+        //햄버거바 메뉴 누르면 이동
+        if(id == R.id.nav_loginbtn){
+          Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+          startActivity(intent);
+        }else if(id == R.id.nav_signupbtn){
+          Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
+          startActivity(intent);
+        }else if(id == R.id.nav_qna){
+          Intent intent = new Intent(getApplicationContext(), QnAMainActivity.class);
+          startActivity(intent);
+        }
         return false;
       }
 
 
 
     });
+
 
 
     //NavigationBar Setting
