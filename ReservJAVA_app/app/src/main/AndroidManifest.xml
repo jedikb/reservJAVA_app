@@ -88,6 +88,15 @@ FINE_LOCATION 정확한 위치에 접근할 수 있는 권한
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ProfileActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Review_viewActivity"/>  <!--사용자리뷰 화면전환-->
     </application>
 
 </manifest>

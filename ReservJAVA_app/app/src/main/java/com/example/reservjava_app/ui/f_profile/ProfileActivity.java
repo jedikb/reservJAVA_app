@@ -72,8 +72,9 @@ public class ProfileActivity extends AppCompatActivity {
     //내가 작성한 리뷰들을 보여줌
     findViewById(R.id.reviewListBtn).setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onClick(View v) {
-
+      public void onClick(View view) {
+        Intent intent = new Intent(getApplicationContext(), Review_viewActivity.class);
+        startActivity(intent);
       }
     });
 
@@ -84,6 +85,7 @@ public class ProfileActivity extends AppCompatActivity {
         finish();
       }
     });
+
 
   }
 
