@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -134,6 +135,30 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
         startActivity(intent);
       }
     });
+
+    //검색명 입력하고 엔터키 입력시 검색으로 연결
+    addrSearch.setOnKeyListener(new View.OnKeyListener() {
+      @Override
+      public boolean onKey(View v, int keyCode, KeyEvent keyEvent) {
+        if(keyCode == keyEvent.KEYCODE_ENTER) {
+          switch (keyCode) {
+            case KeyEvent.KEYCODE_ENTER:
+              searchText = "";
+              searchText = addrSearch.getText().toString();
+              Toast.makeText(SearchActivity.this, searchText + "를 검색합니다", Toast.LENGTH_SHORT).show();
+              //Log.d(TAG, "onClick searchText : " + searchText);
+
+              Intent intent = new Intent(SearchActivity.this, WhereListActivity.class);
+              intent.putExtra("searchText", searchText);
+              startActivity(intent);
+              break;
+          }
+          return true;
+        }
+        return false;
+      }
+    });
+
 
     // (임시) 리뷰 등록 화면으로 이동
     findViewById(R.id.moveToReview).setOnClickListener(new View.OnClickListener() {
@@ -270,7 +295,7 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     }
 
     Address address = addresses.get(0);
-    return address.getAddressLine(0).toString()+"\n";
+    return address.getAddressLine(0) +"\n";
   }
 
 
