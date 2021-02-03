@@ -4,7 +4,5 @@ import android.view.View;
 
 public interface OnItemClickListener {
     public void onItemClick(StoreListAdapter.ViewHolder holderm,
-                            View view, int position);/*
-    public void onItemClick(StoreMenuAdapter.ViewHolder holderm,
-                            View view, int position);*/
+                            View view, int position);
 }
