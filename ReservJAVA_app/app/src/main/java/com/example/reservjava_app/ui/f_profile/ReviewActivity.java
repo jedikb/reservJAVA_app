@@ -2,20 +2,19 @@ package com.example.reservjava_app.ui.f_profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-<<<<<<< HEAD
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-=======
->>>>>>> 871c15482a0b817322cdad14b91cb1e1e5f0dbd7
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
-<<<<<<< HEAD
+
 import com.example.reservjava_app.ATask.ReviewInsert;
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
@@ -25,9 +24,9 @@ import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
 import java.util.concurrent.ExecutionException;
 
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
-=======
+
 import com.example.reservjava_app.R;
->>>>>>> 871c15482a0b817322cdad14b91cb1e1e5f0dbd7
+
 
 public class ReviewActivity extends AppCompatActivity {
 
@@ -37,10 +36,9 @@ public class ReviewActivity extends AppCompatActivity {
 
   EditText editReview;
   RatingBar ratingBar;
-<<<<<<< HEAD
-  Button submitBtn, cancelBtn;
-=======
->>>>>>> 871c15482a0b817322cdad14b91cb1e1e5f0dbd7
+
+          Button submitBtn, cancelBtn;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +49,13 @@ public class ReviewActivity extends AppCompatActivity {
     ratingBar = findViewById(R.id.ratingBar);
     submitBtn = findViewById(R.id.submitBtn);
 
-<<<<<<< HEAD
+
    /* // 뒤로가기 버튼(리스트 프래그먼트로 이동)
     findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
-=======
+
     // 뒤로가기 버튼(리스트 프래그먼트로 이동)
     findViewById(R.id.backQnABtn).setOnClickListener(new View.OnClickListener() {
->>>>>>> 871c15482a0b817322cdad14b91cb1e1e5f0dbd7
+
       @Override
       public void onClick(View v) {
         finish();
