@@ -19,8 +19,6 @@ import com.example.reservjava_app.ui.b_where.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-import com.example.reservjava_app.R;
-
 public class MemberCancelActivity extends AppCompatActivity {
 
     HomeFragment homeFragment;
@@ -51,7 +49,7 @@ public class MemberCancelActivity extends AppCompatActivity {
         toggle.syncState();
 
         //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리
-        NavigationView navigationView = findViewById(R.id.navigation_drawer);
+        NavigationView navigationView = findViewById(R.id.loginnavigation);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

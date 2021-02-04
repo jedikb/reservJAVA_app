@@ -43,7 +43,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="70dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -103,38 +103,6 @@
 
                     </LinearLayout>
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        >
-
-
-                        <Button
-                            android:id="@+id/search_bButton1"
-                            android:layout_width="120dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="50dp"
-                            android:layout_weight="1"
-                            android:text="가게보기"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            app:backgroundTint="#FFFFFF"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <Button
-                            android:id="@+id/search_bButton2"
-                            android:layout_width="120dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="50dp"
-                            android:layout_weight="1"
-                            android:text="예약하기"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            app:backgroundTint="#FFFFFF"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
             </LinearLayout>
     </androidx.cardview.widget.CardView>

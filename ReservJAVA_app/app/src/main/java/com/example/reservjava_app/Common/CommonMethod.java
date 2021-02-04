@@ -20,14 +20,10 @@ public class CommonMethod {
 
   //광범
   //public static String  ipConfig = "http://192.168.0.17:80";
-
-  //public static String ipConfig = "http://192.168.0.34:80";
-
-  //public static String ipConfig = "http://192.168.0.34:80";
-
+  public static String ipConfig = "http://192.168.0.34:80";
 
   //경선
-  public static String  ipConfig = "http://192.168.0.61:80";
+  //public static String  ipConfig = "http://192.168.0.61:80";
 
   //민혁
   //public static String  ipConfig = "http://192.168.0.65:80";

@@ -134,8 +134,8 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
   public BusinessDTO readMessage(JsonReader reader) throws IOException {
     int business_code = 0;
     String business_name = "";
-    int business_member_code= 0, business_category_code1 =0, business_category_code2 =0;
-    String business_addr= "", business_tel="", business_image = "", business_info="";
+    int business_member_code= 0, business_category_parent_code =0, business_category_code =0;
+    String business_addr= "", business_tel="", business_image = "", business_info="", business_hashtag="";
     double business_star_avg = 0;
 
     reader.beginObject();
@@ -147,10 +147,10 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
         business_name = reader.nextString();
       } else if(readStr.equals("business_member_code")) {
         business_member_code = reader.nextInt();
-      } else if(readStr.equals("business_category_code1")) {
-        business_category_code1 = reader.nextInt();
-      } else if(readStr.equals("business_category_code2")) {
-        business_category_code2 = reader.nextInt();
+      } else if(readStr.equals("business_category_parent_code")) {
+        business_category_parent_code = reader.nextInt();
+      } else if(readStr.equals("business_category_code")) {
+        business_category_code = reader.nextInt();
       } else if(readStr.equals("business_addr")) {
         business_addr = reader.nextString();
       } else if(readStr.equals("business_tel")) {
@@ -161,6 +161,8 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
         business_info = reader.nextString();
       } else if(readStr.equals("business_star_avg")) {
         business_star_avg = reader.nextDouble();
+      } else if(readStr.equals("business_hashtag")) {
+        business_hashtag = reader.nextString();
       } else {
         reader.skipValue();
       }
@@ -168,9 +170,9 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
       // booking에서 count Booking_appraisal where Business_code 로 검색하면 될 듯
     }
       reader.endObject();
-      Log.d(TAG, "SearchBusiness:" + business_name + ", " + business_image +", " + business_star_avg);
-      return new BusinessDTO(business_code, business_name, business_member_code, business_category_code1, business_category_code2,
-          business_addr, business_tel, business_image, business_info, business_star_avg);
+      //Log.d(TAG, "SearchBusiness:" + business_name + ", " + business_image +", " + business_star_avg);
+      return new BusinessDTO(business_code, business_name, business_member_code, business_category_parent_code, business_category_code,
+          business_addr, business_tel, business_image, business_info, business_star_avg, business_hashtag);
   }
 
 }

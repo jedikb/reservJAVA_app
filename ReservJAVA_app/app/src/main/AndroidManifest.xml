@@ -73,6 +73,7 @@ FINE_LOCATION 정확한 위치에 접근할 수 있는 권한
         <activity android:name=".category.Hospital" />
         <activity android:name=".ui.b_where.SearchActivity" /> <!-- https가 아니라 http로 오더라도 그냥 허가하는 부분 -->
         <activity android:name=".ui.b_where.WhereListActivity" />
+        <activity android:name=".ui.b_where.AddrListActivity"/>
         <activity android:name=".ui.f_profile.ProfileActivity" />
         <activity android:name=".ui.f_profile.ReviewActivity" />
         <activity android:name=".ui.f_profile.ModProfileActivity" /> <!-- http 라이브러리 사용 -->
