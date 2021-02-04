@@ -72,18 +72,20 @@ public class ProfileActivity extends AppCompatActivity {
     //내가 작성한 리뷰들을 보여줌
     findViewById(R.id.reviewListBtn).setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onClick(View v) {
-
+      public void onClick(View view) {
+        Intent intent = new Intent(getApplicationContext(), Review_viewActivity.class);
+        startActivity(intent);
       }
     });
 
     //뒤로가기 버튼(이전 화면으로 돌아간다-임시:Search)
-    findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
+    findViewById(R.id.backQnABtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         finish();
       }
     });
+
 
   }
 

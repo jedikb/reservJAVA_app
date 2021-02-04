@@ -18,7 +18,7 @@
 
         <!-- 뒤로가기 -->
         <ImageView
-            android:id="@+id/backBtn"
+            android:id="@+id/backQnABtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="10dp"

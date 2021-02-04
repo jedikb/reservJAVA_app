@@ -19,7 +19,7 @@
 
         <!-- 뒤로가기 -->
         <ImageView
-            android:id="@+id/backBtn"
+            android:id="@+id/backQnABtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="10dp"
@@ -98,7 +98,7 @@
             android:layout_weight="0.8"
             android:numStars="5"
             android:rating="3"
-            android:stepSize="1"
+            android:stepSize="0.5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
