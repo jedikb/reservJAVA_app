@@ -28,7 +28,7 @@ public class ListActivity extends AppCompatActivity {
     MainActivity activity;
 
     HomeFragment homeFragment;
-    //ListFragment listFragment;
+    ListFragment listFragment;
     QnAFragment qnAFragment;
     Toolbar toolbar;
 
@@ -40,7 +40,7 @@ public class ListActivity extends AppCompatActivity {
         //1. 액티비티 화면이 A, B, C 를 만들어야 한다면
         //  액티비티 화면을 이름만 주어서 만든다.
 
-/*
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);   //상단액션바를 툴바로 교체
 
@@ -67,7 +67,7 @@ public class ListActivity extends AppCompatActivity {
 
         //하단바 처리
         homeFragment = new HomeFragment();
-        //listFragment = new ListFragment();
+        listFragment = new ListFragment();
         qnAFragment = new QnAFragment();
 
         //getSupportFragmentManager().beginTransaction()
@@ -92,16 +92,22 @@ public class ListActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.listItem:
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.container, listFragment).commit();
+                        return true;
+
+                    //테스트 페이지(임시) 시작
+                    case R.id.testItem:
                         intent = new Intent(getApplicationContext(), ListActivity.class);
                         startActivity(intent);
-                        //getSupportFragmentManager().beginTransaction()
-                        //        .replace(R.id.container, listFragment).commit();
                         return true;
+                    //테스트 페이지(임시) 끝
+
                 }//switch
                 return false;
             }//onNavigationItemSelected()
         });
-*/
+
         //로그인 이동(임시)
         findViewById(R.id.tologinBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +117,7 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
+/*
         //예약 이동(임시)
         findViewById(R.id.moveBtn2).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +126,7 @@ public class ListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+*/
 
         //회원탈퇴 이동(임시)
         findViewById(R.id.moveBtn3).setOnClickListener(new View.OnClickListener() {
@@ -146,29 +154,25 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-
     }//onCreat()
 
     // 프래그먼트 이동 메소드
-
-//    public void onFragmentChange(int state){
-//        Intent intent; //액티비티 콜을 위한 지역변수 선언
-//        if (state == 1) {
-//            getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.container, homeFragment).commit();
-//        } else if (state == 2) {
-//            intent = new Intent(getApplicationContext(), SearchActivity.class);
-//            startActivity(intent);
-//        } else if (state == 3) {
-//            intent = new Intent(getApplicationContext(), ListActivity.class);
-//            startActivity(intent);
-//            //getSupportFragmentManager().beginTransaction()
-//            //        .replace(R.id.container, listFragment).commit();
-//        } else if (state == 7) {
-//            getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.container, qnAFragment).commit();
-//        }
-//    }
+    public void onFragmentChange(int state){
+        Intent intent; //액티비티 콜을 위한 지역변수 선언
+        if (state == 1) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, homeFragment).commit();
+        } else if (state == 2) {
+            intent = new Intent(getApplicationContext(), SearchActivity.class);
+            startActivity(intent);
+        } else if (state == 3) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, listFragment).commit();
+        } else if (state == 7) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, qnAFragment).commit();
+        }
+    }
 
 
 }

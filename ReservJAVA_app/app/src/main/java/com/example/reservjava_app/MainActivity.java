@@ -1,6 +1,7 @@
 package com.example.reservjava_app;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -129,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
     //NavigationBar Setting
     homeFragment = new HomeFragment();
-    //listFragment = new ListFragment();  //ListFragment를 ListActivity로 변경함(임시)이봉선
+    listFragment = new ListFragment();  //ListFragment를 ListActivity로 변경함(임시)이봉선
 /*
     bookingViewFragment = new BookingViewFragment();
     memberCancelFragment = new MemberCancelFragment();
@@ -159,11 +160,16 @@ public class MainActivity extends AppCompatActivity {
             return true;
 
           case R.id.listItem:
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, listFragment).commit();
+            return true;
+
+          //테스트 페이지(임시) 시작
+          case R.id.testItem:
             intent = new Intent(getApplicationContext(), ListActivity.class);
             startActivity(intent);
-            //getSupportFragmentManager().beginTransaction()
-            //        .replace(R.id.container, listFragment).commit();
             return true;
+          //테스트 페이지(임시) 끝
         }//switch
         return false;
       }//onNavigationItemSelected()
@@ -183,10 +189,8 @@ public class MainActivity extends AppCompatActivity {
       startActivity(intent);
       finish();
     } else if (state == 3) {
-      intent = new Intent(getApplicationContext(), ListActivity.class);
-      startActivity(intent);
-      //getSupportFragmentManager().beginTransaction()
-      //        .replace(R.id.container, listFragment).commit();
+      getSupportFragmentManager().beginTransaction()
+              .replace(R.id.container, listFragment).commit();
     } else if (state == 7) {
       getSupportFragmentManager().beginTransaction()
           .replace(R.id.container, qnAFragment).commit();

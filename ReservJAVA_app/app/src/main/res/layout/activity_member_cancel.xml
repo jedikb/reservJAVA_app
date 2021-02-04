@@ -99,133 +99,137 @@
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
                 >
                 <!-- 내용 화면 시작 -->
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent"
-                    android:orientation="vertical"
-                    >
-
-                    <TextView
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-
-                        android:text="회원탈퇴"
-                        android:textSize="30sp"
-                        android:gravity="center"
-                        android:background="@drawable/solid_black"
-
+                    android:layout_height="match_parent">
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-
-                        android:id="@+id/title"
-                        />
-
-                    <TextView
-                        android:id="@+id/textView1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="24dp"
-                        android:background="@drawable/solid_black"
-
-                        android:gravity="left"
-                        android:padding="10dp"
-                        android:text="유의사항\n회원 탈퇴 전에 꼭 확인하세요."
-                        android:textSize="20sp"
-
+                        android:layout_height="match_parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/title" />
+                        app:layout_constraintTop_toBottomOf="parent"
+                        android:orientation="vertical"
+                        >
 
-                    <TextView
-                        app:layout_constraintTop_toBottomOf="@+id/textView1"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        <TextView
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
 
-                        android:text="▶ 예약자바 회원탈퇴시 회원이 보유하고 있던 포인트와 쿠폰은 모두 소멸되며 복구가 불가능합니다."
-                        android:textSize="16sp"
-                        android:padding="10dp"
-                        android:gravity="left"
-                        android:background="@drawable/solid_black"
+                            android:text="회원탈퇴"
+                            android:textSize="30sp"
+                            android:gravity="center"
+                            android:background="@drawable/solid_black"
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginEnd="24dp"
 
-                        android:id="@+id/textView2"
-                        />
+                            android:id="@+id/title"
+                            />
 
-                    <TextView
-                        app:layout_constraintTop_toBottomOf="@+id/textView2"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        <TextView
+                            android:id="@+id/textView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
 
-                        android:text="▶ 예약자바 회원이 탈퇴하려는 경우 결제 편의를 목적으로 회원이 지정(선택)한 부가 서비스(ex.예약페이)가 해지되며 해당 서비스 회원의 자격도 자동으로 상실(탈퇴) 됩니다."
-                        android:textSize="16sp"
-                        android:padding="10dp"
-                        android:gravity="left"
-                        android:background="@drawable/solid_black"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="24dp"
+                            android:background="@drawable/solid_black"
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
+                            android:gravity="left"
+                            android:padding="10dp"
+                            android:text="유의사항\n회원 탈퇴 전에 꼭 확인하세요."
+                            android:textSize="20sp"
 
-                        android:id="@+id/textView3"
-                        />
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/title" />
 
-                    <TextView
-                        app:layout_constraintTop_toBottomOf="@+id/textView3"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        <TextView
+                            app:layout_constraintTop_toBottomOf="@+id/textView1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
 
-                        android:text="▶ 예약자바 회원탈퇴시 회원정보 및 서비스 이용기록은 모두 삭제되며 삭제된 데이터는 복구가 불가능합니다.\n다만 법령에 의하여 보관해야 하는 경우, 또는 회원가입 남용, 또는 서비스 부정사용 등을 위한 회사 내부정책에 의하여 보관해야 하는 정보는 회원탈퇴 후에도 일정기간 보관됩니다. 자세한 사항은 예약자보 개인정보 처리방침에서 확인하실 수 있습니다."
-                        android:textSize="16sp"
-                        android:padding="10dp"
-                        android:gravity="left"
-                        android:background="@drawable/solid_black"
+                            android:text="▶ 예약자바 회원탈퇴시 회원이 보유하고 있던 포인트와 쿠폰은 모두 소멸되며 복구가 불가능합니다."
+                            android:textSize="16sp"
+                            android:padding="10dp"
+                            android:gravity="left"
+                            android:background="@drawable/solid_black"
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginEnd="24dp"
 
-                        android:id="@+id/textView4"
-                        />
+                            android:id="@+id/textView2"
+                            />
 
-                    <Button
-                        android:id="@+id/submitBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        <TextView
+                            app:layout_constraintTop_toBottomOf="@+id/textView2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
 
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="24dp"
-                        android:background="@drawable/solid_black"
+                            android:text="▶ 예약자바 회원이 탈퇴하려는 경우 결제 편의를 목적으로 회원이 지정(선택)한 부가 서비스(ex.예약페이)가 해지되며 해당 서비스 회원의 자격도 자동으로 상실(탈퇴) 됩니다."
+                            android:textSize="16sp"
+                            android:padding="10dp"
+                            android:gravity="left"
+                            android:background="@drawable/solid_black"
 
-                        android:gravity="center"
-                        android:text="회원 탈퇴하기"
-                        android:textSize="18sp"
-                        app:backgroundTint="#2196F3"
-                        app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginEnd="24dp"
 
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                            android:id="@+id/textView3"
+                            />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <TextView
+                            app:layout_constraintTop_toBottomOf="@+id/textView3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+
+                            android:text="▶ 예약자바 회원탈퇴시 회원정보 및 서비스 이용기록은 모두 삭제되며 삭제된 데이터는 복구가 불가능합니다.\n다만 법령에 의하여 보관해야 하는 경우, 또는 회원가입 남용, 또는 서비스 부정사용 등을 위한 회사 내부정책에 의하여 보관해야 하는 정보는 회원탈퇴 후에도 일정기간 보관됩니다. 자세한 사항은 예약자보 개인정보 처리방침에서 확인하실 수 있습니다."
+                            android:textSize="16sp"
+                            android:padding="10dp"
+                            android:gravity="left"
+                            android:background="@drawable/solid_black"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginEnd="24dp"
+
+                            android:id="@+id/textView4"
+                            />
+
+                        <Button
+                            android:id="@+id/submitBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="24dp"
+                            android:background="@drawable/solid_black"
+
+                            android:gravity="center"
+                            android:text="회원 탈퇴하기"
+                            android:textSize="18sp"
+                            app:backgroundTint="#2196F3"
+                            app:layout_constraintEnd_toEndOf="parent"
+
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </ScrollView>
                 <!-- 내용 화면 끝 -->
             </FrameLayout>
             <!-- 중단(내용화면 배치를 위한) 끝 -->
@@ -249,6 +253,14 @@
     <!-- 전체화면(햄버거화면 제외) 끝 -->
 
     <!-- 햄버거화면(Navigation Drawer,바로가기) 시작 -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_drawer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/main_drawer_menu" />
     <!-- 햄버거화면(Navigation Drawer,바로가기) 끝 -->
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -62,7 +62,7 @@ public class MemberCancelActivity extends AppCompatActivity {
 
         //하단바 처리
         homeFragment = new HomeFragment();
-        //listFragment = new ListFragment();
+        listFragment = new ListFragment();
         qnAFragment = new QnAFragment();
 
         //getSupportFragmentManager().beginTransaction()
@@ -87,11 +87,17 @@ public class MemberCancelActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.listItem:
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.container, listFragment).commit();
+                        return true;
+
+                    //테스트 페이지(임시) 시작
+                    case R.id.testItem:
                         intent = new Intent(getApplicationContext(), ListActivity.class);
                         startActivity(intent);
-                        //getSupportFragmentManager().beginTransaction()
-                        //        .replace(R.id.container, listFragment).commit();
                         return true;
+                    //테스트 페이지(임시) 끝
+
                 }//switch
                 return false;
             }//onNavigationItemSelected()
@@ -109,10 +115,8 @@ public class MemberCancelActivity extends AppCompatActivity {
             intent = new Intent(getApplicationContext(), SearchActivity.class);
             startActivity(intent);
         } else if (state == 3) {
-            intent = new Intent(getApplicationContext(), ListActivity.class);
-            startActivity(intent);
-            //getSupportFragmentManager().beginTransaction()
-            //        .replace(R.id.container, listFragment).commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, listFragment).commit();
         } else if (state == 7) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, qnAFragment).commit();

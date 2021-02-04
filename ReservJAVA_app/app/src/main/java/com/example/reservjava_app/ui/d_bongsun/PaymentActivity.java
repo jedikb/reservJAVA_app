@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.reservjava_app.ListActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
@@ -41,7 +42,7 @@ public class PaymentActivity extends AppCompatActivity {
         //햄버거, 액션바 내용 변경
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24);   //햄버거 아이콘 변경
-        getSupportActionBar().setTitle("주소");   //상단액션바(default: app_name @res.values.strings.xml)
+        //getSupportActionBar().setTitle("주소");   //상단액션바(default: app_name @res.values.strings.xml)
 
         //햄버거 버튼과 Navigation Drawer(바로가기 메뉴)연결
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -66,8 +67,8 @@ public class PaymentActivity extends AppCompatActivity {
         listFragment = new ListFragment();
         qnAFragment = new QnAFragment();
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, homeFragment).commit();    //기본 첫화면 띄우기
+        //getSupportFragmentManager().beginTransaction()
+        //        .replace(R.id.container, homeFragment).commit();    //기본 첫화면 띄우기
         BottomNavigationView bottomNavigationView =
                 findViewById(R.id.bottom_navigation);
 
@@ -75,6 +76,7 @@ public class PaymentActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent; //액티비티 콜을 위한 지역변수 선언
                 switch (item.getItemId()){
                     case R.id.homeItem:
                         getSupportFragmentManager().beginTransaction()
@@ -82,7 +84,7 @@ public class PaymentActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.searchItem:
-                        Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                        intent = new Intent(getApplicationContext(), SearchActivity.class);
                         startActivity(intent);
                         return true;
 
@@ -90,11 +92,18 @@ public class PaymentActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.container, listFragment).commit();
                         return true;
+
+                    //테스트 페이지(임시) 시작
+                    case R.id.testItem:
+                        intent = new Intent(getApplicationContext(), ListActivity.class);
+                        startActivity(intent);
+                        return true;
+                    //테스트 페이지(임시) 끝
+
                 }//switch
                 return false;
             }//onNavigationItemSelected()
         });
-
 
     }//onCreat()
 
