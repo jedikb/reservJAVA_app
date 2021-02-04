@@ -1,21 +1,17 @@
 package com.example.reservjava_app.ui.b_where;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +26,6 @@ import java.util.ArrayList;
 import static com.example.reservjava_app.Common.CommonMethod.isNetworkConnected;
 
 public class WhereListActivity extends AppCompatActivity {
-  //public static BusinessDTO busiSetItem = null;
   private static final String TAG = "main:WhereListActivity";
   SearchBusiness searchBusiness;
 
@@ -104,45 +99,46 @@ public class WhereListActivity extends AppCompatActivity {
       adapter.addItem(new BusinessDTO(dto.getBusiness_name(), dto.getBusiness_addr(), dto.getBusiness_star_avg()));
     }
 
+    addrSearch = findViewById(R.id.addrSearch);
     // 상단 검색버튼
     findViewById(R.id.searchBtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        addrSearch = findViewById(R.id.addrSearch);
         searchText = "";
         searchText = addrSearch.getText().toString();
         Toast.makeText(WhereListActivity.this, searchText + "를 검색합니다", Toast.LENGTH_SHORT).show();
         //Log.d(TAG, "onClick searchText : " + searchText);
 
-        //화면 갱신시 옆으로 이동하는 것 없애려고 했는데 일단 너무 시간이 걸려 나중으로 넘김
-        Intent intent = new Intent(WhereListActivity.this, WhereListActivity.class);
-        intent.putExtra("searchText", searchText);
-        finish();
-        startActivity(intent);
+        adapter.removeAllItem();
 
+        if(isNetworkConnected(WhereListActivity.this) == true){
+          searchBusiness = new SearchBusiness(busiList, searchText, progressDialog, adapter);
+          searchBusiness.execute();
+        } else {
+          Toast.makeText(WhereListActivity.this, "인터넷이 연결되어 있지 않습니다.",
+              Toast.LENGTH_SHORT).show();
+        }
+
+        for (BusinessDTO dto : busiList){
+          Log.d(TAG, "onCreate: " + dto.getBusiness_name());
+          adapter.addItem(new BusinessDTO(dto.getBusiness_name(), dto.getBusiness_addr(), dto.getBusiness_star_avg()));
+        }
+        recyclerView.setAdapter(adapter);
       }
     });
 
-    findViewById(R.id.addrSearch).setOnKeyListener(new View.OnKeyListener() {
+    addrSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
       @Override
-      public boolean onKey(View v, int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_ENTER) {
-          switch (keyCode) {
-            case KeyEvent.KEYCODE_ENTER:
-              searchText = "";
-              searchText = addrSearch.getText().toString();
-              Toast.makeText(WhereListActivity.this, searchText + "를 검색합니다", Toast.LENGTH_SHORT).show();
-              //Log.d(TAG, "onClick searchText : " + searchText);
+      public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        searchText = "";
+        searchText = addrSearch.getText().toString();
+        Toast.makeText(WhereListActivity.this, searchText + "를 검색합니다", Toast.LENGTH_SHORT).show();
+        //Log.d(TAG, "onClick searchText : " + searchText);
 
-              //화면 갱신시 옆으로 이동하는 것 없애려고 했는데 일단 너무 시간이 걸려 나중으로 넘김
-              Intent intent = new Intent(WhereListActivity.this, WhereListActivity.class);
-              intent.putExtra("searchText", searchText);
-              //finish();
-              startActivity(intent);
-              break;
-          }
-          return true;
-        }
+        Intent intent = new Intent(WhereListActivity.this, WhereListActivity.class);
+        intent.putExtra("searchText", searchText);
+        startActivity(intent);
+        finish();
         return false;
       }
     });

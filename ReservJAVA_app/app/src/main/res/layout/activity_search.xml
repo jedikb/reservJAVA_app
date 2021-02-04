@@ -130,13 +130,14 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
+            android:background="@drawable/solid_black"
+            android:foregroundGravity="center"
             android:gravity="center"
             android:text="자동으로 현재 위치 주소"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/solid_black"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/setAddrBtn"
