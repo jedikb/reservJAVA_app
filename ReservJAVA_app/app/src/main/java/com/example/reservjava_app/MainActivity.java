@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     //햄버거, 액션바 내용 변경
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24);   //햄버거 아이콘 변경
-    getSupportActionBar().setTitle("");   //상단액션바(default: app_name @res.values.strings.xml)
+    //getSupportActionBar().setTitle("");   //상단액션바(default: app_name @res.values.strings.xml)
 
     //측면메뉴
     //햄버거 버튼과 Navigation Drawer( 바로가기 메뉴)연결
