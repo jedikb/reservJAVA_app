@@ -48,7 +48,7 @@ public class BookingViewActivity extends AppCompatActivity {
         toggle.syncState();
 
         //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리
-        NavigationView navigationView = findViewById(R.id.navigation_drawer);
+        NavigationView navigationView = findViewById(R.id.loginnavigation);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

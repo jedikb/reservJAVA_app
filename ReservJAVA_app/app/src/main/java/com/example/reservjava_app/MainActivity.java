@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     //측면메뉴 버튼 작업
     //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리
-    NavigationView navigationView = findViewById(R.id.navigation_drawer);
+    NavigationView navigationView = findViewById(R.id.loginnavigation);
     if(loginDTO == null) {  //로그인 안했을 때
       navigationView.getMenu().findItem(R.id.nav_membershipbtn)
               .setVisible(false);
