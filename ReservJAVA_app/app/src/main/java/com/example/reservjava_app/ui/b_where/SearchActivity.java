@@ -11,6 +11,7 @@ import android.location.Geocoder;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -55,6 +56,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Vector;
 
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
@@ -66,7 +68,7 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
 
   //지도에 매장들 띄우기 위한 변수들
   SearchBusiness searchBusiness;
-  ArrayList<BusinessDTO> busiList;
+  ArrayList<BusinessDTO> busiList = new ArrayList<>();
   SearchBusinessAdapter adapter;
   ProgressDialog progressDialog;
   Double lat = null;
@@ -79,8 +81,13 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
   String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
   private FusedLocationSource mLocationSource;
   private NaverMap mNaverMap, naverMap;
-  private String searchText="", address;
+  private ArrayList<Marker> markers = new ArrayList<>();
+  private String searchText=null, address;
   private InfoWindow infoWindow;
+  // 마커 정보 저장시킬 변수들 선언
+  private Vector<LatLng> markersPosition;
+  private Vector<Marker> activeMarkers;
+
 
   // 일단 Searchview는 힘드니 EditText로 기능을 구현하고 나서
   //Searchview 사용을 고민해보자..
@@ -121,32 +128,10 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
 
     //일단 DB에서 전체 매장 정보를 불러오자
     //가까운곳 기준으로 검색이라던지 하는 건 나중에
+
+    searchText = "";
     searchBusiness = new SearchBusiness(busiList, searchText, progressDialog, adapter);
     searchBusiness.execute();
-    //int ad = busiList.size();
-    //Log.d(TAG, "onCreate: " + ad);
-
-/*
-    // 가져온 정보중 주소를 lat, lng로 변환
-    List<Address> list = null;
-
-    for (int i = 0; i <= busiList.size(); i++) {
-      String str = busiList.get(i).getBusiness_addr();
-      Log.d(TAG, "onCreate: str  " + str);
-      try {
-        list = geocoder.getFromLocationName(str, 99999);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-*/
-
-      //Address addr = list.get(0);
-      //lat = addr.getLatitude();
-      //lng = addr.getLongitude();
-      //Log.d(TAG, "onCreate: " + lat + " : " + lng);
-
-   // }
-
 
     // 위치를 반환하는 구현체인 FusedLocationSource 생성
     mLocationSource =
@@ -158,15 +143,10 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     if (mapFragment == null) {
       mapFragment = MapFragment.newInstance(new NaverMapOptions()
           //.camera(new CameraPosition(new LatLng(37.5116620, 127.0594274), 16, 0, 90))
-          //.locationButtonEnabled(true)
-          //.compassEnabled(true)
-          // 이동을 할 때?? 뜸,, 바로 안 뜬다//이건 나중에
           );
 
       fm.beginTransaction().add(R.id.map, mapFragment).commit();
     }
-    // getMapAsync를 호출하여 비동기로 onMapReady 콜백 메서드 호출
-    // onMapReady에서 NaverMap 객체를 받음
     mapFragment.getMapAsync(this);
 
 
@@ -178,29 +158,38 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
         searchText = addrSearch.getText().toString();
         Toast.makeText(SearchActivity.this, searchText + "를 검색합니다", Toast.LENGTH_SHORT).show();
         //Log.d(TAG, "onClick searchText : " + searchText);
-
-        Intent intent = new Intent(SearchActivity.this, WhereListActivity.class);
-        intent.putExtra("searchText", searchText);
-        startActivity(intent);
-        finish();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+          @Override
+          public void run() {
+            Intent intent = new Intent(SearchActivity.this, WhereListActivity.class);
+            intent.putExtra("searchText", searchText);
+            startActivity(intent);
+            finish();
+          }
+        }, 2000);
       }
     });
 
     //검색명 입력하고 엔터키 입력시 검색으로 연결
-    //엔터키의 경우 두번 작동하게 되는 문제가 있는데 해결이 잘 안됨
-    addrSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+    //엔터키의 경우 두번 작동하게 되는 문제가 있어 에디터 액션 이벤트를 이용한다
+      addrSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
       @Override
       public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         searchText = "";
         searchText = addrSearch.getText().toString();
         Toast.makeText(SearchActivity.this, searchText + "를 검색합니다", Toast.LENGTH_SHORT).show();
         //Log.d(TAG, "onClick searchText : " + searchText);
-
-        Intent intent = new Intent(SearchActivity.this, WhereListActivity.class);
-        intent.putExtra("searchText", searchText);
-        startActivity(intent);
-        finish();
-
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+          @Override
+          public void run() {
+            Intent intent = new Intent(SearchActivity.this, WhereListActivity.class);
+            intent.putExtra("searchText", searchText);
+            startActivity(intent);
+            finish();
+          }
+        }, 2000);
         return false;
       }
     });
@@ -242,14 +231,12 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
 
   }
 
-  public void setLayerGroupEnabled​(@NonNull String group, boolean enabled) {
-  }
 
   @UiThread
   @Override
   public void onMapReady(@NonNull NaverMap naverMap) {
     Log.d( TAG, "onMapReady");
-    double latitude =0, longitude = 0;
+    double latitude=0.0, longitude=0.0;
 
     infoWindow = new InfoWindow();
 
@@ -303,14 +290,52 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     }
     Log.d(TAG, "onMapReady: " + latitude +" : " +longitude );
 
-    // 지도상에 마커 표시
+    // 가져온 정보중 주소를 lat, lng로 변환
+    List<Address> list = null;
+    Address addr = null;
+    markersPosition = new Vector<LatLng>();
+/*    for (int i = 0; i <= busiList.size(); i++) {
+      String str = busiList.get(i).getBusiness_addr();
+      try {
+        list = geocoder.getFromLocationName(str, 99999);
+        addr = list.get(i);
+        lat = addr.getLatitude();
+        lng = addr.getLongitude();
+        markersPosition.add(new LatLng(lat, lng));
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }*/
+
+    // 카메라 이동 되면 호출 되는 이벤트
+    naverMap.addOnCameraChangeListener(new NaverMap.OnCameraChangeListener() {
+      @Override
+      public void onCameraChange(int reason, boolean animated) {
+        freeActiveMarkers();
+        // 정의된 마커위치들중 가시거리 내에있는것들만 마커 생성
+        LatLng currentPosition = getCurrentPosition(mNaverMap);
+        for (LatLng markerPosition: markersPosition) {
+          if (!withinSightMarker(currentPosition, markerPosition))
+            continue;
+          Marker marker = new Marker();
+          marker.setPosition(markerPosition);
+          marker.setMap(mNaverMap);
+          activeMarkers.add(marker);
+        }
+      }
+    });
+
+/*    // 지도상에 마커 표시
     Marker marker = new Marker();
     marker.setWidth(100);
     marker.setHeight(100);
-    marker.setPosition(new LatLng(latitude, longitude));
+    marker.setIconPerspectiveEnabled(true);
+    //marker.setPosition(new LatLng(latitude, longitude));
+    marker.setPosition(markersPosition);
     marker.setMap(naverMap);
-    marker.setIcon(OverlayImage.fromResource(R.drawable.location));
-    marker.setOnClickListener(new Overlay.OnClickListener() {
+    marker.setIcon(OverlayImage.fromResource(R.drawable.location));*/
+    //마커를 클릭하면 infoWindow 나오게
+/*    marker.setOnClickListener(new Overlay.OnClickListener() {
       @Override
       public boolean onClick(@NonNull Overlay overlay) {
         if (overlay instanceof Marker) {
@@ -327,7 +352,12 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
         }
         return false;
       }
-    });
+    });*/
+
+    // 마커를 클릭해야만 infoWindow가 사라지는데,
+    // 마커 이외의 것을 클릭하면 사라지도록
+
+
 
     infoWindow.setAdapter(new InfoWindow.DefaultViewAdapter(this) {
       @NonNull
@@ -352,7 +382,7 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
 
     // 지정된 위치로 이동
     CameraUpdate cameraUpdate = CameraUpdate.scrollTo(new LatLng(latitude, longitude))
-        .animate(CameraAnimation.Easing, 2000);
+        .animate(CameraAnimation.Easing, 1000);
 
     mNaverMap.moveCamera(cameraUpdate);
 
@@ -386,6 +416,39 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     return address.getAddressLine(0) +"\n";
   }
 
+/*  @Override
+  protected void doInBackground() {
+
+  }*/
+
+  // 현재 카메라가 보고있는 위치
+  public LatLng getCurrentPosition(NaverMap naverMap) {
+    CameraPosition cameraPosition = naverMap.getCameraPosition();
+    return new LatLng(cameraPosition.target.latitude, cameraPosition.target.longitude);
+  }
+
+  // 선택한 마커의 위치가 가시거리(카메라가 보고있는 위치 반경 3km 내)에 있는지 확인
+  public final static double REFERANCE_LAT = 1 / 109.958489129649955;
+  public final static double REFERANCE_LNG = 1 / 88.74;
+  public final static double REFERANCE_LAT_X3 = 3 / 109.958489129649955;
+  public final static double REFERANCE_LNG_X3 = 3 / 88.74;
+  public boolean withinSightMarker(LatLng currentPosition, LatLng markerPosition) {
+    boolean withinSightMarkerLat = Math.abs(currentPosition.latitude - markerPosition.latitude) <= REFERANCE_LAT_X3;
+    boolean withinSightMarkerLng = Math.abs(currentPosition.longitude - markerPosition.longitude) <= REFERANCE_LNG_X3;
+    return withinSightMarkerLat && withinSightMarkerLng;
+  }
+
+  // 지도상에 표시되고있는 마커들 지도에서 삭제
+  private void freeActiveMarkers() {
+    if (activeMarkers == null) {
+      activeMarkers = new Vector<Marker>();
+      return;
+    }
+    for (Marker activeMarker: activeMarkers) {
+      activeMarker.setMap(null);
+    }
+    activeMarkers = new Vector<Marker>();
+  }
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent intent) {

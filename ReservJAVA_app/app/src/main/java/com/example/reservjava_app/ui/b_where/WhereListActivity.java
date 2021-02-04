@@ -3,6 +3,7 @@ package com.example.reservjava_app.ui.b_where;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.reservjava_app.ATask.SearchBusiness;
 import com.example.reservjava_app.DTO.BusinessDTO;
@@ -28,7 +30,6 @@ import static com.example.reservjava_app.Common.CommonMethod.isNetworkConnected;
 public class WhereListActivity extends AppCompatActivity {
   private static final String TAG = "main:WhereListActivity";
   SearchBusiness searchBusiness;
-
   ArrayList<BusinessDTO> busiList;
   RecyclerView recyclerView;
   SearchBusinessAdapter adapter;
@@ -84,11 +85,18 @@ public class WhereListActivity extends AppCompatActivity {
         RecyclerView.VERTICAL, false);
     recyclerView.setLayoutManager(layoutManager);
 
-    recyclerView.setAdapter(adapter);
+
+    // 리사이클러뷰 새로고침
+
+
+      final ProgressDialog progressDialog = new ProgressDialog(this);
+      progressDialog.setMessage("Carimento dati...");
+      progressDialog.show();
 
     if(isNetworkConnected(this) == true){
-      searchBusiness = new SearchBusiness(busiList, searchText, progressDialog, adapter);
-      searchBusiness.execute();
+        searchBusiness = new SearchBusiness(busiList, searchText, progressDialog, adapter);
+        searchBusiness.execute();
+        adapter.notifyDataSetChanged();
     } else {
       Toast.makeText(this, "인터넷이 연결되어 있지 않습니다.",
               Toast.LENGTH_SHORT).show();
@@ -96,8 +104,11 @@ public class WhereListActivity extends AppCompatActivity {
 
     for (BusinessDTO dto : busiList){
       Log.d(TAG, "onCreate: " + dto.getBusiness_name());
-      adapter.addItem(new BusinessDTO(dto.getBusiness_name(), dto.getBusiness_addr(), dto.getBusiness_star_avg()));
+      adapter.addItem(new BusinessDTO(dto.getBusiness_name(), dto.getBusiness_addr(), dto.getBusiness_star_avg() ));
     }
+
+    recyclerView.setAdapter(adapter);
+    progressDialog.dismiss();
 
     addrSearch = findViewById(R.id.addrSearch);
     // 상단 검색버튼
@@ -114,6 +125,7 @@ public class WhereListActivity extends AppCompatActivity {
         if(isNetworkConnected(WhereListActivity.this) == true){
           searchBusiness = new SearchBusiness(busiList, searchText, progressDialog, adapter);
           searchBusiness.execute();
+          adapter.notifyDataSetChanged();
         } else {
           Toast.makeText(WhereListActivity.this, "인터넷이 연결되어 있지 않습니다.",
               Toast.LENGTH_SHORT).show();
@@ -134,11 +146,16 @@ public class WhereListActivity extends AppCompatActivity {
         searchText = addrSearch.getText().toString();
         Toast.makeText(WhereListActivity.this, searchText + "를 검색합니다", Toast.LENGTH_SHORT).show();
         //Log.d(TAG, "onClick searchText : " + searchText);
-
-        Intent intent = new Intent(WhereListActivity.this, WhereListActivity.class);
-        intent.putExtra("searchText", searchText);
-        startActivity(intent);
-        finish();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+          @Override
+          public void run() {
+            Intent intent = new Intent(WhereListActivity.this, WhereListActivity.class);
+            intent.putExtra("searchText", searchText);
+            startActivity(intent);
+            finish();
+          }
+        }, 2000);
         return false;
       }
     });

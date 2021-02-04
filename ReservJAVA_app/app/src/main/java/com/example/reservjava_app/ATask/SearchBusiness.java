@@ -170,7 +170,7 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
       // booking에서 count Booking_appraisal where Business_code 로 검색하면 될 듯
     }
       reader.endObject();
-      Log.d(TAG, "SearchBusiness:" + business_name + ", " + business_image +", " + business_star_avg);
+      //Log.d(TAG, "SearchBusiness:" + business_name + ", " + business_image +", " + business_star_avg);
       return new BusinessDTO(business_code, business_name, business_member_code, business_category_parent_code, business_category_code,
           business_addr, business_tel, business_image, business_info, business_star_avg, business_hashtag);
   }
