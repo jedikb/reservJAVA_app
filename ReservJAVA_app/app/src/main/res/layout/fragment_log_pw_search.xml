@@ -18,7 +18,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="14dp"/>
 
     <TextView
         android:id="@+id/textView20"
@@ -29,7 +30,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.109"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+        app:layout_constraintTop_toBottomOf="@+id/textView19"
+        android:layout_marginLeft="14dp"/>
 
     <TextView
         android:id="@+id/textView21"
@@ -39,16 +41,19 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+        app:layout_constraintTop_toBottomOf="@+id/textView20"
+        android:layout_marginLeft="14dp"/>
 
     <Button
         android:id="@+id/IdSearchBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
+        android:insetLeft="14dp"
+        android:insetRight="14dp"
         android:text="아이디 찾기"
         android:textSize="24sp"
-        app:backgroundTint="#2196F3"
+        app:backgroundTint="#CC64DD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,9 +62,11 @@
         android:id="@+id/PassSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:insetLeft="14dp"
+        android:insetRight="14dp"
         android:text="비밀번호 찾기"
         android:textSize="24sp"
-        app:backgroundTint="#2196F3"
+        app:backgroundTint="#CC64DD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

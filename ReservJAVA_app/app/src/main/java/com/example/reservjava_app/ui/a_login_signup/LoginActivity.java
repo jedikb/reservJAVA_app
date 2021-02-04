@@ -3,19 +3,25 @@ package com.example.reservjava_app.ui.a_login_signup;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.reservjava_app.ATask.LoginSelect;
 import com.example.reservjava_app.DTO.MemberDTO;
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.ui.f_profile.ModProfileActivity;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.concurrent.ExecutionException;
 
@@ -29,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
   Button signupBtn, loginBtn;
   EditText editID, editPW;
   TextView idpw;
+  Toolbar toolbar;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -39,6 +47,16 @@ public class LoginActivity extends AppCompatActivity {
     editID = findViewById(R.id.editID);
     editPW = findViewById(R.id.editPW);
     idpw = (TextView) findViewById(R.id.idpw);
+
+    toolbar = findViewById(R.id.toolbar);
+    DrawerLayout drawer = findViewById(R.id.drawer_layout);
+    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    drawer.addDrawerListener(toggle);
+    toggle.syncState();
+
+
+
+
 
     //(임시: 작업하는 동안 아이디, 비번 치는게 귀찮음)
     editID.setText("aaa");
@@ -93,6 +111,8 @@ public class LoginActivity extends AppCompatActivity {
         }
       }
     });
+
+
 
     // 회원가입 화면으로 이동
     signupBtn.setOnClickListener(new View.OnClickListener() {
