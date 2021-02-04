@@ -123,8 +123,8 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     //가까운곳 기준으로 검색이라던지 하는 건 나중에
     searchBusiness = new SearchBusiness(busiList, searchText, progressDialog, adapter);
     searchBusiness.execute();
-    int ad = busiList.size();
-    Log.d(TAG, "onCreate: " + ad);
+    //int ad = busiList.size();
+    //Log.d(TAG, "onCreate: " + ad);
 
 /*
     // 가져온 정보중 주소를 lat, lng로 변환
