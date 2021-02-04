@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.fragment.d_bongsun.QnAFragment;
 import com.example.reservjava_app.ui.d_bongsun.MemberCancelActivity;
@@ -36,6 +37,15 @@ public class QnAMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(QnAMainActivity.this, MemberCancelActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //백버튼 누르면 메인으로
+        findViewById(R.id.backBtn4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QnAMainActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
