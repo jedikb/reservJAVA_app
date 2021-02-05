@@ -11,11 +11,14 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
 import com.example.reservjava_app.fragment.d_bongsun.QnAFragment;
+import com.example.reservjava_app.ui.a_login_signup.JoinActivity;
 import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
+import com.example.reservjava_app.ui.a_login_signup.QnAMainActivity;
 import com.example.reservjava_app.ui.b_where.SearchActivity;
 import com.example.reservjava_app.ui.d_bongsun.BookingViewActivity;
 import com.example.reservjava_app.ui.d_bongsun.MemberCancelActivity;
@@ -23,11 +26,13 @@ import com.example.reservjava_app.ui.d_bongsun.PaymentActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
+
 public class ListActivity extends AppCompatActivity {
 
     MainActivity activity;
 
-    HomeFragment homeFragment;
+    //HomeFragment homeFragment;
     ListFragment listFragment;
     QnAFragment qnAFragment;
     Toolbar toolbar;
@@ -37,9 +42,11 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
+        EditText addSearch = (EditText) findViewById(R.id.addrSearch);
+        addSearch.setText("activity_list.xml");
+
         //1. 액티비티 화면이 A, B, C 를 만들어야 한다면
         //  액티비티 화면을 이름만 주어서 만든다.
-
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);   //상단액션바를 툴바로 교체
@@ -56,17 +63,61 @@ public class ListActivity extends AppCompatActivity {
         toggle.syncState();
 
         //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리
-        NavigationView navigationView = findViewById(R.id.navigation_drawer);
+        NavigationView navigationView = findViewById(R.id.loginnavigation);
+        if(loginDTO == null) {  //로그인 안했을 때
+            navigationView.getMenu().findItem(R.id.nav_membershipbtn)
+                    .setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_logout)
+                    .setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_listchk)
+                    .setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_loginbtn)
+                    .setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_signupbtn)
+                    .setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_qna)
+                    .setVisible(true);
+        } else {  //로그인 했을 때
+            navigationView.getMenu().findItem(R.id.nav_membershipbtn)
+                    .setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_logout)
+                    .setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_listchk)
+                    .setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_loginbtn)
+                    .setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_signupbtn)
+                    .setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_qna)
+                    .setVisible(true);
+        }
+
+        //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리 내용
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리 내용
+                int id = item.getItemId();
+
+                //햄버거바 메뉴 누르면 이동
+                if(id == R.id.nav_loginbtn){
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else if(id == R.id.nav_signupbtn){
+                    Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
+                    startActivity(intent);
+                }else if(id == R.id.nav_qna){
+                    Intent intent = new Intent(getApplicationContext(), QnAMainActivity.class);
+                    startActivity(intent);
+                }
                 return false;
             }
+
+
+
         });
 
         //하단바 처리
-        homeFragment = new HomeFragment();
+        //homeFragment = new HomeFragment();
         listFragment = new ListFragment();
         qnAFragment = new QnAFragment();
 
@@ -82,8 +133,8 @@ public class ListActivity extends AppCompatActivity {
                 Intent intent; //액티비티 콜을 위한 지역변수 선언
                 switch (item.getItemId()){
                     case R.id.homeItem:
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.container, homeFragment).commit();
+                        intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
                         return true;
 
                     case R.id.searchItem:
@@ -117,7 +168,6 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-/*
         //예약 이동(임시)
         findViewById(R.id.moveBtn2).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,7 +176,6 @@ public class ListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-*/
 
         //회원탈퇴 이동(임시)
         findViewById(R.id.moveBtn3).setOnClickListener(new View.OnClickListener() {
@@ -146,11 +195,11 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-        //문의 이동(임시)
+        //여분(임시)
         findViewById(R.id.moveBtn5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.onFragmentChange(7);
+                //activity.onFragmentChange(7);
             }
         });
 
@@ -160,19 +209,21 @@ public class ListActivity extends AppCompatActivity {
     public void onFragmentChange(int state){
         Intent intent; //액티비티 콜을 위한 지역변수 선언
         if (state == 1) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, homeFragment).commit();
+            intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
         } else if (state == 2) {
             intent = new Intent(getApplicationContext(), SearchActivity.class);
             startActivity(intent);
         } else if (state == 3) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, listFragment).commit();
+        } else if (state == 4) {    //테스트 페이지(임시) state = 4
+            intent = new Intent(getApplicationContext(), ListActivity.class);
+            startActivity(intent);
         } else if (state == 7) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, qnAFragment).commit();
         }
     }
-
 
 }

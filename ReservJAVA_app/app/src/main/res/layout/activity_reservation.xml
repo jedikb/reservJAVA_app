@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:paddingLeft="15dp"
-    android:paddingTop="30dp"
     android:paddingRight="15dp"
     tools:context=".reservation.Reservation">
 
@@ -22,187 +21,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
 
-                <CalendarView
-                    android:id="@+id/calendarView"
+                <Button
+                    android:id="@+id/btn_date_picker"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"
+                    android:text="날짜 선택"
+                    android:textSize="18dp"
+                    android:textColor="@color/black"
+                    android:backgroundTint="#D1D0D0"/>
 
                 <TextView
                     android:id="@+id/textView30"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
-                    android:text="오전"
+                    android:text="시간 선택"
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="5">
-
-                    <ToggleButton
-                        android:id="@+id/toggleButton4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="7:00"
-                        android:textOff="7:00"
-                        android:textOn="7:00" />
-
-                    <ToggleButton
-                        android:id="@+id/toggleButton8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="8:00"
-                        android:textOff="8:00"
-                        android:textOn="8:00" />
-
-                    <ToggleButton
-                        android:id="@+id/toggleButton7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="9:00"
-                        android:textOff="9:00"
-                        android:textOn="9:00" />
-
-                    <ToggleButton
-                        android:id="@+id/toggleButton6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="10:00"
-                        android:textOff="10:00"
-                        android:textOn="10:00" />
-
-                    <ToggleButton
-                        android:id="@+id/toggleButton5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="ToggleButton"
-                        android:textOff="11:00"
-                        android:textOn="11:00" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/textView32"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="20dp"
-                    android:text="오후"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:weightSum="5">
-
-                        <ToggleButton
-                            android:id="@+id/toggleButton11"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="ToggleButton"
-                            android:textOff="12:00"
-                            android:textOn="12:00" />
-
-                        <ToggleButton
-                            android:id="@+id/toggleButton10"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="ToggleButton"
-                            android:textOff="13:00"
-                            android:textOn="13:00" />
-
-                        <ToggleButton
-                            android:id="@+id/toggleButton12"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="ToggleButton"
-                            android:textOff="14:00"
-                            android:textOn="14:00" />
-
-                        <ToggleButton
-                            android:id="@+id/toggleButton13"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="ToggleButton"
-                            android:textOff="15:00"
-                            android:textOn="15:00" />
-
-                        <ToggleButton
-                            android:id="@+id/toggleButton14"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="ToggleButton"
-                            android:textOff="16:00"
-                            android:textOn="16:00" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:weightSum="5">
-
-                        <ToggleButton
-                            android:id="@+id/toggleButton16"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="ToggleButton"
-                            android:textOff="17:00"
-                            android:textOn="17:00" />
-
-                        <ToggleButton
-                            android:id="@+id/toggleButton17"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="ToggleButton"
-                            android:textOff="18:00"
-                            android:textOn="18:00" />
-
-                        <ToggleButton
-                            android:id="@+id/toggleButton18"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="ToggleButton"
-                            android:textOff="19:00"
-                            android:textOn="19:00" />
-
-                        <ToggleButton
-                            android:id="@+id/toggleButton19"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="ToggleButton"
-                            android:textOff="20:00"
-                            android:textOn="20:00" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
+                    android:layout_height="match_parent" />
 
                 <ListView
                     android:id="@+id/product_time"

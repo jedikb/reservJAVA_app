@@ -35,7 +35,6 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="#FFFFFF"
                     app:popupTheme="@style/Widget.AppCompat.Toolbar"
                     app:titleTextColor="#000000"
                     >
@@ -437,7 +436,7 @@
 
     <!-- 햄버거화면(Navigation Drawer,바로가기) 시작 -->
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_drawer"
+        android:id="@+id/loginnavigation"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
