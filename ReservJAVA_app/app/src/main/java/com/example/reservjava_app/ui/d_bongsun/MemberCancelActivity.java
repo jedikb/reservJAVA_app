@@ -8,25 +8,41 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.reservjava_app.ATask.MemberCancel;
 import com.example.reservjava_app.ListActivity;
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
 import com.example.reservjava_app.fragment.d_bongsun.QnAFragment;
+import com.example.reservjava_app.ui.a_login_signup.JoinActivity;
+import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
+import com.example.reservjava_app.ui.a_login_signup.QnAMainActivity;
 import com.example.reservjava_app.ui.b_where.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.lang.reflect.Member;
+import java.util.concurrent.ExecutionException;
+
+import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
+
 public class MemberCancelActivity extends AppCompatActivity {
 
-    //HomeFragment homeFragment;
+    //HomeFragment homeFragment;    //MainActivity 이동 방식으로 변경
     ListFragment listFragment;
     QnAFragment qnAFragment;
     Toolbar toolbar;
+
+    String state;
+
+    private static final String TAG = "main:MemberCancelActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +71,56 @@ public class MemberCancelActivity extends AppCompatActivity {
 
         //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리
         NavigationView navigationView = findViewById(R.id.loginnavigation);
+        if(loginDTO == null) {  //로그인 안했을 때
+            navigationView.getMenu().findItem(R.id.nav_membershipbtn)
+                    .setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_logout)
+                    .setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_listchk)
+                    .setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_loginbtn)
+                    .setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_signupbtn)
+                    .setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_qna)
+                    .setVisible(true);
+        } else {  //로그인 했을 때
+            navigationView.getMenu().findItem(R.id.nav_membershipbtn)
+                    .setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_logout)
+                    .setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_listchk)
+                    .setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_loginbtn)
+                    .setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_signupbtn)
+                    .setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_qna)
+                    .setVisible(true);
+        }
+
+        //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리 내용
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리 내용
+                int id = item.getItemId();
+
+                //햄버거바 메뉴 누르면 이동
+                if(id == R.id.nav_loginbtn){
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else if(id == R.id.nav_signupbtn){
+                    Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
+                    startActivity(intent);
+                }else if(id == R.id.nav_qna){
+                    Intent intent = new Intent(getApplicationContext(), QnAMainActivity.class);
+                    startActivity(intent);
+                }
                 return false;
             }
+
+
+
         });
 
         //하단바 처리
@@ -105,6 +165,30 @@ public class MemberCancelActivity extends AppCompatActivity {
                 return false;
             }//onNavigationItemSelected()
         });
+
+        //회원탈퇴처리
+        findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id = ((EditText) findViewById(R.id.addrSearch)).getText().toString();
+//                MemberCancel memberCancel = new MemberCancel(id);
+//                try {
+//                    state = memberCancel.execute().get();
+//                    Log.d(TAG, "submitBtn:onClick: ");
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }//try//catch
+//
+//                if(state.equals("1")){
+//                    Log.d(TAG, "submitBtn:onClick: 회원탈퇴성공 !!!");
+//                    finish();
+//                }else{
+//                    Log.d(TAG, "submitBtn:onClick: 회원탈퇴실패 !!!");
+//                    finish();
+//                }
+
+            }//onClick()
+        });//submitBtn.setOnClickListener()
 
     }//onCreat()
 

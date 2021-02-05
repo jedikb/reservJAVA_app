@@ -16,11 +16,11 @@ public class CommonMethod {
 
   //각자 자신의 아이피를 넣으세요!!
   //봉선
-  //public static String  ipConfig = "http://192.168.0.116:80";
+  public static String  ipConfig = "http://192.168.0.116:80";
 
   //광범
   //public static String  ipConfig = "http://192.168.0.17:80";
-  public static String ipConfig = "http://192.168.0.34:80";
+  //public static String ipConfig = "http://192.168.0.34:80";
 
   //경선
   //public static String  ipConfig = "http://192.168.0.61:80";

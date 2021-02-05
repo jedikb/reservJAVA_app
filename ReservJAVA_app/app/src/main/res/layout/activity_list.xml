@@ -164,7 +164,7 @@
                             android:id="@+id/moveBtn5"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="문의하기"
+                            android:text="(할당안됨)"
                             />
 
                         <ListView

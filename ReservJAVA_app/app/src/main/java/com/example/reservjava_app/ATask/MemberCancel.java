@@ -13,6 +13,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -29,6 +30,9 @@ public class MemberCancel extends AsyncTask<Void, Void, Void> {
     public MemberCancel(String member_code) {
         this.member_code = member_code;
     }
+
+    // 데이터베이스에 삽입결과 0보다크면 삽입성공, 같거나 작으면 실패
+    String state = "";
 
     HttpClient httpClient;
     HttpPost httpPost;
@@ -77,25 +81,25 @@ public class MemberCancel extends AsyncTask<Void, Void, Void> {
             }
             String jsonStr = stringBuilder.toString();*/
 
+            // 응답
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+            StringBuilder stringBuilder = new StringBuilder();
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null){
+                stringBuilder.append(line + "\n");
+            }
+            state = stringBuilder.toString();
+
             inputStream.close();
 
         } catch (Exception e) {
             Log.d(TAG, "doInBackground: " + e.getMessage() );
             e.printStackTrace();
         }finally {
-            if(httpEntity != null){
-                httpEntity = null;
-            }
-            if(httpResponse != null){
-                httpResponse = null;
-            }
-            if(httpPost != null){
-                httpPost = null;
-            }
-            if(httpClient != null){
-                httpClient = null;
-            }
-
+            if(httpEntity != null) httpEntity = null;
+            if(httpResponse != null) httpResponse = null;
+            if(httpPost != null) httpPost = null;
+            if(httpClient != null) httpClient = null;
         }
 
         return null;
