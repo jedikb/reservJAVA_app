@@ -110,7 +110,8 @@
                         app:layout_constraintTop_toBottomOf="parent"
                         android:orientation="vertical"
                         >
-                    <!-- 사이드바 완성되기 까지 이쪽에서 연결한다. 시작-->
+
+                        <!-- 사이드바 완성되기 까지 이쪽에서 연결한다. 시작-->
                         <Button
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -127,14 +128,14 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
 
-                            android:id="@+id/moveBtn"
+                            android:id="@+id/moveBtn2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="예약"
                             />
 
                         <Button
-                            app:layout_constraintTop_toBottomOf="@+id/moveBtn"
+                            app:layout_constraintTop_toBottomOf="@+id/moveBtn2"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
 
@@ -203,7 +204,7 @@
 
     <!-- 햄버거화면(Navigation Drawer,바로가기) 시작 -->
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_drawer"
+        android:id="@+id/loginnavigation"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

@@ -9,8 +9,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.example.reservjava_app.ListActivity;
+import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
@@ -31,6 +33,9 @@ public class BookingViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_view);
 
+        EditText addSearch = (EditText) findViewById(R.id.addrSearch);
+        addSearch.setText("activity_booking_view.xml");
+
         //1. 액티비티 화면이 A, B, C 를 만들어야 한다면
         //  액티비티 화면을 이름만 주어서 만든다.
 
@@ -42,7 +47,7 @@ public class BookingViewActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24);   //햄버거 아이콘 변경
         //getSupportActionBar().setTitle("주소");   //상단액션바(default: app_name @res.values.strings.xml)
 
-        //햄버거 버튼과 Navigation Drawer(바로가기 메뉴)연결
+        //햄버거 버튼과 Navigation Drawer( 바로가기 메뉴)연결
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -54,14 +59,12 @@ public class BookingViewActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리 내용
-
-
                 return false;
             }
         });
 
         //하단바 처리
-        homeFragment = new HomeFragment();
+        //homeFragment = new HomeFragment();
         listFragment = new ListFragment();
         qnAFragment = new QnAFragment();
 
@@ -74,14 +77,15 @@ public class BookingViewActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent; //액티비티 콜을 위한 지역변수 선언
                 switch (item.getItemId()){
                     case R.id.homeItem:
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.container, homeFragment).commit();
+                        intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
                         return true;
 
                     case R.id.searchItem:
-                        Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                        intent = new Intent(getApplicationContext(), SearchActivity.class);
                         startActivity(intent);
                         return true;
 
@@ -102,22 +106,23 @@ public class BookingViewActivity extends AppCompatActivity {
             }//onNavigationItemSelected()
         });
 
-
-
-
     }//onCreat()
 
     // 프래그먼트 이동 메소드
     public void onFragmentChange(int state){
+        Intent intent; //액티비티 콜을 위한 지역변수 선언
         if (state == 1) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, homeFragment).commit();
+            intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
         } else if (state == 2) {
-            Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+            intent = new Intent(getApplicationContext(), SearchActivity.class);
             startActivity(intent);
         } else if (state == 3) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, listFragment).commit();
+        } else if (state == 4) {    //테스트 페이지(임시) state = 4
+            intent = new Intent(getApplicationContext(), ListActivity.class);
+            startActivity(intent);
         } else if (state == 7) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, qnAFragment).commit();

@@ -9,8 +9,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.example.reservjava_app.ListActivity;
+import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
@@ -21,7 +23,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MemberCancelActivity extends AppCompatActivity {
 
-    HomeFragment homeFragment;
+    //HomeFragment homeFragment;
     ListFragment listFragment;
     QnAFragment qnAFragment;
     Toolbar toolbar;
@@ -30,6 +32,9 @@ public class MemberCancelActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_cancel);
+
+        EditText addSearch = (EditText) findViewById(R.id.addrSearch);
+        addSearch.setText("activity_member_cancel.xml");
 
         //1. 액티비티 화면이 A, B, C 를 만들어야 한다면
         //  액티비티 화면을 이름만 주어서 만든다.
@@ -59,7 +64,7 @@ public class MemberCancelActivity extends AppCompatActivity {
         });
 
         //하단바 처리
-        homeFragment = new HomeFragment();
+        //homeFragment = new HomeFragment();
         listFragment = new ListFragment();
         qnAFragment = new QnAFragment();
 
@@ -75,8 +80,8 @@ public class MemberCancelActivity extends AppCompatActivity {
                 Intent intent; //액티비티 콜을 위한 지역변수 선언
                 switch (item.getItemId()){
                     case R.id.homeItem:
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.container, homeFragment).commit();
+                        intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
                         return true;
 
                     case R.id.searchItem:
@@ -107,14 +112,17 @@ public class MemberCancelActivity extends AppCompatActivity {
     public void onFragmentChange(int state){
         Intent intent; //액티비티 콜을 위한 지역변수 선언
         if (state == 1) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, homeFragment).commit();
+            intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
         } else if (state == 2) {
             intent = new Intent(getApplicationContext(), SearchActivity.class);
             startActivity(intent);
         } else if (state == 3) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, listFragment).commit();
+        } else if (state == 4) {    //테스트 페이지(임시) state = 4
+            intent = new Intent(getApplicationContext(), ListActivity.class);
+            startActivity(intent);
         } else if (state == 7) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, qnAFragment).commit();
