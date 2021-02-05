@@ -126,6 +126,7 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
       }
     });
 
+
     //일단 DB에서 전체 매장 정보를 불러오자
     //가까운곳 기준으로 검색이라던지 하는 건 나중에
 
@@ -136,6 +137,61 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     // 위치를 반환하는 구현체인 FusedLocationSource 생성
     mLocationSource =
         new FusedLocationSource(this, PERMISSIONS_REQUEST_CODE);
+
+
+    Handler handler = new Handler();
+    handler.postDelayed(new Runnable() {
+      @Override
+      public void run() {
+        // 가져온 정보중 주소를 lat, lng로 변환
+        List<Address> list = null;
+        Address addr = null;
+        markersPosition = new Vector<LatLng>();
+
+        for (int i = 0; i <= busiList.size()-1; i++) {
+          String str = busiList.get(i).getBusiness_addr();
+          if (str.equals("금당빌딩")){
+            Toast.makeText(gpsTracker, "ddd", Toast.LENGTH_SHORT).show();
+          }
+          Log.d(TAG, "onCreate: " + str);
+          // 임시 데이터 튕김방지
+          if(str.indexOf("business_addr") > -1) {
+
+          } else {
+            try {
+              list = geocoder.getFromLocationName(str, 99999);
+              addr = list.get(0);
+              lat = addr.getLatitude();
+              lng = addr.getLongitude();
+              markersPosition.add(new LatLng(lat, lng));
+              //Log.d(TAG, "onCreate: " + markersPosition);
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          }
+        }
+
+        naverMap.addOnCameraChangeListener(new NaverMap.OnCameraChangeListener() {
+          @Override
+          public void onCameraChange(int reason, boolean animated) {
+            freeActiveMarkers();
+            // 정의된 마커위치들중 가시거리 내에있는것들만 마커 생성
+            LatLng currentPosition = getCurrentPosition(mNaverMap);
+            for (LatLng markerPosition: markersPosition) {
+              if (!withinSightMarker(currentPosition, markerPosition))
+                continue;
+              Marker marker = new Marker();
+              marker.setPosition(markerPosition);
+              marker.setMap(mNaverMap);
+              activeMarkers.add(marker);
+            }
+          }
+        });
+
+      }
+    }, 1000);
+
+
 
     //지도 객체 띄우기
     FragmentManager fm = getSupportFragmentManager();
@@ -234,7 +290,7 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
 
   @UiThread
   @Override
-  public void onMapReady(@NonNull NaverMap naverMap) {
+  public void onMapReady(@NonNull final NaverMap naverMap) {
     Log.d( TAG, "onMapReady");
     double latitude=0.0, longitude=0.0;
 
@@ -290,43 +346,26 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     }
     Log.d(TAG, "onMapReady: " + latitude +" : " +longitude );
 
-    // 가져온 정보중 주소를 lat, lng로 변환
-    List<Address> list = null;
-    Address addr = null;
-    markersPosition = new Vector<LatLng>();
-/*    for (int i = 0; i <= busiList.size(); i++) {
-      String str = busiList.get(i).getBusiness_addr();
-      try {
-        list = geocoder.getFromLocationName(str, 99999);
-        addr = list.get(i);
-        lat = addr.getLatitude();
-        lng = addr.getLongitude();
-        markersPosition.add(new LatLng(lat, lng));
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }*/
+
+    // 지정된 위치로 이동
+    CameraUpdate cameraUpdate = CameraUpdate.scrollTo(new LatLng(latitude, longitude))
+        .animate(CameraAnimation.Easing, 1000);
+
+    mNaverMap.moveCamera(cameraUpdate);
 
     // 카메라 이동 되면 호출 되는 이벤트
-    naverMap.addOnCameraChangeListener(new NaverMap.OnCameraChangeListener() {
-      @Override
-      public void onCameraChange(int reason, boolean animated) {
-        freeActiveMarkers();
-        // 정의된 마커위치들중 가시거리 내에있는것들만 마커 생성
-        LatLng currentPosition = getCurrentPosition(mNaverMap);
-        for (LatLng markerPosition: markersPosition) {
-          if (!withinSightMarker(currentPosition, markerPosition))
-            continue;
-          Marker marker = new Marker();
-          marker.setPosition(markerPosition);
-          marker.setMap(mNaverMap);
-          activeMarkers.add(marker);
-        }
-      }
-    });
 
-/*    // 지도상에 마커 표시
-    Marker marker = new Marker();
+    Handler handler = new Handler();
+    handler.postDelayed(new Runnable() {
+      @Override
+      public void run() {
+
+      }
+    },2000);
+
+
+    // 지도상에 마커 표시
+/*    Marker marker = new Marker();
     marker.setWidth(100);
     marker.setHeight(100);
     marker.setIconPerspectiveEnabled(true);
@@ -378,13 +417,6 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
       }
     });
 
-
-
-    // 지정된 위치로 이동
-    CameraUpdate cameraUpdate = CameraUpdate.scrollTo(new LatLng(latitude, longitude))
-        .animate(CameraAnimation.Easing, 1000);
-
-    mNaverMap.moveCamera(cameraUpdate);
 
   }
 
