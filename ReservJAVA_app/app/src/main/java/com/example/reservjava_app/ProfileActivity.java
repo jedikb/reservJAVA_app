@@ -2,12 +2,14 @@ package com.example.reservjava_app;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 public class ProfileActivity extends Activity {
+
 
     Toolbar toolbar;
 
