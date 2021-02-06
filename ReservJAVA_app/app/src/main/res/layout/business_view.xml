@@ -84,11 +84,11 @@
                             android:id="@+id/search_bReview"
                             android:layout_width="wrap_content"
                             android:layout_height="25dp"
-                            android:layout_marginLeft="55dp"
+                            android:layout_marginLeft="100dp"
                             android:gravity="center_vertical"
-                            android:text="방문자 리뷰"
                             android:linksClickable="true"
-                            android:textColor="@color/black"/>
+                            android:text="방문자 리뷰"
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:id="@+id/search_bReviewNum"

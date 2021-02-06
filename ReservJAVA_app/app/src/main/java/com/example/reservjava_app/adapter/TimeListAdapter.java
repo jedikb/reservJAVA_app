@@ -62,15 +62,12 @@ public class TimeListAdapter extends
         this.listener = listener;
     }
 
-
-
     @Override
     public void onItemClick(StoreListAdapter.ViewHolder holderm, View view, int position) {
         if(listener != null){
             listener.onItemClick(holderm, view, position);
         }
     }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView business_name;
@@ -85,7 +82,7 @@ public class TimeListAdapter extends
             imageView = itemView.findViewById(R.id.imageView);
 
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+/*            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
@@ -93,7 +90,7 @@ public class TimeListAdapter extends
                         listener.onItemClick(ViewHolder.this, v, position);
                     }
                 }
-            });
+            });*/
         }
 
         public void onBind(BusinessDTO businessDTO){

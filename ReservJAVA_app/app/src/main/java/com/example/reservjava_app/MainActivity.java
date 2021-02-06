@@ -1,10 +1,11 @@
 package com.example.reservjava_app;
 
 import android.Manifest;
-import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -16,6 +17,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.reservjava_app.ATask.SearchBusiness;
+import com.example.reservjava_app.DTO.BusinessDTO;
+import com.example.reservjava_app.adapter.SearchBusinessAdapter;
 import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
 import com.example.reservjava_app.fragment.d_bongsun.QnAFragment;
@@ -26,12 +30,17 @@ import com.example.reservjava_app.ui.b_where.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
 public class MainActivity extends AppCompatActivity {
 
   HomeFragment homeFragment;
   ListFragment listFragment;
+  //통신해서 값을 넘겨주기 위해
+  SearchBusinessAdapter adapter;
+  ProgressDialog progressDialog;
 /*
   BookingViewFragment bookingViewFragment;
   MemberCancelFragment memberCancelFragment;
@@ -147,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
     bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
       @Override
       public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Intent intent; //액티비티 콜을 위한 지역변수 선언
+        final Intent intent; //액티비티 콜을 위한 지역변수 선언
         switch (item.getItemId()){
           case R.id.homeItem:
             getSupportFragmentManager().beginTransaction()
@@ -155,8 +164,22 @@ public class MainActivity extends AppCompatActivity {
             return true;
 
           case R.id.searchItem:
-            intent = new Intent(getApplicationContext(), SearchActivity.class);
-            startActivity(intent);
+            //일단 DB에서 전체 매장 정보를 불러오자
+            //가까운곳 기준으로 검색이라던지 하는 건 나중에
+            String searchText = "";
+            final ArrayList<BusinessDTO> busiList = new ArrayList<>();
+            SearchBusiness searchBusiness = new SearchBusiness(busiList, searchText, progressDialog, adapter);
+            searchBusiness.execute();
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+              @Override
+              public void run() {
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                intent.putExtra("busiList", busiList);
+                startActivity(intent);
+              }
+            }, 1000);
             return true;
 
           case R.id.listItem:

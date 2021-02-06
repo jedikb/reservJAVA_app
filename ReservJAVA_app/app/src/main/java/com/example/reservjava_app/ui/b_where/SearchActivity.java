@@ -2,20 +2,17 @@ package com.example.reservjava_app.ui.b_where;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,11 +29,9 @@ import com.example.reservjava_app.Common.GpsTracker;
 import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.adapter.PlaceInfo;
-import com.example.reservjava_app.adapter.SearchBusinessAdapter;
 import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
 import com.example.reservjava_app.ui.f_profile.ProfileActivity;
 import com.example.reservjava_app.ui.f_profile.ReviewActivity;
-import com.example.reservjava_app.ATask.SearchBusiness;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraAnimation;
 import com.naver.maps.map.CameraPosition;
@@ -48,8 +43,6 @@ import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.Marker;
-import com.naver.maps.map.overlay.Overlay;
-import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import java.io.IOException;
@@ -62,15 +55,12 @@ import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDT
 
 public class SearchActivity extends AppCompatActivity implements OnMapReadyCallback  {
 
-
   private static final String TAG = "main::SearchActivity";
   public static BusinessDTO busiSetItem = null;
 
   //지도에 매장들 띄우기 위한 변수들
   SearchBusiness searchBusiness;
   ArrayList<BusinessDTO> busiList = new ArrayList<>();
-  SearchBusinessAdapter adapter;
-  ProgressDialog progressDialog;
   Double lat = null;
   Double lng = null;
 
@@ -85,9 +75,9 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
   private String searchText=null, address;
   private InfoWindow infoWindow;
   // 마커 정보 저장시킬 변수들 선언
+  Address addr = null;
   private Vector<LatLng> markersPosition;
   private Vector<Marker> activeMarkers;
-
 
   // 일단 Searchview는 힘드니 EditText로 기능을 구현하고 나서
   //Searchview 사용을 고민해보자..
@@ -95,7 +85,6 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
   TextView tvAddr;
   int newAddr = 0;
   Geocoder geocoder = new Geocoder(this);
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -127,71 +116,30 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     });
 
 
-    //일단 DB에서 전체 매장 정보를 불러오자
-    //가까운곳 기준으로 검색이라던지 하는 건 나중에
-
-    searchText = "";
-    searchBusiness = new SearchBusiness(busiList, searchText, progressDialog, adapter);
-    searchBusiness.execute();
-
     // 위치를 반환하는 구현체인 FusedLocationSource 생성
     mLocationSource =
         new FusedLocationSource(this, PERMISSIONS_REQUEST_CODE);
 
+    //메인에서 보낸 매장 정보 받아오기
+    Intent intent = getIntent();
+    ArrayList<BusinessDTO> busiList = (ArrayList<BusinessDTO>) intent.getSerializableExtra("busiList");
+    markersPosition = new Vector<LatLng>();
 
-    Handler handler = new Handler();
-    handler.postDelayed(new Runnable() {
-      @Override
-      public void run() {
-        // 가져온 정보중 주소를 lat, lng로 변환
-        List<Address> list = null;
-        Address addr = null;
-        markersPosition = new Vector<LatLng>();
+    for (int i = 0; i <= busiList.size()-1; i++) {
+      // 임시 데이터 튕김방지
+      if(busiList.get(i).getBusiness_addr().indexOf("business_addr") > -1) {
 
-        for (int i = 0; i <= busiList.size()-1; i++) {
-          String str = busiList.get(i).getBusiness_addr();
-          if (str.equals("금당빌딩")){
-            Toast.makeText(gpsTracker, "ddd", Toast.LENGTH_SHORT).show();
-          }
-          Log.d(TAG, "onCreate: " + str);
-          // 임시 데이터 튕김방지
-          if(str.indexOf("business_addr") > -1) {
-
-          } else {
-            try {
-              list = geocoder.getFromLocationName(str, 99999);
-              addr = list.get(0);
-              lat = addr.getLatitude();
-              lng = addr.getLongitude();
-              markersPosition.add(new LatLng(lat, lng));
-              //Log.d(TAG, "onCreate: " + markersPosition);
-            } catch (Exception e) {
-              e.printStackTrace();
-            }
-          }
+      } else {
+        try {
+          lat = busiList.get(i).getBusiness_lat();
+          lng = busiList.get(i).getBusiness_lng();
+          //Log.d(TAG, "onCreate: " + lat + ", " + lng);
+          markersPosition.add(new LatLng(lat, lng));
+        } catch (Exception e) {
+          e.printStackTrace();
         }
-
-        naverMap.addOnCameraChangeListener(new NaverMap.OnCameraChangeListener() {
-          @Override
-          public void onCameraChange(int reason, boolean animated) {
-            freeActiveMarkers();
-            // 정의된 마커위치들중 가시거리 내에있는것들만 마커 생성
-            LatLng currentPosition = getCurrentPosition(mNaverMap);
-            for (LatLng markerPosition: markersPosition) {
-              if (!withinSightMarker(currentPosition, markerPosition))
-                continue;
-              Marker marker = new Marker();
-              marker.setPosition(markerPosition);
-              marker.setMap(mNaverMap);
-              activeMarkers.add(marker);
-            }
-          }
-        });
-
       }
-    }, 1000);
-
-
+    }
 
     //지도 객체 띄우기
     FragmentManager fm = getSupportFragmentManager();
@@ -283,8 +231,6 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
         }
       }
     });
-
-
   }
 
 
@@ -346,23 +292,34 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     }
     Log.d(TAG, "onMapReady: " + latitude +" : " +longitude );
 
-
     // 지정된 위치로 이동
     CameraUpdate cameraUpdate = CameraUpdate.scrollTo(new LatLng(latitude, longitude))
         .animate(CameraAnimation.Easing, 1000);
 
     mNaverMap.moveCamera(cameraUpdate);
 
-    // 카메라 이동 되면 호출 되는 이벤트
-
     Handler handler = new Handler();
     handler.postDelayed(new Runnable() {
       @Override
       public void run() {
-
+        naverMap.addOnCameraChangeListener(new NaverMap.OnCameraChangeListener() {
+          @Override
+          public void onCameraChange(int reason, boolean animated) {
+            freeActiveMarkers();
+            // 정의된 마커위치들중 가시거리 내에있는것들만 마커 생성
+            LatLng currentPosition = getCurrentPosition(mNaverMap);
+            for (LatLng markerPosition: markersPosition) {
+              if (!withinSightMarker(currentPosition, markerPosition))
+                continue;
+              Marker marker = new Marker();
+              marker.setPosition(markerPosition);
+              marker.setMap(mNaverMap);
+              activeMarkers.add(marker);
+            }
+          }
+        });
       }
-    },2000);
-
+    }, 500);
 
     // 지도상에 마커 표시
 /*    Marker marker = new Marker();

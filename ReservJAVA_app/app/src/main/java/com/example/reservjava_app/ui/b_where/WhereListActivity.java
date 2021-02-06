@@ -15,13 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.reservjava_app.ATask.SearchBusiness;
 import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.adapter.SearchBusinessAdapter;
-import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
@@ -42,35 +40,6 @@ public class WhereListActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_where_list);
 
-//-------------------------툴바
- /*   toolbar = findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
-
-    //햄버거
-    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24);
-    getSupportActionBar().setTitle("주소");
-
-    //측면메뉴
-    DrawerLayout drawer = findViewById(R.id.drawer_layout);
-    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-    drawer.addDrawerListener(toggle);
-    toggle.syncState();
-
-    //측면메뉴 버튼 작업
-    NavigationView navigationView = findViewById(R.id.navigation_drawer);
-    navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-      @Override
-      public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-
-        return false;
-      }
-    });
-*/
-//--------------------- 툴바 ::: 일단 안되네  나중에 하자
-
-
     Intent intent = getIntent();
 
     searchText = intent.getStringExtra("searchText");
@@ -85,10 +54,7 @@ public class WhereListActivity extends AppCompatActivity {
         RecyclerView.VERTICAL, false);
     recyclerView.setLayoutManager(layoutManager);
 
-
     // 리사이클러뷰 새로고침
-
-
       final ProgressDialog progressDialog = new ProgressDialog(this);
       progressDialog.setMessage("Carimento dati...");
       progressDialog.show();
@@ -104,21 +70,21 @@ public class WhereListActivity extends AppCompatActivity {
 
     for (BusinessDTO dto : busiList){
       Log.d(TAG, "onCreate: " + dto.getBusiness_name());
-      adapter.addItem(new BusinessDTO(dto.getBusiness_name(), dto.getBusiness_addr(), dto.getBusiness_star_avg() ));
+      adapter.addItem(new BusinessDTO(dto.getBusiness_name(), dto.getBusiness_addr(), dto.getBusiness_star_avg(), dto.getBusiness_lat(), dto.getBusiness_lng() ));
     }
 
     recyclerView.setAdapter(adapter);
     progressDialog.dismiss();
 
-    addrSearch = findViewById(R.id.addrSearch);
     // 상단 검색버튼
+    addrSearch = findViewById(R.id.addrSearch);
     findViewById(R.id.searchBtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         searchText = "";
         searchText = addrSearch.getText().toString();
         Toast.makeText(WhereListActivity.this, searchText + "를 검색합니다", Toast.LENGTH_SHORT).show();
-        //Log.d(TAG, "onClick searchText : " + searchText);
+        Log.d(TAG, "onClick searchText : " + searchText);
 
         adapter.removeAllItem();
 
@@ -133,7 +99,7 @@ public class WhereListActivity extends AppCompatActivity {
 
         for (BusinessDTO dto : busiList){
           Log.d(TAG, "onCreate: " + dto.getBusiness_name());
-          adapter.addItem(new BusinessDTO(dto.getBusiness_name(), dto.getBusiness_addr(), dto.getBusiness_star_avg()));
+          adapter.addItem(new BusinessDTO(dto.getBusiness_name(), dto.getBusiness_addr(), dto.getBusiness_star_avg(), dto.getBusiness_lat(), dto.getBusiness_lng()));
         }
         recyclerView.setAdapter(adapter);
       }

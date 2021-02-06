@@ -14,13 +14,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.reservation.Store;
-import com.example.reservjava_app.ui.b_where.WhereListActivity;
 
 import java.util.ArrayList;
+
 import static com.example.reservjava_app.ui.b_where.SearchActivity.busiSetItem;
 
 public class SearchBusinessAdapter extends
@@ -110,6 +109,7 @@ public class SearchBusinessAdapter extends
       super(itemView);
 
       parentLayout = itemView.findViewById(R.id.parentLay);
+      // logo는 category 아이콘을 넣을 예정
       search_bLogo = itemView.findViewById(R.id.search_bLogo);
       search_bName = itemView.findViewById(R.id.search_bName);
       search_bAddr = itemView.findViewById(R.id.search_bAddr);

@@ -136,7 +136,7 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
     String business_name = "";
     int business_member_code= 0, business_category_parent_code =0, business_category_code =0;
     String business_addr= "", business_tel="", business_image = "", business_info="", business_hashtag="";
-    double business_star_avg = 0;
+    double business_star_avg = 0, business_lat = 0, business_lng = 0;
 
     reader.beginObject();
     while (reader.hasNext()){
@@ -163,6 +163,10 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
         business_star_avg = reader.nextDouble();
       } else if(readStr.equals("business_hashtag")) {
         business_hashtag = reader.nextString();
+      } else if(readStr.equals("business_lat")) {
+        business_lat = reader.nextDouble();
+      } else if(readStr.equals("business_lng")) {
+        business_lng = reader.nextDouble();
       } else {
         reader.skipValue();
       }
@@ -172,7 +176,7 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
       reader.endObject();
       //Log.d(TAG, "SearchBusiness:" + business_name + ", " + business_image +", " + business_star_avg);
       return new BusinessDTO(business_code, business_name, business_member_code, business_category_parent_code, business_category_code,
-          business_addr, business_tel, business_image, business_info, business_star_avg, business_hashtag);
+          business_addr, business_tel, business_image, business_info, business_star_avg, business_hashtag, business_lat, business_lng);
   }
 
 }
