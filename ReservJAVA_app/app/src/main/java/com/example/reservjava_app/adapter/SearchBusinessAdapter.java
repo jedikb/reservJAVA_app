@@ -40,8 +40,6 @@ public class SearchBusinessAdapter extends
   @Override
   public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
     LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-    //String name1 = busiList.get(1).getBusiness_name();
-    //Log.d(TAG, "onCreateViewHolder: " + name1);
     View itemView = inflater.inflate(R.layout.business_view, parent, false);
 
     return  new ItemViewHolder(itemView);
@@ -58,7 +56,6 @@ public class SearchBusinessAdapter extends
     holder.parentLayout.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        //Log.d(TAG, "onClick: " + position);
 
         busiSetItem = busiList.get(position);
 
@@ -78,8 +75,6 @@ public class SearchBusinessAdapter extends
   //내용 추가하기
   public void addItem(BusinessDTO businessDTO){
     busiList.add(businessDTO);
-  }
-  public void addItem(String toString, String toString1, double business_star_avg) {
   }
 
   //리사이클러뷰 내용 모두 지우기

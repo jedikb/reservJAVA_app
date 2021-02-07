@@ -32,20 +32,20 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
 
   //검색한 리스트를 담을 변수
   ArrayList<BusinessDTO> busiList;
-  SearchBusinessAdapter Adapter;
+  SearchBusinessAdapter adapter;
   ProgressDialog progressDialog;
   String searchText;
 
   public SearchBusiness(ArrayList<BusinessDTO> busiList, String searchText, ProgressDialog progressDialog, SearchBusinessAdapter adapter) {
     this.busiList = busiList;
+    this.adapter = adapter;
     this.searchText = searchText;
     this.progressDialog = progressDialog;
-    this.Adapter = adapter;
   }
 
-  public SearchBusiness(String searchText) {
+/*  public SearchBusiness(String searchText) {
     this.searchText = searchText;
-  }
+  }*/
 
   HttpClient httpClient;
   HttpPost httpPost;
@@ -114,8 +114,7 @@ public class SearchBusiness extends AsyncTask<Void, Void, Void> {
 
     Log.d("SearchBusiness", "SearchBusiness Select Complete!!!");
 
-    //여기부터 다시 작업하자
-    //searchBusinessAdapter.notifyDataSetChanged();
+    //adapter.notifyDataSetChanged();
   }
 
   public void readJsonStream(InputStream inputStream) throws IOException {

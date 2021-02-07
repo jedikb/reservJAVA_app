@@ -4,6 +4,8 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -18,6 +20,7 @@ import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.reservjava_app.ATask.SearchBusiness;
+import com.example.reservjava_app.Common.GpsTracker;
 import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.adapter.SearchBusinessAdapter;
 import com.example.reservjava_app.fragment.HomeFragment;
@@ -29,8 +32,12 @@ import com.example.reservjava_app.ui.a_login_signup.QnAMainActivity;
 import com.example.reservjava_app.ui.b_where.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.naver.maps.geometry.LatLng;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
@@ -49,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
   QnAFragment qnAFragment;
   Toolbar toolbar;
   int member_kind=0;
+  public static String currentAddress = null;
+  public static LatLng curAddr = null;
+  public static ArrayList<BusinessDTO> busiList;
+  double latitude = 0, longitude= 0;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -167,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
             //일단 DB에서 전체 매장 정보를 불러오자
             //가까운곳 기준으로 검색이라던지 하는 건 나중에
             String searchText = "";
-            final ArrayList<BusinessDTO> busiList = new ArrayList<>();
+            busiList = new ArrayList<>();
             SearchBusiness searchBusiness = new SearchBusiness(busiList, searchText, progressDialog, adapter);
             searchBusiness.execute();
 
@@ -179,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("busiList", busiList);
                 startActivity(intent);
               }
-            }, 1000);
+            }, 500);
             return true;
 
           case R.id.listItem:
@@ -198,6 +209,14 @@ public class MainActivity extends AppCompatActivity {
       }//onNavigationItemSelected()
     });
 
+    GpsTracker gpsTracker;
+    gpsTracker = new GpsTracker(this);
+
+    latitude = gpsTracker.getLatitude();
+    longitude = gpsTracker.getLongitude();
+
+    curAddr = new LatLng(latitude, longitude);
+    currentAddress = getCurrentAddress(latitude, longitude);
 
   }//onCreat()
 
@@ -267,7 +286,31 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
+  //현재 주소 불러오기(메인 화면 로딩할 때 미리 작업해놓는게 나은듯
   public String getCurrentAddress(double latitude, double longitude) {
-    return "";
+    Geocoder geocoder = new Geocoder(this);
+    //지오코더... GPS를 주소로 변환
+    geocoder = new Geocoder(this, Locale.getDefault());
+    List<Address> addresses;
+
+    try {
+      addresses = geocoder.getFromLocation(latitude, longitude, 9);
+    } catch (IOException ioException) {
+      //네트워크 문제
+      Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
+      return "지오코더 서비스 사용불가";
+    } catch (IllegalArgumentException illegalArgumentException) {
+      Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
+      return "잘못된 GPS 좌표";
+    }
+
+    if (addresses == null || addresses.size() == 0) {
+      Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
+      return "주소 미발견";
+    }
+
+    Address address = addresses.get(0);
+    return address.getAddressLine(0);
   }
+
 }

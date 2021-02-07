@@ -54,8 +54,6 @@ public class ModProfileActivity extends AppCompatActivity {
   java.text.SimpleDateFormat tmpDateFormat;
 
   // 여기까지 사진 관련
-
-
   String member_id, member_name, member_pw, member_pw2, member_nick, member_tel, member_email;
 
 
