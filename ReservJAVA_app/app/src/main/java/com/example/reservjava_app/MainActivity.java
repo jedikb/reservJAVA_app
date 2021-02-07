@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -58,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
   int member_kind=0;
   public static String currentAddress = null;
   public static LatLng curAddr = null;
-  public static ArrayList<BusinessDTO> busiList;
-  double latitude = 0, longitude= 0;
+  public static ArrayList<BusinessDTO> busiList= null;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -146,7 +145,28 @@ public class MainActivity extends AppCompatActivity {
 
     });
 
+    //(튕김 방지 및 속도 개선을 위해) 로딩 시 매장 정보 및 현재 위치 미리 불러오기
+    //1. 전체 매장 정보를 불러오기
+    String searchText = "";
+    busiList = new ArrayList<>();
+    SearchBusiness searchBusiness = new SearchBusiness(busiList, searchText, progressDialog, adapter);
+    searchBusiness.execute();
 
+    //2. 현재 위치 불러오기
+    GpsTracker gpsTracker;
+    gpsTracker = new GpsTracker(this);
+
+    double latitude = 0, longitude= 0;
+    latitude = gpsTracker.getLatitude();
+    longitude = gpsTracker.getLongitude();
+
+    curAddr = new LatLng(latitude, longitude);
+    currentAddress = getCurrentAddress(latitude, longitude);
+
+    //3. 지도 미리 띄우기? 이것도 도움이 되려나?
+    //4. 미리 불러오는 건 아니지만,, 메인 액티비티는 계속 띄워 놓는게 속도에 도움이 될까?
+    //아니면 지금 미리 불러오는 자료들을 로딩하는 액티비티에 넣는 게 맞을까?
+    //주소 검색창도 로딩?? 너무 많아 지는 것 아닌가?
 
     //NavigationBar Setting
     homeFragment = new HomeFragment();
@@ -167,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
     bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
       @Override
       public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        final Intent intent; //액티비티 콜을 위한 지역변수 선언
+        Intent intent; //액티비티 콜을 위한 지역변수 선언
         switch (item.getItemId()){
           case R.id.homeItem:
             getSupportFragmentManager().beginTransaction()
@@ -175,22 +195,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
 
           case R.id.searchItem:
-            //일단 DB에서 전체 매장 정보를 불러오자
-            //가까운곳 기준으로 검색이라던지 하는 건 나중에
-            String searchText = "";
-            busiList = new ArrayList<>();
-            SearchBusiness searchBusiness = new SearchBusiness(busiList, searchText, progressDialog, adapter);
-            searchBusiness.execute();
-
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-              @Override
-              public void run() {
-                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                intent = new Intent(getApplicationContext(), SearchActivity.class);
                 intent.putExtra("busiList", busiList);
                 startActivity(intent);
-              }
-            }, 500);
             return true;
 
           case R.id.listItem:
@@ -208,15 +215,6 @@ public class MainActivity extends AppCompatActivity {
         return false;
       }//onNavigationItemSelected()
     });
-
-    GpsTracker gpsTracker;
-    gpsTracker = new GpsTracker(this);
-
-    latitude = gpsTracker.getLatitude();
-    longitude = gpsTracker.getLongitude();
-
-    curAddr = new LatLng(latitude, longitude);
-    currentAddress = getCurrentAddress(latitude, longitude);
 
   }//onCreat()
 
