@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
 import static com.example.reservjava_app.Common.CommonMethod.pServer;
+import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
 public class MyReview extends AsyncTask<Void, Void, Void> {
 
@@ -56,6 +57,8 @@ public class MyReview extends AsyncTask<Void, Void, Void> {
   @Override
   protected Void doInBackground(Void... voids) {
 
+    int member_code = loginDTO.getMember_code();
+
     try {
       // MultipartEntityBuild 생성
       MultipartEntityBuilder builder = MultipartEntityBuilder.create();
@@ -63,7 +66,7 @@ public class MyReview extends AsyncTask<Void, Void, Void> {
       builder.setCharset(Charset.forName("UTF-8"));
 
       // 문자열 및 데이터 추가
-      //builder.addTextBody("searchText", searchText, ContentType.create("Multipart/related", "UTF-8"));
+      builder.addTextBody("member_code", String.valueOf(member_code), ContentType.create("Multipart/related", "UTF-8"));
       //Log.d(TAG, "doInBackground: searchText    " + searchText);
       String postURL = ipConfig + pServer + "/anMyReview";
 

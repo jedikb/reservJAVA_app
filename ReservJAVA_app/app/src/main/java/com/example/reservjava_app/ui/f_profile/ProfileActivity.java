@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.reservjava_app.ATask.MyReview;
-import com.example.reservjava_app.ATask.ReviewSelect;
 import com.example.reservjava_app.DTO.ReviewDTO;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.adapter.MyReviewAdapter;
@@ -56,6 +54,11 @@ public class ProfileActivity extends AppCompatActivity {
     //선택된 이미지 보여주기(움직이는 그림도 됨)
     Glide.with(this).load(member_image)
         .error(R.drawable.user).into(faceImg);
+
+    // 리뷰 정보 조회
+    reviewDTOS = new ArrayList<>();
+    MyReview myReview = new MyReview(reviewDTOS, progressDialog, adapter);
+    myReview.execute();
 
     //리사클러 뷰 시작
     reviewDTOS = new ArrayList<>();
