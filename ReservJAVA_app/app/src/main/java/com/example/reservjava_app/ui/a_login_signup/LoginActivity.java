@@ -54,13 +54,10 @@ public class LoginActivity extends AppCompatActivity {
     drawer.addDrawerListener(toggle);
     toggle.syncState();
 
-
-
-
-
     //(임시: 작업하는 동안 아이디, 비번 치는게 귀찮음)
     editID.setText("aaa");
     editPW.setText("aaa");
+
     //아이디 입력하는 곳에 포커스 주기
     editID.requestFocus();
     //자동으로 키보드 띄우기(귀찮으니 주석처리;;)
@@ -96,11 +93,6 @@ public class LoginActivity extends AppCompatActivity {
           Log.d("main:login", loginDTO.getMember_name() + "님 로그인 되었습니다 !!!");
 
           // 로그인 정보에 값이 있으면 로그인이 되었다는 것이므로 화면을 종료시킨다
-          Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-          startActivity(intent);
-          intent = new Intent(getApplicationContext(), ModProfileActivity.class);
-          startActivity(intent);
-
           finish();
 
         }else {

@@ -48,9 +48,11 @@
                 android:layout_gravity="center"
                 android:background="@drawable/solid_black"
                 android:gravity="center"
+                android:singleLine="true"
                 android:hint="찾으시는 매장 이름을 입력하세요"
                 android:textColor="#000"
                 android:textSize="18sp" />
+            <!--android:singleLine="true" 이걸 넣으면 로딩 시 자동으로 키보드가 해제됨-->
 
             <ImageView
                 android:id="@+id/searchBtn"
