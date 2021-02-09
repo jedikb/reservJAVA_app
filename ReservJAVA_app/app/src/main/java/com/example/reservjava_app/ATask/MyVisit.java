@@ -7,7 +7,6 @@ import android.util.JsonReader;
 import android.util.Log;
 
 import com.example.reservjava_app.DTO.ReviewDTO;
-import com.example.reservjava_app.adapter.MyReviewAdapter;
 import com.example.reservjava_app.adapter.MyVisitAdapter;
 
 import org.apache.http.HttpEntity;
@@ -22,12 +21,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.sql.Date;
 import java.util.ArrayList;
 
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
 import static com.example.reservjava_app.Common.CommonMethod.pServer;
-import static com.example.reservjava_app.MainActivity.busiList;
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
 public class MyVisit extends AsyncTask<Void, Void, Void> {
@@ -105,9 +102,9 @@ public class MyVisit extends AsyncTask<Void, Void, Void> {
   protected void onPostExecute(Void aVoid) {
     super.onPostExecute(aVoid);
 
-    if(progressDialog != null){
+/*    if(progressDialog != null){
       progressDialog.dismiss();
-    }
+    }*/
 
     Log.d("MyVisit", "MyVisit Select Complete!!!");
 

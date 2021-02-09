@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
   private static final String TAG = "main:MainActivity";
   HomeFragment homeFragment;
   ListFragment listFragment;
+  double latitude = 0, longitude= 0;
   //통신해서 값을 넘겨주기 위해
   SearchBusinessAdapter adapter;
   ProgressDialog progressDialog;
@@ -159,17 +160,9 @@ public class MainActivity extends AppCompatActivity {
     handler.postDelayed(new Runnable() {
       @Override
       public void run() {
-        GpsTracker gpsTracker;
-        gpsTracker = new GpsTracker(MainActivity.this);
-    
-        double latitude = 0, longitude= 0;
-        latitude = gpsTracker.getLatitude();
-        longitude = gpsTracker.getLongitude();
-        
-        curAddr = new LatLng(latitude, longitude);
-        currentAddress = getCurrentAddress(latitude, longitude);
+        setCurAddress(latitude, longitude);
       }
-    },500);
+    }, 1200);
 
     //3. 지도 미리 띄우기? 이것도 도움이 되려나?
     //4. 미리 불러오는 건 아니지만,, 메인 액티비티는 계속 띄워 놓는게 속도에 도움이 될까?
@@ -225,6 +218,17 @@ public class MainActivity extends AppCompatActivity {
     });
 
   }//onCreat()
+
+  public void setCurAddress(Double latitude, Double longitude) {
+    GpsTracker gpsTracker;
+    gpsTracker = new GpsTracker(this);
+
+    latitude = gpsTracker.getLatitude();
+    longitude = gpsTracker.getLongitude();
+
+    curAddr = new LatLng(latitude, longitude);
+    currentAddress = getCurrentAddress(latitude, longitude);
+  }
 
   // 주요 프래그먼트로 이동
   public void onFragmentChange(int state){

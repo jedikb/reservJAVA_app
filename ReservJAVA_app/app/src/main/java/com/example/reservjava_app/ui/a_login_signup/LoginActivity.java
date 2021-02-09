@@ -1,5 +1,6 @@
 package com.example.reservjava_app.ui.a_login_signup;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,12 +18,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.reservjava_app.ATask.LoginSelect;
+import com.example.reservjava_app.ATask.MyReview;
+import com.example.reservjava_app.ATask.MyVisit;
 import com.example.reservjava_app.DTO.MemberDTO;
-import com.example.reservjava_app.MainActivity;
+import com.example.reservjava_app.DTO.ReviewDTO;
+import com.example.reservjava_app.ProfileActivity;
 import com.example.reservjava_app.R;
-import com.example.reservjava_app.ui.f_profile.ModProfileActivity;
+import com.example.reservjava_app.adapter.MyReviewAdapter;
+import com.example.reservjava_app.adapter.MyVisitAdapter;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
@@ -31,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
   // 어느곳에서나 접근할 수 있게 한다
   // 적용할 곳에서 import만 해주면 된다.(다시 선언하면 안 됨)
   public static MemberDTO loginDTO = null;
+  public static ArrayList<ReviewDTO> reviewDTOS = null;
+  public static ArrayList<ReviewDTO> visitDTOS = null;
 
   Button signupBtn, loginBtn;
   EditText editID, editPW;
@@ -151,6 +159,38 @@ public class LoginActivity extends AppCompatActivity {
           Log.d("main:login", loginDTO.getMember_name() + "님 로그인 되었습니다 !!!");
 
           // 로그인 정보에 값이 있으면 로그인이 되었다는 것이므로 화면을 종료시킨다
+          // 로그인이 되면 필요한 정보를 불러 온다.
+
+          // 리뷰 정보 조회
+          ArrayList<ReviewDTO> reviewDTOS, visitDTOS;
+          MyReviewAdapter rAdapter;
+          MyVisitAdapter vAdapter;
+          ProgressDialog progressDialog;
+          visitDTOS = new ArrayList<>();
+          reviewDTOS = new ArrayList<>();
+          vAdapter = new MyVisitAdapter(LoginActivity.this, visitDTOS);
+          rAdapter = new MyReviewAdapter(LoginActivity.this, visitDTOS);
+          progressDialog = new ProgressDialog(LoginActivity.this);
+          progressDialog.setTitle("데이터 업로딩");
+          progressDialog.setMessage("데이터 업로딩 중입니다\n" + "잠시만 기다려주세요 ...");
+          progressDialog.setCanceledOnTouchOutside(false);
+          progressDialog.show();
+
+          MyVisit myVisit = new MyVisit(visitDTOS, progressDialog, vAdapter);
+          myVisit.execute();
+          MyReview myReview = new MyReview(reviewDTOS, progressDialog, rAdapter);
+          myReview.execute();
+
+          if(progressDialog != null){
+            progressDialog.dismiss();
+          }
+
+          Log.d(TAG, "onClick: visit  " + visitDTOS.size());
+          Log.d(TAG, "onClick: visit  " + reviewDTOS.size());
+          Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+          intent.putExtra("visitDTOS", visitDTOS);
+          intent.putExtra("reviewDTOS", reviewDTOS);
+          //startActivity(intent);
           finish();
 
         }else {
