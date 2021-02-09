@@ -22,7 +22,7 @@ import java.nio.charset.Charset;
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
 import static com.example.reservjava_app.Common.CommonMethod.pServer;
 
-public class MemberCancel extends AsyncTask<Void, Void, Void> {
+public class MemberCancel extends AsyncTask<Void, Void, String> {
 
     private static final String TAG = "main:MemberCancel";
 
@@ -32,12 +32,12 @@ public class MemberCancel extends AsyncTask<Void, Void, Void> {
     }
 
     // 데이터베이스에 삽입결과 0보다크면 삽입성공, 같거나 작으면 실패
-    String state = "";
+    String       state = "";
 
-    HttpClient httpClient;
-    HttpPost httpPost;
+    HttpClient   httpClient;
+    HttpPost     httpPost;
     HttpResponse httpResponse;
-    HttpEntity httpEntity;
+    HttpEntity   httpEntity;
 
     /*@Override  // 없어도 됨
     protected void onPreExecute() {
@@ -45,7 +45,7 @@ public class MemberCancel extends AsyncTask<Void, Void, Void> {
     }*/
 
     @Override
-    protected Void doInBackground(Void... voids) {
+    protected String doInBackground(Void... voids) {
 
         try {
             // MultipartEntityBuild 생성
@@ -96,17 +96,17 @@ public class MemberCancel extends AsyncTask<Void, Void, Void> {
             Log.d(TAG, "doInBackground: " + e.getMessage() );
             e.printStackTrace();
         }finally {
-            if(httpEntity != null) httpEntity = null;
-            if(httpResponse != null) httpResponse = null;
-            if(httpPost != null) httpPost = null;
-            if(httpClient != null) httpClient = null;
+            if(httpEntity   != null) httpEntity     = null;
+            if(httpResponse != null) httpResponse   = null;
+            if(httpPost     != null) httpPost       = null;
+            if(httpClient   != null) httpClient     = null;
         }
 
-        return null;
+        return state;
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
+    protected void onPostExecute(String aVoid) {
 
     }
 
@@ -131,7 +131,8 @@ public class MemberCancel extends AsyncTask<Void, Void, Void> {
             }
         }
         reader.endObject();
-        Log.d("main:loginselect : ", id + "," + name + "," + phonenumber + "," + address);
+        Log.d(TAG, "readMessage: ");
+        //Log.d("main:loginselect : ", id + "," + name + "," + phonenumber + "," + address);
         return ;//new MemberDTO(id, name, phonenumber, address);
 
     }

@@ -12,48 +12,55 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
         android:layout_marginTop="40dp"
+        android:fontFamily="@font/maplefont"
         android:text="안녕하세요"
-        android:textSize="24sp"
+        android:textColor="#03A9F4"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="14dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:fontFamily="@font/maplefont"
         android:text="오늘의 예약회원님"
-        android:textSize="24sp"
+        android:textColor="#03A9F4"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.109"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView19"
-        android:layout_marginLeft="14dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
     <TextView
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="아이디 또는 비밀번호를 잊으셨나요?"
-        android:textSize="24sp"
+        android:layout_marginLeft="14dp"
+        android:fontFamily="@font/maplefont"
+        android:text="ID 또는 PW를 잊으셨나요?"
+        android:textColor="#FFA2A2"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20"
-        android:layout_marginLeft="14dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <Button
         android:id="@+id/IdSearchBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
+        android:fontFamily="@font/font"
         android:insetLeft="14dp"
         android:insetRight="14dp"
         android:text="아이디 찾기"
-        android:textSize="24sp"
-        app:backgroundTint="#CC64DD"
+        android:textSize="30sp"
+        app:backgroundTint="#03A9F4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -62,11 +69,12 @@
         android:id="@+id/PassSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/font"
         android:insetLeft="14dp"
         android:insetRight="14dp"
         android:text="비밀번호 찾기"
-        android:textSize="24sp"
-        app:backgroundTint="#CC64DD"
+        android:textSize="30sp"
+        app:backgroundTint="#03A9F4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
