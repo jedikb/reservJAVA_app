@@ -19,17 +19,18 @@ import com.example.reservjava_app.R;
 
 import java.util.ArrayList;
 
+import static com.example.reservjava_app.MainActivity.busiList;
 import static com.example.reservjava_app.ui.f_profile.ProfileActivity.reviewSetItem;
 
-public class MyReviewAdapter extends
-    RecyclerView.Adapter<MyReviewAdapter.ItemViewHolder> {
+public class MyVisitAdapter extends
+    RecyclerView.Adapter<MyVisitAdapter.ItemViewHolder> {
   private static final String TAG = "main:MyReviewAdapter";
 
   Context mContext;
   ArrayList<ReviewDTO> reviewDTOS;
   LinearLayout parentLayout;
 
-  public MyReviewAdapter(Context mContext, ArrayList<ReviewDTO> reviewDTOS) {
+  public MyVisitAdapter(Context mContext, ArrayList<ReviewDTO> reviewDTOS) {
     this.mContext = mContext;
     this.reviewDTOS = reviewDTOS;
   }
@@ -39,14 +40,14 @@ public class MyReviewAdapter extends
   @Override
   public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-    View itemView = inflater.inflate(R.layout.review_view, parent, false);
+    View itemView = inflater.inflate(R.layout.visit_view, parent, false);
 
     return new ItemViewHolder(itemView);
   }
 
   //데이터 연결
   @Override
-  public void onBindViewHolder(@NonNull MyReviewAdapter.ItemViewHolder holder, final int position) {
+  public void onBindViewHolder(@NonNull MyVisitAdapter.ItemViewHolder holder, final int position) {
     Log.d(TAG, "onBindViewHolder: " + position);
 
     final ReviewDTO reviewDTO = reviewDTOS.get(position);
@@ -87,29 +88,29 @@ public class MyReviewAdapter extends
   public static class  ItemViewHolder extends  RecyclerView.ViewHolder {
 
     public LinearLayout parentLayout;
-    public ImageView review_category;
-    public TextView review_name;
-    public RatingBar review_ratingBar;
-    public TextView review_contents;
+    public ImageView visit_category;
+    public TextView visit_name;
+    public TextView visit_date;
+    public TextView visit_addr;
 
     public ItemViewHolder(@NonNull View itemView) {
       super(itemView);
 
       parentLayout = itemView.findViewById(R.id.parentLay);
       //카테고리 로고 넣을 곳
-      review_category = itemView.findViewById(R.id.review_category);
-      review_name = itemView.findViewById(R.id.review_name);
-      review_ratingBar = itemView.findViewById(R.id.review_ratingBar);
-      review_contents = itemView.findViewById(R.id.review_contents);
+      visit_category = itemView.findViewById(R.id.visit_category);
+      visit_name = itemView.findViewById(R.id.visit_name);
+      visit_date = itemView.findViewById(R.id.visit_date);
+      visit_addr = itemView.findViewById(R.id.visit_addr);
+
     }
 
     public void setItem(ReviewDTO reviewDTO) {
-
       //임시
-      review_category.setImageResource(R.drawable.fitness);
-      review_name.setText(reviewDTO.getBusiness_name());
-      review_ratingBar.setRating(reviewDTO.getBooking_appraisal_star());
-      review_contents.setText(reviewDTO.getBooking_appraisal());
+      visit_category.setImageResource(R.drawable.fitness);
+      visit_name.setText(reviewDTO.getBusiness_name());
+      visit_date.setText(reviewDTO.getBooking_date_reservation());
+      visit_addr.setText(reviewDTO.getBusiness_addr());
     }
   }
 }
