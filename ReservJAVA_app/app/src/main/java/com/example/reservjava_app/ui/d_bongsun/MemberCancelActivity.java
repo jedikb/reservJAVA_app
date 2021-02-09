@@ -37,6 +37,8 @@ public class MemberCancelActivity extends AppCompatActivity {
 
     String state;
 
+    String id;
+
     private static String TAG = "main:MemberCancelActivity";
 
     @Override
@@ -161,16 +163,16 @@ public class MemberCancelActivity extends AppCompatActivity {
             }//onNavigationItemSelected()
         });
 
+        // id = ((EditText) findViewById(R.id.addrSearch)).getText().toString();
+        id = "200";//임시 테스트용
         //회원탈퇴처리
         findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String id = ((EditText) findViewById(R.id.addrSearch)).getText().toString();
-                id="200";
                 MemberCancel memberCancel = new MemberCancel(id);
                 try {
                     state = memberCancel.execute().get();
-                    Log.d(TAG, "submitBtn:onClick: ");
+                    Log.d(TAG, "submitBtn:onClick: memberCancel.execute().get() 실행함.");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }//try//catch
