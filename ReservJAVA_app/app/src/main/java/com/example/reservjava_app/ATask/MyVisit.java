@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.reservjava_app.DTO.ReviewDTO;
 import com.example.reservjava_app.adapter.MyReviewAdapter;
+import com.example.reservjava_app.adapter.MyVisitAdapter;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -29,17 +30,18 @@ import static com.example.reservjava_app.Common.CommonMethod.pServer;
 import static com.example.reservjava_app.MainActivity.busiList;
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
-public class MyReview extends AsyncTask<Void, Void, Void> {
+public class MyVisit extends AsyncTask<Void, Void, Void> {
 
-  private static final String TAG = "main:MyReview";
+  private static final String TAG = "main:MyVisit";
 
   //검색한 리스트를 담을 변수
-  ArrayList<ReviewDTO> reviewDTOS;
+  //ReviewDTO와 거의 비슷한 자료를 불러오기 때문에 같은 것을 쓴다
+  ArrayList<ReviewDTO> visitDTOS;
   ProgressDialog progressDialog;
-  MyReviewAdapter adapter;
+  MyVisitAdapter adapter;
 
-  public MyReview(ArrayList<ReviewDTO> reviewDTOS, ProgressDialog progressDialog, MyReviewAdapter adapter) {
-    this.reviewDTOS = reviewDTOS;
+  public MyVisit(ArrayList<ReviewDTO> visitDTOS, ProgressDialog progressDialog, MyVisitAdapter adapter) {
+    this.visitDTOS = visitDTOS;
     this.adapter = adapter;
     this.progressDialog = progressDialog;
   }
@@ -80,7 +82,7 @@ public class MyReview extends AsyncTask<Void, Void, Void> {
 
       readJsonStream(inputStream);
     } catch (Exception e) {
-      Log.d(TAG, "MyReview: "+ e.getMessage());
+      Log.d(TAG, "MyVisit: "+ e.getMessage());
       e.printStackTrace();
     } finally {
       if(httpEntity != null){
@@ -107,7 +109,7 @@ public class MyReview extends AsyncTask<Void, Void, Void> {
       progressDialog.dismiss();
     }
 
-    Log.d("MyReview", "MyReview Select Complete!!!");
+    Log.d("MyVisit", "MyVisit Select Complete!!!");
 
     adapter.notifyDataSetChanged();
   }
@@ -117,7 +119,7 @@ public class MyReview extends AsyncTask<Void, Void, Void> {
     try {
       reader.beginArray();
       while (reader.hasNext()) {
-        reviewDTOS.add(readMessage(reader));
+        visitDTOS.add(readMessage(reader));
       }
       reader.endArray();
     } finally {

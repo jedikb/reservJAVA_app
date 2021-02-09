@@ -15,6 +15,9 @@ import com.example.reservjava_app.DTO.ReviewDTO;
 
 import java.util.ArrayList;
 
+
+///혹시 이거 쓰는 사람 있음?
+///내가 잠결에 만든건가;;;    
 public class VisitAdapter extends
     RecyclerView.Adapter<VisitAdapter.ViewHolder> {
 
@@ -55,9 +58,9 @@ public class VisitAdapter extends
     public ViewHolder(@NonNull View itemView) {
       super(itemView);
       parentLay = itemView.findViewById(R.id.parentLay);
-      name = itemView.findViewById(R.id.name);
-      date = itemView.findViewById(R.id.date);
-      order = itemView.findViewById(R.id.order);
+      name = itemView.findViewById(R.id.visit_name);
+      date = itemView.findViewById(R.id.visit_date);
+      order = itemView.findViewById(R.id.visit_addr);
     }
     public void setItem(BusinessDTO dto, ReviewDTO reviewDTO){
       name.setText(dto.getBusiness_name());
