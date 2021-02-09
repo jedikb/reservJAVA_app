@@ -12,13 +12,11 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.reservjava_app.ATask.MemberCancel;
 import com.example.reservjava_app.ListActivity;
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
-import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
 import com.example.reservjava_app.fragment.d_bongsun.QnAFragment;
 import com.example.reservjava_app.ui.a_login_signup.JoinActivity;
@@ -27,9 +25,6 @@ import com.example.reservjava_app.ui.a_login_signup.QnAMainActivity;
 import com.example.reservjava_app.ui.b_where.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-
-import java.lang.reflect.Member;
-import java.util.concurrent.ExecutionException;
 
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
@@ -42,7 +37,7 @@ public class MemberCancelActivity extends AppCompatActivity {
 
     String state;
 
-    private static final String TAG = "main:MemberCancelActivity";
+    private static String TAG = "main:MemberCancelActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,21 +166,22 @@ public class MemberCancelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String id = ((EditText) findViewById(R.id.addrSearch)).getText().toString();
-//                MemberCancel memberCancel = new MemberCancel(id);
-//                try {
-//                    state = memberCancel.execute().get();
-//                    Log.d(TAG, "submitBtn:onClick: ");
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }//try//catch
-//
-//                if(state.equals("1")){
-//                    Log.d(TAG, "submitBtn:onClick: 회원탈퇴성공 !!!");
-//                    finish();
-//                }else{
-//                    Log.d(TAG, "submitBtn:onClick: 회원탈퇴실패 !!!");
-//                    finish();
-//                }
+                id="200";
+                MemberCancel memberCancel = new MemberCancel(id);
+                try {
+                    state = memberCancel.execute().get();
+                    Log.d(TAG, "submitBtn:onClick: ");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }//try//catch
+
+                if(state.equals("1")){
+                    Log.d(TAG, "submitBtn:onClick: 회원탈퇴성공 !!!");
+                    finish();
+                }else{
+                    Log.d(TAG, "submitBtn:onClick: 회원탈퇴실패 !!!");
+                    finish();
+                }
 
             }//onClick()
         });//submitBtn.setOnClickListener()
