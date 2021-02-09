@@ -69,10 +69,6 @@ public class MemberUpdate extends AsyncTask<Void, Void, Void> {
       builder.addTextBody("member_email", member_email, ContentType.create("Multipart/related", "UTF-8"));
       builder.addTextBody("member_image", member_image, ContentType.create("Multipart/related", "UTF-8"));
 
-      Log.d("Sub1Update11", member_image);
-      Log.d("Sub1Update16", pImgDbPathU);
-      Log.d("Sub1Update17", imageDbPathU);
-
       // 이미지를 새로 선택했으면 선택한 이미지와 기존에 이미지 경로를 같이 보낸다
       if(!imageRealPathU.equals("")){
         Log.d("memberUpdate:postURL", "1");
@@ -133,9 +129,7 @@ public class MemberUpdate extends AsyncTask<Void, Void, Void> {
       if(httpClient != null){
         httpClient = null;
       }
-
     }
-
     return null;
   }
 

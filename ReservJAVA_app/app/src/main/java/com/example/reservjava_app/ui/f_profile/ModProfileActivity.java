@@ -232,7 +232,6 @@ public class ModProfileActivity extends AppCompatActivity {
         e.printStackTrace();
       }
     }
-
   }
 
   public String getPathFromURI(Uri contentUri) {
@@ -279,8 +278,16 @@ public class ModProfileActivity extends AppCompatActivity {
 
           // 새로 고침 시 사진을 바로 불러 들일 수 있도록 하기 위해 저장
           // 이거 안 하면 빈화면이나 이전에 저장한 화면이 다시 로딩 됨
-          member_image = imageDbPathU;
+          if(imageDbPathU != "") {
+            member_image = imageDbPathU;
+          }
           loginDTO.setMember_image(member_image);
+          if(member_pw != "") {
+            loginDTO.setMember_pw(member_pw);
+          }
+          loginDTO.setMember_nick(member_nick);
+          loginDTO.setMember_tel(member_tel);
+          loginDTO.setMember_email(member_email);
           Log.d(TAG, "mod_saveBtnClicked: image: " + member_image);
 
           MemberUpdate memberUpdate = new MemberUpdate(member_id, member_pw, member_nick, member_tel, member_email, member_image, pImgDbPathU, imageDbPathU, imageRealPathU);

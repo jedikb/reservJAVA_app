@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class WhereListActivity extends AppCompatActivity {
   private static final String TAG = "main:WhereListActivity";
   SearchBusiness searchBusiness;
-  ArrayList<BusinessDTO> busiList, busiList1;
+  ArrayList<BusinessDTO> busiList;
   RecyclerView recyclerView;
   SearchBusinessAdapter adapter;
   ProgressDialog progressDialog;
@@ -90,7 +90,8 @@ public class WhereListActivity extends AppCompatActivity {
         //trim, replace"[\\n\\r]", null, "",  다 안되네;
         //  \\n, \n,
         //searchText.replace("\\n", "");
-
+        //searchText.substring(3); // 앤 튕김..... '\n'을 문자로 인식하지 않는거 같음
+        //android:singleLine="true" 임시로 이걸 적용해서 문제 해결하자.
 
         for(BusinessDTO dto : busiList) {
           if( dto.getBusiness_name().indexOf(searchText) >-1 || dto.getBusiness_hashtag().indexOf(searchText) >-1) {

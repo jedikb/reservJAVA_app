@@ -124,16 +124,7 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
     <!-- 전체화면(햄버거화면 제외) 끝 -->
 
-    <!-- 햄버거화면(Navigation Drawer,바로가기) 시작 -->
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/loginnavigation"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/main_drawer_menu" />
-    <!-- 햄버거화면(Navigation Drawer,바로가기) 끝 -->
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
     <!-- 전체화면(햄버거화면을 위한) 끝 -->
