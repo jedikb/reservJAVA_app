@@ -165,7 +165,7 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
         Intent intent = new Intent(SearchActivity.this, WhereListActivity.class);
         intent.putExtra("busiList",busiList1);
         startActivity(intent);
-        finish();
+        //finish();
       }
     });
 
@@ -193,19 +193,11 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
             startActivity(intent);
             finish();
           }
-        },300);
+        },100);
         return false;
       }
     });
 
-    // (임시) 리뷰 등록 화면으로 이동
-    findViewById(R.id.moveToReview).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        Intent intent = new Intent(getApplicationContext(), ReviewActivity.class);
-        startActivity(intent);
-      }
-    });
 
     // (임시) 프로필 화면으로 이동
     findViewById(R.id.moveToProfile).setOnClickListener(new View.OnClickListener() {
@@ -353,8 +345,6 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
     });
 
   }
-
-
 
   //지도 위치 변경시 마커 새로 뿌림 - 처음 뿌릴 때도 이것으로 뿌리기 때문에 마커 정보를 저장 후 지도를 이동해 주어야 한다.
   @Override

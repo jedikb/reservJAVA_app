@@ -33,7 +33,7 @@ public class MyVisit extends AsyncTask<Void, Void, Void> {
 
   //검색한 리스트를 담을 변수
   //ReviewDTO와 거의 비슷한 자료를 불러오기 때문에 같은 것을 쓴다
-  ArrayList<ReviewDTO> visitDTOS;
+  public static ArrayList<ReviewDTO> visitDTOS;
   ProgressDialog progressDialog;
   MyVisitAdapter adapter;
 

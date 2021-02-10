@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,16 +18,17 @@ import com.example.reservjava_app.DTO.ReviewDTO;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.adapter.MyReviewAdapter;
 import com.example.reservjava_app.adapter.MyVisitAdapter;
+import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
 
 import java.util.ArrayList;
 
+import static com.example.reservjava_app.Common.CommonMethod.isNetworkConnected;
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
-//import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.reviewDTOS;
-//import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.visitDTOS;
-
+import static com.example.reservjava_app.ATask.MyReview.reviewDTOS;
 
 public class ProfileActivity extends AppCompatActivity {
   private static final String TAG = "main:ProfileActivity";
+  public static ReviewDTO reviewSetItem = null;
   RecyclerView recyclerView;
   TextView pro_tv_name;
   ImageView faceImg;
@@ -35,9 +37,6 @@ public class ProfileActivity extends AppCompatActivity {
   MyReview myReview;
   MyReviewAdapter rAdapter;
   MyVisitAdapter vAdapter;
-  ProgressDialog progressDialog;
-  public static ReviewDTO reviewSetItem = null;
-  ArrayList<ReviewDTO> visitDTOS, reviewDTOS;
   public String member_image;
 
   @Override
@@ -60,22 +59,13 @@ public class ProfileActivity extends AppCompatActivity {
         .error(R.drawable.user).into(faceImg);
 
     //리사클러 뷰 시작
-    vAdapter = new MyVisitAdapter(this, visitDTOS);
     rAdapter = new MyReviewAdapter(this, reviewDTOS);
+    vAdapter = new MyVisitAdapter(this, reviewDTOS);
     recyclerView = findViewById(R.id.recyclerView);
-
-    Intent intent = getIntent();
-    visitDTOS = (ArrayList<ReviewDTO>) intent.getSerializableExtra("visitDTOS");
-    reviewDTOS = (ArrayList<ReviewDTO>) intent.getSerializableExtra("reviewDTOS");
 
     LinearLayoutManager layoutManager = new LinearLayoutManager(this,
         RecyclerView.VERTICAL, false);
     recyclerView.setLayoutManager(layoutManager);
-
-
-    for(ReviewDTO dto : visitDTOS) {
-      vAdapter.addItem(new ReviewDTO(dto.getBooking_code(), dto.getBusiness_category_code(), dto.getBusiness_name(), dto.getBooking_appraisal_star(), dto.getBooking_appraisal()));
-    }
 
     recyclerView.setAdapter(vAdapter);
 
@@ -83,13 +73,6 @@ public class ProfileActivity extends AppCompatActivity {
     findViewById(R.id.visitListBtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-
-        vAdapter.removeAllItem();
-        rAdapter.removeAllItem();
-
-        for(ReviewDTO dto : visitDTOS) {
-          vAdapter.addItem(new ReviewDTO(dto.getBooking_code(), dto.getBusiness_category_code(), dto.getBusiness_name(), dto.getBooking_appraisal_star(), dto.getBooking_appraisal()));
-        }
         recyclerView.setAdapter(vAdapter);
       }
     });
@@ -98,13 +81,6 @@ public class ProfileActivity extends AppCompatActivity {
     findViewById(R.id.reviewListBtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-
-        vAdapter.removeAllItem();
-        rAdapter.removeAllItem();
-
-        for(ReviewDTO dto : reviewDTOS) {
-          rAdapter.addItem(new ReviewDTO(dto.getBooking_code(), dto.getBusiness_category_code(), dto.getBusiness_name(), dto.getBooking_appraisal_star(), dto.getBooking_appraisal()));
-        }
         recyclerView.setAdapter(rAdapter);
       }
     });
@@ -128,7 +104,5 @@ public class ProfileActivity extends AppCompatActivity {
       }
     });
 
-
   }
-
 }

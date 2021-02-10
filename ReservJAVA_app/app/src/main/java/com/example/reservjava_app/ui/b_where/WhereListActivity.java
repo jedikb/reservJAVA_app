@@ -40,8 +40,6 @@ public class WhereListActivity extends AppCompatActivity {
 
     Intent intent = getIntent();
 
-    //searchText = intent.getStringExtra("searchText");
-
     //리사이클러 뷰 시작
     busiList = new ArrayList<>();
     adapter = new SearchBusinessAdapter(this, busiList);
@@ -52,11 +50,6 @@ public class WhereListActivity extends AppCompatActivity {
     LinearLayoutManager layoutManager = new LinearLayoutManager(this,
         RecyclerView.VERTICAL, false);
     recyclerView.setLayoutManager(layoutManager);
-
-    for (BusinessDTO dto : busiList){
-      //Log.d(TAG, "onCreate: " + dto.getBusiness_name());
-      adapter.addItem(new BusinessDTO(dto.getBusiness_name(), dto.getBusiness_addr(), dto.getBusiness_star_avg(), dto.getBusiness_lat(), dto.getBusiness_lng() ));
-    }
 
     recyclerView.setAdapter(adapter);
 
@@ -136,4 +129,10 @@ public class WhereListActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
       super.onActivityResult(requestCode, resultCode, data);
     }
+
+  //뒤로가기 버튼
+  public void onBackPressed() {
+    //super.onBackPressed();
+
+  }
 }

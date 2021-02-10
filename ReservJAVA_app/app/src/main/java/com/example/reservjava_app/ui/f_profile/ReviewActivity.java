@@ -12,10 +12,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.example.reservjava_app.ATask.ReviewInsert;
+import com.example.reservjava_app.DTO.ReviewDTO;
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.fragment.ListFragment;
@@ -36,9 +38,8 @@ public class ReviewActivity extends AppCompatActivity {
 
   EditText editReview;
   RatingBar ratingBar;
-
-          Button submitBtn, cancelBtn;
-
+  Button submitBtn, cancelBtn;
+  TextView reviewName;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class ReviewActivity extends AppCompatActivity {
     editReview = findViewById(R.id.editReview);
     ratingBar = findViewById(R.id.ratingBar);
     submitBtn = findViewById(R.id.submitBtn);
-
+    reviewName = findViewById(R.id.reviewName);
 
    /* // 뒤로가기 버튼(리스트 프래그먼트로 이동)
     findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
@@ -62,7 +63,6 @@ public class ReviewActivity extends AppCompatActivity {
       }
     });
 */
-
 
     // 고객 아이디, 매장 코드와 연동// 예약한 항목과 시간)
    /* findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
@@ -89,7 +89,6 @@ public class ReviewActivity extends AppCompatActivity {
         String review = editReview.getText().toString();
         float ratingbar = ratingBar.getRating()*20;
 
-
         ReviewInsert ReviewInsert = new ReviewInsert(review, ratingbar);
         try {
           state = ReviewInsert.execute().get().trim();   //.get() : 데이터가 도착하기 전에 조회하는 것을 방지
@@ -110,10 +109,6 @@ public class ReviewActivity extends AppCompatActivity {
           Log.d(TAG, "onClick: 삽입 실패");
           finish();
         }
-
-
-
-
       }
     });
 
@@ -135,8 +130,16 @@ public class ReviewActivity extends AppCompatActivity {
 
     });
 
+    //매장 이름 입력
+    ReviewDTO reviewDTO = null;
+    Intent intent = getIntent();
+    reviewDTO = (ReviewDTO) intent.getSerializableExtra("reviewDTO");
+    reviewName.setText(reviewDTO.getBusiness_name());
 
-
-
+    //수정으로 들어 왔을 경우
+    if(reviewDTO.getBooking_appraisal() != null) {
+      editReview.setText(reviewDTO.getBooking_appraisal());
+      ratingBar.setRating(reviewDTO.getBooking_appraisal_star());
+    }
   }
 }

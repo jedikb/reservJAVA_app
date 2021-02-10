@@ -44,6 +44,10 @@ import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDT
 public class MainActivity extends AppCompatActivity {
 
   private static final String TAG = "main:MainActivity";
+  //뒤로가기 버튼
+  private long backKeyPressedTime = 0;
+  private Toast toast;
+
   HomeFragment homeFragment;
   ListFragment listFragment;
   double latitude = 0, longitude= 0;
@@ -219,6 +223,29 @@ public class MainActivity extends AppCompatActivity {
 
   }//onCreat()
 
+  //뒤로가기 버튼
+  public void onBackPressed() {
+    //super.onBackPressed();
+    // 마지막으로 뒤로 가기 버튼을 눌렀던 시간에 2.5초를 더해 현재 시간과 비교 후
+    // 마지막으로 뒤로 가기 버튼을 눌렀던 시간이 2.5초가 지났으면 Toast 출력
+    // 2500 milliseconds = 2.5 seconds
+    if (System.currentTimeMillis() > backKeyPressedTime + 2500) {
+      backKeyPressedTime = System.currentTimeMillis();
+      toast = Toast.makeText(this, "뒤로 가기 버튼을 한 번 더 누르시면 종료됩니다.", Toast.LENGTH_LONG);
+      toast.show();
+      return;
+    }
+    // 마지막으로 뒤로 가기 버튼을 눌렀던 시간에 2.5초를 더해 현재 시간과 비교 후
+    // 마지막으로 뒤로 가기 버튼을 눌렀던 시간이 2.5초가 지나지 않았으면 종료
+    if (System.currentTimeMillis() <= backKeyPressedTime + 2500) {
+      finish();
+      toast.cancel();
+      toast = Toast.makeText(this,"이용해 주셔서 감사합니다.",Toast.LENGTH_LONG);
+      toast.show();
+    }
+  }
+
+  //현재 위치 설정
   public void setCurAddress(Double latitude, Double longitude) {
     GpsTracker gpsTracker;
     gpsTracker = new GpsTracker(this);

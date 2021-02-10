@@ -31,6 +31,8 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import static com.example.reservjava_app.Common.CommonMethod.isNetworkConnected;
+
 public class LoginActivity extends AppCompatActivity {
   private static final String TAG = "main:LoginActivity";
   // 로그인이 성공하면 static 로그인DTO 변수에 담아서
@@ -38,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
   // 적용할 곳에서 import만 해주면 된다.(다시 선언하면 안 됨)
   public static MemberDTO loginDTO = null;
   public static ArrayList<ReviewDTO> reviewDTOS = null;
-  public static ArrayList<ReviewDTO> visitDTOS = null;
+
 
   Button signupBtn, loginBtn;
   EditText editID, editPW;
@@ -136,8 +138,6 @@ public class LoginActivity extends AppCompatActivity {
         if(editID.getText().toString().length() != 0 && editPW.getText().toString().length() != 0){
           String member_id = editID.getText().toString();
           String member_pw = editPW.getText().toString();
-          //Log.d(TAG, "onClick: " + member_id);
-          //Log.d(TAG, "onClick: " + member_pw);
 
           LoginSelect loginSelect = new LoginSelect(member_id, member_pw);
           try {
@@ -159,38 +159,10 @@ public class LoginActivity extends AppCompatActivity {
           Log.d("main:login", loginDTO.getMember_name() + "님 로그인 되었습니다 !!!");
 
           // 로그인 정보에 값이 있으면 로그인이 되었다는 것이므로 화면을 종료시킨다
-          // 로그인이 되면 필요한 정보를 불러 온다.
 
           // 리뷰 정보 조회
-          ArrayList<ReviewDTO> reviewDTOS, visitDTOS;
-          MyReviewAdapter rAdapter;
-          MyVisitAdapter vAdapter;
-          ProgressDialog progressDialog;
-          visitDTOS = new ArrayList<>();
-          reviewDTOS = new ArrayList<>();
-          vAdapter = new MyVisitAdapter(LoginActivity.this, visitDTOS);
-          rAdapter = new MyReviewAdapter(LoginActivity.this, visitDTOS);
-          progressDialog = new ProgressDialog(LoginActivity.this);
-          progressDialog.setTitle("데이터 업로딩");
-          progressDialog.setMessage("데이터 업로딩 중입니다\n" + "잠시만 기다려주세요 ...");
-          progressDialog.setCanceledOnTouchOutside(false);
-          progressDialog.show();
+          selectDate ();
 
-          MyVisit myVisit = new MyVisit(visitDTOS, progressDialog, vAdapter);
-          myVisit.execute();
-          MyReview myReview = new MyReview(reviewDTOS, progressDialog, rAdapter);
-          myReview.execute();
-
-          if(progressDialog != null){
-            progressDialog.dismiss();
-          }
-
-          Log.d(TAG, "onClick: visit  " + visitDTOS.size());
-          Log.d(TAG, "onClick: visit  " + reviewDTOS.size());
-          Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-          intent.putExtra("visitDTOS", visitDTOS);
-          intent.putExtra("reviewDTOS", reviewDTOS);
-          //startActivity(intent);
           finish();
 
         }else {
@@ -201,7 +173,6 @@ public class LoginActivity extends AppCompatActivity {
         }
       }
     });
-
 
 
     // 회원가입 화면으로 이동
@@ -223,8 +194,27 @@ public class LoginActivity extends AppCompatActivity {
       }
     });
 
+  }
 
+  //개인 정보 불러오기
+  public void selectDate () {
+    ArrayList<ReviewDTO> reviewDTOS;
+    MyReviewAdapter rAdapter;
+    ProgressDialog progressDialog;
+    reviewDTOS = new ArrayList<>();
+    rAdapter = new MyReviewAdapter(LoginActivity.this, reviewDTOS);
 
+    progressDialog = new ProgressDialog(LoginActivity.this);
+    progressDialog.setTitle("데이터 업로딩");
+    progressDialog.setMessage("데이터 업로딩 중입니다\n" + "잠시만 기다려주세요 ...");
+    progressDialog.setCanceledOnTouchOutside(false);
+    progressDialog.show();
 
+    if(isNetworkConnected(LoginActivity.this) == true) {
+      MyReview myReview = new MyReview(reviewDTOS, progressDialog, rAdapter);
+      myReview.execute();
+    } else {
+      Toast.makeText(LoginActivity.this, "인터넷이 연결되어 있지 않습니다.", Toast.LENGTH_SHORT).show();
+    }
   }
 }

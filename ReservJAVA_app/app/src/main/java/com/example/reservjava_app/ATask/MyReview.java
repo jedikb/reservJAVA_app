@@ -1,12 +1,14 @@
 package com.example.reservjava_app.ATask;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.util.JsonReader;
 import android.util.Log;
 
 import com.example.reservjava_app.DTO.ReviewDTO;
+import com.example.reservjava_app.ProfileActivity;
 import com.example.reservjava_app.adapter.MyReviewAdapter;
 
 import org.apache.http.HttpEntity;
@@ -32,7 +34,7 @@ public class MyReview extends AsyncTask<Void, Void, Void> {
   private static final String TAG = "main:MyReview";
 
   //검색한 리스트를 담을 변수
-  ArrayList<ReviewDTO> reviewDTOS;
+  public static ArrayList<ReviewDTO> reviewDTOS;
   ProgressDialog progressDialog;
   MyReviewAdapter adapter;
 
@@ -100,14 +102,15 @@ public class MyReview extends AsyncTask<Void, Void, Void> {
   @Override
   protected void onPostExecute(Void aVoid) {
     super.onPostExecute(aVoid);
-/*
+
     if(progressDialog != null){
       progressDialog.dismiss();
-    }*/
-
+    }
     Log.d("MyReview", "MyReview Select Complete!!!");
 
     adapter.notifyDataSetChanged();
+
+
   }
 
   public void readJsonStream(InputStream inputStream) throws IOException {
@@ -152,7 +155,7 @@ public class MyReview extends AsyncTask<Void, Void, Void> {
       } else if(readStr.equals("business_category_code")) {
         business_category_code = reader.nextInt();
       } else if(readStr.equals("booking_date_reservation")) {
-        booking_date_reservation = reader.nextString();
+        booking_date_reservation = (reader.nextString()).substring(2, 10);
       } else if(readStr.equals("business_addr")) {
         business_addr = reader.nextString();
       } else {
