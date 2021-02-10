@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.reservjava_app.DTO.BusinessDTO;
+import com.example.reservjava_app.DTO.ProductDTO;
 import com.example.reservjava_app.R;
 
 import java.util.ArrayList;
@@ -22,12 +23,12 @@ public class TimeListAdapter extends
     OnItemClickListener listener;
 
     Context context;
-    ArrayList<BusinessDTO> businessList;
+    ArrayList<ProductDTO> productList;
 
 
-    public TimeListAdapter(Context context, ArrayList<BusinessDTO> businessList) {
+    public TimeListAdapter(Context context, ArrayList<ProductDTO> productList) {
         this.context = context;
-        this.businessList = businessList;
+        this.productList = productList;
     }
 
 
@@ -36,7 +37,7 @@ public class TimeListAdapter extends
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.item_business, parent, false);
+        View itemView = inflater.inflate(R.layout.item_timelist, parent, false);
 
         return new ViewHolder(itemView, listener);
     }
@@ -44,17 +45,17 @@ public class TimeListAdapter extends
     //데이터 연결
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        BusinessDTO businessDTO = businessList.get(position);
-        holder.onBind(businessDTO);
+        ProductDTO productDTO = productList.get(position);
+        holder.onBind(productDTO);
     }
 
     @Override
     public int getItemCount() {
-        return businessList.size();
+        return productList.size();
     }
 
-    public void addItem(BusinessDTO businessDTO){
-        businessList.add(businessDTO);
+    public void addItem(ProductDTO productDTO){
+        productList.add(productDTO);
     }
 
     //메인에서 접근하는 메소드
@@ -70,16 +71,12 @@ public class TimeListAdapter extends
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView business_name;
-        TextView business_info;
-        ImageView imageView;
+        TextView time_text;
 
 
         public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
-            business_name = itemView.findViewById(R.id.business_name);
-            business_info = itemView.findViewById(R.id.business_info);
-            imageView = itemView.findViewById(R.id.imageView);
+            time_text = itemView.findViewById(R.id.time_text);
 
 
 /*            itemView.setOnClickListener(new View.OnClickListener() {
@@ -93,15 +90,13 @@ public class TimeListAdapter extends
             });*/
         }
 
-        public void onBind(BusinessDTO businessDTO){
-            business_name.setText(businessDTO.getBusiness_name());
-            business_info.setText(businessDTO.getBusiness_info());
-            imageView.setImageResource(R.drawable.singer1);
+        public void onBind(ProductDTO productDTO){
+            time_text.setText(productDTO.getProduct_time());
         }
     }
 
-    public BusinessDTO getItem(int position){
-        return businessList.get(position);
+    public ProductDTO getItem(int position){
+        return productList.get(position);
     }
 
 }
