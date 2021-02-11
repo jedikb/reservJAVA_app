@@ -78,12 +78,12 @@ public class Reservation extends AppCompatActivity {
 
 
         //시간  리사이클 뷰 처리
-        recyclerView = findViewById(R.id.recyclerView);
-        RecyclerView.LayoutManager layoutManager =
-                new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-
-        adapter = new TimeListAdapter(Reservation.this, arrayList);
+//        recyclerView = findViewById(R.id.recyclerView);
+//        RecyclerView.LayoutManager layoutManager =
+//                new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+//        recyclerView.setLayoutManager(layoutManager);
+//
+//        adapter = new TimeListAdapter(Reservation.this, arrayList);
 
 
 
