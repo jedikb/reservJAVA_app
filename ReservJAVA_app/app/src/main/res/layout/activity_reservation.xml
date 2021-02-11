@@ -44,14 +44,13 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:id="@+id/time_list"/>
 
-                <ListView
-                    android:id="@+id/product_time"
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </ListView>
+                    android:layout_height="match_parent"
+                    android:id="@+id/product_list"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
