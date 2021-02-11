@@ -17,16 +17,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.reservjava_app.ATask.SearchBusiness;
 import com.example.reservjava_app.DTO.BusinessDTO;
-import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.adapter.SearchBusinessAdapter;
 
 import java.util.ArrayList;
 
+import static com.example.reservjava_app.MainActivity.busiList;
+
 public class WhereListActivity extends AppCompatActivity {
   private static final String TAG = "main:WhereListActivity";
   SearchBusiness searchBusiness;
-  ArrayList<BusinessDTO> busiList;
+  ArrayList<BusinessDTO> searchBusiList;
   RecyclerView recyclerView;
   SearchBusinessAdapter adapter;
   ProgressDialog progressDialog;
@@ -41,11 +42,12 @@ public class WhereListActivity extends AppCompatActivity {
     Intent intent = getIntent();
 
     //리사이클러 뷰 시작
-    busiList = new ArrayList<>();
-    adapter = new SearchBusinessAdapter(this, busiList);
+    searchBusiList = new ArrayList<>();
+    ArrayList<BusinessDTO> searchBusiList = (ArrayList<BusinessDTO>) intent.getSerializableExtra("searchBusiList");
+
+    adapter = new SearchBusinessAdapter(this, searchBusiList);
     recyclerView = findViewById(R.id.searchRecyclerView);
 
-    ArrayList<BusinessDTO> busiList = (ArrayList<BusinessDTO>) intent.getSerializableExtra("busiList");
 
     LinearLayoutManager layoutManager = new LinearLayoutManager(this,
         RecyclerView.VERTICAL, false);
@@ -58,24 +60,27 @@ public class WhereListActivity extends AppCompatActivity {
     findViewById(R.id.searchBtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        searchText = "";
-        searchText = addrSearch.getText().toString();
-        Toast.makeText(WhereListActivity.this, searchText + "를 검색합니다", Toast.LENGTH_SHORT).show();
-        //Log.d(TAG, "onClick searchText : " + searchText);
+        adapter.removeAllItem();
 
-        Intent intent = new Intent(WhereListActivity.this, WhereListActivity.class);
-        intent.putExtra("searchText", searchText);
-        startActivity(intent);
-        finish();
+        searchText = addrSearch.getText().toString();
+
+        for(BusinessDTO dto : busiList) {
+          if( dto.getBusiness_name().indexOf(searchText) >-1 || dto.getBusiness_hashtag().indexOf(searchText) >-1) {
+            adapter.addItem(new BusinessDTO(dto.getBusiness_name(), dto.getBusiness_addr(), dto.getBusiness_star_avg(), dto.getBusiness_lat(), dto.getBusiness_lng() ));
+          }
+        }
+
+        Toast.makeText(WhereListActivity.this, searchText + " 매장을 검색합니다", Toast.LENGTH_SHORT).show();
+        recyclerView.setAdapter(adapter);
+        addrSearch.setText(null);
       }
     });
-    addrSearch.requestFocus();
+    //addrSearch.requestFocus();
+
     // 엔터로 검색
     addrSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
       @Override
       public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        ArrayList<BusinessDTO> busiList = new ArrayList<>();
-        busiList = MainActivity.busiList;
         adapter.removeAllItem();
 
         //String searchText = null;
@@ -92,10 +97,11 @@ public class WhereListActivity extends AppCompatActivity {
           }
         }
 
-        Toast.makeText(WhereListActivity.this, searchText + "를 검색합니다", Toast.LENGTH_SHORT).show();
+        Toast.makeText(WhereListActivity.this, searchText + " 매장을 검색합니다", Toast.LENGTH_SHORT).show();
         recyclerView.setAdapter(adapter);
         addrSearch.setText(null);
-        return false;
+        addrSearch.requestFocus();
+        return true;
       }
     });
 
@@ -132,7 +138,6 @@ public class WhereListActivity extends AppCompatActivity {
 
   //뒤로가기 버튼
   public void onBackPressed() {
-    //super.onBackPressed();
-
+    super.onBackPressed();
   }
 }
