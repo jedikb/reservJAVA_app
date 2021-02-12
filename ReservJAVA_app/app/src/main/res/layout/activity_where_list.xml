@@ -7,62 +7,53 @@
     android:orientation="vertical">
 
 
-    <!--상단바-->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+    <!-- 검색창(주소or검색) -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#FFFFFF"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:weightSum="10">
 
         <!-- 뒤로가기 -->
         <ImageView
-            android:id="@+id/backQnABtn"
+            android:id="@+id/wl_backBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_weight="0.8"
+            android:layout_gravity="center"
+            android:layout_marginStart="12dp"
             android:src="@drawable/navigate_before"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
-        <!-- 검색창(주소or검색) -->
-        <LinearLayout
-            android:layout_width="310dp"
-            android:layout_height="30dp"
+        <EditText
+            android:id="@+id/wl_addrSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_weight="6.5"
             android:layout_marginLeft="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:background="@drawable/solid_black"
+            android:gravity="center"
+            android:hint="찾으시는 매장 이름을 입력하세요"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/addrSearch"
-                android:layout_width="270dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:background="@drawable/solid_black"
-                android:gravity="center"
-                android:singleLine="true"
-                android:hint="찾으시는 매장 이름을 입력하세요"
-                android:textColor="#000"
-                android:textSize="18sp" />
-            <!--android:singleLine="true" 이걸 넣으면 로딩 시 자동으로 키보드가 해제됨-->
-
-            <ImageView
-                android:id="@+id/searchBtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/ic_search_black_24dp" />
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/wl_searchBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1.2"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_search_black_24dp" />
+    </LinearLayout>
     <!--상단바-->
 
 

@@ -40,6 +40,8 @@ import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
+import com.naver.maps.map.widget.CompassView;
+import com.naver.maps.map.widget.LocationButtonView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -77,7 +79,7 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
 
   // 일단 Searchview는 힘드니 EditText로 기능을 구현하고 나서
   //Searchview 사용을 고민해보자..
-  EditText addrSearch;
+  EditText search_addrSearch;
   TextView tvAddr;
   int newAddr = 0;
   Geocoder geocoder = new Geocoder(this);
@@ -87,10 +89,8 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_search);
 
-    addrSearch = findViewById(R.id.addrSearch);
+    search_addrSearch = findViewById(R.id.search_addrSearch);
     tvAddr = findViewById(R.id.tvAddr);
-
-
 
     //(임시) 누르면 현재 위치 찾는 것으로 구현해보자(종료?)
     //자동으로 위치 찾기가 안되었을 때,, 이전 위치 띄워주었으면 좋겠다//
@@ -123,13 +123,13 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
     mapFragment.getMapAsync(this);
 
 
-    searchBusiList = new ArrayList<>();
     //상단바 - 검색버튼(whereList로 이동)
-    findViewById(R.id.searchBtn).setOnClickListener(new View.OnClickListener() {
+    findViewById(R.id.search_searchBtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+        searchBusiList = new ArrayList<>();
         searchText = "";
-        searchText = addrSearch.getText().toString();
+        searchText = search_addrSearch.getText().toString();
         for(BusinessDTO dto : busiList) {
           if( dto.getBusiness_name().indexOf(searchText) >-1 || dto.getBusiness_hashtag().indexOf(searchText) >-1) {
             searchBusiList.add(dto);
@@ -141,21 +141,23 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
         Intent intent = new Intent(SearchActivity.this, WhereListActivity.class);
         intent.putExtra("searchBusiList",searchBusiList);
         startActivity(intent);
-        addrSearch.setText(null);
+        search_addrSearch.setText(null);
         //finish();
       }
     });
 
     //검색명 입력하고 엔터키 입력시 검색으로 연결
     //엔터키의 경우 두번 작동하게 되는 문제가 있어 에디터 액션 이벤트를 이용한다
-      addrSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+    search_addrSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
       @Override
       public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        searchBusiList = new ArrayList<>();
         searchText = "";
-        searchText = addrSearch.getText().toString();
+        searchText = search_addrSearch.getText().toString();
         for(BusinessDTO dto : busiList) {
           if( dto.getBusiness_name().indexOf(searchText) >-1 || dto.getBusiness_hashtag().indexOf(searchText) >-1) {
             searchBusiList.add(dto);
+    // (임시) 프로필 화면으로 이동
           }
         }
 
@@ -164,14 +166,13 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
         Intent intent = new Intent(SearchActivity.this, WhereListActivity.class);
         intent.putExtra("searchBusiList",searchBusiList);
         startActivity(intent);
-        addrSearch.setText(null);
+        search_addrSearch.setText(null);
         //finish();
         return false;
       }
     });
 
-
-    // (임시) 프로필 화면으로 이동
+    //(임시) 프로필로 이동
     findViewById(R.id.moveToProfile).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -195,6 +196,14 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
         }
       }
     });
+
+    //백 버튼
+    findViewById(R.id.search_backBtn).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        finish();
+      }
+    });
   }
 
   @UiThread
@@ -202,15 +211,21 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
   public void onMapReady(@NonNull NaverMap naverMap) {
     Log.d( TAG, "onMapReady");
 
-    //나침반, 현재 위치 추적 버튼 활성화
-    // 나침반 위치 변경해야 함
-    UiSettings uiSettings = naverMap.getUiSettings();
-    uiSettings.setCompassEnabled(true);
-    uiSettings.setLocationButtonEnabled(true);
-
+    //이렇게 띄우면 위치 변경이 안 된다
     // NaverMap 객체 받아서 NaverMap 객체에 위치 소스 지정
     mNaverMap = naverMap;
     mNaverMap.setLocationSource(mLocationSource);
+
+    UiSettings uiSettings = naverMap.getUiSettings();
+    uiSettings.setCompassEnabled(false);
+    uiSettings.setLocationButtonEnabled(false);
+
+    //나침반, 현재 위치 추적 버튼 활성화
+    // 나침반 위치 변경해야 함
+    CompassView compassView = findViewById(R.id.compassBtn);
+    compassView.setMap(mNaverMap);
+    LocationButtonView locationButtonView = findViewById(R.id.locationBtn);
+    locationButtonView.setMap(mNaverMap);
 
     if(newAddr == 0) {    // 기본옵션(자동으로 현재 위치 불러옴)
       //주소 자동으로 입력하기

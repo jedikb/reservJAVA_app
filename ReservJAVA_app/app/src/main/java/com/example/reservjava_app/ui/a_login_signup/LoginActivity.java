@@ -19,13 +19,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.reservjava_app.ATask.LoginSelect;
 import com.example.reservjava_app.ATask.MyReview;
-import com.example.reservjava_app.ATask.MyVisit;
 import com.example.reservjava_app.DTO.MemberDTO;
 import com.example.reservjava_app.DTO.ReviewDTO;
-import com.example.reservjava_app.ProfileActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.adapter.MyReviewAdapter;
-import com.example.reservjava_app.adapter.MyVisitAdapter;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;

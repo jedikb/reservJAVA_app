@@ -1,14 +1,12 @@
 package com.example.reservjava_app.ATask;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.util.JsonReader;
 import android.util.Log;
 
 import com.example.reservjava_app.DTO.ReviewDTO;
-import com.example.reservjava_app.ProfileActivity;
 import com.example.reservjava_app.adapter.MyReviewAdapter;
 
 import org.apache.http.HttpEntity;
