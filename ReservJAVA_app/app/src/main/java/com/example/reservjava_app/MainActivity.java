@@ -5,12 +5,14 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -22,9 +24,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.reservjava_app.ATask.MyReview;
 import com.example.reservjava_app.ATask.SearchBusiness;
 import com.example.reservjava_app.Common.GpsTracker;
 import com.example.reservjava_app.DTO.BusinessDTO;
+import com.example.reservjava_app.DTO.MemberDTO;
+import com.example.reservjava_app.DTO.ReviewDTO;
+import com.example.reservjava_app.adapter.MyReviewAdapter;
 import com.example.reservjava_app.adapter.SearchBusinessAdapter;
 import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
@@ -38,15 +44,22 @@ import com.google.android.material.navigation.NavigationView;
 import com.naver.maps.geometry.LatLng;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static com.example.reservjava_app.Common.CommonMethod.isNetworkConnected;
+import static com.example.reservjava_app.Common.SideBar.sideBar;
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
+import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.reviewDTOS;
 
 public class MainActivity extends AppCompatActivity {
 
   private static final String TAG = "main:MainActivity";
+
   //뒤로가기 버튼
   private long backKeyPressedTime = 0;
   private Toast toast;
@@ -69,7 +82,12 @@ public class MainActivity extends AppCompatActivity {
   QnAFragment qnAFragment;
   Toolbar toolbar;
   int member_kind=0;
+  //데이터 공유
   public static ArrayList<BusinessDTO> busiList= null;
+  private SharedPreferences appData;
+
+  //사이드바
+  DrawerLayout drawer;
 
 
   @Override
@@ -86,8 +104,13 @@ public class MainActivity extends AppCompatActivity {
       checkRunTimePermission();
     }
 
-    //1. 액티비티 화면이 A, B, C 를 만들어야 한다면
-    //  액티비티 화면을 이름만 주어서 만든다.
+    //자동 로그인 정보 불러오기
+    // 설정값 불러오기
+    appData = getSharedPreferences("SAVE_LOGIN_DATA", MODE_PRIVATE);
+    saveLoginData = appData.getBoolean("SAVE_LOGIN_DATA", false);
+    if (saveLoginData) {
+      loginDTOLoad();
+    }
 
     toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
@@ -99,14 +122,14 @@ public class MainActivity extends AppCompatActivity {
 
     //측면메뉴
     //햄버거 버튼과 Navigation Drawer( 바로가기 메뉴)연결
-    DrawerLayout drawer = findViewById(R.id.drawer_layout);
+    drawer = findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
     drawer.addDrawerListener(toggle);
     toggle.syncState();
 
     //로그인 정보 표시하기
 
-
+    sideBar(getApplicationContext());
 
     //측면메뉴 버튼 작업
     //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리
@@ -147,19 +170,39 @@ public class MainActivity extends AppCompatActivity {
 
         //햄버거바 메뉴 누르면 이동
         if(id == R.id.nav_loginbtn){
+          drawer.close();
           Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
           startActivity(intent);
         }else if(id == R.id.nav_signupbtn){
+          drawer.close();
           Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
           startActivity(intent);
         }else if(id == R.id.nav_qna){
+          drawer.close();
           Intent intent = new Intent(getApplicationContext(), QnAMainActivity.class);
           startActivity(intent);
+
+        }else if(id == R.id.nav_membershipbtn){
+          drawer.close();
+          Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+          startActivity(intent);
+        }else if(id == R.id.nav_logout){
+          drawer.close();
+          SharedPreferences.Editor editor = appData.edit();
+          editor.clear();
+          editor.apply();
+          loginDTO = null;
+          reviewDTOS = null;
+          Toast.makeText(MainActivity.this, "정상적으로 로그아웃 되었습니다", Toast.LENGTH_SHORT).show();
+          startActivity(getIntent());
+
+        }else if(id == R.id.nav_listchk){
+          drawer.close();
+          getSupportFragmentManager().beginTransaction()
+              .replace(R.id.container, listFragment).commit();
         }
         return false;
       }
-
-
 
     });
 
@@ -211,8 +254,12 @@ public class MainActivity extends AppCompatActivity {
             return true;
 
           case R.id.searchItem:
-                intent = new Intent(getApplicationContext(), SearchActivity.class);
-                startActivity(intent);
+            if(curAddr.latitude == 0.0) {
+              setCurAddress(latitude, longitude);
+            }
+            intent = new Intent(getApplicationContext(), SearchActivity.class);
+            startActivity(intent);
+            //finish();
             return true;
 
           case R.id.listItem:
@@ -236,36 +283,36 @@ public class MainActivity extends AppCompatActivity {
   //뒤로가기 버튼
   public void onBackPressed() {
     //super.onBackPressed();
-    // 마지막으로 뒤로 가기 버튼을 눌렀던 시간에 2.5초를 더해 현재 시간과 비교 후
-    // 마지막으로 뒤로 가기 버튼을 눌렀던 시간이 2.5초가 지났으면 Toast 출력
-    // 2500 milliseconds = 2.5 seconds
-    if (System.currentTimeMillis() > backKeyPressedTime + 2500) {
-      backKeyPressedTime = System.currentTimeMillis();
-      toast = Toast.makeText(this, "뒤로 가기 버튼을 한 번 더 누르시면 종료됩니다.", Toast.LENGTH_LONG);
-      toast.show();
-      return;
-    }
-    // 마지막으로 뒤로 가기 버튼을 눌렀던 시간에 2.5초를 더해 현재 시간과 비교 후
-    // 마지막으로 뒤로 가기 버튼을 눌렀던 시간이 2.5초가 지나지 않았으면 종료
-    if (System.currentTimeMillis() <= backKeyPressedTime + 2500) {
-      finish();
-      toast.cancel();
-      toast = Toast.makeText(this,"이용해 주셔서 감사합니다.",Toast.LENGTH_LONG);
-      toast.show();
+    if(drawer.isOpen()) {
+      drawer.close();
+    } else {
+      // 마지막으로 뒤로 가기 버튼을 눌렀던 시간에 2.5초를 더해 현재 시간과 비교 후
+      // 마지막으로 뒤로 가기 버튼을 눌렀던 시간이 2.5초가 지났으면 Toast 출력
+      // 2500 milliseconds = 2.5 seconds
+      if (System.currentTimeMillis() > backKeyPressedTime + 2500) {
+        backKeyPressedTime = System.currentTimeMillis();
+        toast = Toast.makeText(this, "뒤로 가기 버튼을 한 번 더 누르시면 종료됩니다.", Toast.LENGTH_LONG);
+        toast.show();
+        return;
+      }
+      // 마지막으로 뒤로 가기 버튼을 눌렀던 시간에 2.5초를 더해 현재 시간과 비교 후
+      // 마지막으로 뒤로 가기 버튼을 눌렀던 시간이 2.5초가 지나지 않았으면 종료
+      if (System.currentTimeMillis() <= backKeyPressedTime + 2500) {
+        finish();
+        toast.cancel();
+        toast = Toast.makeText(this,"이용해 주셔서 감사합니다.",Toast.LENGTH_LONG);
+        toast.show();
+      }
     }
   }
 
 
-  // 주요 프래그먼트로 이동
+  // 프래그먼트 이동
   public void onFragmentChange(int state){
     Intent intent; //액티비티 콜을 위한 지역변수 선언
     if (state == 1) {
       getSupportFragmentManager().beginTransaction()
           .replace(R.id.container, homeFragment).commit();
-    } else if (state == 2) {
-      intent = new Intent(getApplicationContext(), SearchActivity.class);
-      startActivity(intent);
-      finish();
     } else if (state == 3) {
       getSupportFragmentManager().beginTransaction()
               .replace(R.id.container, listFragment).commit();
@@ -426,12 +473,10 @@ public class MainActivity extends AppCompatActivity {
         || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
   }
   //-------------------------------------------------------
-
-
   //------------------- 현재 위치 추적 ---------------------
   public static String currentAddress = null;
-  public static LatLng curAddr = null;
   Address address = null;
+  public static LatLng curAddr = null;
 
   public void setCurAddress(Double latitude, Double longitude) {
     GpsTracker gpsTracker;
@@ -439,6 +484,20 @@ public class MainActivity extends AppCompatActivity {
 
     latitude = gpsTracker.getLatitude();
     longitude = gpsTracker.getLongitude();
+
+    //주소가 미발견인 경우 preference에 저장된 주소를 불러온다
+    appData = getSharedPreferences("SAVE_LOGIN_DATA", MODE_PRIVATE);
+    SharedPreferences.Editor editor = appData.edit();
+    if(saveLoginData) {
+      if (latitude == 0.0 || longitude == 0.0) {
+        latitude = Double.valueOf(appData.getString("member_lat", ""));
+        longitude = Double.valueOf(appData.getString("member_lng", ""));
+      } else {
+        editor.putFloat("member_lat", Float.parseFloat(String.valueOf(latitude)));
+        editor.putFloat("member_lng", Float.parseFloat(String.valueOf(longitude)));
+        editor.apply();
+      }
+    }
 
     curAddr = new LatLng(latitude, longitude);
     currentAddress = getCurrentAddress(latitude, longitude);
@@ -471,21 +530,105 @@ public class MainActivity extends AppCompatActivity {
     return address.getAddressLine(0);
   }
 
-  //액티비티가 준비되면 주소가 정상적으로 반영이 되었는지 확인 한다.
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-    super.onActivityResult(requestCode, resultCode, intent);
+  //로그인 정보 불러오기
+  private boolean saveLoginData;
+  private void loginDTOLoad() {
 
-    while (true) {
-      if(currentAddress == null) {
-        setCurAddress(latitude, longitude);
-      } else if(address == null) {
-        getCurrentAddress(latitude, longitude);
-      } else {
-        break;
-      }
+    saveLoginData = appData.getBoolean("SAVE_LOGIN_DATA", false);
+
+    int member_code=-1, member_kind=-1;
+    String member_id = "", member_pw = "",
+        member_name = "", member_nick = "", member_tel = "", member_email = "", member_addr = "", member_image="";
+    Date member_date = null;
+    double member_lat = 0, member_lng= 0;
+
+    member_code = appData.getInt("member_code", -1);
+    member_id = appData.getString("member_id", "");
+    member_pw = appData.getString("member_pw", "");
+    member_kind = appData.getInt("member_kind", -1);
+    member_name = appData.getString("member_name", "");
+    member_nick = appData.getString("member_nick", "");
+    member_tel = appData.getString("member_tel", "");
+    member_email = appData.getString("member_email", "");
+    member_addr = appData.getString("member_addr", "");
+    member_image = appData.getString("member_image", "");
+    SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    try {
+      member_date = fm.parse(appData.getString("member_date", ""));
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+    Log.d(TAG, "loginDTOLoad: member_date : " + member_date);
+    member_lat = appData.getFloat("member_lat", 0);
+    member_lng = appData.getFloat("member_lat", 0);
+
+    member_lat = Double.parseDouble(String.valueOf(member_lat));
+    member_lng = Double.parseDouble(String.valueOf(member_lng));
+
+    loginDTO = new MemberDTO(member_code, member_id, member_pw, member_kind, member_name, member_nick
+        , member_tel, member_email, member_addr, member_image, member_lat, member_lng, member_date);
+
+    // 리뷰 정보 조회
+    selectDate ();
+  }
+
+  //개인 정보 불러오기
+  public void selectDate () {
+    ArrayList<ReviewDTO> reviewDTOS;
+    MyReviewAdapter rAdapter;
+    ProgressDialog progressDialog;
+    reviewDTOS = new ArrayList<>();
+    rAdapter = new MyReviewAdapter(this, reviewDTOS);
+
+    progressDialog = new ProgressDialog(this);
+    progressDialog.setTitle("데이터 업로딩");
+    progressDialog.setMessage("데이터 업로딩 중입니다\n" + "잠시만 기다려주세요 ...");
+    progressDialog.setCanceledOnTouchOutside(false);
+    progressDialog.show();
+
+    if(isNetworkConnected(this) == true) {
+      MyReview myReview = new MyReview(reviewDTOS, progressDialog, rAdapter);
+      myReview.execute();
+    } else {
+      Toast.makeText(this, "인터넷이 연결되어 있지 않습니다.", Toast.LENGTH_SHORT).show();
     }
   }
 
+  //액티비티가 다시 활성화 되었을 때(로그인)
 
+  @Override
+  protected void onResume() {
+    super.onResume();
+    drawer.close();
+
+    NavigationView navigationView = findViewById(R.id.loginnavigation);
+    if(loginDTO == null) {  //로그인 안했을 때
+      navigationView.getMenu().findItem(R.id.nav_membershipbtn)
+          .setVisible(false);
+      navigationView.getMenu().findItem(R.id.nav_logout)
+          .setVisible(false);
+      navigationView.getMenu().findItem(R.id.nav_listchk)
+          .setVisible(false);
+      navigationView.getMenu().findItem(R.id.nav_loginbtn)
+          .setVisible(true);
+      navigationView.getMenu().findItem(R.id.nav_signupbtn)
+          .setVisible(true);
+      navigationView.getMenu().findItem(R.id.nav_qna)
+          .setVisible(true);
+    } else {  //로그인 했을 때
+      navigationView.getMenu().findItem(R.id.nav_membershipbtn)
+          .setVisible(true);
+      navigationView.getMenu().findItem(R.id.nav_logout)
+          .setVisible(true);
+      navigationView.getMenu().findItem(R.id.nav_listchk)
+          .setVisible(true);
+      navigationView.getMenu().findItem(R.id.nav_loginbtn)
+          .setVisible(false);
+      navigationView.getMenu().findItem(R.id.nav_signupbtn)
+          .setVisible(false);
+      navigationView.getMenu().findItem(R.id.nav_qna)
+          .setVisible(true);
+    }
+
+  }
 }

@@ -186,6 +186,7 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
               dialogInterface.dismiss();
               Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
               startActivity(intent);
+
             }
           });
           builder.show();
@@ -201,6 +202,8 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
     findViewById(R.id.search_backBtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+        //Intent intent = new Intent(SearchActivity.this, MainActivity.class);
+        //startActivity(intent);
         finish();
       }
     });
@@ -420,5 +423,12 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
     activeMarkers = new Vector<Marker>();
   }
 
+  //뒤로가기 버튼
+  public void onBackPressed() {
+    super.onBackPressed();
 
+/*    Intent intent = new Intent(SearchActivity.this, MainActivity.class);
+    startActivity(intent);
+    finish();*/
+  }
 }

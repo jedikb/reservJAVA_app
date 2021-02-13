@@ -19,15 +19,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
 import static com.example.reservjava_app.Common.CommonMethod.pServer;
-import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
-public class LoginSelect extends AsyncTask<Void, Void, Void> {
+public class LoginSelect extends AsyncTask<Void, Void, MemberDTO> {
   private static final String TAG = "main:LoginSelect";
   String member_id, member_pw;
+  MemberDTO loginData = new MemberDTO();
 
   HttpClient httpClient;
   HttpPost httpPost;
@@ -41,7 +43,7 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
 
 
   @Override
-  protected Void doInBackground(Void... voids) {
+  protected MemberDTO doInBackground(Void... voids) {
 
     try {
       // MultipartEntityBuild 생성
@@ -69,7 +71,7 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
       inputStream = httpEntity.getContent();
 
       // 하나의 오브젝트 가져올때
-      loginDTO = readMessage(inputStream);
+      loginData = readMessage(inputStream);
 
       inputStream.close();
 
@@ -91,11 +93,11 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
       }
 
     }
-    return null;
+    return loginData;
   }
 
   @Override
-  protected void onPostExecute(Void aVoid) {
+  protected void onPostExecute(MemberDTO aVoid) {
 
   }
 
@@ -104,6 +106,7 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
     int member_code = -1, member_kind = -1;
     String member_id = "", member_name = "", member_nick = "", member_tel = "", member_email = "", member_addr = "", member_image="";
     Date member_date = null;
+    //String member_date = "";
     //오류나면 여기 일 수 있음
 
     reader.beginObject();
@@ -128,19 +131,18 @@ public class LoginSelect extends AsyncTask<Void, Void, Void> {
       } else if (readStr.equals("member_image")) {
         member_image = reader.nextString();
       } else if (readStr.equals("member_date")) {
-        // 이부분은 나중에 다시 하자
-        //Log.d(TAG, "readMessage: date1");
-        //String d = reader.nextString();
-        //Log.d(TAG, "readMessage: date : " + d);
-        member_date = Date.valueOf(reader.nextString());
-        //Log.d(TAG, "readMessage: date2");
-        //member_date = Date.valueOf("2021-01-01");
+        SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+          member_date = fm.parse(reader.nextString());
+        } catch (ParseException e) {
+          e.printStackTrace();
+        }
       } else {
         reader.skipValue();
       }
     }
     reader.endObject();
-    Log.d("main:loginselect : ", member_code + ", " + member_id + "," + member_name + "," + member_nick + "," + member_tel + "," + member_email);
+    Log.d("main:loginselect : ", member_id + "," + member_name + "," + member_addr + "," + member_email);
     return new MemberDTO(member_code, member_id, member_kind, member_name, member_nick, member_tel, member_email, member_addr, member_image, member_date);
   }
 }
