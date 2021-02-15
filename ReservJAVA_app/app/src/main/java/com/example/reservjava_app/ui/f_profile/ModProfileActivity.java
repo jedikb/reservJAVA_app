@@ -21,17 +21,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.reservjava_app.ATask.MemberUpdate;
-import com.example.reservjava_app.ATask.Common.CommonMethod;
+import com.example.reservjava_app.Common.CommonMethod;
 import com.example.reservjava_app.R;
 
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 
-import static com.example.reservjava_app.ATask.Common.CommonMethod.ipConfig;
-import static com.example.reservjava_app.ATask.Common.CommonMethod.isNetworkConnected;
-import static com.example.reservjava_app.ATask.Common.CommonMethod.member_imgPath;
-import static com.example.reservjava_app.ATask.Common.CommonMethod.pServer;
+import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
+import static com.example.reservjava_app.Common.CommonMethod.isNetworkConnected;
+import static com.example.reservjava_app.Common.CommonMethod.member_imgPath;
+import static com.example.reservjava_app.Common.CommonMethod.pServer;
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
 public class ModProfileActivity extends AppCompatActivity {

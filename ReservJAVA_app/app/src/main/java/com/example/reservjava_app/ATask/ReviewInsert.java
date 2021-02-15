@@ -5,8 +5,6 @@ import android.os.AsyncTask;
 import android.util.JsonReader;
 import android.util.Log;
 
-import com.example.reservjava_app.ui.f_profile.ReviewActivity;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -19,8 +17,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
-import static com.example.reservjava_app.ATask.Common.CommonMethod.ipConfig;
-import static com.example.reservjava_app.ATask.Common.CommonMethod.pServer;
+import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
+import static com.example.reservjava_app.Common.CommonMethod.pServer;
 
 public class ReviewInsert extends AsyncTask<Void, Void, String> {
     private static final String TAG = "main ReviewInsert";;

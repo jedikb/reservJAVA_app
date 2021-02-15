@@ -1,4 +1,4 @@
-package com.example.reservjava_app.ATask.Common;
+package com.example.reservjava_app.Common;
 
 import android.Manifest;
 import android.app.Service;

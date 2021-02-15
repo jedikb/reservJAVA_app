@@ -10,7 +10,7 @@ import android.webkit.WebViewClient;
 
 import com.example.reservjava_app.R;
 
-import static com.example.reservjava_app.ATask.Common.CommonMethod.ipConfig;
+import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
 
 public class AddrListActivity extends AppCompatActivity {
 

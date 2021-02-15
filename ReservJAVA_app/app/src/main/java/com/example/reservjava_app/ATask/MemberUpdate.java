@@ -19,8 +19,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
-import static com.example.reservjava_app.ATask.Common.CommonMethod.ipConfig;
-import static com.example.reservjava_app.ATask.Common.CommonMethod.pServer;
+import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
+import static com.example.reservjava_app.Common.CommonMethod.pServer;
 
 public class MemberUpdate extends AsyncTask<Void, Void, Void> {
 

@@ -23,8 +23,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
-import static com.example.reservjava_app.ATask.Common.CommonMethod.ipConfig;
-import static com.example.reservjava_app.ATask.Common.CommonMethod.pServer;
+import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
+import static com.example.reservjava_app.Common.CommonMethod.pServer;
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
 public class MyReview extends AsyncTask<Void, Void, Void> {
