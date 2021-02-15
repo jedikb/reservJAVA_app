@@ -1,12 +1,10 @@
 package com.example.reservjava_app.ui.f_profile;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,11 +16,7 @@ import com.example.reservjava_app.DTO.ReviewDTO;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.adapter.MyReviewAdapter;
 import com.example.reservjava_app.adapter.MyVisitAdapter;
-import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
 
-import java.util.ArrayList;
-
-import static com.example.reservjava_app.Common.CommonMethod.isNetworkConnected;
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 import static com.example.reservjava_app.ATask.MyReview.reviewDTOS;
 

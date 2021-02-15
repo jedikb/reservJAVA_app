@@ -23,8 +23,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
-import static com.example.reservjava_app.Common.CommonMethod.pServer;
+import static com.example.reservjava_app.ATask.Common.CommonMethod.ipConfig;
+import static com.example.reservjava_app.ATask.Common.CommonMethod.pServer;
 
 public class LoginSelect extends AsyncTask<Void, Void, MemberDTO> {
   private static final String TAG = "main:LoginSelect";

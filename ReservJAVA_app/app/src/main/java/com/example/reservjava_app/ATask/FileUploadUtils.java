@@ -15,12 +15,12 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.example.reservjava_app.Common.CommonMethod.business_upImgPath;
-import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
-import static com.example.reservjava_app.Common.CommonMethod.logo_upImgPath;
-import static com.example.reservjava_app.Common.CommonMethod.member_upImgPath;
-import static com.example.reservjava_app.Common.CommonMethod.pServer;
-import static com.example.reservjava_app.Common.CommonMethod.product_upImgPath;
+import static com.example.reservjava_app.ATask.Common.CommonMethod.business_upImgPath;
+import static com.example.reservjava_app.ATask.Common.CommonMethod.ipConfig;
+import static com.example.reservjava_app.ATask.Common.CommonMethod.logo_upImgPath;
+import static com.example.reservjava_app.ATask.Common.CommonMethod.member_upImgPath;
+import static com.example.reservjava_app.ATask.Common.CommonMethod.pServer;
+import static com.example.reservjava_app.ATask.Common.CommonMethod.product_upImgPath;
 
 // 보류.. 기능 구현이 너무 힘듬.. 그냥 쌤꺼 쓰자..
 // 나중에 사진들을 자유롭게 업로드 하려면 필요할 듯하니 보존해둔다
