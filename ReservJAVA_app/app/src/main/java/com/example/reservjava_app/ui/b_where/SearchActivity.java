@@ -127,22 +127,22 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
     findViewById(R.id.search_searchBtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        searchBusiList = new ArrayList<>();
-        searchText = "";
-        searchText = search_addrSearch.getText().toString();
-        for(BusinessDTO dto : busiList) {
-          if( dto.getBusiness_name().indexOf(searchText) >-1 || dto.getBusiness_hashtag().indexOf(searchText) >-1) {
-            searchBusiList.add(dto);
-          }
+      searchBusiList = new ArrayList<>();
+      searchText = "";
+      searchText = search_addrSearch.getText().toString();
+      for(BusinessDTO dto : busiList) {
+        if( dto.getBusiness_name().indexOf(searchText) >-1 || dto.getBusiness_hashtag().indexOf(searchText) >-1) {
+          searchBusiList.add(dto);
         }
+      }
 
-        Toast.makeText(SearchActivity.this, searchText + " 매장을 검색합니다", Toast.LENGTH_SHORT).show();
+      Toast.makeText(SearchActivity.this, searchText + " 매장을 검색합니다", Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(SearchActivity.this, WhereListActivity.class);
-        intent.putExtra("searchBusiList",searchBusiList);
-        startActivity(intent);
-        search_addrSearch.setText(null);
-        //finish();
+      Intent intent = new Intent(SearchActivity.this, WhereListActivity.class);
+      intent.putExtra("searchBusiList",searchBusiList);
+      startActivity(intent);
+      search_addrSearch.setText(null);
+      //finish();
       }
     });
 
@@ -151,24 +151,22 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
     search_addrSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
       @Override
       public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        searchBusiList = new ArrayList<>();
-        searchText = "";
-        searchText = search_addrSearch.getText().toString();
-        for(BusinessDTO dto : busiList) {
-          if( dto.getBusiness_name().indexOf(searchText) >-1 || dto.getBusiness_hashtag().indexOf(searchText) >-1) {
-            searchBusiList.add(dto);
-    // (임시) 프로필 화면으로 이동
-          }
+      searchBusiList = new ArrayList<>();
+      searchText = "";
+      searchText = search_addrSearch.getText().toString();
+      for(BusinessDTO dto : busiList) {
+        if( dto.getBusiness_name().indexOf(searchText) >-1 || dto.getBusiness_hashtag().indexOf(searchText) >-1) {
+          searchBusiList.add(dto);
         }
+      }
 
-        Toast.makeText(SearchActivity.this, searchText + " 매장을 검색합니다", Toast.LENGTH_SHORT).show();
-
-        Intent intent = new Intent(SearchActivity.this, WhereListActivity.class);
-        intent.putExtra("searchBusiList",searchBusiList);
-        startActivity(intent);
-        search_addrSearch.setText(null);
-        //finish();
-        return false;
+      Toast.makeText(SearchActivity.this, searchText + " 매장을 검색합니다", Toast.LENGTH_SHORT).show();
+      Intent intent = new Intent(SearchActivity.this, WhereListActivity.class);
+      intent.putExtra("searchBusiList",searchBusiList);
+      startActivity(intent);
+      search_addrSearch.setText(null);
+      //finish();
+      return false;
       }
     });
 
@@ -176,25 +174,25 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
     findViewById(R.id.moveToProfile).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        if(loginDTO == null) {
-          AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this);
-          builder.setTitle("알림");
-          builder.setMessage("로그인이 필요한 페이지 입니다");
-          builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-              dialogInterface.dismiss();
-              Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-              startActivity(intent);
+      if(loginDTO == null) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this);
+        builder.setTitle("알림");
+        builder.setMessage("로그인이 필요한 페이지 입니다");
+        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialogInterface, int i) {
+            dialogInterface.dismiss();
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
 
-            }
-          });
-          builder.show();
+          }
+        });
+        builder.show();
 
-        } else {
-          Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-          startActivity(intent);
-        }
+      } else {
+        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+        startActivity(intent);
+      }
       }
     });
 
@@ -202,9 +200,9 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
     findViewById(R.id.search_backBtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        //Intent intent = new Intent(SearchActivity.this, MainActivity.class);
-        //startActivity(intent);
-        finish();
+      //Intent intent = new Intent(SearchActivity.this, MainActivity.class);
+      //startActivity(intent);
+      finish();
       }
     });
   }

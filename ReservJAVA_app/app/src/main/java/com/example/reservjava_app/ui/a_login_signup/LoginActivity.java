@@ -23,6 +23,7 @@ import com.example.reservjava_app.ATask.LoginSelect;
 import com.example.reservjava_app.ATask.MyReview;
 import com.example.reservjava_app.DTO.MemberDTO;
 import com.example.reservjava_app.DTO.ReviewDTO;
+import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.adapter.MyReviewAdapter;
 import com.google.android.material.navigation.NavigationView;
@@ -179,8 +180,9 @@ public class LoginActivity extends AppCompatActivity {
 
           // 로그인에 성공하면 값을 SharedPreference에 저장한다
           loginDTOSave();
-          //Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-          //startActivity(intent);
+          Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+          //intent.setFlags(intent.FLAG_ACTIVITY_SINGLE_TOP|intent.FLAG_ACTIVITY_CLEAR_TOP);
+          startActivity(intent);
           finish();
 
         }else {

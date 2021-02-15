@@ -39,6 +39,7 @@ import com.example.reservjava_app.ui.a_login_signup.JoinActivity;
 import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
 import com.example.reservjava_app.ui.a_login_signup.QnAMainActivity;
 import com.example.reservjava_app.ui.b_where.SearchActivity;
+import com.example.reservjava_app.ui.f_profile.ProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.naver.maps.geometry.LatLng;
@@ -173,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
           drawer.close();
           Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
           startActivity(intent);
+          finish();
         }else if(id == R.id.nav_signupbtn){
           drawer.close();
           Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
@@ -184,13 +186,17 @@ public class MainActivity extends AppCompatActivity {
 
         }else if(id == R.id.nav_membershipbtn){
           drawer.close();
-          Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-          startActivity(intent);
+          if(loginDTO == null) {
+            Toast.makeText(MainActivity.this, "로그인 되지 않았습니다", Toast.LENGTH_SHORT).show();
+          } else {
+            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+            startActivity(intent);
+          }
         }else if(id == R.id.nav_logout){
           drawer.close();
           SharedPreferences.Editor editor = appData.edit();
           editor.clear();
-          editor.apply();
+          editor.commit();
           loginDTO = null;
           reviewDTOS = null;
           Toast.makeText(MainActivity.this, "정상적으로 로그아웃 되었습니다", Toast.LENGTH_SHORT).show();
