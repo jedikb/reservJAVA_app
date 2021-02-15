@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
-import static com.example.reservjava_app.Common.CommonMethod.isNetworkConnected;
+import static com.example.reservjava_app.ATask.Common.CommonMethod.isNetworkConnected;
 
 public class LoginActivity extends AppCompatActivity {
   private static final String TAG = "main:LoginActivity";

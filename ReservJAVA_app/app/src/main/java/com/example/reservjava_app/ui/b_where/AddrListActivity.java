@@ -4,17 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.webkit.JavascriptInterface;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.TextView;
 
 import com.example.reservjava_app.R;
 
-import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
-import static com.example.reservjava_app.Common.CommonMethod.pServer;
+import static com.example.reservjava_app.ATask.Common.CommonMethod.ipConfig;
 
 public class AddrListActivity extends AppCompatActivity {
 

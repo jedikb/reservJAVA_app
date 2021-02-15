@@ -26,7 +26,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.reservjava_app.ATask.MyReview;
 import com.example.reservjava_app.ATask.SearchBusiness;
-import com.example.reservjava_app.Common.GpsTracker;
+import com.example.reservjava_app.ATask.Common.GpsTracker;
 import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.DTO.MemberDTO;
 import com.example.reservjava_app.DTO.ReviewDTO;
@@ -52,8 +52,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static com.example.reservjava_app.Common.CommonMethod.isNetworkConnected;
-import static com.example.reservjava_app.Common.SideBar.sideBar;
+import static com.example.reservjava_app.ATask.Common.CommonMethod.isNetworkConnected;
+import static com.example.reservjava_app.ATask.Common.SideBar.sideBar;
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.reviewDTOS;
 
