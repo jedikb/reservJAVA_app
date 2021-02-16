@@ -2,10 +2,12 @@ package com.example.reservjava_app.ui.d_bongsun;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +27,7 @@ import com.example.reservjava_app.ui.a_login_signup.QnAMainActivity;
 import com.example.reservjava_app.ui.b_where.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
@@ -37,7 +40,7 @@ public class MemberCancelActivity extends AppCompatActivity {
 
     String state;
 
-    String id;
+    String member_code;
 
     private static String TAG = "main:MemberCancelActivity";
 
@@ -164,12 +167,16 @@ public class MemberCancelActivity extends AppCompatActivity {
         });
 
         // id = ((EditText) findViewById(R.id.addrSearch)).getText().toString();
-        id = "200";//임시 테스트용
+        member_code = "200";//임시 테스트용
         //회원탈퇴처리
+        showMessage();
+
         findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MemberCancel memberCancel = new MemberCancel(id);
+                showMessage();
+
+                MemberCancel memberCancel = new MemberCancel(member_code);
                 try {
                     state = memberCancel.execute().get();
                     Log.d(TAG, "submitBtn:onClick: memberCancel.execute().get() 실행함.");
@@ -179,10 +186,10 @@ public class MemberCancelActivity extends AppCompatActivity {
 
                 if(state.equals("1")){
                     Log.d(TAG, "submitBtn:onClick: 회원탈퇴성공 !!!");
-                    finish();
+                    //finish();
                 }else{
                     Log.d(TAG, "submitBtn:onClick: 회원탈퇴실패 !!!");
-                    finish();
+                    //finish();
                 }
 
             }//onClick()
@@ -210,5 +217,37 @@ public class MemberCancelActivity extends AppCompatActivity {
                     .replace(R.id.container, qnAFragment).commit();
         }
     }
+
+    private boolean showMessage(){
+        boolean result = false;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("안내");
+        builder.setMessage("정말 탈퇴 하시겠습니까?");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+
+        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String message = "예. 버튼이 눌렸습니다!";
+                Log.d(TAG, "showMessage().onClick: " + message);
+                //result = true;
+            }
+        });
+
+        builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String message = "아니오. 버튼이 눌렸습니다!";
+                Log.d(TAG, "showMessage().onClick: " + message);
+                if(dialog != null){
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        return result;
+    }//showMessage()
 
 }

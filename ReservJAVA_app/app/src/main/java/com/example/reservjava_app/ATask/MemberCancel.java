@@ -23,7 +23,6 @@ import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
 import static com.example.reservjava_app.Common.CommonMethod.pServer;
 
 public class MemberCancel extends AsyncTask<Void, Void, String> {
-
     private static final String TAG = "main:MemberCancel.java";
 
     String member_code;
@@ -39,9 +38,6 @@ public class MemberCancel extends AsyncTask<Void, Void, String> {
     HttpPost     httpPost       = null;
     HttpResponse httpResponse   = null;
     HttpEntity   httpEntity     = null;
-
-    @Override //없어도 됨
-    protected void onPreExecute() { super.onPreExecute(); }
 
     @Override
     protected String doInBackground(Void... voids) {
@@ -72,16 +68,6 @@ public class MemberCancel extends AsyncTask<Void, Void, String> {
             httpEntity = httpResponse.getEntity();
             inputStream = httpEntity.getContent();
 
-            //loginDTO = readMessage(inputStream);
-
-
-            /*StringBuilder stringBuilder = new StringBuilder();
-            String line = null;
-            while ((line = bufferedReader.readLine()) != null){
-                stringBuilder.append(line + "\n");
-            }
-            String jsonStr = stringBuilder.toString();*/
-
             // 응답
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
             StringBuilder stringBuilder = new StringBuilder();
@@ -92,7 +78,7 @@ public class MemberCancel extends AsyncTask<Void, Void, String> {
             inputStream.close();
 
             //응답결과
-            state = stringBuilder.toString();
+            state = stringBuilder.toString().trim();
             Log.d(TAG, "doInBackground: state= " + state);
 
         } catch (Exception e) {
@@ -109,36 +95,4 @@ public class MemberCancel extends AsyncTask<Void, Void, String> {
         return state;
     }
 
-    @Override
-    protected void onPostExecute(String aVoid) {
-        super.onPostExecute(aVoid);
-        //dialog.dismiss();
-    }
-
-    public void readMessage(InputStream inputStream) throws IOException {
-        JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
-
-        String id = "", name = "", phonenumber = "", address = "";
-
-        reader.beginObject();
-        while (reader.hasNext()) {
-            String readStr = reader.nextName();
-            if (readStr.equals("id")) {
-                id = reader.nextString();
-            } else if (readStr.equals("name")) {
-                name = reader.nextString();
-            } else if (readStr.equals("phonenumber")) {
-                phonenumber = reader.nextString();
-            } else if (readStr.equals("address")) {
-                address = reader.nextString();
-            }else {
-                reader.skipValue();
-            }
-        }
-        reader.endObject();
-        Log.d(TAG, "readMessage: ");
-        //Log.d("main:loginselect : ", id + "," + name + "," + phonenumber + "," + address);
-        return ;//new MemberDTO(id, name, phonenumber, address);
-
-    }
 }
