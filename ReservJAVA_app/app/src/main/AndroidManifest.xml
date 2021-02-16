@@ -56,6 +56,7 @@ FINE_LOCATION 정확한 위치에 접근할 수 있는 권한
         android:theme="@style/Theme.ReservJAVA_app"
         android:usesCleartextTraffic="true">
         <activity android:name=".MainActivity"></activity>
+        <!--<activity android:launchMode="singleInstance" android:name=".MainActivity"></activity>-->
         <activity android:name=".ListActivity" />
         <activity android:name=".ui.a_login_signup.QnAMainActivity" />
         <activity android:name=".ui.a_login_signup.PwSearchActivity" />
@@ -86,13 +87,6 @@ FINE_LOCATION 정확한 위치에 접근할 수 있는 권한
             android:value="evbl7x2447" />
 
         <activity android:name=".IntroActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ProfileActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

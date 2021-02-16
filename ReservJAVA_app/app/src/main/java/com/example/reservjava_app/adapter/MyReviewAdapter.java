@@ -19,19 +19,25 @@ import com.example.reservjava_app.R;
 
 import java.util.ArrayList;
 
-import static com.example.reservjava_app.ui.f_profile.ProfileActivity.reviewSetItem;
-
 public class MyReviewAdapter extends
     RecyclerView.Adapter<MyReviewAdapter.ItemViewHolder> {
   private static final String TAG = "main:MyReviewAdapter";
 
   Context mContext;
-  ArrayList<ReviewDTO> reviewDTOS;
+  ArrayList<ReviewDTO> reviewDTOS, reviewList;
   LinearLayout parentLayout;
 
   public MyReviewAdapter(Context mContext, ArrayList<ReviewDTO> reviewDTOS) {
     this.mContext = mContext;
-    this.reviewDTOS = reviewDTOS;
+
+    reviewList = new ArrayList<>();
+    //리뷰의 경우 리뷰작성을 하지 않은 것에 대해서는 리스트에 나타나지 않게 해야 한다
+    for (ReviewDTO dto : reviewDTOS) {
+      if(dto.getBooking_appraisal() != null) {
+        reviewList.add(dto);
+      }
+    }
+    this.reviewDTOS = reviewList;
   }
 
   //화면 연결

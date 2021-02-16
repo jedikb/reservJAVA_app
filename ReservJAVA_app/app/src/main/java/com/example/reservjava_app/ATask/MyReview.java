@@ -21,12 +21,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.sql.Date;
 import java.util.ArrayList;
 
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
 import static com.example.reservjava_app.Common.CommonMethod.pServer;
-import static com.example.reservjava_app.MainActivity.busiList;
 import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
 public class MyReview extends AsyncTask<Void, Void, Void> {
@@ -34,7 +32,7 @@ public class MyReview extends AsyncTask<Void, Void, Void> {
   private static final String TAG = "main:MyReview";
 
   //검색한 리스트를 담을 변수
-  ArrayList<ReviewDTO> reviewDTOS;
+  public static ArrayList<ReviewDTO> reviewDTOS;
   ProgressDialog progressDialog;
   MyReviewAdapter adapter;
 
@@ -106,10 +104,11 @@ public class MyReview extends AsyncTask<Void, Void, Void> {
     if(progressDialog != null){
       progressDialog.dismiss();
     }
-
     Log.d("MyReview", "MyReview Select Complete!!!");
 
     adapter.notifyDataSetChanged();
+
+
   }
 
   public void readJsonStream(InputStream inputStream) throws IOException {
@@ -154,7 +153,7 @@ public class MyReview extends AsyncTask<Void, Void, Void> {
       } else if(readStr.equals("business_category_code")) {
         business_category_code = reader.nextInt();
       } else if(readStr.equals("booking_date_reservation")) {
-        booking_date_reservation = reader.nextString();
+        booking_date_reservation = (reader.nextString()).substring(2, 10);
       } else if(readStr.equals("business_addr")) {
         business_addr = reader.nextString();
       } else {

@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<searchable xmlns:android="http://schemas.android.com/apk/res/android"
-    android:label="@string/app_label"
-    android:hint="@string/search_hint" >
-</searchable>-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,143 +10,124 @@
     <!-- 상단바 -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <fragment
             android:id="@+id/map"
-            android:layout_width="match_parent"
-            android:layout_height="470dp"
             android:name="com.naver.maps.map.MapFragment"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-        </fragment>
-        <!-- 제일 권장한다며,,, 안되는게 왜 이렇게 많냐
-        android:name="com.naver.maps.map.MapFragment"-->
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <com.naver.maps.map.widget.LocationButtonView
+            android:id="@+id/locationBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvAddr"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.naver.maps.map.widget.CompassView
+            android:id="@+id/compassBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginBottom="80dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvAddr"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- 검색창(주소or검색) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/white"
-            >
+            android:weightSum="10">
 
             <!-- 뒤로가기 -->
             <ImageView
-                android:id="@+id/backQnABtn"
+                android:id="@+id/search_backBtn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
+                android:layout_weight="0.8"
+                android:layout_gravity="center"
+                android:layout_marginStart="12dp"
                 android:src="@drawable/navigate_before"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
 
-            <!-- 검색창(주소or검색) -->
-            <LinearLayout
-                android:layout_width="320dp"
+            <EditText
+                android:id="@+id/search_addrSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_weight="6.5"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/solid_black"
+                android:gravity="center"
+                android:hint="찾으시는 매장 이름을 입력하세요"
+                android:singleLine="true"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/search_searchBtn"
+                android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="30dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                >
-
-                <EditText
-                    android:id="@+id/addrSearch"
-                    android:layout_width="270dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/solid_black"
-                    android:gravity="center"
-                    android:hint="찾으시는 매장 이름을 입력하세요"
-                    android:textColor="#000"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:id="@+id/searchBtn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/ic_search_black_24dp" />
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_weight="1.2"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_search_black_24dp" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/moveToProfile"
-            android:layout_width="87dp"
-            android:layout_height="41dp"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="16dp"
-            android:textColor="#FFFFFF"
+            android:layout_marginBottom="8dp"
+            android:text="프로필"
             android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="프로필" />
-
-        <Button
-            android:id="@+id/moveToReview"
-            android:layout_width="87dp"
-            android:layout_height="41dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="64dp"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="리뷰" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent">
-
+            app:layout_constraintBottom_toTopOf="@+id/setAddrBtn"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/tvAddr"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
+            android:layout_marginBottom="44dp"
             android:background="@drawable/solid_black"
             android:foregroundGravity="center"
             android:gravity="center"
-            android:text="자동으로 현재 위치 주소"
-            android:textSize="24sp"
+            tools:text="자동으로 현재 위치 주소"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@+id/map"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/setAddrBtn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
             android:layout_marginEnd="24dp"
-            android:text="새로운 주소 찾기"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAddr" />
+            android:layout_marginBottom="16dp"
+            android:text="새 위치"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/tvAddr"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,8 @@ package com.example.reservjava_app.reservation;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -18,7 +20,11 @@ import android.widget.ToggleButton;
 
 import com.example.reservjava_app.DTO.ProductDTO;
 import com.example.reservjava_app.R;
+import com.example.reservjava_app.adapter.StoreListAdapter;
+import com.example.reservjava_app.adapter.TimeListAdapter;
+import com.example.reservjava_app.category.Exercise;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -26,10 +32,11 @@ import java.util.List;
 
 public class Reservation extends AppCompatActivity {
 
+    TimeListAdapter adapter;
+    RecyclerView recyclerView;
+    ArrayList<ProductDTO> arrayList;
 
     String date;
-    Button btn_datePicker;
-    ProductDTO productDTO;
     TextView calendar_text, time_text, product_text, person_text, per;
     int person = 1, maxPerson = 5, minPerson = 0;
 
@@ -38,6 +45,8 @@ public class Reservation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
+
+        arrayList = new ArrayList<ProductDTO>();
 
         //Intent getintent = getIntent();
         //int business_code = Integer.parseInt(getintent.getStringExtra("business_Code"));
@@ -68,7 +77,13 @@ public class Reservation extends AppCompatActivity {
 
 
 
-        //db연동해서 값을 상품 정보에 값을 시간 값으로 생각하자
+        //시간  리사이클 뷰 처리
+//        recyclerView = findViewById(R.id.recyclerView);
+//        RecyclerView.LayoutManager layoutManager =
+//                new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+//        recyclerView.setLayoutManager(layoutManager);
+//
+//        adapter = new TimeListAdapter(Reservation.this, arrayList);
 
 
 

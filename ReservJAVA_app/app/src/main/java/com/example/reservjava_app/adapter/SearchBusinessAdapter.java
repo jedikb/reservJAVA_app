@@ -48,7 +48,6 @@ public class SearchBusinessAdapter extends
   //데이터 연결
   @Override
   public void onBindViewHolder(@NonNull SearchBusinessAdapter.ItemViewHolder holder, final int position) {
-    //Log.d(TAG, "onAdapter : "  + position);
 
     final BusinessDTO busiDTO = busiList.get(position);
     holder.setItem(busiDTO);
@@ -59,7 +58,7 @@ public class SearchBusinessAdapter extends
 
         busiSetItem = busiList.get(position);
 
-        Toast.makeText(mContext, "OnClick " + busiList.get(position).getBusiness_name(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, busiList.get(position).getBusiness_name() + " 매장으로 이동합니다.", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(v.getContext(), Store.class);
         intent.putExtra("businessdto", busiSetItem);
         v.getContext().startActivity(intent);
@@ -71,7 +70,6 @@ public class SearchBusinessAdapter extends
   public int getItemCount() { return busiList.size(); }
 
   //어댑터에 메소드 만들기
-
   //내용 추가하기
   public void addItem(BusinessDTO businessDTO){
     busiList.add(businessDTO);
@@ -119,6 +117,7 @@ public class SearchBusinessAdapter extends
       Log.d(TAG, "setItem: " + bRateAvg);
       search_bSRateAvg.setText(bRateAvg);
 
+      //카테고리 로고
       //Glide.with(itemView).load(busiDTO.getBusiness_image()).into(search_bLogo);
     }
   }
