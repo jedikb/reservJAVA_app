@@ -56,7 +56,7 @@ public class JoinInsert extends AsyncTask<Void, Void, String> {
             builder.addTextBody("email", email, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("phonenumber", phonenumber, ContentType.create("Multipart/related", "UTF-8"));
 
-            String postURL = ipConfig + pServer + "/app/MemberJoin";
+            String postURL = ipConfig + pServer + "/anMemberJoin";
 
             // 전송
             InputStream inputStream = null;

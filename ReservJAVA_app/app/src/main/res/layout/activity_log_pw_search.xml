@@ -56,32 +56,7 @@
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_marginTop="13dp"
-                            >
-                            <!-- 검색입력창(주소or검색) -->
-                            <EditText
-                                android:id="@+id/addrSearch"
-                                android:layout_width="0dp"
-                                android:layout_height="25dp"
-                                android:layout_weight="1"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="10dp"
-                                android:background="@drawable/solid_black"
-                                android:gravity="center"
-                                android:hint=""
-                                android:textColor="#000"
-                                android:textSize="18sp"
-                                />
-                            <!-- 검색아이콘 -->
-                            <ImageView
-                                android:id="@+id/searchBtn"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_marginTop="1dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="30dp"
-                                android:src="@drawable/ic_search_black_24dp"
-                                />
-                        </LinearLayout>
+                            />
                     </LinearLayout>
                     <!-- 상단바 끝 -->
 
@@ -107,15 +82,6 @@
             <!-- 중단(내용화면 배치를 위한) 끝 -->
 
             <!-- 하단바 시작 -->
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_navigation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:menu="@menu/bottom_menu"
-                />
             <!-- 하단바 끝 -->
 
         </LinearLayout>

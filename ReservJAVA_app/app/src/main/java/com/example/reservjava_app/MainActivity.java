@@ -14,6 +14,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +27,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
 import com.example.reservjava_app.ATask.MyReview;
 import com.example.reservjava_app.ATask.SearchBusiness;
 import com.example.reservjava_app.Common.GpsTracker;
@@ -41,7 +45,9 @@ import com.example.reservjava_app.ui.a_login_signup.QnAMainActivity;
 import com.example.reservjava_app.ui.b_where.SearchActivity;
 import com.example.reservjava_app.ui.f_profile.ProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.naver.maps.geometry.LatLng;
 
 import java.io.IOException;
@@ -130,11 +136,40 @@ public class MainActivity extends AppCompatActivity {
 
     //로그인 정보 표시하기
 
+
     sideBar(getApplicationContext());
 
     //측면메뉴 버튼 작업
     //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리
     NavigationView navigationView = findViewById(R.id.loginnavigation);
+
+//    // 헤드드로어에 로그인 정보 표시하기
+//    int userLevel = 1; // 0:일반유저, 1:관리자
+//    String loninID = "";
+//    View headerView = navigationView.getHeaderView(0);
+//    ImageView imageView = headerView.findViewById(R.id.loginImage);
+//    TextView navLoginID = headerView.findViewById(R.id.loginID);
+//    navLoginID.setText("반갑습니다 " + loninID);
+//    // imageView.setImageResource(R.drawable.su);
+//    Glide.with(this)
+//            .load(R.drawable.susu)
+//            .circleCrop()
+//            .into(imageView);
+//
+//    if(userLevel == 1){
+//      navigationView.getMenu().findItem(R.id.communi)
+//              .setVisible(true);
+//    }
+//
+//    FloatingActionButton fab = findViewById(R.id.fab);
+//    fab.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View view) {
+//        Snackbar.make(view, "Replace with your own action",
+//                Snackbar.LENGTH_LONG).setAction("Action", null).show();
+//      }
+//    });
+
     if(loginDTO == null) {  //로그인 안했을 때
       navigationView.getMenu().findItem(R.id.nav_membershipbtn)
               .setVisible(false);

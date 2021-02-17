@@ -100,19 +100,6 @@ public class LoginActivity extends AppCompatActivity {
               .setVisible(true);
       navigationView.getMenu().findItem(R.id.nav_qna)
               .setVisible(true);
-    } else {  //로그인 했을 때
-      navigationView.getMenu().findItem(R.id.nav_membershipbtn)
-              .setVisible(true);
-      navigationView.getMenu().findItem(R.id.nav_logout)
-              .setVisible(true);
-      navigationView.getMenu().findItem(R.id.nav_listchk)
-              .setVisible(true);
-      navigationView.getMenu().findItem(R.id.nav_loginbtn)
-              .setVisible(false);
-      navigationView.getMenu().findItem(R.id.nav_signupbtn)
-              .setVisible(false);
-      navigationView.getMenu().findItem(R.id.nav_qna)
-              .setVisible(true);
     }
 
     //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리 내용
