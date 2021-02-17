@@ -239,30 +239,6 @@ public class JoinActivity extends AppCompatActivity {
         });
 
 
-//        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(Email).matches())
-//        {
-//            Toast.makeText(JoinActivity.this,"이메일 형식이 아닙니다",Toast.LENGTH_SHORT).show();
-//            dialog.dismiss();
-//            return;
-//        }
-//
-//        //핸드폰번호 유효성
-//        if(!Pattern.matches("^01(?:0|1|[6-9]) - (?:\\d{3}|\\d{4}) - \\d{4}$", Phone_num))
-//        {
-//            Toast.makeText(JoinActivity.this,"올바른 핸드폰 번호가 아닙니다.",Toast.LENGTH_SHORT).show();
-//            dialog.dismiss();
-//            return;
-//        }
-//
-//        //비밀번호 유효성
-//        if(!Pattern.matches("^(?=.*\\d)(?=.*[~`!@#$%\\^&*()-])(?=.*[a-zA-Z]).{8,20}$", PW))
-//        {
-//            Toast.makeText(JoinActivity.this,"비밀번호 형식을 지켜주세요.",Toast.LENGTH_SHORT).show();
-//            dialog.dismiss();
-//            return;
-//        }
-
-//        //회원가입시 미입력구간 입력하라고 띄우기
 
     }
 }
