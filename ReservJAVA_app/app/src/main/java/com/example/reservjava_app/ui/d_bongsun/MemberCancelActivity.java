@@ -39,7 +39,6 @@ public class MemberCancelActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     String state;
-
     String member_code;
 
     private static String TAG = "main:MemberCancelActivity";
@@ -130,8 +129,7 @@ public class MemberCancelActivity extends AppCompatActivity {
 
         //getSupportFragmentManager().beginTransaction()
         //        .replace(R.id.container, homeFragment).commit();    //기본 첫화면 띄우기
-        BottomNavigationView bottomNavigationView =
-                findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         //하단바 아이템 클릭 이벤트 처리
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -168,30 +166,12 @@ public class MemberCancelActivity extends AppCompatActivity {
 
         // id = ((EditText) findViewById(R.id.addrSearch)).getText().toString();
         member_code = "200";//임시 테스트용
-        //회원탈퇴처리
-        showMessage();
 
+        //회원탈퇴처리
         findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showMessage();
-
-                MemberCancel memberCancel = new MemberCancel(member_code);
-                try {
-                    state = memberCancel.execute().get();
-                    Log.d(TAG, "submitBtn:onClick: memberCancel.execute().get() 실행함.");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }//try//catch
-
-                if(state.equals("1")){
-                    Log.d(TAG, "submitBtn:onClick: 회원탈퇴성공 !!!");
-                    //finish();
-                }else{
-                    Log.d(TAG, "submitBtn:onClick: 회원탈퇴실패 !!!");
-                    //finish();
-                }
-
+                memberCancel();
             }//onClick()
         });//submitBtn.setOnClickListener()
 
@@ -218,23 +198,41 @@ public class MemberCancelActivity extends AppCompatActivity {
         }
     }
 
-    private boolean showMessage(){
-        boolean result = false;
+    private void memberCancel(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("안내");
         builder.setMessage("정말 탈퇴 하시겠습니까?");
         builder.setIcon(android.R.drawable.ic_dialog_alert);
 
-        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("예", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String message = "예. 버튼이 눌렸습니다!";
                 Log.d(TAG, "showMessage().onClick: " + message);
-                //result = true;
-            }
-        });
 
-        builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                MemberCancel memberCancel = new MemberCancel(member_code);
+                try {
+                    state = memberCancel.execute().get();
+                    Log.d(TAG, "submitBtn:onClick: memberCancel.execute().get() 실행함.");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }//try//catch
+
+                if(state.equals("1")){
+                    Log.d(TAG, "submitBtn:onClick: 회원탈퇴성공 !!!");
+
+                    showAlert("회원 탈퇴 되었습니다.");
+                    //finish();
+                }else{
+                    Log.d(TAG, "submitBtn:onClick: 회원탈퇴실패 !!!");
+
+                    showAlert("회원 탈퇴처리가 완료되지 않았습니다.");
+                    //finish();
+                }
+            }
+        });//builder.setNegativeButton()
+
+        builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String message = "아니오. 버튼이 눌렸습니다!";
@@ -243,11 +241,31 @@ public class MemberCancelActivity extends AppCompatActivity {
                     dialog.dismiss();
                 }
             }
-        });
+        });//builder.setPositiveButton()
 
         AlertDialog dialog = builder.create();
         dialog.show();
-        return result;
-    }//showMessage()
 
-}
+    }//memberCancel()
+
+    private void showAlert(String msg){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //builder.setTitle("확인");
+        builder.setMessage( msg );
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+
+        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(dialog != null){
+                    dialog.dismiss();
+                }
+                finish();
+            }
+        });//builder.setPositiveButton()
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }//showAlert()
+
+}//class MemberCancelActivity
