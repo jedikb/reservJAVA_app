@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,11 +53,21 @@ public class LoginActivity extends AppCompatActivity {
   EditText editID, editPW;
   TextView idpw;
   Toolbar toolbar;
+  ImageView backLoginBtn;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
+
+    backLoginBtn = findViewById(R.id.backLoginBtn);
+    backLoginBtn.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+      }
+    });
 
     // 설정값 불러오기
     appData = getSharedPreferences("SAVE_LOGIN_DATA", MODE_PRIVATE);
@@ -76,55 +87,6 @@ public class LoginActivity extends AppCompatActivity {
       editPW.setText(member_pw);
       autoLogin.setChecked(saveLoginData);
     }
-
-    //위에 툴바 생기게 해서 네비게이션드로어 띄우고 닫을수 있게 하는 기능!
-    toolbar = findViewById(R.id.toolbar);
-    DrawerLayout drawer = findViewById(R.id.drawer_layout);
-    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-    drawer.addDrawerListener(toggle);
-    toggle.syncState();
-
-
-    //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리
-    NavigationView navigationView = findViewById(R.id.loginnavigation);
-    if(loginDTO == null) {  //로그인 안했을 때
-      navigationView.getMenu().findItem(R.id.nav_membershipbtn)
-              .setVisible(false);
-      navigationView.getMenu().findItem(R.id.nav_logout)
-              .setVisible(false);
-      navigationView.getMenu().findItem(R.id.nav_listchk)
-              .setVisible(false);
-      navigationView.getMenu().findItem(R.id.nav_loginbtn)
-              .setVisible(true);
-      navigationView.getMenu().findItem(R.id.nav_signupbtn)
-              .setVisible(true);
-      navigationView.getMenu().findItem(R.id.nav_qna)
-              .setVisible(true);
-    }
-
-    //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리 내용
-    navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-      @Override
-      public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        //햄버거바 메뉴 누르면 이동
-        if(id == R.id.nav_loginbtn){
-          Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
-          startActivity(intent);
-        }else if(id == R.id.nav_signupbtn){
-          Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
-          startActivity(intent);
-        }else if(id == R.id.nav_qna){
-          Intent intent = new Intent(LoginActivity.this, QnAMainActivity.class);
-          startActivity(intent);
-        }
-        return false;
-      }
-
-
-
-    });
 
 
     //(임시: 작업하는 동안 아이디, 비번 치는게 귀찮음)
