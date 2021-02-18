@@ -5,18 +5,19 @@
     android:padding="8dp"
     android:gravity="center_vertical"
     android:layout_marginBottom="8dp"
-    android:background="@android:color/white"
+    android:background="@drawable/background_border"
     android:layout_gravity="center">
+
 
 
 
         <TextView
             android:id="@+id/time_text"
-            android:layout_width="50dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
             android:text="시간"
-            android:textSize="15sp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:gravity="center"/>

@@ -34,7 +34,7 @@
                     android:backgroundTint="#D1D0D0"/>
 
                 <TextView
-                    android:id="@+id/textView30"
+                    android:id="@+id/time_select"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
@@ -46,6 +46,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/time_list"/>
+
+                <TextView
+                    android:id="@+id/product_select"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:text="상품 선택"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"

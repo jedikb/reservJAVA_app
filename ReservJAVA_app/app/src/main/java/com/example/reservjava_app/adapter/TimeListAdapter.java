@@ -23,12 +23,12 @@ public class TimeListAdapter extends
     OnItemClickListener listener;
 
     Context context;
-    ArrayList<ProductDTO> productList;
+    ArrayList<String> timeList;
 
 
-    public TimeListAdapter(Context context, ArrayList<ProductDTO> productList) {
+    public TimeListAdapter(Context context, ArrayList<String> timeList) {
         this.context = context;
-        this.productList = productList;
+        this.timeList = timeList;
     }
 
 
@@ -45,17 +45,16 @@ public class TimeListAdapter extends
     //데이터 연결
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ProductDTO productDTO = productList.get(position);
-        holder.onBind(productDTO);
+        holder.onBind(timeList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return productList.size();
+        return timeList.size();
     }
 
-    public void addItem(ProductDTO productDTO){
-        productList.add(productDTO);
+    public void addItem(String time){
+        timeList.add(time);
     }
 
     //메인에서 접근하는 메소드
@@ -90,13 +89,13 @@ public class TimeListAdapter extends
             });*/
         }
 
-        public void onBind(ProductDTO productDTO){
-            time_text.setText(productDTO.getProduct_time());
+        public void onBind(String time){
+            time_text.setText(time);
         }
     }
 
-    public ProductDTO getItem(int position){
-        return productList.get(position);
+    public String getItem(int position){
+        return timeList.get(position);
     }
 
 }

@@ -49,7 +49,7 @@ public class Store extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Store.this, Reservation.class);
-                //intent.putExtra("business_Code", businessDTO.getBusiness_code());
+                intent.putExtra("business_code", businessDTO.getBusiness_code()) ;
                 startActivity(intent);
             }
         });

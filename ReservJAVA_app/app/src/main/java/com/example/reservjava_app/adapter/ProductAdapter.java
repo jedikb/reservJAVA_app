@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class ProductAdapter extends
 
     Context context;
     ArrayList<ProductDTO> productList;
+
 
 
     public ProductAdapter(Context context, ArrayList<ProductDTO> productList) {
@@ -95,8 +97,10 @@ public class ProductAdapter extends
             String name = productDTO.getProduct_name();
             int price = productDTO.getProduct_price();
             product_name.setText(name);
-            product_price.setText(price);
+            product_price.setText(price + "원");
         }
+
+
     }
 
     public ProductDTO getItem(int position){
