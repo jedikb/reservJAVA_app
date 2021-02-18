@@ -1,34 +1,35 @@
 package com.example.reservjava_app.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.DTO.ProductDTO;
 import com.example.reservjava_app.R;
 
 import java.util.ArrayList;
 
-public class TimeListAdapter extends
-        RecyclerView.Adapter<TimeListAdapter.ViewHolder>
-        implements  OnItemClickListener{
+public class ProductAdapter extends
+        RecyclerView.Adapter<ProductAdapter.ViewHolder>{
 
     OnItemClickListener listener;
 
     Context context;
-    ArrayList<String> timeList;
+    ArrayList<ProductDTO> productList;
 
 
-    public TimeListAdapter(Context context, ArrayList<String> timeList) {
+
+    public ProductAdapter(Context context, ArrayList<ProductDTO> productList) {
         this.context = context;
-        this.timeList = timeList;
+        this.productList = productList;
     }
 
 
@@ -37,7 +38,7 @@ public class TimeListAdapter extends
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.item_timelist, parent, false);
+        View itemView = inflater.inflate(R.layout.item_product, parent, false);
 
         return new ViewHolder(itemView, listener);
     }
@@ -45,37 +46,39 @@ public class TimeListAdapter extends
     //데이터 연결
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.onBind(timeList.get(position));
+
+        ProductDTO productDTO = productList.get(position);
+        holder.onBind(productDTO);
     }
 
     @Override
     public int getItemCount() {
-        return timeList.size();
+        return productList.size();
     }
 
-    public void addItem(String time){
-        timeList.add(time);
+    public void addItem(ProductDTO productDTO){
+        productList.add(productDTO);
     }
 
     //메인에서 접근하는 메소드
-    public void setOnItemClickListener(OnItemClickListener listener){
-        this.listener = listener;
-    }
+//    public void setOnItemClickListener(OnItemClickListener listener){
+//        this.listener = listener;
+//    }
 
-    @Override
-    public void onItemClick(StoreListAdapter.ViewHolder holderm, View view, int position) {
-        if(listener != null){
-            listener.onItemClick(holderm, view, position);
-        }
-    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView time_text;
+        ImageView product_image;
+        TextView product_name;
+        TextView product_price;
+
 
 
         public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
-            time_text = itemView.findViewById(R.id.time_text);
+            product_image = itemView.findViewById(R.id.product_image);
+            product_name = itemView.findViewById(R.id.product_name);
+            product_price = itemView.findViewById(R.id.product_price);
 
 
 /*            itemView.setOnClickListener(new View.OnClickListener() {
@@ -89,13 +92,19 @@ public class TimeListAdapter extends
             });*/
         }
 
-        public void onBind(String time){
-            time_text.setText(time);
+        public void onBind(ProductDTO productDTO){
+            Log.d("main: ", "onBind: " + productDTO.getProduct_name() + productDTO.getProduct_price());
+            String name = productDTO.getProduct_name();
+            int price = productDTO.getProduct_price();
+            product_name.setText(name);
+            product_price.setText(price + "원");
         }
+
+
     }
 
-    public String getItem(int position){
-        return timeList.get(position);
+    public ProductDTO getItem(int position){
+        return productList.get(position);
     }
 
 }

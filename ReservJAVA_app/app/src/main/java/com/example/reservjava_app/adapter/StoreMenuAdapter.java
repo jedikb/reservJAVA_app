@@ -27,8 +27,8 @@ public class StoreMenuAdapter extends RecyclerView.Adapter<StoreMenuAdapter.View
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            product_name = itemView.findViewById(R.id.product_name);
-            product_info = itemView.findViewById(R.id.product_info);
+//            product_name = itemView.findViewById(R.id.product_name);
+//            product_info = itemView.findViewById(R.id.product_info);
 
         }
 

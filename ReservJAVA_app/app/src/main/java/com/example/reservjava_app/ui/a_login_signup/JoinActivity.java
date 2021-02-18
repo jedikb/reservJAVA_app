@@ -19,11 +19,14 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.reservjava_app.ATask.JoinInsert;
+import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 import com.google.android.material.navigation.NavigationView;
 import com.naver.maps.map.Symbol;
@@ -44,6 +47,7 @@ public class JoinActivity extends AppCompatActivity {
     TextView Id_text, nick_text, Pw_text, Pwchk_text, Email_text, Phone_text;
     boolean vaildate = false;
     AlertDialog dialog;
+    ImageView backJoinBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,14 @@ public class JoinActivity extends AppCompatActivity {
         Email_text = findViewById(R.id.Email_text);
         Phone_text = findViewById(R.id.Phone_text);
         nick_text = findViewById(R.id.nick_text);
+        backJoinBtn = findViewById(R.id.backJoinBtn);
+        backJoinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(JoinActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         //회원가입 등록
@@ -151,13 +163,7 @@ public class JoinActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //위에 툴바 생기게 해서 네비게이션드로어 띄우고 닫을수 있게 하는 기능!
-        toolbar = findViewById(R.id.toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(JoinActivity.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
+        //취소버튼 누르면 로그인 화면으로 넘어갑니다
         resetbtn = findViewById(R.id.resetbtn);
         resetbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,49 +172,6 @@ public class JoinActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24);
-
-        NavigationView navigationView = findViewById(R.id.loginnavigation);
-        if (loginDTO == null) {  //로그인 안했을 때
-            navigationView.getMenu().findItem(R.id.nav_membershipbtn)
-                    .setVisible(false);
-            navigationView.getMenu().findItem(R.id.nav_logout)
-                    .setVisible(false);
-            navigationView.getMenu().findItem(R.id.nav_listchk)
-                    .setVisible(false);
-            navigationView.getMenu().findItem(R.id.nav_loginbtn)
-                    .setVisible(true);
-            navigationView.getMenu().findItem(R.id.nav_signupbtn)
-                    .setVisible(true);
-            navigationView.getMenu().findItem(R.id.nav_qna)
-                    .setVisible(true);
-        }
-
-        //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리 내용
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-
-                //햄버거바 메뉴 누르면 이동
-                if (id == R.id.nav_loginbtn) {
-                    Intent intent = new Intent(JoinActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                } else if (id == R.id.nav_signupbtn) {
-                    Intent intent = new Intent(JoinActivity.this, JoinActivity.class);
-                    startActivity(intent);
-                } else if (id == R.id.nav_qna) {
-                    Intent intent = new Intent(JoinActivity.this, QnAMainActivity.class);
-                    startActivity(intent);
-                }
-                return false;
-            }
-
-
-        });
-
 
         //비밀번호 다를 시 텍스트바 색상 변화
         Pwchk_text = findViewById(R.id.Pwchk_text);
