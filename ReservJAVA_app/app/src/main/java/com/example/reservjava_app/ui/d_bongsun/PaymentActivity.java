@@ -2,15 +2,21 @@ package com.example.reservjava_app.ui.d_bongsun;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
+import com.example.reservjava_app.ATask.MemberCancel;
+import com.example.reservjava_app.ATask.Payment;
 import com.example.reservjava_app.ListActivity;
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
@@ -28,10 +34,16 @@ import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDT
 
 public class PaymentActivity extends AppCompatActivity {
 
-    HomeFragment homeFragment;
+    //HomeFragment homeFragment;    //MainActivity 이동 방식으로 변경
     ListFragment listFragment;
     QnAFragment qnAFragment;
     Toolbar toolbar;
+
+    String state;
+    String member_code;
+    String booking_code;
+
+    private static String TAG = "main:PaymentActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,8 +131,7 @@ public class PaymentActivity extends AppCompatActivity {
 
         //getSupportFragmentManager().beginTransaction()
         //        .replace(R.id.container, homeFragment).commit();    //기본 첫화면 띄우기
-        BottomNavigationView bottomNavigationView =
-                findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         //하단바 아이템 클릭 이벤트 처리
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -155,6 +166,18 @@ public class PaymentActivity extends AppCompatActivity {
             }//onNavigationItemSelected()
         });
 
+        // id = ((EditText) findViewById(R.id.addrSearch)).getText().toString();
+        member_code = "101";//임시 테스트용
+        booking_code = "177";//임시 테스트용
+
+        //결재처리
+        findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                payment();
+            }//onClick()
+        });//submitBtn.setOnClickListener()
+
     }//onCreat()
 
     // 프래그먼트 이동 메소드
@@ -178,4 +201,74 @@ public class PaymentActivity extends AppCompatActivity {
         }
     }
 
-}
+    private void payment(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("안내");
+        builder.setMessage("결재 하시겠습니까?");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+
+        builder.setNegativeButton("예", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String message = "예. 버튼이 눌렸습니다!";
+                Log.d(TAG, "showMessage().onClick: " + message);
+
+                Payment payment = new Payment(booking_code);
+                try {
+                    state = payment.execute().get();
+                    Log.d(TAG, "submitBtn:onClick: payment.execute().get() 실행함.");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }//try//catch
+
+                if(state.equals("1")){
+                    Log.d(TAG, "submitBtn:onClick: 결재성공 !!!");
+
+                    showAlert("결재 되었습니다.");
+                    //finish();
+                }else{
+                    Log.d(TAG, "submitBtn:onClick: 결재실패 !!!");
+
+                    showAlert("결재가 완료되지 않았습니다.");
+                    //finish();
+                }
+            }
+        });//builder.setNegativeButton()
+
+        builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String message = "아니오. 버튼이 눌렸습니다!";
+                Log.d(TAG, "showMessage().onClick: " + message);
+                if(dialog != null){
+                    dialog.dismiss();
+                }
+            }
+        });//builder.setPositiveButton()
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }//memberCancel()
+
+    private void showAlert(String msg){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //builder.setTitle("확인");
+        builder.setMessage( msg );
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+
+        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(dialog != null){
+                    dialog.dismiss();
+                }
+                finish();
+            }
+        });//builder.setPositiveButton()
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }//showAlert()
+
+}//class PaymentActivity
