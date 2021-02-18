@@ -20,13 +20,13 @@ import java.nio.charset.Charset;
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
 import static com.example.reservjava_app.Common.CommonMethod.pServer;
 
-public class Payment extends AsyncTask<Void, Void, String> {
-    private static final String TAG = "main:Payment.java";
+public class BookingCancel extends AsyncTask<Void, Void, String> {
+    private static final String TAG = "main:BookingCancel.java";
 
     //String member_code;
     String booking_code;
 
-    public Payment(String booking_code) {
+    public BookingCancel(String booking_code) {
 
         //this.member_code = member_code;
         this.booking_code = booking_code;
@@ -54,11 +54,11 @@ public class Payment extends AsyncTask<Void, Void, String> {
             //builder.addTextBody("member_code", member_code, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("booking_code", booking_code, ContentType.create("Multipart/related", "UTF-8"));
 
-            Log.d(TAG, "doInBackground: booking_code: "+ booking_code + " 결재 처리 시작.");
+            Log.d(TAG, "doInBackground: booking_code: "+ booking_code + " 예약취소 처리 시작.");
 
 
             //스프링서버 응답 URL
-            postURL = ipConfig + pServer + "/anPayment";
+            postURL = ipConfig + pServer + "/anBookingCancel";
             Log.d(TAG, "doInBackground: " + postURL);
 
             // 전송

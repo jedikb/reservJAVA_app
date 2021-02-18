@@ -2,15 +2,23 @@ package com.example.reservjava_app.ui.d_bongsun;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.example.reservjava_app.ATask.BookingCancel;
+import com.example.reservjava_app.ATask.BookingView;
+import com.example.reservjava_app.DTO.BookingDTO;
 import com.example.reservjava_app.ListActivity;
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
@@ -28,10 +36,18 @@ import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDT
 
 public class BookingViewActivity extends AppCompatActivity {
 
-    HomeFragment homeFragment;
+    //HomeFragment homeFragment;
     ListFragment listFragment;
     QnAFragment qnAFragment;
     Toolbar toolbar;
+
+    String state;
+    String member_code;
+    String booking_code;
+
+    public static BookingDTO bookingDTO = null;
+
+    private static String TAG = "main:BookingViewActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +171,33 @@ public class BookingViewActivity extends AppCompatActivity {
             }//onNavigationItemSelected()
         });
 
+        // id = ((EditText) findViewById(R.id.addrSearch)).getText().toString();
+        member_code = "101";//임시 테스트용
+        booking_code = "105";//임시 테스트용
+
+        //예약정보 화면출력
+        BookingView bookingView = new BookingView(booking_code);
+        try {
+            //showBooking( bookingView.execute().get() );
+            bookingDTO = bookingView.execute().get();
+            Log.d(TAG, "readMessage: " + " : " + bookingDTO.getBooking_code() + " : " + bookingDTO.getBooking_kind() + " : " + bookingDTO.getBooking_member_code() + " : " + bookingDTO.getBooking_business_code() + " : " + bookingDTO.getBooking_product_code() + " : " + bookingDTO.getBooking_price() + " : " + bookingDTO.getBooking_price_deposit() + " : " + bookingDTO.getBooking_num() + " : " + bookingDTO.getBooking_date() + " : " + bookingDTO.getBooking_date_reservation() + " : " + bookingDTO.getBooking_etc() + " : " + bookingDTO.getBooking_appraisal_star() + " : " + bookingDTO.getBooking_appraisal());
+            Log.d(TAG, "onCreate: bookingView.execute().get() 실행함.");
+
+            //showBooking(bookingDTO);
+            TextView business_name = (TextView) findViewById(R.id.business_name);
+            business_name.setText( String.valueOf(bookingDTO.getBooking_business_code()) );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }//try//catch
+
+        //예약취소 처리
+        findViewById(R.id.cancelBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bookingCancel();
+            }//onClick()
+        });//cancelBtn.setOnClickListener()
+
     }//onCreat()
 
     // 프래그먼트 이동 메소드
@@ -177,5 +220,81 @@ public class BookingViewActivity extends AppCompatActivity {
                     .replace(R.id.container, qnAFragment).commit();
         }
     }
+    
+    private void showBooking(BookingDTO dto){
+        TextView business_name = (TextView) findViewById(R.id.business_name);
+        business_name.setText( dto.getBooking_business_code() );
+        Log.d(TAG, "showBooking: " + dto.getBooking_business_code() );
+    }
 
-}
+    private void bookingCancel(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("안내");
+        builder.setMessage("예약을 취소 하시겠습니까?");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+
+        builder.setNegativeButton("예", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String message = "예. 버튼이 눌렸습니다!";
+                Log.d(TAG, "showMessage().onClick: " + message);
+
+                BookingCancel bookingCancel = new BookingCancel(booking_code);
+                try {
+                    state = bookingCancel.execute().get();
+                    Log.d(TAG, "cancelBtn:onClick: bookingCancel.execute().get() 실행함.");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }//try//catch
+
+                if(state.equals("1")){
+                    Log.d(TAG, "cancelBtn:onClick: 예약취소 성공 !!!");
+
+                    showAlert("예약취소 되었습니다.");
+                    //finish();
+                }else{
+                    Log.d(TAG, "cancelBtn:onClick: 예약취소 실패 !!!");
+
+                    showAlert("예약취소가 완료되지 않았습니다.");
+                    //finish();
+                }
+            }
+        });//builder.setNegativeButton()
+
+        builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String message = "아니오. 버튼이 눌렸습니다!";
+                Log.d(TAG, "showMessage().onClick: " + message);
+                if(dialog != null){
+                    dialog.dismiss();
+                }
+            }
+        });//builder.setPositiveButton()
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }//bookingCancel()
+
+    private void showAlert(String msg){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //builder.setTitle("확인");
+        builder.setMessage( msg );
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+
+        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(dialog != null){
+                    dialog.dismiss();
+                }
+                //finish();
+            }
+        });//builder.setPositiveButton()
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }//showAlert()
+
+}//class BookingViewActivity
