@@ -186,7 +186,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/business_image" />
 
                         <TextView
-                            android:id="@+id/booking_date_reservation"
+                            android:id="@+id/booking_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
 
@@ -204,7 +204,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/business_name" />
 
                         <TextView
-                            android:id="@+id/booking_price"
+                            android:id="@+id/booking_etc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
 
@@ -219,7 +219,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
 
-                            app:layout_constraintTop_toBottomOf="@+id/booking_date_reservation" />
+                            app:layout_constraintTop_toBottomOf="@+id/booking_date" />
 
                         <Button
                             android:id="@+id/cancelBtn"
@@ -237,7 +237,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
 
-                            app:layout_constraintTop_toBottomOf="@+id/booking_price" />
+                            app:layout_constraintTop_toBottomOf="@+id/booking_etc" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </ScrollView>

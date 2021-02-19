@@ -97,18 +97,21 @@ public class BookingView extends AsyncTask<Void, Void, BookingDTO> {
   public BookingDTO readMessage(InputStream inputStream) throws IOException {
     JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
 
-    int booking_code = 0;
-    int booking_kind = 0;
-    int booking_member_code = 0;
-    int booking_business_code = 0;
-    int booking_product_code = 0;
-    int booking_price = 0;
-    int booking_price_deposit = 0;
-    int booking_num = 0;
-    Date booking_date = null;
-    Date booking_date_reservation = null;
+    int    booking_code = 0;
+    int    booking_kind = 0;
+    int    booking_member_code = 0;
+    String booking_member_name = null;
+    int    booking_business_code = 0;
+    String booking_business_name = null;
+    int    booking_product_code = 0;
+    String booking_product_name = null;
+    int    booking_price = 0;
+    int    booking_price_deposit = 0;
+    int    booking_num = 0;
+    Date   booking_date = null;
+    Date   booking_date_reservation = null;
     String booking_etc = null;
-    int booking_appraisal_star = 0;
+    int    booking_appraisal_star = 0;
     String booking_appraisal = null;
 
     reader.beginObject();
@@ -119,8 +122,11 @@ public class BookingView extends AsyncTask<Void, Void, BookingDTO> {
       if      (readStr.equals("booking_code"))           booking_code          = reader.nextInt();
       else if (readStr.equals("booking_kind"))           booking_kind          = reader.nextInt();
       else if (readStr.equals("booking_member_code"))    booking_member_code   = reader.nextInt();
+      else if (readStr.equals("booking_member_name"))    booking_member_name   = reader.nextString();
       else if (readStr.equals("booking_business_code"))  booking_business_code = reader.nextInt();
+      else if (readStr.equals("booking_business_name"))  booking_business_name = reader.nextString();
       else if (readStr.equals("booking_product_code"))   booking_product_code  = reader.nextInt();
+      else if (readStr.equals("booking_product_name"))   booking_product_name  = reader.nextString();
       else if (readStr.equals("booking_price"))          booking_price         = reader.nextInt();
       else if (readStr.equals("booking_price_deposit"))  booking_price_deposit = reader.nextInt();
       else if (readStr.equals("booking_num"))            booking_num           = reader.nextInt();
@@ -137,6 +143,21 @@ public class BookingView extends AsyncTask<Void, Void, BookingDTO> {
 
     reader.endObject();
     Log.d(TAG, "readMessage: " + " : " + booking_code + " : " + booking_kind + " : " + booking_member_code + " : " + booking_business_code + " : " + booking_product_code + " : " + booking_price + " : " + booking_price_deposit + " : " + booking_num + " : " + booking_date + " : " + booking_date_reservation + " : " + booking_etc + " : " + booking_appraisal_star + " : " + booking_appraisal);
-    return new BookingDTO(booking_code, booking_kind, booking_member_code, booking_business_code, booking_product_code, booking_price, booking_price_deposit, booking_num, booking_date, booking_date_reservation, booking_etc, booking_appraisal_star, booking_appraisal);
+    return new BookingDTO(booking_code,
+                          booking_kind,
+                          booking_member_code,
+                          booking_member_name,
+                          booking_business_code,
+                          booking_business_name,
+                          booking_product_code,
+                          booking_product_name,
+                          booking_price,
+                          booking_price_deposit,
+                          booking_num,
+                          booking_date,
+                          booking_date_reservation,
+                          booking_etc,
+                          booking_appraisal_star,
+                          booking_appraisal );
   }
 }

@@ -26,20 +26,93 @@ public class BookingDTO implements Serializable {
   private int booking_appraisal_star;
   private String booking_appraisal;
 
-  public BookingDTO(int booking_code, int booking_kind, int booking_member_code, int booking_business_code, int booking_product_code, int booking_price, int booking_price_deposit, int booking_num, Date booking_date, Date booking_date_reservation, String booking_etc, int booking_appraisal_star, String booking_appraisal) {
-    this.booking_code = booking_code;
-    this.booking_kind = booking_kind;
-    this.booking_member_code = booking_member_code;
-    this.booking_business_code = booking_business_code;
-    this.booking_product_code = booking_product_code;
-    this.booking_price = booking_price;
-    this.booking_price_deposit = booking_price_deposit;
-    this.booking_num = booking_num;
-    this.booking_date = booking_date;
+  public BookingDTO(int    booking_code,
+                    int    booking_kind,
+                    int    booking_member_code,
+                    int    booking_business_code,
+                    int    booking_product_code,
+                    int    booking_price,
+                    int    booking_price_deposit,
+                    int    booking_num,
+                    Date   booking_date,
+                    Date   booking_date_reservation,
+                    String booking_etc,
+                    int    booking_appraisal_star,
+                    String booking_appraisal) {
+    this.booking_code             = booking_code;
+    this.booking_kind             = booking_kind;
+    this.booking_member_code      = booking_member_code;
+    this.booking_business_code    = booking_business_code;
+    this.booking_product_code     = booking_product_code;
+    this.booking_price            = booking_price;
+    this.booking_price_deposit    = booking_price_deposit;
+    this.booking_num              = booking_num;
+    this.booking_date             = booking_date;
     this.booking_date_reservation = booking_date_reservation;
-    this.booking_etc = booking_etc;
-    this.booking_appraisal_star = booking_appraisal_star;
-    this.booking_appraisal = booking_appraisal;
+    this.booking_etc              = booking_etc;
+    this.booking_appraisal_star   = booking_appraisal_star;
+    this.booking_appraisal        = booking_appraisal;
+  }
+
+  //조회(select) 쿼리를 위한 맴버변수 및 맴버변수를 반영한 생성자
+  private String booking_member_name, booking_business_name, booking_product_name;
+  public BookingDTO(int    booking_code,
+                    int    booking_kind,
+                    int    booking_member_code,
+                    String booking_member_name,
+                    int    booking_business_code,
+                    String booking_business_name,
+                    int    booking_product_code,
+                    String booking_product_name,
+                    int    booking_price,
+                    int    booking_price_deposit,
+                    int    booking_num,
+                    Date   booking_date,
+                    Date   booking_date_reservation,
+                    String booking_etc,
+                    int    booking_appraisal_star,
+                    String booking_appraisal) {
+    this.booking_member_name      = booking_member_name;
+    this.booking_business_name    = booking_business_name;
+    this.booking_product_name     = booking_product_name;
+
+    this.booking_code             = booking_code;
+    this.booking_kind             = booking_kind;
+    this.booking_member_code      = booking_member_code;
+    this.booking_business_code    = booking_business_code;
+    this.booking_product_code     = booking_product_code;
+    this.booking_price            = booking_price;
+    this.booking_price_deposit    = booking_price_deposit;
+    this.booking_num              = booking_num;
+    this.booking_date             = booking_date;
+    this.booking_date_reservation = booking_date_reservation;
+    this.booking_etc              = booking_etc;
+    this.booking_appraisal_star   = booking_appraisal_star;
+    this.booking_appraisal        = booking_appraisal;
+  }
+
+  public String getBooking_member_name() {
+    return booking_member_name;
+  }
+
+  public void setBooking_member_name(String booking_member_name) {
+    this.booking_member_name = booking_member_name;
+  }
+
+  public String getBooking_business_name() {
+    return booking_business_name;
+  }
+
+  public void setBooking_business_name(String booking_business_name) {
+    this.booking_business_name = booking_business_name;
+  }
+
+  public String getBooking_product_name() {
+    return booking_product_name;
+  }
+
+  public void setBooking_product_name(String booking_product_name) {
+    this.booking_product_name = booking_product_name;
   }
 
   public int getBooking_code() {

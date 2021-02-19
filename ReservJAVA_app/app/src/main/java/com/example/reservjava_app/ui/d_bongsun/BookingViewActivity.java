@@ -22,7 +22,6 @@ import com.example.reservjava_app.DTO.BookingDTO;
 import com.example.reservjava_app.ListActivity;
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
-import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
 import com.example.reservjava_app.fragment.d_bongsun.QnAFragment;
 import com.example.reservjava_app.ui.a_login_signup.JoinActivity;
@@ -183,9 +182,11 @@ public class BookingViewActivity extends AppCompatActivity {
             Log.d(TAG, "readMessage: " + " : " + bookingDTO.getBooking_code() + " : " + bookingDTO.getBooking_kind() + " : " + bookingDTO.getBooking_member_code() + " : " + bookingDTO.getBooking_business_code() + " : " + bookingDTO.getBooking_product_code() + " : " + bookingDTO.getBooking_price() + " : " + bookingDTO.getBooking_price_deposit() + " : " + bookingDTO.getBooking_num() + " : " + bookingDTO.getBooking_date() + " : " + bookingDTO.getBooking_date_reservation() + " : " + bookingDTO.getBooking_etc() + " : " + bookingDTO.getBooking_appraisal_star() + " : " + bookingDTO.getBooking_appraisal());
             Log.d(TAG, "onCreate: bookingView.execute().get() 실행함.");
 
-            //showBooking(bookingDTO);
+            showBooking(bookingDTO);
+/*
             TextView business_name = (TextView) findViewById(R.id.business_name);
             business_name.setText( String.valueOf(bookingDTO.getBooking_business_code()) );
+*/
         } catch (Exception e) {
             e.printStackTrace();
         }//try//catch
@@ -222,9 +223,12 @@ public class BookingViewActivity extends AppCompatActivity {
     }
     
     private void showBooking(BookingDTO dto){
-        TextView business_name = (TextView) findViewById(R.id.business_name);
-        business_name.setText( dto.getBooking_business_code() );
-        Log.d(TAG, "showBooking: " + dto.getBooking_business_code() );
+        ((TextView) findViewById(R.id.business_name))
+                        .setText( String.valueOf(dto.getBooking_business_name()) );
+        ((TextView) findViewById(R.id.booking_date))
+                        .setText( String.valueOf(dto.getBooking_date_reservation()) );
+        ((TextView) findViewById(R.id.booking_etc))
+                        .setText( String.valueOf(dto.getBooking_price()) );
     }
 
     private void bookingCancel(){

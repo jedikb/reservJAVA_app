@@ -181,7 +181,7 @@
                                 android:layout_marginStart="24dp"
                                 android:layout_marginEnd="24dp"
 
-                                android:id="@+id/booking_date_reserv"
+                                android:id="@+id/booking_date_reservation"
                                 />
 
                             <Button
@@ -236,7 +236,7 @@
                                 android:layout_marginStart="24dp"
                                 android:layout_marginEnd="24dp"
 
-                                android:id="@+id/booking_price1"
+                                android:id="@+id/booking_price"
                                 />
 
                             <TextView
@@ -291,7 +291,7 @@
                                 android:layout_marginStart="24dp"
                                 android:layout_marginEnd="24dp"
 
-                                android:id="@+id/booking_price3"
+                                android:id="@+id/booking_price_total"
                                 />
 
                             <TextView
@@ -358,7 +358,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
 
-                            android:text="예약시간"
+                            android:text="예약등록시간"
                             android:textSize="20sp"
                             android:gravity="center"
                             android:background="@drawable/solid_black"
@@ -369,11 +369,11 @@
                             android:layout_marginStart="24dp"
                             android:layout_marginEnd="24dp"
 
-                            android:id="@+id/booking_date_reservation"
+                            android:id="@+id/booking_date"
                             />
 
                         <TextView
-                            app:layout_constraintTop_toBottomOf="@+id/booking_date_reservation"
+                            app:layout_constraintTop_toBottomOf="@+id/booking_date"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
 
@@ -388,11 +388,11 @@
                             android:layout_marginStart="24dp"
                             android:layout_marginEnd="24dp"
 
-                            android:id="@+id/booking_price"
+                            android:id="@+id/booking_etc"
                             />
 
                         <Button
-                            app:layout_constraintTop_toBottomOf="@+id/booking_price"
+                            app:layout_constraintTop_toBottomOf="@+id/booking_etc"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
 

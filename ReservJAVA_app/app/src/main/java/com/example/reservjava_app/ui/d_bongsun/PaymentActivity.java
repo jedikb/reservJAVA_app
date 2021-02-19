@@ -14,13 +14,14 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import com.example.reservjava_app.ATask.MemberCancel;
+import com.example.reservjava_app.ATask.BookingView;
 import com.example.reservjava_app.ATask.Payment;
+import com.example.reservjava_app.DTO.BookingDTO;
 import com.example.reservjava_app.ListActivity;
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
-import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
 import com.example.reservjava_app.fragment.d_bongsun.QnAFragment;
 import com.example.reservjava_app.ui.a_login_signup.JoinActivity;
@@ -42,6 +43,8 @@ public class PaymentActivity extends AppCompatActivity {
     String state;
     String member_code;
     String booking_code;
+
+    public static BookingDTO bookingDTO = null;
 
     private static String TAG = "main:PaymentActivity";
 
@@ -170,6 +173,23 @@ public class PaymentActivity extends AppCompatActivity {
         member_code = "101";//임시 테스트용
         booking_code = "177";//임시 테스트용
 
+        //예약정보 화면출력
+        BookingView bookingView = new BookingView(booking_code);
+        try {
+            //showBooking( bookingView.execute().get() );
+            bookingDTO = bookingView.execute().get();
+            Log.d(TAG, "readMessage: " + " : " + bookingDTO.getBooking_code() + " : " + bookingDTO.getBooking_kind() + " : " + bookingDTO.getBooking_member_code() + " : " + bookingDTO.getBooking_business_code() + " : " + bookingDTO.getBooking_product_code() + " : " + bookingDTO.getBooking_price() + " : " + bookingDTO.getBooking_price_deposit() + " : " + bookingDTO.getBooking_num() + " : " + bookingDTO.getBooking_date() + " : " + bookingDTO.getBooking_date_reservation() + " : " + bookingDTO.getBooking_etc() + " : " + bookingDTO.getBooking_appraisal_star() + " : " + bookingDTO.getBooking_appraisal());
+            Log.d(TAG, "onCreate: bookingView.execute().get() 실행함.");
+
+            showBooking(bookingDTO);
+/*
+            TextView business_name = (TextView) findViewById(R.id.business_name);
+            business_name.setText( String.valueOf(bookingDTO.getBooking_business_code()) );
+*/
+        } catch (Exception e) {
+            e.printStackTrace();
+        }//try//catch
+
         //결재처리
         findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,6 +219,23 @@ public class PaymentActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, qnAFragment).commit();
         }
+    }
+
+    private void showBooking(BookingDTO dto){
+        ((TextView) findViewById(R.id.product_name))
+                .setText( String.valueOf(dto.getBooking_product_name()) );
+        ((TextView) findViewById(R.id.booking_date_reservation))
+                .setText( String.valueOf(dto.getBooking_date_reservation()) );
+        ((TextView) findViewById(R.id.booking_price))
+                .setText( String.valueOf(dto.getBooking_price()) );
+        ((TextView) findViewById(R.id.booking_price_total))
+                .setText( String.valueOf(dto.getBooking_num()) );
+        ((TextView) findViewById(R.id.business_name))
+                .setText( String.valueOf(dto.getBooking_business_name()) );
+        ((TextView) findViewById(R.id.booking_date))
+                .setText( String.valueOf(dto.getBooking_date()) );
+        ((TextView) findViewById(R.id.booking_etc))
+                .setText( String.valueOf(dto.getBooking_etc()) );
     }
 
     private void payment(){
