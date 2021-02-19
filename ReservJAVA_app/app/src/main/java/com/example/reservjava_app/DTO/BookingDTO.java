@@ -1,9 +1,24 @@
 package com.example.reservjava_app.DTO;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 public class BookingDTO implements Serializable {
+  /*
+  booking_ code             not null number
+  booking_ kind                      number
+  booking_ member_code               number
+  booking_ business_code             number
+  booking_ product_code              number
+  booking_ price                     number
+  booking_ price_deposit             number
+  booking_ num                       number
+  booking_ date                      date
+  booking_ date_reservation          date
+  booking_ etc                       varchar2(1000)
+  booking_ appraisal_star            number
+  booking_ appraisal                 varchar2(2000)
+  */
   private int booking_code, booking_kind, booking_member_code, booking_business_code,
       booking_product_code, booking_price, booking_price_deposit, booking_num;
   private Date booking_date, booking_date_reservation;
