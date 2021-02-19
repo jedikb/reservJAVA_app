@@ -10,14 +10,14 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/loginImage"
+        android:id="@+id/header_user_pro_img"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:paddingTop="8dp"
         android:src="@drawable/user"/>
 
     <TextView
-        android:id="@+id/loginID"
+        android:id="@+id/header_user_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
@@ -25,7 +25,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/loginStr"
+        android:id="@+id/header_user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="오늘은 어떤 예약을 도와드릴까요?" />

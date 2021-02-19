@@ -131,7 +131,8 @@ public class LoginActivity extends AppCompatActivity {
           loginDTOSave();
           Intent intent = new Intent(LoginActivity.this, MainActivity.class);
           //intent.setFlags(intent.FLAG_ACTIVITY_SINGLE_TOP|intent.FLAG_ACTIVITY_CLEAR_TOP);
-          startActivity(intent);
+          intent.putExtra("login", loginData);
+          startActivityForResult(intent, 10000);
           finish();
 
         }else {
