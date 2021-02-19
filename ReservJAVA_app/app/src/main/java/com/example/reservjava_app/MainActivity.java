@@ -1,6 +1,7 @@
 package com.example.reservjava_app;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -12,6 +13,7 @@ import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +30,7 @@ import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
+import com.example.reservjava_app.ATask.LoginSelect;
 import com.example.reservjava_app.ATask.MyReview;
 import com.example.reservjava_app.ATask.SearchBusiness;
 import com.example.reservjava_app.Common.GpsTracker;
@@ -111,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
       checkRunTimePermission();
     }
 
+    loginDTO = (MemberDTO)getIntent().getSerializableExtra("login");
+
     //자동 로그인 정보 불러오기
     // 설정값 불러오기
     appData = getSharedPreferences("SAVE_LOGIN_DATA", MODE_PRIVATE);
@@ -135,40 +140,22 @@ public class MainActivity extends AppCompatActivity {
     toggle.syncState();
 
     //로그인 정보 표시하기
-
-
     sideBar(getApplicationContext());
+
+
 
     //측면메뉴 버튼 작업
     //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리
     NavigationView navigationView = findViewById(R.id.loginnavigation);
-
-//    // 헤드드로어에 로그인 정보 표시하기
+    // 헤드드로어에 로그인 정보 표시하기
 //    int userLevel = 1; // 0:일반유저, 1:관리자
-//    String loninID = "";
-//    View headerView = navigationView.getHeaderView(0);
-//    ImageView imageView = headerView.findViewById(R.id.loginImage);
-//    TextView navLoginID = headerView.findViewById(R.id.loginID);
-//    navLoginID.setText("반갑습니다 " + loninID);
-//    // imageView.setImageResource(R.drawable.su);
-//    Glide.with(this)
-//            .load(R.drawable.susu)
-//            .circleCrop()
-//            .into(imageView);
-//
-//    if(userLevel == 1){
-//      navigationView.getMenu().findItem(R.id.communi)
-//              .setVisible(true);
-//    }
-//
-//    FloatingActionButton fab = findViewById(R.id.fab);
-//    fab.setOnClickListener(new View.OnClickListener() {
-//      @Override
-//      public void onClick(View view) {
-//        Snackbar.make(view, "Replace with your own action",
-//                Snackbar.LENGTH_LONG).setAction("Action", null).show();
-//      }
-//    });
+    View headerView = navigationView.getHeaderView(0);
+    ImageView imageView = headerView.findViewById(R.id.header_user_pro_img);
+    TextView navLoginID = headerView.findViewById(R.id.header_user_id);
+    if (loginDTO != null) {
+      Glide.with(this).load(loginDTO.getMember_image()).error(R.drawable.arrow_down).into(imageView);
+      navLoginID.setText("반갑습니다 " + loginDTO.getMember_nick());
+    }
 
     if(loginDTO == null) {  //로그인 안했을 때
       navigationView.getMenu().findItem(R.id.nav_membershipbtn)
@@ -205,29 +192,29 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //햄버거바 메뉴 누르면 이동
-        if(id == R.id.nav_loginbtn){
+        if (id == R.id.nav_loginbtn) {
           drawer.close();
           Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
           startActivity(intent);
           finish();
-        }else if(id == R.id.nav_signupbtn){
+        } else if (id == R.id.nav_signupbtn) {
           drawer.close();
           Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
           startActivity(intent);
-        }else if(id == R.id.nav_qna){
+        } else if (id == R.id.nav_qna) {
           drawer.close();
           Intent intent = new Intent(getApplicationContext(), QnAMainActivity.class);
           startActivity(intent);
 
-        }else if(id == R.id.nav_membershipbtn){
+        } else if (id == R.id.nav_membershipbtn) {
           drawer.close();
-          if(loginDTO == null) {
+          if (loginDTO == null) {
             Toast.makeText(MainActivity.this, "로그인 되지 않았습니다", Toast.LENGTH_SHORT).show();
           } else {
             Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
             startActivity(intent);
           }
-        }else if(id == R.id.nav_logout){
+        } else if (id == R.id.nav_logout) {
           drawer.close();
           SharedPreferences.Editor editor = appData.edit();
           editor.clear();
@@ -237,15 +224,34 @@ public class MainActivity extends AppCompatActivity {
           Toast.makeText(MainActivity.this, "정상적으로 로그아웃 되었습니다", Toast.LENGTH_SHORT).show();
           startActivity(getIntent());
 
-        }else if(id == R.id.nav_listchk){
+        } else if (id == R.id.nav_listchk) {
           drawer.close();
           getSupportFragmentManager().beginTransaction()
-              .replace(R.id.container, listFragment).commit();
+                  .replace(R.id.container, listFragment).commit();
         }
         return false;
+
       }
 
     });
+
+
+//
+//    if(userLevel == 1){
+//      navigationView.getMenu().findItem(R.id.communi)
+//              .setVisible(true);
+//    }
+//
+//    FloatingActionButton fab = findViewById(R.id.fab);
+//    fab.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View view) {
+//        Snackbar.make(view, "Replace with your own action",
+//                Snackbar.LENGTH_LONG).setAction("Action", null).show();
+//      }
+//    });
+
+
 
     //(튕김 방지 및 속도 개선을 위해) 로딩 시 매장 정보 및 현재 위치 미리 불러오기
     //1. 전체 매장 정보를 불러오기
@@ -635,41 +641,35 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
+  LoginActivity loginActivity;
   //액티비티가 다시 활성화 되었을 때(로그인)
-
   @Override
   protected void onResume() {
     super.onResume();
-    drawer.close();
 
-    NavigationView navigationView = findViewById(R.id.loginnavigation);
-    if(loginDTO == null) {  //로그인 안했을 때
-      navigationView.getMenu().findItem(R.id.nav_membershipbtn)
-          .setVisible(false);
-      navigationView.getMenu().findItem(R.id.nav_logout)
-          .setVisible(false);
-      navigationView.getMenu().findItem(R.id.nav_listchk)
-          .setVisible(false);
-      navigationView.getMenu().findItem(R.id.nav_loginbtn)
-          .setVisible(true);
-      navigationView.getMenu().findItem(R.id.nav_signupbtn)
-          .setVisible(true);
-      navigationView.getMenu().findItem(R.id.nav_qna)
-          .setVisible(true);
-    } else {  //로그인 했을 때
-      navigationView.getMenu().findItem(R.id.nav_membershipbtn)
-          .setVisible(true);
-      navigationView.getMenu().findItem(R.id.nav_logout)
-          .setVisible(true);
-      navigationView.getMenu().findItem(R.id.nav_listchk)
-          .setVisible(true);
-      navigationView.getMenu().findItem(R.id.nav_loginbtn)
-          .setVisible(false);
-      navigationView.getMenu().findItem(R.id.nav_signupbtn)
-          .setVisible(false);
-      navigationView.getMenu().findItem(R.id.nav_qna)
-          .setVisible(true);
-    }
+
+
+
+    drawer.close();
+    //네비헤더 로그인할때 변경
+
+//    loginDTO = loginDTO.(getSharedPreferences("userData", Activity.MODE_PRIVATE));
+//    loginActivity = new LoginActivity();
+//    loginDTO.appData
+//            (getSharedPreferences("userData", Activity.MODE_PRIVATE),
+//                    loginDTO.nomalLogin(loginDTO.getMember_id(), loginDTO.getMember_pw()));
+//    loginDTO = loginDTO.appData(loginDTO("userData", Activity.MODE_PRIVATE));
+
+
+
+//    View headerView = navigationView.getHeaderView(0);
+//    ImageView header_user_pro_img = headerView.findViewById(R.id.header_user_pro_img);
+//    TextView header_user_id = headerView.findViewById(R.id.header_user_id);
+//    TextView header_user_email = headerView.findViewById(R.id.header_user_email);
+    //이미지 프로필 띄우기
+//    Glide.with(this).load(loginDTO.getMember_image()).error(R.drawable.susu).into(header_user_pro_img);
+//    header_user_id.setText(loginDTO.getMember_nick() + "님 어서오세요^^");
+//    header_user_email.setText(loginDTO.getMember_email());
 
   }
 }
