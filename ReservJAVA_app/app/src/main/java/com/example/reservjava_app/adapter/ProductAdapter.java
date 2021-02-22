@@ -25,6 +25,7 @@ public class ProductAdapter extends
 
     Context context;
     ArrayList<ProductDTO> productList;
+    ProductDTO dto;
 
     private TextView product_text;
     private int position;
@@ -54,21 +55,17 @@ public class ProductAdapter extends
         ProductDTO productDTO = productList.get(position);
         holder.onBind(productDTO);
 
-        this.position = position;
-
-
-
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 product_text.setText(productList.get(position).getProduct_name());
+                dto = productList.get(position);
             }
         });
     }
 
     public ProductDTO getDTO(){
-        ProductDTO productDTO = productList.get(position);
-        return productDTO;
+        return dto;
     }
 
 

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,8 +17,12 @@ import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.DTO.ProductDTO;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.adapter.StoreMenuAdapter;
+import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
+import com.example.reservjava_app.ui.b_where.SearchActivity;
 
 import java.util.ArrayList;
+
+import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
 public class Store extends AppCompatActivity {
 
@@ -48,23 +54,28 @@ public class Store extends AppCompatActivity {
         testBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Store.this, Reservation.class);
-                intent.putExtra("business_code", businessDTO.getBusiness_code()) ;
-                startActivity(intent);
+                if(loginDTO == null) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Store.this);
+                    builder.setTitle("알림");
+                    builder.setMessage("로그인이 필요한 페이지 입니다");
+                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    builder.show();
+
+                }else {
+                    Intent intent = new Intent(Store.this, Reservation.class);
+                    intent.putExtra("business_code", businessDTO.getBusiness_code());
+                    startActivity(intent);
+                }
             }
         });
-        //테스트용 버튼 입니다.
 
-        //Toast.makeText(this, "name : " +businessDTO.getBusiness_name() +
-        //        "info" + businessDTO.getBusiness_info(), Toast.LENGTH_SHORT).show();
-
-        /*recyclerView = findViewById(R.id.store_recycler);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-        adapter = new StoreMenuAdapter();
-        recyclerView.setAdapter(adapter);*/
 
 
     }

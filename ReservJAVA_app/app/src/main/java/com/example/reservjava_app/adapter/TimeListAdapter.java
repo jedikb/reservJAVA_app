@@ -30,6 +30,8 @@ public class TimeListAdapter extends
     private TextView time_text_view;
     private int position;
 
+    String time;
+
 
     public TimeListAdapter(Context context, ArrayList<String> timeList) {
         this.context = context;
@@ -50,18 +52,17 @@ public class TimeListAdapter extends
     //데이터 연결
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        this.position = position;
         holder.onBind(timeList.get(position));
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 time_text_view.setText(timeList.get(position));
+                time = timeList.get(position);
             }
         });
     }
 
     public String getTime(){
-        String time = timeList.get(position);
         return time;
     }
 
@@ -82,10 +83,10 @@ public class TimeListAdapter extends
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView time_text;
+
 
         public LinearLayout parentLayout;
-        public TextView time;
+        public TextView time_text;
 
 
         public ViewHolder(@NonNull View itemView) {

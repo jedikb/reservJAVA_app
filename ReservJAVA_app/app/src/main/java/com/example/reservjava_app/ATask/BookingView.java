@@ -143,7 +143,7 @@ public class BookingView extends AsyncTask<Void, Void, BookingDTO> {
 
     reader.endObject();
     Log.d(TAG, "readMessage: " + " : " + booking_code + " : " + booking_kind + " : " + booking_member_code + " : " + booking_business_code + " : " + booking_product_code + " : " + booking_price + " : " + booking_price_deposit + " : " + booking_num + " : " + booking_date + " : " + booking_date_reservation + " : " + booking_etc + " : " + booking_appraisal_star + " : " + booking_appraisal);
-    return new BookingDTO(booking_code,
+    /*return new BookingDTO(booking_code,
                           booking_kind,
                           booking_member_code,
                           booking_member_name,
@@ -158,6 +158,7 @@ public class BookingView extends AsyncTask<Void, Void, BookingDTO> {
                           booking_date_reservation,
                           booking_etc,
                           booking_appraisal_star,
-                          booking_appraisal );
+                          booking_appraisal );*/
+    return null;
   }
 }

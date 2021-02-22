@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
+import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
+
 
 public class Reservation extends AppCompatActivity {
 
@@ -42,9 +44,9 @@ public class Reservation extends AppCompatActivity {
     ArrayList<ProductDTO> productList;
     ArrayList<String> timeList;
 
-    String date, state;
+    String date = null, state, time = null;
     TextView calendar_text, time_text, product_text, person_text, per;
-    int person = 1, maxPerson = 5, minPerson = 0;
+    int person = 1, maxPerson = 5, minPerson = 1;
     int business_code;
 
     Button reservBtn, cancleBtn;
@@ -114,6 +116,7 @@ public class Reservation extends AppCompatActivity {
 
             time_text = findViewById(R.id.time_text_view);
             timeListAdapter.settime_Text(time_text);
+            time = timeListAdapter.getTime();
         }
 
 
@@ -131,7 +134,7 @@ public class Reservation extends AppCompatActivity {
 
             recyclerView_product.setAdapter(productAdapter);
 
-            productSelect = new ProductSelect(productAdapter, productList, progressDialog, business_code);
+            productSelect = new ProductSelect(productAdapter, productList, progressDialog, business_code, time);
             try {
                 productSelect.execute().get();
             } catch (Exception e) {
@@ -191,31 +194,41 @@ public class Reservation extends AppCompatActivity {
             public void onClick(View v) {
                 //예약 insert할 데이터 DTO 에 담기
                 ProductDTO productDTO = productAdapter.getDTO();
-                String gettime = timeListAdapter.getTime();
+                if (date == null) {
+                    //날짜 선택 해주세요
+                    return;
+                } else if (time == null) {
+                    //시간을 선택 해주세요
+                    return;
+                } else if (productDTO == null) {
+                    return;
+                    //상품을 선택 해주세요
+                } else {
+                    //작동
+                    bookinginsert = new BookingInsert(loginDTO.getMember_code(), business_code, productDTO.getProduct_code(), productDTO.getProduct_price(), productDTO.getProduct_price_deposit()
+                            , person, date + " " + time);
+                    try {
+                        state = bookinginsert.execute().get().trim();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
-                bookinginsert = new BookingInsert(001, business_code, productDTO.getProduct_code(), productDTO.getProduct_price(), productDTO.getProduct_price_deposit()
-                        , person, date + " " + gettime);
-                try {
-                    state = bookinginsert.execute().get().trim();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                    Log.d("bookingInsert: ", "onClick: " + productDTO.getProduct_code() + ", " + time);
 
-                Log.d("bookingInsert: ", "onClick: " + productDTO.getProduct_business_code() + gettime);
+                    if (state.equals("1")) {
+                        Toast.makeText(Reservation.this, "예약이 등록 되었습니다", Toast.LENGTH_SHORT).show();
+                        Log.d("bookingInsert:", "예약이 등록 되었습니다");
+                        finish();
+                    } else {
+                        Toast.makeText(Reservation.this, "예약에 실패하였습니다", Toast.LENGTH_SHORT).show();
+                        Log.d("bookingInsert", "예약에 실패하였습니다");
+                        finish();
+                    }
 
-                if(state.equals("1")){
-                    Toast.makeText(Reservation.this, "회원가입성공 !!!", Toast.LENGTH_SHORT).show();
-                    Log.d("bookingInsert:", "예약이 등록 되었습니다");
                     finish();
-                }else{
-                    Toast.makeText(Reservation.this, "회원가입실패 !!!", Toast.LENGTH_SHORT).show();
-                    Log.d("bookingInsert", "예약에 실패하였습니다");
-                    finish();
-                }
-
-                finish();
+                }//if else
             }
         });
 

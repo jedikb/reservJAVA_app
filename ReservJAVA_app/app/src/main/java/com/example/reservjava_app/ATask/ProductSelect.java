@@ -34,12 +34,14 @@ public class ProductSelect extends AsyncTask<Void, Void, Void> {
     ProductAdapter adapter;
     ProgressDialog progressDialog;
     int business_code;
+    String time;
 
-    public ProductSelect(ProductAdapter adapter, ArrayList<ProductDTO> productList, ProgressDialog progressDialog, int business_code) {
+    public ProductSelect(ProductAdapter adapter, ArrayList<ProductDTO> productList, ProgressDialog progressDialog, int business_code, String time) {
         this.adapter = adapter;
         this.productList = productList;
         this.progressDialog = progressDialog;
         this.business_code = business_code;
+        this.time = time;
     }
 
     HttpClient httpClient;
@@ -65,6 +67,7 @@ public class ProductSelect extends AsyncTask<Void, Void, Void> {
 
             // 문자열 및 데이터 추가
             builder.addTextBody("business_code", String.valueOf(business_code), ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("set_time", time, ContentType.create("Multipart/related", "UTF-8"));
             String postURL = ipConfig + pServer + "/anProductSelect";
 
             // 전송
