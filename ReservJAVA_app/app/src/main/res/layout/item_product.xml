@@ -6,7 +6,8 @@
     android:gravity="center_vertical"
     android:layout_marginBottom="8dp"
     android:background="@drawable/select_border"
-    android:weightSum="5">
+    android:weightSum="5"
+    android:id="@+id/product_list_lay">
 
 
     <ImageView

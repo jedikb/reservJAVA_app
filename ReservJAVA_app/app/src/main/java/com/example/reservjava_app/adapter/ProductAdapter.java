@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,9 @@ public class ProductAdapter extends
 
     Context context;
     ArrayList<ProductDTO> productList;
+
+    private TextView product_text;
+    private int position;
 
 
 
@@ -45,11 +49,28 @@ public class ProductAdapter extends
 
     //데이터 연결
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         ProductDTO productDTO = productList.get(position);
         holder.onBind(productDTO);
+
+        this.position = position;
+
+
+
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                product_text.setText(productList.get(position).getProduct_name());
+            }
+        });
     }
+
+    public ProductDTO getDTO(){
+        ProductDTO productDTO = productList.get(position);
+        return productDTO;
+    }
+
 
     @Override
     public int getItemCount() {
@@ -72,6 +93,8 @@ public class ProductAdapter extends
         TextView product_name;
         TextView product_price;
 
+        public LinearLayout parentLayout;
+
 
 
         public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
@@ -80,16 +103,10 @@ public class ProductAdapter extends
             product_name = itemView.findViewById(R.id.product_name);
             product_price = itemView.findViewById(R.id.product_price);
 
+            parentLayout = itemView.findViewById(R.id.product_list_lay);
 
-/*            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if(listener != null){
-                        listener.onItemClick(ViewHolder.this, v, position);
-                    }
-                }
-            });*/
+
+
         }
 
         public void onBind(ProductDTO productDTO){
@@ -107,4 +124,7 @@ public class ProductAdapter extends
         return productList.get(position);
     }
 
+    public void setproduct_text(TextView product_text){
+        this.product_text = product_text;
+    }
 }

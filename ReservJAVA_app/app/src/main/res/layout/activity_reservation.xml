@@ -187,7 +187,7 @@
                     android:textSize="24sp" />
 
                 <TextView
-                    android:id="@+id/time_text"
+                    android:id="@+id/time_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="시간을 선택하세요"
@@ -196,7 +196,7 @@
 
 
                 <TextView
-                    android:id="@+id/product_text"
+                    android:id="@+id/product_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="상품명"

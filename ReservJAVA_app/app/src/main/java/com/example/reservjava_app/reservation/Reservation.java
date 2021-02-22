@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -16,12 +15,14 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.reservjava_app.ATask.BookingInsert;
 import com.example.reservjava_app.ATask.ProductSelect;
 import com.example.reservjava_app.ATask.Timelist;
 import com.example.reservjava_app.DTO.ProductDTO;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.adapter.ProductAdapter;
 import com.example.reservjava_app.adapter.TimeListAdapter;
+import com.example.reservjava_app.ui.a_login_signup.JoinActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,6 +33,8 @@ public class Reservation extends AppCompatActivity {
 
     ProductSelect productSelect;
     Timelist timelistAsync;
+    BookingInsert bookinginsert;
+
     TimeListAdapter timeListAdapter;
     ProductAdapter productAdapter;
     ProgressDialog progressDialog;
@@ -39,7 +42,7 @@ public class Reservation extends AppCompatActivity {
     ArrayList<ProductDTO> productList;
     ArrayList<String> timeList;
 
-    String date;
+    String date, state;
     TextView calendar_text, time_text, product_text, person_text, per;
     int person = 1, maxPerson = 5, minPerson = 0;
     int business_code;
@@ -50,6 +53,8 @@ public class Reservation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
+
+
 
         Intent getintent = getIntent();
         business_code = getintent.getIntExtra("business_code", -1);
@@ -62,6 +67,9 @@ public class Reservation extends AppCompatActivity {
         calendar_text = findViewById(R.id.calendar_text);
 
         final Calendar cal = Calendar.getInstance();
+
+        //현재로 부터 30일 뒤
+        //final long month_latter = System.currentTimeMillis() + (24 * 60 * 60 * 1000) * 30;
 
         findViewById(R.id.btn_date_picker).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,30 +103,21 @@ public class Reservation extends AppCompatActivity {
             recyclerView_time.setAdapter(timeListAdapter);
 
 
+
+
             timelistAsync = new Timelist(timeList, timeListAdapter, progressDialog, business_code);
             try {
                 timelistAsync.execute().get();
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            time_text = findViewById(R.id.time_text_view);
+            timeListAdapter.settime_Text(time_text);
         }
 
 
-
-
-
-
-
-
-
-        //product select 연결
-
-
-
-        
         //상품리스트 표시
-
-
         if(business_code != -1){
             productList = new ArrayList<>();
 
@@ -138,6 +137,9 @@ public class Reservation extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            product_text = findViewById(R.id.product_text_view);
+            productAdapter.setproduct_text(product_text);
+
         }
 
 
@@ -182,11 +184,38 @@ public class Reservation extends AppCompatActivity {
 
 
 
+
         reservBtn = findViewById(R.id.rev_choice);
         reservBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //예약 insert할 데이터 DTO 에 담기
+                ProductDTO productDTO = productAdapter.getDTO();
+                String gettime = timeListAdapter.getTime();
 
+                bookinginsert = new BookingInsert(001, business_code, productDTO.getProduct_code(), productDTO.getProduct_price(), productDTO.getProduct_price_deposit()
+                        , person, date + " " + gettime);
+                try {
+                    state = bookinginsert.execute().get().trim();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d("bookingInsert: ", "onClick: " + productDTO.getProduct_business_code() + gettime);
+
+                if(state.equals("1")){
+                    Toast.makeText(Reservation.this, "회원가입성공 !!!", Toast.LENGTH_SHORT).show();
+                    Log.d("bookingInsert:", "예약이 등록 되었습니다");
+                    finish();
+                }else{
+                    Toast.makeText(Reservation.this, "회원가입실패 !!!", Toast.LENGTH_SHORT).show();
+                    Log.d("bookingInsert", "예약에 실패하였습니다");
+                    finish();
+                }
+
+                finish();
             }
         });
 

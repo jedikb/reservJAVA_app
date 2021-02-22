@@ -6,7 +6,8 @@
     android:gravity="center_vertical"
     android:layout_marginBottom="8dp"
     android:background="@drawable/background_border"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:id="@+id/time_list_lay">
 
 
 
