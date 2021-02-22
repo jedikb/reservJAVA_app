@@ -21,8 +21,8 @@ public class BookingDTO implements Serializable {
   */
   private int booking_code, booking_kind, booking_member_code, booking_business_code,
       booking_product_code, booking_price, booking_price_deposit, booking_num;
-  private Date booking_date, booking_date_reservation;
-  private String booking_etc;
+  private Date booking_date;
+  private String booking_date_reservation, booking_etc;
   private int booking_appraisal_star;
   private String booking_appraisal;
 
@@ -35,7 +35,7 @@ public class BookingDTO implements Serializable {
                     int    booking_price_deposit,
                     int    booking_num,
                     Date   booking_date,
-                    Date   booking_date_reservation,
+                    String   booking_date_reservation,
                     String booking_etc,
                     int    booking_appraisal_star,
                     String booking_appraisal) {
@@ -68,7 +68,7 @@ public class BookingDTO implements Serializable {
                     int    booking_price_deposit,
                     int    booking_num,
                     Date   booking_date,
-                    Date   booking_date_reservation,
+                    String   booking_date_reservation,
                     String booking_etc,
                     int    booking_appraisal_star,
                     String booking_appraisal) {
@@ -187,11 +187,11 @@ public class BookingDTO implements Serializable {
     this.booking_date = booking_date;
   }
 
-  public Date getBooking_date_reservation() {
+  public String getBooking_date_reservation() {
     return booking_date_reservation;
   }
 
-  public void setBooking_date_reservation(Date booking_date_reservation) {
+  public void setBooking_date_reservation(String booking_date_reservation) {
     this.booking_date_reservation = booking_date_reservation;
   }
 
