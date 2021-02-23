@@ -6,22 +6,19 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.R;
-import com.example.reservjava_app.category.Accommodation;
-import com.example.reservjava_app.category.Exercise;
-import com.example.reservjava_app.category.Hospital;
-import com.example.reservjava_app.category.Restaurant;
-import com.google.android.material.navigation.NavigationView;
+import com.example.reservjava_app.ui.b_where.WhereListActivity;
 
+import java.util.ArrayList;
+import static com.example.reservjava_app.MainActivity.busiList;
 
 public class HomeFragment extends Fragment {
-
+    ArrayList<BusinessDTO> searchBusiList;
 
     ImageView hospital, restaurant, accommodation, exercise,
         button5, button6, button7, button8;
@@ -42,11 +39,18 @@ public class HomeFragment extends Fragment {
         button7 = rootView.findViewById(R.id.imageButton7);
         button8 = rootView.findViewById(R.id.imageButton8);
 
-        //병원 카테고리
+//병원 카테고리
         hospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Hospital.class);
+                searchBusiList = new ArrayList<>();
+                Intent intent = new Intent(getActivity(), WhereListActivity.class);
+                for(BusinessDTO dto : busiList) {
+                    if(dto.getBusiness_hashtag().indexOf("병원") >-1 ){
+                        searchBusiList.add(dto);
+                    }
+                }
+                intent.putExtra("searchBusiList", searchBusiList);
                 startActivity(intent);
             }
         });
@@ -55,7 +59,14 @@ public class HomeFragment extends Fragment {
         restaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Restaurant.class);
+                searchBusiList = new ArrayList<>();
+                Intent intent = new Intent(getActivity(), WhereListActivity.class);
+                for(BusinessDTO dto : busiList) {
+                    if(dto.getBusiness_hashtag().indexOf("음식점") >-1 ){
+                        searchBusiList.add(dto);
+                    }
+                }
+                intent.putExtra("searchBusiList", searchBusiList);
                 startActivity(intent);
             }
         });
@@ -64,7 +75,14 @@ public class HomeFragment extends Fragment {
         accommodation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Accommodation.class);
+                searchBusiList = new ArrayList<>();
+                Intent intent = new Intent(getActivity(), WhereListActivity.class);
+                for(BusinessDTO dto : busiList) {
+                    if(dto.getBusiness_hashtag().indexOf("숙박") >-1 ){
+                        searchBusiList.add(dto);
+                    }
+                }
+                intent.putExtra("searchBusiList", searchBusiList);
                 startActivity(intent);
             }
         });
@@ -73,7 +91,14 @@ public class HomeFragment extends Fragment {
         exercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Exercise.class);
+                searchBusiList = new ArrayList<>();
+                Intent intent = new Intent(getActivity(), WhereListActivity.class);
+                for(BusinessDTO dto : busiList) {
+                    if(dto.getBusiness_hashtag().indexOf("운동") >-1 ){
+                        searchBusiList.add(dto);
+                    }
+                }
+                intent.putExtra("searchBusiList", searchBusiList);
                 startActivity(intent);
             }
         });
