@@ -102,14 +102,14 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        //운동 카테고리
+        //미용 카테고리
         exercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 searchBusiList = new ArrayList<>();
                 Intent intent = new Intent(getActivity(), WhereListActivity.class);
                 for(BusinessDTO dto : busiList) {
-                    if(dto.getBusiness_hashtag().indexOf("운동") >-1 ){
+                    if(dto.getBusiness_hashtag().indexOf("미용") >-1 ){
                         searchBusiList.add(dto);
                     }
                 }

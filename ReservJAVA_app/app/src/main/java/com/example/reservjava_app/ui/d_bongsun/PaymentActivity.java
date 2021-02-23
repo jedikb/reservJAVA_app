@@ -157,13 +157,6 @@ public class PaymentActivity extends AppCompatActivity {
                                 .replace(R.id.container, listFragment).commit();
                         return true;
 
-                    //테스트 페이지(임시) 시작
-                    case R.id.testItem:
-                        intent = new Intent(getApplicationContext(), ListActivity.class);
-                        startActivity(intent);
-                        return true;
-                    //테스트 페이지(임시) 끝
-
                 }//switch
                 return false;
             }//onNavigationItemSelected()
