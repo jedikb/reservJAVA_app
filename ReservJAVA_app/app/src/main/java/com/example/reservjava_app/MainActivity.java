@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
   MemberCancelFragment memberCancelFragment;
   PaymentFragment paymentFragment;
 */
-  QnAFragment qnAFragment;
   Toolbar toolbar;
   int member_kind=0;
   //데이터 공유
@@ -282,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
     memberCancelFragment = new MemberCancelFragment();
     paymentFragment = new PaymentFragment();
 */
-    qnAFragment = new QnAFragment();
+
 
     getSupportFragmentManager().beginTransaction()
             .replace(R.id.container, homeFragment).commit();    //기본 첫화면(homeFragment) 띄우기
@@ -314,12 +313,6 @@ public class MainActivity extends AppCompatActivity {
                     .replace(R.id.container, listFragment).commit();
             return true;
 
-          //테스트 페이지(임시) 시작
-          case R.id.testItem:
-            intent = new Intent(getApplicationContext(), ListActivity.class);
-            startActivity(intent);
-            return true;
-          //테스트 페이지(임시) 끝
         }//switch
         return false;
       }//onNavigationItemSelected()
@@ -363,9 +356,6 @@ public class MainActivity extends AppCompatActivity {
     } else if (state == 3) {
       getSupportFragmentManager().beginTransaction()
               .replace(R.id.container, listFragment).commit();
-    } else if (state == 7) {
-      getSupportFragmentManager().beginTransaction()
-          .replace(R.id.container, qnAFragment).commit();
     }
   }
 

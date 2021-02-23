@@ -28,18 +28,22 @@ public class QnAMainActivity extends AppCompatActivity {
     Toolbar toolbarqna;
     ImageView backQnAbtn;
 
+    QnAFragment qnAFragment;
+    MainActivity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qn_a_main);
 
         qnabtn = findViewById(R.id.qnabtn);
+        qnAFragment =new QnAFragment();
         //문의하기 화면띄우기
         qnabtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(QnAMainActivity.this, QnAFragment.class);
-                startActivity(intent);
+  /*              getSupportFragmentManager().beginTransaction()
+                    .replace(MainActivity, qnAFragment).commit();*/
             }
         });
 
@@ -63,8 +67,8 @@ public class QnAMainActivity extends AppCompatActivity {
             }
         });
 
-        toolbarqna = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbarqna);
+        //toolbarqna = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbarqna);
 
 
     }
