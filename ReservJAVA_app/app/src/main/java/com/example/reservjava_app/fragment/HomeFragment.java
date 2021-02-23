@@ -1,12 +1,14 @@
 package com.example.reservjava_app.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -23,6 +25,7 @@ public class HomeFragment extends Fragment {
     ImageView hospital, restaurant, accommodation, exercise,
         button5, button6, button7, button8;
 
+    TextView seonlover;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +41,18 @@ public class HomeFragment extends Fragment {
         button6 = rootView.findViewById(R.id.imageButton6);
         button7 = rootView.findViewById(R.id.imageButton7);
         button8 = rootView.findViewById(R.id.imageButton8);
+
+        seonlover = rootView.findViewById(R.id.seonlover);
+
+        seonlover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.instagram.com/skuukzky/"));
+                startActivity(intent);
+            }
+        });
+
+
 
 //병원 카테고리
         hospital.setOnClickListener(new View.OnClickListener() {

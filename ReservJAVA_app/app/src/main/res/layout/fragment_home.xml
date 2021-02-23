@@ -20,8 +20,8 @@
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager2"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_width="412dp"
+                android:layout_height="79dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -95,12 +95,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/samfont"
             android:gravity="center"
-            android:text="카테고리"
+            android:padding="10dp"
+            android:text="Category"
             android:textColor="#03A9F4"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/binggraefont"/>
+            android:textSize="36sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <!--버튼구간-->
@@ -115,36 +116,38 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            android:src="@drawable/yelhart"
-            android:padding="0sp"
+            android:src="@drawable/hos1"
+            android:padding="7sp"
             android:scaleType="fitXY"/>
 
         <ImageView
-            android:id="@+id/imageButton2"
+            android:id="@+id/imageButton8"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            android:src="@drawable/yelhart"
-            android:padding="0sp"
-            android:scaleType="fitXY" />
+            android:src="@drawable/food1"
+            android:padding="12sp"
+            android:scaleType="fitXY"/>
+
+
 
         <ImageButton
             android:id="@+id/imageButton3"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:padding="3sp"
+            android:scaleType="fitXY"
+            android:src="@drawable/hotel1" />
+        <ImageView
+            android:id="@+id/imageButton7"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            android:src="@drawable/yelhart"
+            android:src="@drawable/heir2"
             android:padding="0sp"
             android:scaleType="fitXY"/>
 
-        <ImageView
-            android:id="@+id/imageButton4"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:src="@drawable/yelhart"
-            android:padding="0sp"
-            android:scaleType="fitXY"/>
     </LinearLayout>
 
     <LinearLayout
@@ -158,7 +161,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            android:src="@drawable/yelhart"
+            android:src="@drawable/car1"
             android:padding="0sp"
             android:scaleType="fitXY"/>
 
@@ -167,28 +170,42 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            android:src="@drawable/yelhart"
+            android:src="@drawable/rmsid"
             android:padding="0sp"
             android:scaleType="fitXY"/>
 
         <ImageView
-            android:id="@+id/imageButton7"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/imageButton4"
+            android:layout_width="80dp"
+            android:layout_height="90dp"
             android:layout_weight="1"
-            android:src="@drawable/yelhart"
-            android:padding="0sp"
-            android:scaleType="fitXY"/>
+            android:padding="5sp"
+            android:scaleType="fitXY"
+            android:src="@drawable/museum" />
+
 
         <ImageView
-            android:id="@+id/imageButton8"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/imageButton2"
+            android:layout_width="97dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/yelhart"
             android:padding="0sp"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY"
+            android:src="@drawable/qlgodrl" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/seonlover"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:background="#F8CFFF"
+        android:gravity="center"
+        android:text="Seon Lover"
+        android:textColor="#C666D6"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/maplefont"
+        android:layout_margin="10dp"/>
 
 
 </LinearLayout>
