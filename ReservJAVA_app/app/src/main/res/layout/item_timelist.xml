@@ -10,18 +10,17 @@
     android:id="@+id/time_list_lay">
 
 
-
-
         <TextView
             android:id="@+id/time_text"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
+            android:background="#FFF59C"
+            android:gravity="center"
             android:includeFontPadding="false"
             android:text="시간"
-            android:textSize="18dp"
             android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:gravity="center"/>
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
 
 

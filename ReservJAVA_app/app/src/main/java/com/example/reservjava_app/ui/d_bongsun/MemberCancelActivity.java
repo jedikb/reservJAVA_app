@@ -1,11 +1,9 @@
 package com.example.reservjava_app.ui.d_bongsun;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +12,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.reservjava_app.ATask.MemberCancel;
 import com.example.reservjava_app.ListActivity;
@@ -21,15 +20,9 @@ import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.fragment.ListFragment;
 import com.example.reservjava_app.fragment.d_bongsun.QnAFragment;
-import com.example.reservjava_app.ui.a_login_signup.JoinActivity;
-import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
 import com.example.reservjava_app.ui.a_login_signup.QnAMainActivity;
 import com.example.reservjava_app.ui.b_where.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
-
-import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
 public class MemberCancelActivity extends AppCompatActivity {
 
@@ -37,6 +30,7 @@ public class MemberCancelActivity extends AppCompatActivity {
     ListFragment listFragment;
     QnAFragment qnAFragment;
     Toolbar toolbar;
+    ImageView backQnABtn3;
 
     String state;
     String member_code;
@@ -48,6 +42,16 @@ public class MemberCancelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_cancel);
 
+        backQnABtn3 = findViewById(R.id.backQnABtn3);
+        backQnABtn3.setOnClickListener(new View.OnClickListener() {
+            //  백버튼 누르면 QnA메인 화면으로 돌아감
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MemberCancelActivity.this,QnAMainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         EditText addSearch = (EditText) findViewById(R.id.addrSearch);
         addSearch.setText("activity_member_cancel.xml");
 
@@ -56,71 +60,6 @@ public class MemberCancelActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);   //상단액션바를 툴바로 교체
-
-        //햄버거, 액션바 내용 변경
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24);   //햄버거 아이콘 변경
-        //getSupportActionBar().setTitle("주소");   //상단액션바(default: app_name @res.values.strings.xml)
-
-        //햄버거 버튼과 Navigation Drawer( 바로가기 메뉴)연결
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리
-        NavigationView navigationView = findViewById(R.id.loginnavigation);
-        if(loginDTO == null) {  //로그인 안했을 때
-            navigationView.getMenu().findItem(R.id.nav_membershipbtn)
-                    .setVisible(false);
-            navigationView.getMenu().findItem(R.id.nav_logout)
-                    .setVisible(false);
-            navigationView.getMenu().findItem(R.id.nav_listchk)
-                    .setVisible(false);
-            navigationView.getMenu().findItem(R.id.nav_loginbtn)
-                    .setVisible(true);
-            navigationView.getMenu().findItem(R.id.nav_signupbtn)
-                    .setVisible(true);
-            navigationView.getMenu().findItem(R.id.nav_qna)
-                    .setVisible(true);
-        } else {  //로그인 했을 때
-            navigationView.getMenu().findItem(R.id.nav_membershipbtn)
-                    .setVisible(true);
-            navigationView.getMenu().findItem(R.id.nav_logout)
-                    .setVisible(true);
-            navigationView.getMenu().findItem(R.id.nav_listchk)
-                    .setVisible(true);
-            navigationView.getMenu().findItem(R.id.nav_loginbtn)
-                    .setVisible(false);
-            navigationView.getMenu().findItem(R.id.nav_signupbtn)
-                    .setVisible(false);
-            navigationView.getMenu().findItem(R.id.nav_qna)
-                    .setVisible(true);
-        }
-
-        //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리 내용
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-
-                //햄버거바 메뉴 누르면 이동
-                if(id == R.id.nav_loginbtn){
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(intent);
-                }else if(id == R.id.nav_signupbtn){
-                    Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
-                    startActivity(intent);
-                }else if(id == R.id.nav_qna){
-                    Intent intent = new Intent(getApplicationContext(), QnAMainActivity.class);
-                    startActivity(intent);
-                }
-                return false;
-            }
-
-
-
-        });
 
         //하단바 처리
         //homeFragment = new HomeFragment();

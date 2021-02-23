@@ -149,7 +149,7 @@ public class ModProfileActivity extends AppCompatActivity {
     });*/
 
     //뒤로가기 버튼(프로필 화면으로 돌아간다)
-    findViewById(R.id.backQnABtn).setOnClickListener(new View.OnClickListener() {
+    findViewById(R.id.backQnABtn1).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
