@@ -22,12 +22,17 @@
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:text="모두의예약"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#03A9F4"
+        android:fontFamily="@font/maplefont"/>
+
 
     <TextView
         android:id="@+id/header_user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="오늘은 어떤 예약을 도와드릴까요?" />
+        android:text="오늘은 어떤 예약을 도와드릴까요?"
+        android:textColor="#03A9F4"
+        android:fontFamily="@font/maplefont"/>
 
 </LinearLayout>

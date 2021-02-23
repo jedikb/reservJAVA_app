@@ -92,7 +92,7 @@
         android:layout_marginTop="272dp"
         android:text="다음"
         android:textSize="18sp"
-        app:backgroundTint="#2196F3"
+        app:backgroundTint="#A7D8FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

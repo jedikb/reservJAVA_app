@@ -126,8 +126,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="65dp"
             android:layout_marginTop="12dp"
+            android:background="#A7D8FF"
             android:text="방문"
             android:textSize="18sp"
+            app:backgroundTint="#A7D8FF"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pro_tv_name" />
 
@@ -139,6 +141,7 @@
             android:layout_marginEnd="65dp"
             android:text="리뷰"
             android:textSize="18sp"
+            app:backgroundTint="#A7D8FF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/visitListBtn"

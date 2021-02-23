@@ -13,11 +13,12 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#A7D8FF"
         android:theme="@style/ThemeOverlay.AppCompat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_weight="1">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -71,6 +72,7 @@
                 android:fontFamily="@font/font"
                 android:gravity="center"
                 android:text="아이디"
+                android:textColor="#A7D8FF"
                 android:textSize="26dp"></TextView>
 
             <EditText
@@ -90,7 +92,8 @@
                 android:layout_weight="0.1"
                 android:fontFamily="@font/maplefont"
                 android:text="확인"
-                android:textSize="17dp" />
+                android:textSize="17dp"
+                app:backgroundTint="#A7D8FF" />
 
         </LinearLayout>
     </ScrollView>
@@ -116,6 +119,7 @@
                 android:fontFamily="@font/font"
                 android:gravity="center"
                 android:text="비밀번호"
+                android:textColor="#A7D8FF"
                 android:textSize="26dp"></TextView>
 
             <EditText
@@ -150,6 +154,7 @@
                 android:fontFamily="@font/font"
                 android:gravity="center"
                 android:text="비번확인"
+                android:textColor="#A7D8FF"
                 android:textSize="26dp"></TextView>
 
             <EditText
@@ -184,6 +189,7 @@
                 android:fontFamily="@font/font"
                 android:gravity="center"
                 android:text="닉네임"
+                android:textColor="#A7D8FF"
                 android:textSize="26dp"></TextView>
 
             <EditText
@@ -218,6 +224,7 @@
                 android:fontFamily="@font/font"
                 android:gravity="center"
                 android:text="이메일"
+                android:textColor="#A7D8FF"
                 android:textSize="26dp"></TextView>
 
             <EditText
@@ -252,6 +259,7 @@
                 android:fontFamily="@font/font"
                 android:gravity="center"
                 android:text="폰번호"
+                android:textColor="#A7D8FF"
                 android:textSize="26dp"></TextView>
 
             <EditText
@@ -284,7 +292,9 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/maplefont"
                 android:text="가입"
-                android:textSize="20dp" />
+                android:textColor="#A7D8FF"
+                android:textSize="20dp"
+                app:backgroundTint="#FFF59C" />
 
             <Button
                 android:id="@+id/resetbtn"
@@ -294,7 +304,8 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/maplefont"
                 android:text="취소"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                app:backgroundTint="#A7D8FF" />
 
         </LinearLayout>
     </ScrollView>

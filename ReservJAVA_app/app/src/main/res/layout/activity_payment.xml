@@ -31,57 +31,54 @@
                 android:layout_height="wrap_content"
                 android:theme="@style/ThemeOverlay.AppCompat"
                 >
+
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
+                    android:background="#A7D8FF"
                     app:popupTheme="@style/Widget.AppCompat.Toolbar"
-                    app:titleTextColor="#000000"
-                    >
+                    app:titleTextColor="#000000">
                     <!-- 상단바 시작 -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        >
+                        android:orientation="horizontal">
                         <!-- 뒤로가기 아이콘(아이콘 상단여백 조절을위해 검색입력창과 분리시킴) -->
                         <ImageView
                             android:id="@+id/backQnABtn"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_marginTop="13dp"
-                            android:src="@drawable/navigate_before"
-                            />
+                            android:src="@drawable/navigate_before" />
+
                         <LinearLayout
-                            android:layout_height="30dp"
                             android:layout_width="0dp"
-                            android:layout_weight="1"
+                            android:layout_height="30dp"
                             android:layout_marginTop="13dp"
-                            >
+                            android:layout_weight="1">
                             <!-- 검색입력창(주소or검색) -->
                             <EditText
                                 android:id="@+id/addrSearch"
                                 android:layout_width="0dp"
                                 android:layout_height="25dp"
-                                android:layout_weight="1"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="10dp"
+                                android:layout_weight="1"
                                 android:background="@drawable/solid_black"
                                 android:gravity="center"
                                 android:hint=""
                                 android:textColor="#000"
-                                android:textSize="18sp"
-                                />
+                                android:textSize="18sp" />
                             <!-- 검색아이콘 -->
                             <ImageView
                                 android:id="@+id/searchBtn"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:layout_marginTop="1dp"
                                 android:layout_marginLeft="10dp"
+                                android:layout_marginTop="1dp"
                                 android:layout_marginRight="30dp"
-                                android:src="@drawable/ic_search_black_24dp"
-                                />
+                                android:src="@drawable/ic_search_black_24dp" />
                         </LinearLayout>
                     </LinearLayout>
                     <!-- 상단바 끝 -->
@@ -185,22 +182,22 @@
                                 />
 
                             <Button
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-
-                                android:text="변경"
-                                android:textSize="16sp"
-                                android:gravity="center"
-                                android:background="@drawable/solid_black"
-
+                                android:id="@+id/dateChangeBtn"
                                 android:layout_width="wrap_content"
+
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="0dp"
                                 android:layout_marginStart="24dp"
+                                android:layout_marginTop="0dp"
                                 android:layout_marginEnd="24dp"
 
-                                android:id="@+id/dateChangeBtn"
-                                />
+                                android:background="@drawable/solid_black"
+                                android:gravity="center"
+                                android:text="변경"
+                                android:textSize="16sp"
+                                app:backgroundTint="#A7D8FF"
+
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
 
                         </LinearLayout>
 
