@@ -98,6 +98,7 @@
             android:layout_marginBottom="8dp"
             android:text="프로필"
             android:textSize="18sp"
+            app:backgroundTint="#A7D8FF"
             app:layout_constraintBottom_toTopOf="@+id/setAddrBtn"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -126,6 +127,7 @@
             android:layout_marginBottom="16dp"
             android:text="새 위치"
             android:textSize="18sp"
+            app:backgroundTint="#A7D8FF"
             app:layout_constraintBottom_toTopOf="@+id/tvAddr"
             app:layout_constraintEnd_toEndOf="parent" />
 

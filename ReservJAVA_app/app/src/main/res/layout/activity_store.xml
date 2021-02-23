@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="매장이름"
-            android:textColor="#000000"
+            android:textColor="#03A9F4"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -72,21 +72,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/business_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="매장정보"
-                    android:textColor="#000000"
-                    android:textSize="18dp"
-                    android:gravity="center"/>
+                    android:textColor="#03A9F4"
+                    android:textSize="18dp" />
 
                 <Button
                     android:id="@+id/testBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="임시페이지전환"
-                    />
+                    app:backgroundTint="#A7D8FF" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
