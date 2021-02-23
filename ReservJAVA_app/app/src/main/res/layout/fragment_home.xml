@@ -75,6 +75,8 @@
                 android:paddingRight="4dp"
                 android:paddingBottom="4dp"
                 android:text="모두 보기>"
+                android:fontFamily="@font/binggraefont"
+                android:textColor="#FFA59E"
                 app:layout_constraintBottom_toBottomOf="@+id/viewPager2"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -95,8 +97,10 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="카테고리"
+            android:textColor="#03A9F4"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/binggraefont"/>
     </LinearLayout>
 
     <!--버튼구간-->
@@ -106,33 +110,41 @@
         android:orientation="horizontal"
         android:weightSum="4">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imageButton1"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@drawable/yelhart"
+            android:padding="0sp"
+            android:scaleType="fitXY"/>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imageButton2"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@drawable/yelhart"
+            android:padding="0sp"
+            android:scaleType="fitXY" />
 
         <ImageButton
             android:id="@+id/imageButton3"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@drawable/yelhart"
+            android:padding="0sp"
+            android:scaleType="fitXY"/>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imageButton4"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@drawable/yelhart"
+            android:padding="0sp"
+            android:scaleType="fitXY"/>
     </LinearLayout>
 
     <LinearLayout
@@ -141,33 +153,41 @@
         android:orientation="horizontal"
         android:weightSum="4">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imageButton5"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@drawable/yelhart"
+            android:padding="0sp"
+            android:scaleType="fitXY"/>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imageButton6"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@drawable/yelhart"
+            android:padding="0sp"
+            android:scaleType="fitXY"/>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imageButton7"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@drawable/yelhart"
+            android:padding="0sp"
+            android:scaleType="fitXY"/>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imageButton8"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@drawable/yelhart"
+            android:padding="0sp"
+            android:scaleType="fitXY"/>
     </LinearLayout>
 
 
