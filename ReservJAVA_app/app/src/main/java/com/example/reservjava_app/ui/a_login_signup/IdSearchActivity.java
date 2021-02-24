@@ -19,7 +19,7 @@ public class IdSearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_id_search);
 
         //백버튼 누르면 아이디 비번 찾기 메인화면으로 넘어감
-        findViewById(R.id.backBtn3).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.idsearchbakbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(IdSearchActivity.this,LogPwSearchActivity.class);

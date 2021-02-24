@@ -16,7 +16,7 @@ public class PwSearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pw_search);
 
         //백버튼 누르면 아이디 비번 찾기 메인화면으로 넘어감
-        findViewById(R.id.backBtn2).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.pwsearchbakbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PwSearchActivity.this,LogPwSearchActivity.class);
