@@ -77,11 +77,13 @@
         android:layout_marginTop="192dp"
         android:fontFamily="@font/soojinfont"
         android:text="인증번호 받기"
-        android:textColor="#31BCFB"
+        android:textColor="@color/white"
         android:textSize="18sp"
-        app:backgroundTint="#A7F2FF"
+        app:backgroundTint="#A7D8FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.94"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#FFF490"
+        app:strokeWidth="2dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

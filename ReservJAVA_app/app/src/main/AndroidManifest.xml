@@ -55,7 +55,7 @@ FINE_LOCATION 정확한 위치에 접근할 수 있는 권한
         android:supportsRtl="true"
         android:theme="@style/Theme.ReservJAVA_app"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.a_login_signup.JoinActivity"></activity>
+        <activity android:name=".ui.a_login_signup.JoinActivity"/>
         <activity android:name=".MainActivity" /> <!-- <activity android:launchMode="singleInstance" android:name=".MainActivity"></activity> -->
         <activity android:name=".ListActivity" />
         <activity android:name=".ui.a_login_signup.QnAMainActivity" />

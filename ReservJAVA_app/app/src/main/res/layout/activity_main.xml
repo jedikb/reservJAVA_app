@@ -35,7 +35,7 @@
                     android:id="@+id/backJoinBtn"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="#A7F2FF"
+                    android:background="#A7D8FF"
                     app:popupTheme="@style/Widget.AppCompat.Toolbar"
                     app:titleTextColor="#000000">
                     <!-- 상단바 시작 -->

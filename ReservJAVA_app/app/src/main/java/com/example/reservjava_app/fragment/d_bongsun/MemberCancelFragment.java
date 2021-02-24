@@ -39,7 +39,7 @@ public class MemberCancelFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         ViewGroup viewGroup = (ViewGroup) inflater.inflate  //viewGroup 정의
-                (R.layout.fragment_member_cancel, container, false);
+                (R.layout.activity_member_cancel, container, false);
 
         //activity = (MainActivity) getActivity();
 

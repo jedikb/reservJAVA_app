@@ -196,23 +196,26 @@
             />
 
         <Button
-            app:layout_constraintTop_toBottomOf="@+id/booking_etc"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-
-            android:text="예약취소"
-            android:textSize="24sp"
-            android:gravity="center"
-            android:background="@drawable/solid_black"
-
+            android:id="@+id/cancelBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+
             android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
 
-            android:id="@+id/cancelBtn"
-            />
+            android:backgroundTint="#A7D8FF"
+            android:gravity="center"
+            android:text="예약취소"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/soojinfont"
+
+
+            app:layout_constraintTop_toBottomOf="@+id/booking_etc"
+            app:strokeColor="#FFF490"
+            app:strokeWidth="2dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!-- 내용 화면 끝 -->

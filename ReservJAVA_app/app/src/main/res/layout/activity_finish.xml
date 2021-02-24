@@ -25,30 +25,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="388dp"
-        android:text="Main"
         android:fontFamily="@font/soojinfont"
+        android:text="Main"
+        android:textColor="#FBF29E"
         android:textSize="24sp"
         app:backgroundTint="#A7F2FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.236"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textColor="#FBF29E"/>
+        app:strokeColor="#6CD1FF"
+        app:strokeWidth="2dp" />
 
     <Button
         android:id="@+id/loginbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="388dp"
-        android:text="Login"
         android:fontFamily="@font/soojinfont"
+        android:text="Login"
+        android:textColor="#FBF29E"
         android:textSize="24sp"
         app:backgroundTint="#A7F2FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.368"
         app:layout_constraintStart_toEndOf="@+id/mainbtn"
         app:layout_constraintTop_toTopOf="parent"
-        android:textColor="#FBF29E"/>
+        app:strokeColor="#6CD1FF"
+        app:strokeWidth="2dp" />
 
     <TextView
         android:id="@+id/textView8"

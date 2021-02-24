@@ -56,12 +56,14 @@
         android:insetLeft="14dp"
         android:insetRight="14dp"
         android:text="아이디 찾기"
-        android:textColor="#FFF6A2"
+        android:textColor="@color/white"
         android:textSize="30sp"
         app:backgroundTint="#A7D8FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#FFF490"
+        app:strokeWidth="2dp" />
 
     <Button
         android:id="@+id/PassSearch"
@@ -71,11 +73,13 @@
         android:insetLeft="14dp"
         android:insetRight="14dp"
         android:text="비밀번호 찾기"
+        android:textColor="@color/white"
         android:textSize="30sp"
         app:backgroundTint="#A7D8FF"
-        android:textColor="#FFF6A2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#FFF490"
+        app:strokeWidth="2dp" />
 
 </LinearLayout>

@@ -173,19 +173,18 @@
             />
 
         <LinearLayout
-            app:layout_constraintTop_toBottomOf="@+id/board_file"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="364dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="24dp"
+
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
 
             android:gravity="center"
             android:orientation="horizontal"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            >
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/board_file">
 
             <Button
                 android:id="@+id/submitBtn"
@@ -203,7 +202,9 @@
                 app:backgroundTint="#A7D8FF"
 
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:strokeColor="#FFF490"
+                app:strokeWidth="2dp" />
 
             <Button
                 android:id="@+id/cancelBtn"
@@ -221,7 +222,9 @@
                 app:backgroundTint="#A7D8FF"
 
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:strokeColor="#FFF490"
+                app:strokeWidth="2dp" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

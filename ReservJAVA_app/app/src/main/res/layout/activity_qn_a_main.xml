@@ -45,12 +45,12 @@
                 android:id="@+id/ansdmlgkrl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="120dp"
-                android:fontFamily="@font/binggraefont"
+                android:layout_marginLeft="130dp"
+                android:fontFamily="@font/soojinfont"
                 android:gravity="center"
                 android:text="문의하기"
                 android:textColor="@color/white"
-                android:textSize="27dp" />
+                android:textSize="24dp" />
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -108,7 +108,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#FFF490"
+        app:strokeWidth="2dp" />
 
     <Button
         android:id="@+id/faqbtn"
@@ -118,13 +120,15 @@
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/maplefont"
         android:text="자주묻는질문"
-        android:textColor="#A7D8FF"
+        android:textColor="@color/white"
         android:textSize="24sp"
-        app:backgroundTint="#FFF59C"
+        app:backgroundTint="#A7D8FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/qnabtn" />
+        app:layout_constraintTop_toBottomOf="@+id/qnabtn"
+        app:strokeColor="#FFF490"
+        app:strokeWidth="2dp" />
 
     <Button
         android:id="@+id/drawalbtn"
@@ -138,5 +142,7 @@
         app:backgroundTint="#A7D8FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/faqbtn" />
+        app:layout_constraintTop_toBottomOf="@+id/faqbtn"
+        app:strokeColor="#FFF490"
+        app:strokeWidth="2dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

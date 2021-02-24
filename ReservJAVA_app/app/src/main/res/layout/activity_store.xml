@@ -87,7 +87,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="임시페이지전환"
-                    app:backgroundTint="#A7D8FF" />
+                    app:backgroundTint="#A7D8FF"
+                    app:strokeColor="#FFF490"
+                    app:strokeWidth="2dp"
+                    android:fontFamily="@font/font"/>
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
