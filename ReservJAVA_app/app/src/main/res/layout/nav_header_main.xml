@@ -11,21 +11,21 @@
 
     <ImageView
         android:id="@+id/header_user_pro_img"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="74dp"
+        android:layout_height="61dp"
         android:paddingTop="8dp"
-        android:src="@drawable/user"
-        />
+        android:src="@drawable/user" />
 
     <TextView
         android:id="@+id/header_user_id"
-        android:layout_width="match_parent"
+        android:layout_width="269dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/maplefont"
         android:paddingTop="8dp"
         android:text="모두의예약"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="#25CADF" />
+        android:textColor="#25CADF"
+        android:textSize="18dp" />
 
 
     <TextView
@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/maplefont"
         android:text="오늘은 어떤 예약을 도와드릴까요?"
-        android:textColor="#25CADF" />
+        android:textColor="#25CADF"
+        android:textSize="18dp" />
 
 </LinearLayout>

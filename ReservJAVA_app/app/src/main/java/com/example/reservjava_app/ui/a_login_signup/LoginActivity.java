@@ -136,8 +136,8 @@ public class LoginActivity extends AppCompatActivity {
           finish();
 
         }else {
-          Toast.makeText(LoginActivity.this, "아이디나 비밀번호가 일치안함 !!!", Toast.LENGTH_SHORT).show();
-          Log.d("main:login", "아이디나 비밀번호가 일치안함 !!!");
+          Toast.makeText(LoginActivity.this, "아이디나 비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
+          Log.d("main:login", "아이디나 비밀번호가 일치하지 않습니다");
           editID.setText(""); editPW.setText("");
           editID.requestFocus();
         }

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.reservjava_app.ATask.MyReview;
 import com.example.reservjava_app.DTO.ReviewDTO;
+import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.adapter.MyReviewAdapter;
 import com.example.reservjava_app.adapter.MyVisitAdapter;
@@ -25,7 +26,7 @@ public class ProfileActivity extends AppCompatActivity {
   public static ReviewDTO reviewSetItem = null;
   RecyclerView recyclerView;
   TextView pro_tv_name;
-  ImageView faceImg;
+  ImageView faceImg, profilebackBtn;
 
   //리사이클러뷰
   MyReview myReview;
@@ -90,11 +91,13 @@ public class ProfileActivity extends AppCompatActivity {
       }
     });
 
-    //뒤로가기 버튼(이전 화면으로 돌아간다-임시:Search)
-    findViewById(R.id.backQnABtn1).setOnClickListener(new View.OnClickListener() {
+    //뒤로가기 버튼(메인화면으로 돌아감)
+    profilebackBtn = findViewById(R.id.profilebackBtn);
+    profilebackBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        finish();
+        Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+        startActivity(intent);
       }
     });
 

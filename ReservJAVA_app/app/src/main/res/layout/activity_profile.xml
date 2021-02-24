@@ -32,54 +32,40 @@
             app:popupTheme="@style/Widget.AppCompat.Toolbar"
             android:background="#A7D8FF">
 
+            <!-- 뒤로가기 -->
+            <ImageView
+                android:id="@+id/profilebackBtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:src="@drawable/navigate_before"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!--상단바-->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/topLayout"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <!-- 뒤로가기 -->
-        <ImageView
-            android:id="@+id/backQnABtn1"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:src="@drawable/navigate_before"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <!-- 검색창(주소or검색) -->
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <!--상단바-->
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_width="414dp"
+        android:layout_height="318dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/topLayout">
+        app:layout_constraintTop_toBottomOf="@+id/topLayout"
+        tools:layout_editor_absoluteX="-3dp">
 
         <ImageView
             android:id="@+id/faceImg"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="64dp"
             android:src="@drawable/user"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -100,8 +86,8 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
-            android:text="소중한 OOO님"
             android:fontFamily="@font/soojinfont"
+            android:text="소중한 OOO님"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
@@ -112,43 +98,41 @@
             android:id="@+id/visitListBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="65dp"
-            android:layout_marginTop="12dp"
-            android:text="방문"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/maplefont"
+            android:text="방문"
             android:textSize="24dp"
             app:backgroundTint="#A7D8FF"
-            app:strokeColor="#FFF490"
-            app:strokeWidth="2dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pro_tv_name" />
+            app:layout_constraintTop_toBottomOf="@+id/pro_tv_name"
+            app:strokeColor="#FFF490"
+            app:strokeWidth="2dp" />
 
         <Button
             android:id="@+id/reviewListBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="65dp"
+            android:fontFamily="@font/maplefont"
             android:text="리뷰"
             android:textSize="24dp"
             app:backgroundTint="#A7D8FF"
-            app:strokeColor="#FFF490"
-            app:strokeWidth="2dp"
-            android:fontFamily="@font/maplefont"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.547"
             app:layout_constraintStart_toEndOf="@+id/visitListBtn"
-            app:layout_constraintTop_toBottomOf="@+id/pro_tv_name" />
-
+            app:layout_constraintTop_toBottomOf="@+id/pro_tv_name"
+            app:strokeColor="#FFF490"
+            app:strokeWidth="2dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="422dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="367dp"
+        android:layout_height="286dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout1" />

@@ -93,7 +93,7 @@ public class MemberCancelActivity extends AppCompatActivity {
                 return false;
             }//onNavigationItemSelected()
         });
-        
+
 
         //회원탈퇴처리
         findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
