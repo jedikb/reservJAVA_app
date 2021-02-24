@@ -59,7 +59,7 @@ public class BookingViewActivity extends AppCompatActivity {
         //1. 액티비티 화면이 A, B, C 를 만들어야 한다면
         //  액티비티 화면을 이름만 주어서 만든다.
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.backJoinBtn);
         setSupportActionBar(toolbar);   //상단액션바를 툴바로 교체
 
         //햄버거, 액션바 내용 변경

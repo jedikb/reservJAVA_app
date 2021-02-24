@@ -1,7 +1,6 @@
 package com.example.reservjava_app;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -13,7 +12,6 @@ import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,7 +28,6 @@ import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
-import com.example.reservjava_app.ATask.LoginSelect;
 import com.example.reservjava_app.ATask.MyReview;
 import com.example.reservjava_app.ATask.SearchBusiness;
 import com.example.reservjava_app.Common.GpsTracker;
@@ -41,16 +38,13 @@ import com.example.reservjava_app.adapter.MyReviewAdapter;
 import com.example.reservjava_app.adapter.SearchBusinessAdapter;
 import com.example.reservjava_app.fragment.HomeFragment;
 import com.example.reservjava_app.fragment.ListFragment;
-import com.example.reservjava_app.fragment.d_bongsun.QnAFragment;
 import com.example.reservjava_app.ui.a_login_signup.JoinActivity;
 import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
 import com.example.reservjava_app.ui.a_login_signup.QnAMainActivity;
 import com.example.reservjava_app.ui.b_where.SearchActivity;
 import com.example.reservjava_app.ui.f_profile.ProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.naver.maps.geometry.LatLng;
 
 import java.io.IOException;
@@ -123,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
       loginDTOLoad();
     }
 
-    toolbar = findViewById(R.id.toolbar);
+    toolbar = findViewById(R.id.backJoinBtn);
     setSupportActionBar(toolbar);
 
     //햄버거, 액션바 내용 변경
@@ -147,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
     //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리
     NavigationView navigationView = findViewById(R.id.loginnavigation);
     // 헤드드로어에 로그인 정보 표시하기
-//    int userLevel = 1; // 0:일반유저, 1:관리자
     View headerView = navigationView.getHeaderView(0);
     ImageView imageView = headerView.findViewById(R.id.header_user_pro_img);
     TextView navLoginID = headerView.findViewById(R.id.header_user_id);
@@ -198,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
           finish();
         } else if (id == R.id.nav_signupbtn) {
           drawer.close();
-          Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
+          Intent intent = new Intent(MainActivity.this, JoinActivity.class);
           startActivity(intent);
         } else if (id == R.id.nav_qna) {
           drawer.close();
@@ -656,10 +649,7 @@ public class MainActivity extends AppCompatActivity {
 //    ImageView header_user_pro_img = headerView.findViewById(R.id.header_user_pro_img);
 //    TextView header_user_id = headerView.findViewById(R.id.header_user_id);
 //    TextView header_user_email = headerView.findViewById(R.id.header_user_email);
-    //이미지 프로필 띄우기
-//    Glide.with(this).load(loginDTO.getMember_image()).error(R.drawable.susu).into(header_user_pro_img);
-//    header_user_id.setText(loginDTO.getMember_nick() + "님 어서오세요^^");
-//    header_user_email.setText(loginDTO.getMember_email());
+
 
   }
 }

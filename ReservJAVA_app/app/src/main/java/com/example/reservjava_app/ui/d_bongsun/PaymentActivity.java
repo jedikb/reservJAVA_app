@@ -59,7 +59,7 @@ public class PaymentActivity extends AppCompatActivity {
         //1. 액티비티 화면이 A, B, C 를 만들어야 한다면
         //  액티비티 화면을 이름만 주어서 만든다.
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.backJoinBtn);
         setSupportActionBar(toolbar);   //상단액션바를 툴바로 교체
 
         //햄버거, 액션바 내용 변경
@@ -114,7 +114,7 @@ public class PaymentActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                 }else if(id == R.id.nav_signupbtn){
-                    Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
+                    Intent intent = new Intent(PaymentActivity.this, JoinActivity.class);
                     startActivity(intent);
                 }else if(id == R.id.nav_qna){
                     Intent intent = new Intent(getApplicationContext(), QnAMainActivity.class);

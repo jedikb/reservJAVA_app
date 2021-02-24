@@ -17,7 +17,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/backJoinBtn"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="#A7F2FF"
@@ -55,7 +55,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.146"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/autoLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/autoLogin"
+        app:strokeColor="#FFF490"
+        app:strokeWidth="2dp" />
 
     <Button
         android:id="@+id/signupBtn"
@@ -69,7 +71,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toEndOf="@+id/loginBtn"
-        app:layout_constraintTop_toBottomOf="@+id/autoLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/autoLogin"
+        app:strokeColor="#FFF490"
+        app:strokeWidth="2dp" />
 
     <TextView
         android:id="@+id/idpw"

@@ -1,52 +1,33 @@
 package com.example.reservjava_app.ui.a_login_signup;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.reservjava_app.ATask.JoinInsert;
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
-import com.google.android.material.navigation.NavigationView;
-import com.naver.maps.map.Symbol;
-
-import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
 public class JoinActivity extends AppCompatActivity {
 
     String state;
-    Button resetbtn, signupbtn, Idchk_btn;
+    Button resetbtn, signupbtn1;
     Toolbar toolbar;
     TextView Id_text, nick_text, Pw_text, Pwchk_text, Email_text, Phone_text;
-    boolean vaildate = false;
-    AlertDialog dialog;
     ImageView backJoinBtn;
 
     @Override
@@ -57,6 +38,7 @@ public class JoinActivity extends AppCompatActivity {
         //스피너 객체 선언 및 리소스를 가져오는 부분
 
         //findViewById(R.id.signupbt);
+        signupbtn1 = findViewById(R.id.signupbtn1);
         resetbtn = findViewById(R.id.resetbtn);
         Pwchk_text = findViewById(R.id.Pwchk_text);
         Pw_text = findViewById(R.id.Pw_text);
@@ -160,7 +142,7 @@ public class JoinActivity extends AppCompatActivity {
             }
         });
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.backJoinBtn);
         setSupportActionBar(toolbar);
 
         //취소버튼 누르면 로그인 화면으로 넘어갑니다
