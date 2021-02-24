@@ -14,7 +14,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:paddingTop="8dp"
-        android:src="@drawable/user"/>
+        android:src="@drawable/user"
+        />
 
     <TextView
         android:id="@+id/header_user_id"

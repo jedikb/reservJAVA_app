@@ -99,7 +99,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="Category"
-            android:textColor="#03A9F4"
+            android:textColor="#5BE1E1"
             android:textSize="36sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -198,14 +198,40 @@
         android:id="@+id/seonlover"
         android:layout_width="match_parent"
         android:layout_height="53dp"
-        android:background="#F8CFFF"
+        android:layout_margin="10dp"
+        android:background="#82FBE3"
+        android:fontFamily="@font/maplefont"
+        android:gravity="center"
+        android:text="Mun Lover"
+        android:textColor="#FBF6C6"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/seonlover2"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_margin="10dp"
+        android:background="#CFFFE2"
+        android:fontFamily="@font/maplefont"
+        android:gravity="center"
+        android:text="Gyung Lover"
+        android:textColor="#47C6FF"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/seonlover3"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_margin="10dp"
+        android:background="#FFF8BD"
+        android:fontFamily="@font/maplefont"
         android:gravity="center"
         android:text="Seon Lover"
-        android:textColor="#C666D6"
+        android:textColor="#AEFFA6"
         android:textSize="30sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/maplefont"
-        android:layout_margin="10dp"/>
+        android:textStyle="bold" />
 
 
 </LinearLayout>
