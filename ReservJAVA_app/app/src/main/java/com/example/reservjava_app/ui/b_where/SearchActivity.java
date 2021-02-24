@@ -170,32 +170,6 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
       }
     });
 
-    //(임시) 프로필로 이동
-    findViewById(R.id.moveToProfile).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-      if(loginDTO == null) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this);
-        builder.setTitle("알림");
-        builder.setMessage("로그인이 필요한 페이지 입니다");
-        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialogInterface, int i) {
-            dialogInterface.dismiss();
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
-
-          }
-        });
-        builder.show();
-
-      } else {
-        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-        startActivity(intent);
-      }
-      }
-    });
-
     //백 버튼
     findViewById(R.id.search_backBtn).setOnClickListener(new View.OnClickListener() {
       @Override

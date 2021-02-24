@@ -51,49 +51,6 @@ public class ListFragment extends Fragment {
         });
 */
 
-        //로그인 이동(임시)
-        viewGroup.findViewById(R.id.tologinBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity.getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //예약 이동(임시)
-        viewGroup.findViewById(R.id.moveBtn2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity.getApplicationContext(), BookingViewActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //회원탈퇴 이동(임시)
-        viewGroup.findViewById(R.id.moveBtn3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity.getApplicationContext(), MemberCancelActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //결제 이동(임시)
-        viewGroup.findViewById(R.id.moveBtn4).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity.getApplicationContext(), PaymentActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //문의 이동(임시)
-        viewGroup.findViewById(R.id.moveBtn5).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.onFragmentChange(7);
-            }
-        });
 
         return viewGroup;
 
