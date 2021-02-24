@@ -25,10 +25,7 @@ import java.util.concurrent.ExecutionException;
 public class JoinActivity extends AppCompatActivity {
 
     String state;
-    Button resetbtn, signupbtn1;
-    Toolbar toolbar;
     TextView Id_text, nick_text, Pw_text, Pwchk_text, Email_text, Phone_text;
-    ImageView backJoinBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,24 +34,20 @@ public class JoinActivity extends AppCompatActivity {
 
         //스피너 객체 선언 및 리소스를 가져오는 부분
 
-        //findViewById(R.id.signupbt);
-        signupbtn1 = findViewById(R.id.signupbtn1);
-        resetbtn = findViewById(R.id.resetbtn);
-        Pwchk_text = findViewById(R.id.Pwchk_text);
-        Pw_text = findViewById(R.id.Pw_text);
         Id_text = findViewById(R.id.Id_text);
+        nick_text = findViewById(R.id.nick_text);
+        Pw_text = findViewById(R.id.Pw_text);
+        Pwchk_text = findViewById(R.id.Pwchk_text);
         Email_text = findViewById(R.id.Email_text);
         Phone_text = findViewById(R.id.Phone_text);
-        nick_text = findViewById(R.id.nick_text);
-        backJoinBtn = findViewById(R.id.backJoinBtn);
-        backJoinBtn.setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.backJoinBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(JoinActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
-
 
         //회원가입 등록
         findViewById(R.id.signupbtn1).setOnClickListener(new View.OnClickListener() {
@@ -142,12 +135,11 @@ public class JoinActivity extends AppCompatActivity {
             }
         });
 
-        toolbar = findViewById(R.id.backJoinBtn);
-        setSupportActionBar(toolbar);
+        //toolbar = findViewById(R.id.backJoinBtn);
+        //setSupportActionBar(toolbar);
 
         //취소버튼 누르면 로그인 화면으로 넘어갑니다
-        resetbtn = findViewById(R.id.resetbtn);
-        resetbtn.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.resetbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(JoinActivity.this, LoginActivity.class);
