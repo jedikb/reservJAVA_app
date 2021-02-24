@@ -79,45 +79,5 @@
         android:layout_width="match_parent"
         android:layout_height="100dp" />
 
-    <Button
-        android:id="@+id/tologinBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="로그인화면(임시)"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/moveBtn2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="예약"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/moveBtn3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="회원탈퇴"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/moveBtn4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="결제"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/moveBtn5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="문의하기"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
 
 </LinearLayout>

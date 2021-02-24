@@ -90,7 +90,7 @@
                             android:fontFamily="@font/soojinfont"
                             android:text="리뷰작성"
                             android:textColor="#65B7FF"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             app:backgroundTint="#FFFFFF"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.054"
@@ -102,15 +102,15 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:fontFamily="@font/soojinfont"
                             android:text="가게보기"
                             android:textColor="#65B7FF"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             app:backgroundTint="#FFFFFF"
                             app:layout_constraintEnd_toStartOf="@+id/viewOrder"
                             app:layout_constraintHorizontal_bias="0.485"
                             app:layout_constraintStart_toEndOf="@+id/writeReview"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:fontFamily="@font/soojinfont"/>
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <Button
                             android:id="@+id/viewOrder"
@@ -120,7 +120,7 @@
                             android:fontFamily="@font/soojinfont"
                             android:text="주문상세"
                             android:textColor="#65B7FF"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             app:backgroundTint="#FFFFFF"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.945"
