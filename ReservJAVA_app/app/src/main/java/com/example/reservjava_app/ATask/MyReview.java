@@ -153,7 +153,7 @@ public class MyReview extends AsyncTask<Void, Void, Void> {
       } else if(readStr.equals("business_category_code")) {
         business_category_code = reader.nextInt();
       } else if(readStr.equals("booking_date_reservation")) {
-        booking_date_reservation = (reader.nextString()).substring(2, 10);
+        booking_date_reservation = reader.nextString();
       } else if(readStr.equals("business_addr")) {
         business_addr = reader.nextString();
       } else {

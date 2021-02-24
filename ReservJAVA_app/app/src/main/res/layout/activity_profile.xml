@@ -54,7 +54,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout1"
         android:layout_width="414dp"
-        android:layout_height="318dp"
+        android:layout_height="280dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/topLayout"
         tools:layout_editor_absoluteX="-3dp">
@@ -131,8 +131,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="367dp"
-        android:layout_height="286dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout1" />
