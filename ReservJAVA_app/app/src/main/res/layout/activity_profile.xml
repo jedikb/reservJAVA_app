@@ -1,29 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.drawerlayout.widget.DrawerLayout
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/drawer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start"
+    android:orientation="vertical"
     tools:context=".ProfileActivity">
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/loginnavigation"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/main_drawer_menu" />
-
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -43,7 +30,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:popupTheme="@style/Widget.AppCompat.Toolbar"
-            app:titleTextColor="#CC64DD">
+            android:background="#A7D8FF">
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -114,6 +101,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:text="소중한 OOO님"
+            android:fontFamily="@font/soojinfont"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
@@ -126,10 +114,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="65dp"
             android:layout_marginTop="12dp"
-            android:background="#A7D8FF"
             android:text="방문"
-            android:textSize="18sp"
+            android:fontFamily="@font/maplefont"
+            android:textSize="24dp"
             app:backgroundTint="#A7D8FF"
+            app:strokeColor="#FFF490"
+            app:strokeWidth="2dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pro_tv_name" />
 
@@ -140,8 +130,11 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="65dp"
             android:text="리뷰"
-            android:textSize="18sp"
+            android:textSize="24dp"
             app:backgroundTint="#A7D8FF"
+            app:strokeColor="#FFF490"
+            app:strokeWidth="2dp"
+            android:fontFamily="@font/maplefont"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/visitListBtn"
@@ -162,4 +155,3 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.drawerlayout.widget.DrawerLayout>

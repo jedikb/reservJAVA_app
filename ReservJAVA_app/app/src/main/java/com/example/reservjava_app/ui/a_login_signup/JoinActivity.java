@@ -62,6 +62,7 @@ public class JoinActivity extends AppCompatActivity {
                 //아이디 중복체크 확인
 
 
+                //입력칸에 다 입력했는지 체크
                 if (Id_text.getText().toString().length()==0){
                     Toast.makeText(JoinActivity.this,"아이디를 입력하세요", Toast.LENGTH_SHORT).show();
                     Id_text.requestFocus();
