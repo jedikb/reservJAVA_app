@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,7 +24,7 @@ public class HomeFragment extends Fragment {
     ImageView hospital, restaurant, accommodation, exercise,
         button5, button6, button7, button8;
 
-    TextView seonlover;
+    TextView seonlover, gyunglover, munlover;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,9 +41,10 @@ public class HomeFragment extends Fragment {
         button7 = rootView.findViewById(R.id.imageButton7);
         button8 = rootView.findViewById(R.id.imageButton8);
 
-        seonlover = rootView.findViewById(R.id.seonlover);
+        //수지 인스타로 넘어가는 부분
+        munlover = rootView.findViewById(R.id.munlover);
 
-        seonlover.setOnClickListener(new View.OnClickListener() {
+        munlover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.instagram.com/skuukzky/"));
@@ -52,6 +52,27 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        //아이유 인스타로 넘어가는 부분
+        gyunglover = rootView.findViewById(R.id.gyunglover);
+
+        gyunglover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.instagram.com/dlwlrma/?hl=ko"));
+                startActivity(intent);
+            }
+        });
+
+        //태연 인스타로 넘어가는 부분
+        seonlover = rootView.findViewById(R.id.seonlover);
+
+        seonlover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.instagram.com/taeyeon_ss/?hl=ko"));
+                startActivity(intent);
+            }
+        });
 
 
 //병원 카테고리

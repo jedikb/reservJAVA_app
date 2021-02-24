@@ -195,7 +195,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/seonlover"
+        android:id="@+id/munlover"
         android:layout_width="match_parent"
         android:layout_height="53dp"
         android:layout_margin="10dp"
@@ -208,7 +208,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/seonlover2"
+        android:id="@+id/gyunglover"
         android:layout_width="match_parent"
         android:layout_height="53dp"
         android:layout_margin="10dp"
@@ -221,7 +221,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/seonlover3"
+        android:id="@+id/seonlover"
         android:layout_width="match_parent"
         android:layout_height="53dp"
         android:layout_margin="10dp"

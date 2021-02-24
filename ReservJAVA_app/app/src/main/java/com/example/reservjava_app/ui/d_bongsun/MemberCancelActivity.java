@@ -52,8 +52,6 @@ public class MemberCancelActivity extends AppCompatActivity {
             }
         });
 
-        EditText addSearch = (EditText) findViewById(R.id.addrSearch);
-        addSearch.setText("activity_member_cancel.xml");
 
         //1. 액티비티 화면이 A, B, C 를 만들어야 한다면
         //  액티비티 화면을 이름만 주어서 만든다.
@@ -95,9 +93,7 @@ public class MemberCancelActivity extends AppCompatActivity {
                 return false;
             }//onNavigationItemSelected()
         });
-
-        // id = ((EditText) findViewById(R.id.addrSearch)).getText().toString();
-        member_code = "200";//임시 테스트용
+        
 
         //회원탈퇴처리
         findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
