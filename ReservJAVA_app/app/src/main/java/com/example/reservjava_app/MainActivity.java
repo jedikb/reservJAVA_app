@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
   int member_kind=0;
   //데이터 공유
   public static ArrayList<BusinessDTO> busiList= null;
-  private SharedPreferences appData;
+  public static SharedPreferences appData;
 
   //사이드바
   DrawerLayout drawer;
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
       checkRunTimePermission();
     }
 
-    loginDTO = (MemberDTO)getIntent().getSerializableExtra("login");
+    //loginDTO = (MemberDTO)getIntent().getSerializableExtra("login");
 
     //자동 로그인 정보 불러오기
     // 설정값 불러오기
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageView = headerView.findViewById(R.id.header_user_pro_img);
     TextView navLoginID = headerView.findViewById(R.id.header_user_id);
     if (loginDTO != null) {
-      Glide.with(this).load(loginDTO.getMember_image()).error(R.drawable.arrow_down).into(imageView);
+      Glide.with(this).load(loginDTO.getMember_image()).error(R.drawable.user).into(imageView);
       navLoginID.setText("반갑습니다 " + loginDTO.getMember_nick());
     }
 
@@ -226,24 +226,6 @@ public class MainActivity extends AppCompatActivity {
       }
 
     });
-
-
-//
-//    if(userLevel == 1){
-//      navigationView.getMenu().findItem(R.id.communi)
-//              .setVisible(true);
-//    }
-//
-//    FloatingActionButton fab = findViewById(R.id.fab);
-//    fab.setOnClickListener(new View.OnClickListener() {
-//      @Override
-//      public void onClick(View view) {
-//        Snackbar.make(view, "Replace with your own action",
-//                Snackbar.LENGTH_LONG).setAction("Action", null).show();
-//      }
-//    });
-
-
 
     //(튕김 방지 및 속도 개선을 위해) 로딩 시 매장 정보 및 현재 위치 미리 불러오기
     //1. 전체 매장 정보를 불러오기
@@ -564,7 +546,7 @@ public class MainActivity extends AppCompatActivity {
   private boolean saveLoginData;
   private void loginDTOLoad() {
 
-    saveLoginData = appData.getBoolean("SAVE_LOGIN_DATA", false);
+    //saveLoginData = appData.getBoolean("SAVE_LOGIN_DATA", false);
 
     int member_code=-1, member_kind=-1;
     String member_id = "", member_pw = "",
@@ -623,33 +605,54 @@ public class MainActivity extends AppCompatActivity {
       Toast.makeText(this, "인터넷이 연결되어 있지 않습니다.", Toast.LENGTH_SHORT).show();
     }
   }
-
-  LoginActivity loginActivity;
   //액티비티가 다시 활성화 되었을 때(로그인)
   @Override
   protected void onResume() {
     super.onResume();
-
-
-
-
     drawer.close();
+
     //네비헤더 로그인할때 변경
 
-//    loginDTO = loginDTO.(getSharedPreferences("userData", Activity.MODE_PRIVATE));
-//    loginActivity = new LoginActivity();
-//    loginDTO.appData
-//            (getSharedPreferences("userData", Activity.MODE_PRIVATE),
-//                    loginDTO.nomalLogin(loginDTO.getMember_id(), loginDTO.getMember_pw()));
-//    loginDTO = loginDTO.appData(loginDTO("userData", Activity.MODE_PRIVATE));
+    NavigationView navigationView = findViewById(R.id.loginnavigation);
+    if(loginDTO == null) {  //로그인 안했을 때
+      navigationView.getMenu().findItem(R.id.nav_membershipbtn)
+          .setVisible(false);
+      navigationView.getMenu().findItem(R.id.nav_logout)
+          .setVisible(false);
+      navigationView.getMenu().findItem(R.id.nav_listchk)
+          .setVisible(false);
+      navigationView.getMenu().findItem(R.id.nav_loginbtn)
+          .setVisible(true);
+      navigationView.getMenu().findItem(R.id.nav_signupbtn)
+          .setVisible(true);
+      navigationView.getMenu().findItem(R.id.nav_qna)
+          .setVisible(true);
+    } else {  //로그인 했을 때
+      navigationView.getMenu().findItem(R.id.nav_membershipbtn)
+          .setVisible(true);
+      navigationView.getMenu().findItem(R.id.nav_logout)
+          .setVisible(true);
+      navigationView.getMenu().findItem(R.id.nav_listchk)
+          .setVisible(true);
+      navigationView.getMenu().findItem(R.id.nav_loginbtn)
+          .setVisible(false);
+      navigationView.getMenu().findItem(R.id.nav_signupbtn)
+          .setVisible(false);
+      navigationView.getMenu().findItem(R.id.nav_qna)
+          .setVisible(true);
+    }
+/*    loginDTO = loginDTO.(getSharedPreferences("userData", Activity.MODE_PRIVATE));
+    loginActivity = new LoginActivity();
+    loginDTO.appData
+            (getSharedPreferences("userData", Activity.MODE_PRIVATE),
+                    loginDTO.nomalLogin(loginDTO.getMember_id(), loginDTO.getMember_pw()));
+    loginDTO = loginDTO.appData(loginDTO("userData", Activity.MODE_PRIVATE));
 
 
 
-//    View headerView = navigationView.getHeaderView(0);
-//    ImageView header_user_pro_img = headerView.findViewById(R.id.header_user_pro_img);
-//    TextView header_user_id = headerView.findViewById(R.id.header_user_id);
-//    TextView header_user_email = headerView.findViewById(R.id.header_user_email);
-
-
+    View headerView = navigationView.getHeaderView(0);
+    ImageView header_user_pro_img = headerView.findViewById(R.id.header_user_pro_img);
+    TextView header_user_id = headerView.findViewById(R.id.header_user_id);
+    TextView header_user_email = headerView.findViewById(R.id.header_user_email);*/
   }
 }

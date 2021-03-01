@@ -1,7 +1,5 @@
 package com.example.reservjava_app.ui.b_where;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PointF;
 import android.location.Address;
@@ -23,8 +21,6 @@ import androidx.fragment.app.FragmentManager;
 import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.reservation.Store;
-import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
-import com.example.reservjava_app.ui.f_profile.ProfileActivity;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.CameraAnimation;
@@ -52,7 +48,6 @@ import static com.example.reservjava_app.MainActivity.PERMISSIONS_REQUEST_CODE;
 import static com.example.reservjava_app.MainActivity.busiList;
 import static com.example.reservjava_app.MainActivity.curAddr;
 import static com.example.reservjava_app.MainActivity.currentAddress;
-import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
 
 public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapClickListener, Overlay.OnClickListener, OnMapReadyCallback, NaverMap.OnCameraChangeListener {
 
@@ -201,6 +196,10 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
     compassView.setMap(mNaverMap);
     LocationButtonView locationButtonView = findViewById(R.id.locationBtn);
     locationButtonView.setMap(mNaverMap);
+
+    if(getIntent()==null) {
+      newAddr = (int) getIntent().getSerializableExtra("newAddr");
+    }
 
     if(newAddr == 0) {    // 기본옵션(자동으로 현재 위치 불러옴)
       //주소 자동으로 입력하기
@@ -402,5 +401,22 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
 /*    Intent intent = new Intent(SearchActivity.this, MainActivity.class);
     startActivity(intent);
     finish();*/
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+
+    FragmentManager fm = getSupportFragmentManager();
+    MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map);
+    if (mapFragment == null) {   // 이거 왜 건너뛰는거지;;; null을 not null로 강제 실행 시키려 해도 안됨
+      mapFragment = MapFragment.newInstance(new NaverMapOptions()
+              .camera(new CameraPosition(new LatLng(curAddr.latitude, curAddr.longitude), 16, 0, 90))
+          //기존에 접속 했던 곳의 위치 정보가 필요함
+      );
+
+      fm.beginTransaction().add(R.id.map, mapFragment).commit();
+    }
+    mapFragment.getMapAsync(this);
   }
 }

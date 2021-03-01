@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,11 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.reservjava_app.ATask.LoginSelect;
 import com.example.reservjava_app.ATask.MyReview;
@@ -27,7 +23,6 @@ import com.example.reservjava_app.DTO.ReviewDTO;
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.adapter.MyReviewAdapter;
-import com.google.android.material.navigation.NavigationView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -131,8 +126,9 @@ public class LoginActivity extends AppCompatActivity {
           loginDTOSave();
           Intent intent = new Intent(LoginActivity.this, MainActivity.class);
           //intent.setFlags(intent.FLAG_ACTIVITY_SINGLE_TOP|intent.FLAG_ACTIVITY_CLEAR_TOP);
-          intent.putExtra("login", loginData);
-          startActivityForResult(intent, 10000);
+          //intent.putExtra("login", loginData);
+          //startActivityForResult(intent, 10000);
+          startActivity(intent);
           finish();
 
         }else {

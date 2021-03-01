@@ -1,12 +1,12 @@
 package com.example.reservjava_app.ui.b_where;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.reservjava_app.R;
 
@@ -43,6 +43,7 @@ public class AddrListActivity extends AppCompatActivity {
       Bundle extra = new Bundle();
       Intent intent = new Intent();
       extra.putString("data", data);
+      extra.putSerializable("newAddr", 1);
       intent.putExtras(extra);
       setResult(RESULT_OK, intent);
       finish();
