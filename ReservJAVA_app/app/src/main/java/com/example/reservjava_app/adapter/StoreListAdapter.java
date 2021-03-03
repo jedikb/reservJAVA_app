@@ -11,13 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.reservjava_app.DTO.BusinessDTO;
+import com.example.reservjava_app.Listner.OnItemClickListener;
 import com.example.reservjava_app.R;
 
 import java.util.ArrayList;
 
 public class StoreListAdapter extends
         RecyclerView.Adapter<StoreListAdapter.ViewHolder>
-        implements  OnItemClickListener{
+        implements OnItemClickListener {
 
     OnItemClickListener listener;
 

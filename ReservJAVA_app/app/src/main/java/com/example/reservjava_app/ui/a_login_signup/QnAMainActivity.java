@@ -17,10 +17,7 @@ import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.fragment.d_bongsun.QnAFragment;
 import com.example.reservjava_app.ui.d_bongsun.MemberCancelActivity;
-import com.example.reservjava_app.ui.f_profile.ProfileActivity;
-import com.google.android.material.navigation.NavigationView;
-
-import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
+import static com.example.reservjava_app.Common.CommonMethod.loginDTO;
 
 public class QnAMainActivity extends AppCompatActivity {
 
@@ -62,8 +59,7 @@ public class QnAMainActivity extends AppCompatActivity {
         backQnAbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(QnAMainActivity.this,MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

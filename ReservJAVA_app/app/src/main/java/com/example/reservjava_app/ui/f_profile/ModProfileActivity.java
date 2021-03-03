@@ -23,21 +23,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.reservjava_app.ATask.MemberUpdate;
 import com.example.reservjava_app.Common.CommonMethod;
-import com.example.reservjava_app.DTO.MemberDTO;
 import com.example.reservjava_app.R;
 
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
+import static com.example.reservjava_app.Common.CommonMethod.appData;
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
 import static com.example.reservjava_app.Common.CommonMethod.isNetworkConnected;
+import static com.example.reservjava_app.Common.CommonMethod.loginDTOLoad;
 import static com.example.reservjava_app.Common.CommonMethod.member_imgPath;
 import static com.example.reservjava_app.Common.CommonMethod.pServer;
-import static com.example.reservjava_app.MainActivity.appData;
-import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
+import static com.example.reservjava_app.Common.CommonMethod.loginDTO;
 
 public class ModProfileActivity extends AppCompatActivity {
   private static final String TAG = "main:ModProfileActivity";
@@ -290,21 +288,17 @@ public class ModProfileActivity extends AppCompatActivity {
             editor.putString("member_image", imageDbPathU);
             member_image = imageDbPathU;
           }
-          //loginDTO.setMember_image(member_image);
+          loginDTO.setMember_image(member_image);
           if(member_pw != "") {
             editor.putString("member_pw", member_pw);
-            //loginDTO.setMember_pw(member_pw);
           }
+
           editor.putString("member_nick", member_nick);
           editor.putString("member_tel", member_tel);
           editor.putString("member_email", member_email);
           editor.commit();
 
-          loginDTOLoad();
-
-          //loginDTO.setMember_nick(member_nick);
-          //loginDTO.setMember_tel(member_tel);
-          //loginDTO.setMember_email(member_email);
+          loginDTOLoad(ModProfileActivity.this);
 
           MemberUpdate memberUpdate = new MemberUpdate(member_id, member_pw, member_nick, member_tel, member_email, member_image, pImgDbPathU, imageDbPathU, imageRealPathU);
           memberUpdate.execute();
@@ -349,41 +343,4 @@ public class ModProfileActivity extends AppCompatActivity {
     startActivity(intent);
     finish();
   }
-
-  //로그인 정보 불러오기
-  private void loginDTOLoad() {
-
-    int member_code=-1, member_kind=-1;
-    String member_name = "", member_nick = "", member_tel = "", member_email = "", member_addr = "", member_image="";
-    java.util.Date member_date = null;
-    double member_lat = 0, member_lng= 0;
-
-    member_code = appData.getInt("member_code", -1);
-    member_id = appData.getString("member_id", "");
-    member_pw = appData.getString("member_pw", "");
-    member_kind = appData.getInt("member_kind", -1);
-    member_name = appData.getString("member_name", "");
-    member_nick = appData.getString("member_nick", "");
-    member_tel = appData.getString("member_tel", "");
-    member_email = appData.getString("member_email", "");
-    member_addr = appData.getString("member_addr", "");
-    member_image = appData.getString("member_image", "");
-    SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    try {
-      member_date = fm.parse(appData.getString("member_date", ""));
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-    Log.d(TAG, "loginDTOLoad: member_date : " + member_date);
-    member_lat = appData.getFloat("member_lat", 0);
-    member_lng = appData.getFloat("member_lat", 0);
-
-    member_lat = Double.parseDouble(String.valueOf(member_lat));
-    member_lng = Double.parseDouble(String.valueOf(member_lng));
-
-    loginDTO = new MemberDTO(member_code, member_id, member_pw, member_kind, member_name, member_nick
-        , member_tel, member_email, member_addr, member_image, member_lat, member_lng, member_date);
-
-  }
-
 }

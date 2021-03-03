@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.R;
-import com.example.reservjava_app.adapter.OnItemClickListener;
+import com.example.reservjava_app.Listner.OnItemClickListener;
 import com.example.reservjava_app.adapter.StoreListAdapter;
 import com.example.reservjava_app.reservation.Store;
 

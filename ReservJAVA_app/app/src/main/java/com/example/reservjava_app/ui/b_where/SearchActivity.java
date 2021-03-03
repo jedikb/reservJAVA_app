@@ -44,11 +44,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import static com.example.reservjava_app.MainActivity.PERMISSIONS_REQUEST_CODE;
-import static com.example.reservjava_app.MainActivity.busiList;
-import static com.example.reservjava_app.MainActivity.curAddr;
-import static com.example.reservjava_app.MainActivity.currentAddress;
+import static com.example.reservjava_app.Common.CommonMethod.*;
 
+import static com.example.reservjava_app.Common.CommonMethod.busiList;
 public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapClickListener, Overlay.OnClickListener, OnMapReadyCallback, NaverMap.OnCameraChangeListener {
 
   private static final String TAG = "main::SearchActivity";
@@ -76,7 +74,7 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
   //Searchview 사용을 고민해보자..
   EditText search_addrSearch;
   TextView tvAddr;
-  int newAddr = 0;
+  String newAddr;
   Geocoder geocoder = new Geocoder(this);
 
   @Override
@@ -105,7 +103,7 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
         new FusedLocationSource(this, PERMISSIONS_REQUEST_CODE);
 
     //지도 객체 띄우기
-    FragmentManager fm = getSupportFragmentManager();
+/*    FragmentManager fm = getSupportFragmentManager();
     MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map);
     if (mapFragment == null) {   // 이거 왜 건너뛰는거지;;; null을 not null로 강제 실행 시키려 해도 안됨
       mapFragment = MapFragment.newInstance(new NaverMapOptions()
@@ -115,7 +113,7 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
 
       fm.beginTransaction().add(R.id.map, mapFragment).commit();
     }
-    mapFragment.getMapAsync(this);
+    mapFragment.getMapAsync(this);*/
 
 
     //상단바 - 검색버튼(whereList로 이동)
@@ -197,11 +195,11 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
     LocationButtonView locationButtonView = findViewById(R.id.locationBtn);
     locationButtonView.setMap(mNaverMap);
 
-    if(getIntent()==null) {
-      newAddr = (int) getIntent().getSerializableExtra("newAddr");
-    }
+    /*Intent intent = getIntent();
 
-    if(newAddr == 0) {    // 기본옵션(자동으로 현재 위치 불러옴)
+    newAddr = intent.getStringExtra("newAddr");*/
+
+    if(newAddr == null) {    // 기본옵션(자동으로 현재 위치 불러옴)
       //주소 자동으로 입력하기
       address = currentAddress;
       address = address.substring(address.indexOf(" "));
@@ -215,11 +213,10 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
       mNaverMap.setExtent(new LatLngBounds(new LatLng(33.5, 126), new LatLng(39.35, 130)));
       mNaverMap.moveCamera(cameraUpdate);
 
-    } else if(newAddr ==1) { //새로운 주소를 설정했을 경우
+    } else if(newAddr == "1") { //새로운 주소를 설정했을 경우
       //새로 지정한 주소로 이동 및 텍스트를 변경 한다
       // 지오코더를 이용하여 주소를 위도 경도로 변환
       List<Address> list = null;
-
       String str = tvAddr.getText().toString();
       try {
         list = geocoder.getFromLocationName(str, // 지역 이름
@@ -243,10 +240,10 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
               .animate(CameraAnimation.Easing, 900);
           mNaverMap.setMinZoom(6.0);
           mNaverMap.setMaxZoom(18.0);
+          // 지도 범위가 지정된 곳까지임
           mNaverMap.setExtent(new LatLngBounds(new LatLng(33.5, 126), new LatLng(39.35, 130)));
           mNaverMap.moveCamera(cameraUpdate);
-
-          //String sss = String.format("geo:%f,%f", latitude, longitude);
+          newAddr = null;
         }
       }
     }
@@ -409,14 +406,27 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
 
     FragmentManager fm = getSupportFragmentManager();
     MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map);
-    if (mapFragment == null) {   // 이거 왜 건너뛰는거지;;; null을 not null로 강제 실행 시키려 해도 안됨
+    if (mapFragment == null) {
       mapFragment = MapFragment.newInstance(new NaverMapOptions()
-              .camera(new CameraPosition(new LatLng(curAddr.latitude, curAddr.longitude), 16, 0, 90))
-          //기존에 접속 했던 곳의 위치 정보가 필요함
       );
-
       fm.beginTransaction().add(R.id.map, mapFragment).commit();
     }
     mapFragment.getMapAsync(this);
+  }
+
+  public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+    super.onActivityResult(requestCode, resultCode, intent);
+    switch (requestCode) {
+      case SEARCH_ADDRESS_ACTIVITY:
+        if (resultCode == RESULT_OK) {
+          String data = intent.getExtras().getString("data");
+          if (data != null) {
+            data = data.substring(7);
+            tvAddr.setText(data);
+            newAddr = "1";
+          }
+        }
+        break;
+    }
   }
 }

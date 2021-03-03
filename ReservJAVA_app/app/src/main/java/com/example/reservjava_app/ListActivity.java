@@ -24,7 +24,7 @@ import com.example.reservjava_app.ui.d_bongsun.PaymentActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
+import static com.example.reservjava_app.Common.CommonMethod.loginDTO;
 
 public class ListActivity extends AppCompatActivity {
 

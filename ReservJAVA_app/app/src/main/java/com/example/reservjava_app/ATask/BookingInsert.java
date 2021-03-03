@@ -33,9 +33,9 @@ private static final String TAG = "main:MemberUpdate";
 
         // 사진 정보 추가
         int member_code, business_code, product_code, product_price, price_deposit, booking_num;
-        String booking_date_reservation;
+        String booking_date_reservation , booking_etc;
 
-        public BookingInsert(int member_code, int business_code, int product_code, int product_price, int price_deposit, int booking_num, String booking_date_reservation) {
+        public BookingInsert(int member_code, int business_code, int product_code, int product_price, int price_deposit, int booking_num, String booking_date_reservation,String booking_etc) {
                 this.member_code = member_code;
                 this.business_code = business_code;
                 this.product_code = product_code;
@@ -43,6 +43,7 @@ private static final String TAG = "main:MemberUpdate";
                 this.price_deposit = price_deposit;
                 this.booking_num = booking_num;
                 this.booking_date_reservation = booking_date_reservation;
+                this.booking_etc = booking_etc;
         }
 
         @Override
@@ -67,6 +68,7 @@ protected String doInBackground(Void... voids) {
         builder.addTextBody("price_deposit", String.valueOf(price_deposit), ContentType.create("Multipart/related", "UTF-8"));
         builder.addTextBody("booking_num", String.valueOf(booking_num), ContentType.create("Multipart/related", "UTF-8"));
         builder.addTextBody("booking_date_reservation", booking_date_reservation, ContentType.create("Multipart/related", "UTF-8"));
+        builder.addTextBody("booking_etc", booking_etc, ContentType.create("Multipart/related", "UTF-8"));
 
         String postURL = ipConfig + pServer + "/anBookingInsert";
 
@@ -89,7 +91,7 @@ protected String doInBackground(Void... voids) {
         stringBuilder.append(line + "\n");
         }
 
-        state = stringBuilder.toString();
+        state = stringBuilder.toString().trim();
 
         inputStream.close();
 

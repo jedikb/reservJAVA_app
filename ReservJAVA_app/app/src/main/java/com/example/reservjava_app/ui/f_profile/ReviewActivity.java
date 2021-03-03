@@ -15,20 +15,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.example.reservjava_app.ATask.ReviewInsert;
 import com.example.reservjava_app.DTO.ReviewDTO;
-import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
-import com.example.reservjava_app.fragment.ListFragment;
-import com.example.reservjava_app.ui.a_login_signup.LoginActivity;
 
 import java.util.concurrent.ExecutionException;
-
-import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
-
-import com.example.reservjava_app.R;
-
 
 public class ReviewActivity extends AppCompatActivity {
 

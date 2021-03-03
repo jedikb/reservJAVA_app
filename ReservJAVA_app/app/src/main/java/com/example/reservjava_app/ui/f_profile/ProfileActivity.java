@@ -18,7 +18,7 @@ import com.example.reservjava_app.R;
 import com.example.reservjava_app.adapter.MyReviewAdapter;
 import com.example.reservjava_app.adapter.MyVisitAdapter;
 
-import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
+import static com.example.reservjava_app.Common.CommonMethod.loginDTO;
 import static com.example.reservjava_app.ATask.MyReview.reviewDTOS;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -98,6 +98,7 @@ public class ProfileActivity extends AppCompatActivity {
       public void onClick(View v) {
         Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
         startActivity(intent);
+        finish();
       }
     });
 

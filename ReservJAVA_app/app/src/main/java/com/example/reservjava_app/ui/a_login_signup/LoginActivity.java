@@ -1,11 +1,12 @@
 package com.example.reservjava_app.ui.a_login_signup;
 
-import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -14,40 +15,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.reservjava_app.ATask.LoginSelect;
-import com.example.reservjava_app.ATask.MyReview;
-import com.example.reservjava_app.DTO.MemberDTO;
 import com.example.reservjava_app.DTO.ReviewDTO;
 import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
-import com.example.reservjava_app.adapter.MyReviewAdapter;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
-import static com.example.reservjava_app.Common.CommonMethod.isNetworkConnected;
+import static com.example.reservjava_app.Common.CommonMethod.*;
 
 public class LoginActivity extends AppCompatActivity {
   private static final String TAG = "main:LoginActivity";
   //앞으로는 자동 로그인 기능이 이걸 대체할 것임
-  public static MemberDTO loginDTO = null;
 
   public static ArrayList<ReviewDTO> reviewDTOS = null;
   private boolean saveLoginData;
-  private SharedPreferences appData;
   private String member_id, member_pw;
-  private MemberDTO loginData;
 
   CheckBox autoLogin;
   Button signupBtn, loginBtn;
   EditText editID, editPW;
   TextView idpw;
-  Toolbar toolbar;
   ImageView backLoginBtn;
 
   @Override
@@ -90,22 +80,21 @@ public class LoginActivity extends AppCompatActivity {
 
     //아이디 입력하는 곳에 포커스 주기
     editID.requestFocus();
-    //자동으로 키보드 띄우기(귀찮으니 주석처리;;)
-    //InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-    //imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+    //자동으로 키보드 띄우기
+    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
     // 로그인하고 전에 있던 화면으로 이동
     loginBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        loginData = new MemberDTO();
-
         if(editID.getText().toString().length() != 0 && editPW.getText().toString().length() != 0){
           member_id = editID.getText().toString();
           member_pw = editPW.getText().toString();
 
           LoginSelect loginSelect = new LoginSelect(member_id, member_pw);
           try {
-            loginData = loginSelect.execute().get();
+            loginDTO = loginSelect.execute().get();
           } catch (ExecutionException e) {
             e.getMessage();
           } catch (InterruptedException e) {
@@ -118,16 +107,14 @@ public class LoginActivity extends AppCompatActivity {
           return;
         }
 
-        if(loginData != null){
+        if(loginDTO != null){
           Toast.makeText(LoginActivity.this, "로그인 되었습니다 !!!", Toast.LENGTH_SHORT).show();
-          Log.d("main:login", loginData.getMember_name() + "님 로그인 되었습니다 !!!");
+          Log.d("main:login", loginDTO.getMember_name() + "님 로그인 되었습니다 !!!");
 
           // 로그인에 성공하면 값을 SharedPreference에 저장한다
           loginDTOSave();
           Intent intent = new Intent(LoginActivity.this, MainActivity.class);
           //intent.setFlags(intent.FLAG_ACTIVITY_SINGLE_TOP|intent.FLAG_ACTIVITY_CLEAR_TOP);
-          //intent.putExtra("login", loginData);
-          //startActivityForResult(intent, 10000);
           startActivity(intent);
           finish();
 
@@ -158,8 +145,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
       }
     });
-
-
   }
 
   //로그인 정보 저장
@@ -174,83 +159,21 @@ public class LoginActivity extends AppCompatActivity {
     editor.putString("member_pw", editPW.getText().toString().trim());
 
     //기타 정보들도 저장하자
-    editor.putInt("member_code", loginData.getMember_code());
-    editor.putInt("member_kind", loginData.getMember_kind());
-    editor.putString("member_name", loginData.getMember_name());
-    editor.putString("member_nick", loginData.getMember_nick());
-    editor.putString("member_tel", loginData.getMember_tel());
-    editor.putString("member_email", loginData.getMember_email());
-    editor.putString("member_addr", loginData.getMember_addr());
-    editor.putString("member_image", loginData.getMember_image());
+    editor.putInt("member_code", loginDTO.getMember_code());
+    editor.putInt("member_kind", loginDTO.getMember_kind());
+    editor.putString("member_name", loginDTO.getMember_name());
+    editor.putString("member_nick", loginDTO.getMember_nick());
+    editor.putString("member_tel", loginDTO.getMember_tel());
+    editor.putString("member_email", loginDTO.getMember_email());
+    editor.putString("member_addr", loginDTO.getMember_addr());
+    editor.putString("member_image", loginDTO.getMember_image());
     //editor.putString("member_date", String.valueOf(loginData.getMember_date()));
 
     // apply, commit 을 안하면 변경된 내용이 저장되지 않음
     editor.apply();
 
     // 저장한 것을 loginDTO로 바로 담기 위해 실행함
-    loginDTOLoad();
-
+    loginDTOLoad(LoginActivity.this);
   }
 
-  //로그인 정보 불러오기
-  private void loginDTOLoad() {
-
-    saveLoginData = appData.getBoolean("SAVE_LOGIN_DATA", false);
-
-    int member_code=-1, member_kind=-1;
-    String member_name = "", member_nick = "", member_tel = "", member_email = "", member_addr = "", member_image="";
-    Date member_date = null;
-    double member_lat = 0, member_lng= 0;
-
-    member_code = appData.getInt("member_code", -1);
-    member_id = appData.getString("member_id", "");
-    member_pw = appData.getString("member_pw", "");
-    member_kind = appData.getInt("member_kind", -1);
-    member_name = appData.getString("member_name", "");
-    member_nick = appData.getString("member_nick", "");
-    member_tel = appData.getString("member_tel", "");
-    member_email = appData.getString("member_email", "");
-    member_addr = appData.getString("member_addr", "");
-    member_image = appData.getString("member_image", "");
-    SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    try {
-      member_date = fm.parse(appData.getString("member_date", ""));
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-    Log.d(TAG, "loginDTOLoad: member_date : " + member_date);
-    member_lat = appData.getFloat("member_lat", 0);
-    member_lng = appData.getFloat("member_lat", 0);
-
-    member_lat = Double.parseDouble(String.valueOf(member_lat));
-    member_lng = Double.parseDouble(String.valueOf(member_lng));
-
-    loginDTO = new MemberDTO(member_code, member_id, member_pw, member_kind, member_name, member_nick
-              , member_tel, member_email, member_addr, member_image, member_lat, member_lng, member_date);
-
-    // 리뷰 정보 조회
-    selectDate ();
-  }
-
-  //개인 정보 불러오기
-  public void selectDate () {
-    ArrayList<ReviewDTO> reviewDTOS;
-    MyReviewAdapter rAdapter;
-    ProgressDialog progressDialog;
-    reviewDTOS = new ArrayList<>();
-    rAdapter = new MyReviewAdapter(LoginActivity.this, reviewDTOS);
-
-    progressDialog = new ProgressDialog(LoginActivity.this);
-    progressDialog.setTitle("데이터 업로딩");
-    progressDialog.setMessage("데이터 업로딩 중입니다\n" + "잠시만 기다려주세요 ...");
-    progressDialog.setCanceledOnTouchOutside(false);
-    progressDialog.show();
-
-    if(isNetworkConnected(LoginActivity.this) == true) {
-      MyReview myReview = new MyReview(reviewDTOS, progressDialog, rAdapter);
-      myReview.execute();
-    } else {
-      Toast.makeText(LoginActivity.this, "인터넷이 연결되어 있지 않습니다.", Toast.LENGTH_SHORT).show();
-    }
-  }
 }

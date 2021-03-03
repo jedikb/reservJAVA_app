@@ -15,17 +15,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.reservjava_app.ATask.StroInfo;
 import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.DTO.ReviewDTO;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.reservation.Store;
 import com.example.reservjava_app.ui.f_profile.ReviewActivity;
+import com.example.reservjava_app.ui.f_profile.ReviewDetailActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
-import static com.example.reservjava_app.MainActivity.busiList;
-import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.reviewDTOS;
-import static com.example.reservjava_app.ui.b_where.SearchActivity.busiSetItem;
+import static com.example.reservjava_app.Common.CommonMethod.busiList;
 import static com.example.reservjava_app.ui.f_profile.ProfileActivity.reviewSetItem;
 
 public class MyVisitAdapter extends
@@ -102,25 +104,12 @@ public class MyVisitAdapter extends
     viewOrder.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        //busiSetItem = busiList.get(position);
-
-        Toast.makeText(mContext, "아직 화면이 구현되지 않았습니다.", Toast.LENGTH_SHORT).show();
-/*        Intent intent = new Intent(v.getContext(), ReviewActivity.class);
-        intent.putExtra("businessdto", busiSetItem);
-        mContext.startActivity(intent);*/
+        Intent intent = new Intent(v.getContext(), ReviewDetailActivity.class);
+        intent.putExtra("reviewDTO", reviewDTO);
+        v.getContext().startActivity(intent);
       }
     });
 
-    //구현할 내용이 없다
-/*    holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        busiSetItem = busiList.get(position);
-
-        //우선 데이터 가져와서 작업하자.
-        Toast.makeText(mContext, adapterDTOS.get(position).getBooking_business_code() + "가 클릭되었습니다", Toast.LENGTH_SHORT).show();
-      }
-    });*/
 
 
   }
@@ -137,18 +126,6 @@ public class MyVisitAdapter extends
   public void addItem(ReviewDTO reviewDTO){
     adapterDTOS.add(reviewDTO);
   }
-
-  //리사이클러뷰 내용 모두 지우기
-  public void removeAllItem() { adapterDTOS.clear();}
-
-  // 특정 인덱스 항목 가져오기
-  public ReviewDTO getItem(int position) { return adapterDTOS.get(position);}
-
-  //특정 인덱스 항목 세팅하기
-  public void setItem(int position, ReviewDTO reviewDTO) {adapterDTOS.set(position, reviewDTO);}
-
-  //ArrayList 통째로 세팅하기
-  public void setItems(ArrayList<ReviewDTO> adapterDTOS) { this.adapterDTOS = adapterDTOS;}
 
   public static class  ItemViewHolder extends  RecyclerView.ViewHolder {
 

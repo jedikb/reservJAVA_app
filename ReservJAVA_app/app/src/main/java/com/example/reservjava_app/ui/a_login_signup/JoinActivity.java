@@ -25,7 +25,7 @@ import java.util.concurrent.ExecutionException;
 public class JoinActivity extends AppCompatActivity {
 
     String state;
-    TextView Id_text, nick_text, Pw_text, Pwchk_text, Email_text, Phone_text;
+    TextView Id_text, nick_text, Pw_text, Pwchk_text, Email_text, Phone_text , name_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +35,10 @@ public class JoinActivity extends AppCompatActivity {
         //스피너 객체 선언 및 리소스를 가져오는 부분
 
         Id_text = findViewById(R.id.Id_text);
-        nick_text = findViewById(R.id.nick_text);
         Pw_text = findViewById(R.id.Pw_text);
         Pwchk_text = findViewById(R.id.Pwchk_text);
+        name_text = findViewById(R.id.name_text);
+        nick_text = findViewById(R.id.nickname_text);
         Email_text = findViewById(R.id.Email_text);
         Phone_text = findViewById(R.id.Phone_text);
 
@@ -56,7 +57,8 @@ public class JoinActivity extends AppCompatActivity {
                 String id = Id_text.getText().toString();
                 String passwd = Pw_text.getText().toString();
                 String passwdchk = Pwchk_text.getText().toString();
-                String name = nick_text.getText().toString();
+                String name = name_text.getText().toString();
+                String nick = nick_text.getText().toString();
                 String email = Email_text.getText().toString();
                 String phonenumber =  Phone_text.getText().toString();
                 //아이디 중복체크 확인
@@ -73,6 +75,11 @@ public class JoinActivity extends AppCompatActivity {
                     nick_text.requestFocus();
                     return;
                 }
+                if (name_text.getText().toString().length()==0){
+                    Toast.makeText(JoinActivity.this,"이름을 입력하세요", Toast.LENGTH_SHORT).show();
+                    nick_text.requestFocus();
+                    return;
+                }
                 if (Pw_text.getText().toString().length()==0){
                     Toast.makeText(JoinActivity.this,"비밀번호를 입력하세요", Toast.LENGTH_SHORT).show();
                     Pw_text.requestFocus();
@@ -84,13 +91,12 @@ public class JoinActivity extends AppCompatActivity {
                     return;
                 }
                 //비밀번호 일치하는지 확인
-                if (!Pw_text.getText().toString().equals(Pwchk_text.getText().toString())){
+                if (!passwd.equals(passwdchk)){
                     Toast.makeText(JoinActivity.this,"비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
                     Pw_text.setText("");
                     Pwchk_text.setText("");
                     Pw_text.requestFocus();
                     return;
-
                 }
                 if (Email_text.getText().toString().length()==0){
                     Toast.makeText(JoinActivity.this,"이메일을 입력하세요", Toast.LENGTH_SHORT).show();
@@ -105,8 +111,7 @@ public class JoinActivity extends AppCompatActivity {
 
                 setResult(RESULT_OK);
 
-
-                JoinInsert joinInsert = new JoinInsert(id, passwd, passwdchk, name, email, phonenumber);
+                JoinInsert joinInsert = new JoinInsert(id, passwd, name, nick,  phonenumber ,email);
                 try {
                     state = joinInsert.execute().get().trim();
                     Log.d("main:joinact0 : ", state);

@@ -20,15 +20,15 @@ import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
 import static com.example.reservjava_app.Common.CommonMethod.pServer;
 
 public class JoinInsert extends AsyncTask<Void, Void, String> {
-    String id, passwd, passwdchk, name, phonenumber, email;
+    String id, passwd, name, phonenumber, email , nick;
 
-    public JoinInsert(String id, String passwd, String passwdchk, String name, String phonenumber, String email) {
+    public JoinInsert(String id, String passwd, String name,String nick, String phonenumber, String email) {
         this.id = id;
         this.passwd = passwd;
-        this.passwdchk = passwdchk;
         this.name = name;
-        this.email = email;
+        this.nick = nick;
         this.phonenumber = phonenumber;
+        this.email = email;
     }
 
     // 데이터베이스에 삽입결과 0보다크면 삽입성공, 같거나 작으면 실패
@@ -49,12 +49,12 @@ public class JoinInsert extends AsyncTask<Void, Void, String> {
             builder.setCharset(Charset.forName("UTF-8"));
 
             // 문자열 및 데이터 추가
-            builder.addTextBody("id", id, ContentType.create("Multipart/related", "UTF-8"));
-            builder.addTextBody("passwd", passwd, ContentType.create("Multipart/related", "UTF-8"));
-            builder.addTextBody("passwdchk", passwdchk, ContentType.create("Multipart/related", "UTF-8"));
-            builder.addTextBody("name", name, ContentType.create("Multipart/related", "UTF-8"));
-            builder.addTextBody("email", email, ContentType.create("Multipart/related", "UTF-8"));
-            builder.addTextBody("phonenumber", phonenumber, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("member_id", id, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("member_pw", passwd, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("member_name", name, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("member_nick", nick, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("member_tel", phonenumber, ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("member_email", email, ContentType.create("Multipart/related", "UTF-8"));
 
             String postURL = ipConfig + pServer + "/anMemberJoin";
 
@@ -65,7 +65,7 @@ public class JoinInsert extends AsyncTask<Void, Void, String> {
             httpPost.setEntity(builder.build());
             httpResponse = httpClient.execute(httpPost);
             httpEntity = httpResponse.getEntity();
-
+            inputStream = httpEntity.getContent();
             // 응답
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
             StringBuilder stringBuilder = new StringBuilder();
@@ -73,8 +73,7 @@ public class JoinInsert extends AsyncTask<Void, Void, String> {
             while ((line = bufferedReader.readLine()) != null){
                 stringBuilder.append(line + "\n");
             }
-            state = stringBuilder.toString();
-
+            state = stringBuilder.toString().trim();
             inputStream.close();
 
         }  catch (Exception e) {

@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
 import static com.example.reservjava_app.Common.CommonMethod.pServer;
-import static com.example.reservjava_app.ui.a_login_signup.LoginActivity.loginDTO;
+import static com.example.reservjava_app.Common.CommonMethod.loginDTO;
 
 public class MyReview extends AsyncTask<Void, Void, Void> {
 

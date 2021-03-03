@@ -8,230 +8,364 @@
     android:orientation="vertical"
     >
 
-    <!--중앙 상단 스크롤 뷰-->
-    <ScrollView
-        android:id="@+id/scrollView2"
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="4"
+    android:orientation="vertical"
+    >
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="3"
+        android:weightSum="4"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/sliderViewPager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_weight="1"/>
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager2"
-                android:layout_width="412dp"
-                android:layout_height="79dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_page_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="2dp"
-                android:layout_marginRight="2dp"
-                android:text="1"
-                android:textColor="#fff"
-                app:layout_constraintBottom_toBottomOf="@+id/s_Id"
-                app:layout_constraintEnd_toStartOf="@+id/s_Id"
-                app:layout_constraintTop_toTopOf="@+id/s_Id" />
-
-
-            <TextView
-                android:id="@+id/s_Id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/sign_Id"
-                app:layout_constraintEnd_toStartOf="@+id/sign_Id"
-                app:layout_constraintTop_toTopOf="@+id/sign_Id" />
-
-
-            <TextView
-                android:id="@+id/sign_Id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:text="/5"
-                android:textColor="#fff"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_see_all"
-                app:layout_constraintEnd_toStartOf="@+id/tv_see_all"
-                app:layout_constraintTop_toTopOf="@+id/tv_see_all" />
-
-            <TextView
-                android:id="@+id/tv_see_all"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:alpha="0.7"
-                android:background="@drawable/white_rectangle_left_radius"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:paddingTop="4dp"
-                android:paddingEnd="4dp"
-                android:paddingRight="4dp"
-                android:paddingBottom="4dp"
-                android:text="모두 보기>"
-                android:fontFamily="@font/binggraefont"
-                android:textColor="#FFA59E"
-                app:layout_constraintBottom_toBottomOf="@+id/viewPager2"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/sign_Phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/samfont"
+        <View
+            android:id="@+id/viewFadingEdge"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/bg_fading_edge"
+            app:layout_constraintBottom_toBottomOf="@id/sliderViewPager" />
+        <LinearLayout
+            android:layout_weight="3"
+            android:id="@+id/layoutIndicators"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:padding="10dp"
-            android:text="Category"
-            android:textColor="#5BE1E1"
-            android:textSize="36sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:paddingBottom="8dp"/>
 
+    </LinearLayout>
     <!--버튼구간-->
-    <LinearLayout
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_weight="1"
+    android:layout_margin="35dp"
+    android:background="@drawable/main_back_grad">
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="카테고리"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp">
+    </TextView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:orientation="horizontal"
         android:weightSum="4">
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:weightSum="3">
         <ImageView
             android:id="@+id/imageButton1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:src="@drawable/hos1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/main_img1"
             android:padding="7sp"
-            android:scaleType="fitXY"/>
+            android:layout_weight="2"
+            android:scaleType="fitXY">
+        </ImageView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
 
-        <ImageView
-            android:id="@+id/imageButton2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+                android:text="병원"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             android:layout_weight="1"
-            android:src="@drawable/food1"
-            android:padding="12sp"
-            android:scaleType="fitXY"/>
+            android:weightSum="3">
+            <ImageView
+                android:id="@+id/imageButton2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/main_img2"
+                android:padding="7sp"
+                android:layout_weight="2"
+                android:scaleType="fitXY"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:text="식당"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+        </LinearLayout>
 
-
-
-        <ImageButton
-            android:id="@+id/imageButton3"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             android:layout_weight="1"
-            android:padding="3sp"
-            android:scaleType="fitXY"
-            android:src="@drawable/hotel1" />
-        <ImageView
-            android:id="@+id/imageButton4"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:weightSum="3">
+            <ImageView
+                android:id="@+id/imageButton3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/main_img3"
+                android:padding="7sp"
+                android:layout_weight="2"
+                android:scaleType="fitXY"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:text="숙박업소"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             android:layout_weight="1"
-            android:src="@drawable/heir2"
-            android:padding="0sp"
-            android:scaleType="fitXY"/>
+            android:weightSum="3">
+            <ImageView
+                android:id="@+id/imageButton4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/main_img4"
+                android:padding="7sp"
+                android:layout_weight="2"
+                android:scaleType="fitXY"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:text="미용실"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:orientation="horizontal"
         android:weightSum="4">
 
-        <ImageView
-            android:id="@+id/imageButton5"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:src="@drawable/car1"
-            android:padding="0sp"
-            android:scaleType="fitXY"/>
-
-        <ImageView
-            android:id="@+id/imageButton6"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:src="@drawable/rmsid"
-            android:padding="0sp"
-            android:scaleType="fitXY"/>
-
-        <ImageView
-            android:id="@+id/imageButton7"
-            android:layout_width="80dp"
-            android:layout_height="90dp"
-            android:layout_weight="1"
-            android:padding="5sp"
-            android:scaleType="fitXY"
-            android:src="@drawable/museum" />
-
-
-        <ImageView
-            android:id="@+id/imageButton8"
-            android:layout_width="97dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:layout_weight="1"
-            android:padding="0sp"
-            android:scaleType="fitXY"
-            android:src="@drawable/qlgodrl" />
+            android:weightSum="3">
+            <ImageView
+                android:id="@+id/imageButton5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/main_img5"
+                android:padding="7sp"
+                android:layout_weight="2"
+                android:scaleType="fitXY"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:text="카센터"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:weightSum="3">
+            <ImageView
+                android:id="@+id/imageButton6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/main_img6"
+                android:padding="7sp"
+                android:layout_weight="2"
+                android:scaleType="fitXY"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:text="놀이공원"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:weightSum="3">
+            <ImageView
+                android:id="@+id/imageButton7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/main_img7"
+                android:padding="7sp"
+                android:layout_weight="2"
+                android:scaleType="fitXY"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:text="박물관"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:weightSum="3">
+            <ImageView
+                android:id="@+id/imageButton8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/main_img8"
+                android:padding="7sp"
+                android:layout_weight="2"
+                android:scaleType="fitXY"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:text="항공권"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+        </LinearLayout>
+
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/munlover"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:layout_margin="10dp"
-        android:background="#82FBE3"
-        android:fontFamily="@font/maplefont"
-        android:gravity="center"
-        android:text="Mun Lover"
-        android:textColor="#FBF6C6"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:weightSum="4">
 
-    <TextView
-        android:id="@+id/gyunglover"
-        android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:layout_margin="10dp"
-        android:background="#CFFFE2"
-        android:fontFamily="@font/maplefont"
-        android:gravity="center"
-        android:text="Gyung Lover"
-        android:textColor="#47C6FF"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:weightSum="3">
+            <ImageView
+                android:id="@+id/imageButton9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/main_img9"
+                android:padding="7sp"
+                android:layout_weight="2"
+                android:scaleType="fitXY"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:text="카페"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/seonlover"
-        android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:layout_margin="10dp"
-        android:background="#FFF8BD"
-        android:fontFamily="@font/maplefont"
-        android:gravity="center"
-        android:text="Seon Lover"
-        android:textColor="#AEFFA6"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:weightSum="3">
+            <ImageView
+                android:id="@+id/imageButton10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/main_img10"
+                android:padding="7sp"
+                android:layout_weight="2"
+                android:scaleType="fitXY"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:text="노래방"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:weightSum="3">
+            <ImageView
+                android:id="@+id/imageButton11"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/main_img11"
+                android:padding="7sp"
+                android:layout_weight="2"
+                android:scaleType="fitXY"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:text="당구 볼링장"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:weightSum="3">
+            <ImageView
+                android:id="@+id/imageButton12"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/main_img12"
+                android:padding="7sp"
+                android:layout_weight="2"
+                android:scaleType="fitXY"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:text="PC방 오락실"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
+</LinearLayout>
 
 
 </LinearLayout>

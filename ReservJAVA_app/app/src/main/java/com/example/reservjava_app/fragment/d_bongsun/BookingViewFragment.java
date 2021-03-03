@@ -57,7 +57,7 @@ public class BookingViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //Home화면(fragment_home.xml)을 activity_main.container 에 띄운다.
-                activity.onFragmentChange(1);
+            //    activity.onFragmentChange(1);
             }
         });
 
@@ -66,7 +66,7 @@ public class BookingViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //List화면(fragment_search.xml)을 activity_main.container 에 띄운다.
-                activity.onFragmentChange(2);
+              //  activity.onFragmentChange(2);
             }
         });
 
@@ -87,7 +87,7 @@ public class BookingViewFragment extends Fragment {
 
                 /* 예약 취소 처리 - 끝 */
 
-                activity.onFragmentChange(1);   //처리후 화면 전환
+               // activity.onFragmentChange(1);   //처리후 화면 전환
             }
         });
 

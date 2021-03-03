@@ -71,13 +71,18 @@ public class LoginSelect extends AsyncTask<Void, Void, MemberDTO> {
       inputStream = httpEntity.getContent();
 
       // 하나의 오브젝트 가져올때
+      if (inputStream != null){
       loginData = readMessage(inputStream);
+      }else{
+        loginData= null;
+      }
 
       inputStream.close();
 
     } catch (Exception e) {
       Log.d("main:loginselect", e.getMessage());
       e.printStackTrace();
+      loginData= null;
     }finally {
       if(httpEntity != null){
         httpEntity = null;

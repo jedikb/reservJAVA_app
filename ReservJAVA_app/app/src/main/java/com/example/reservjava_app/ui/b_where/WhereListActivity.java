@@ -22,7 +22,7 @@ import com.example.reservjava_app.adapter.SearchBusinessAdapter;
 
 import java.util.ArrayList;
 
-import static com.example.reservjava_app.MainActivity.busiList;
+import static com.example.reservjava_app.Common.CommonMethod.busiList;
 
 public class WhereListActivity extends AppCompatActivity {
   private static final String TAG = "main:WhereListActivity";
