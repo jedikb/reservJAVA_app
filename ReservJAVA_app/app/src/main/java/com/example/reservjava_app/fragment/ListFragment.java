@@ -22,6 +22,7 @@ import com.example.reservjava_app.adapter.ReserveListAdapter;
 import java.util.ArrayList;
 
 import static com.example.reservjava_app.ATask.MyReview.reviewDTOS;
+import static com.example.reservjava_app.Common.CommonMethod.currentAddress;
 
 public class ListFragment extends Fragment {
 

@@ -67,7 +67,7 @@ public class MyVisitAdapter extends
     final ReviewDTO reviewDTO = adapterDTOS.get(position);
     holder.setItem(reviewDTO);
 
-    //리뷰화면으로 연결
+    //리뷰 화면으로 연결
     writeReview.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -80,9 +80,13 @@ public class MyVisitAdapter extends
       }
     });
 
+    //매장 화면 연결
     viewStore.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+        reviewSetItem = adapterDTOS.get(position);
+        reviewSetItem.getBooking_business_code();
+
         int code = reviewDTO.getBooking_business_code();
         BusinessDTO busidto = null;
 
@@ -93,7 +97,6 @@ public class MyVisitAdapter extends
           }
         }
 
-        Toast.makeText(mContext, busidto.getBusiness_name(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(v.getContext(), Store.class);
         intent.putExtra("businessdto", busidto);
         v.getContext().startActivity(intent);

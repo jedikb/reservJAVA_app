@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         SupporAction();
 
-
         // //(튕김 방지 및 속도 개선을 위해) 로딩 시 매장 정보 및 현재 위치 미리 불러오기
         // 2021.02.28 영문 -> Main -> Intro  에서 가져오게 변경 Main->CommonMethod로 변경
         //    //1. 전체 매장 정보를 불러오기
@@ -95,14 +95,7 @@ public class MainActivity extends AppCompatActivity {
         //바텀 네비게이션 세팅
         SetBottomNav();
 
-
-
     }//onCreat()
-
-
-
-
-
 
     //뒤로가기 버튼
     public void onBackPressed() {
@@ -151,6 +144,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         drawer.close();
+
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                String address = currentAddress;
+                TextView addrSearch = findViewById(R.id.addrSearch);
+                address = address.substring(address.indexOf(" "));
+                addrSearch.setText(address);
+            }
+        }, 1500);
     }
 
     //햄버거, 액션바
@@ -167,8 +172,6 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        //로그인 정보 표시하기 ??사용안하는듯..
-        //sideBar(getApplicationContext());
         //측면메뉴 버튼 작업
         //Navigation Drawer(바로가기 메뉴) 아이템 클릭 이벤트 처리
         NavigationView navigationView = findViewById(R.id.loginnavigation);
@@ -252,7 +255,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 return false;
-
             }
 
         });
