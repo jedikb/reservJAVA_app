@@ -14,12 +14,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.reservjava_app.Common.CommonMethod;
 import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.reservation.Store;
 
 import java.util.ArrayList;
 
+import static com.example.reservjava_app.Common.CommonMethod.busiList;
 import static com.example.reservjava_app.ui.b_where.SearchActivity.busiSetItem;
 
 public class SearchBusinessAdapter extends
@@ -111,6 +113,44 @@ public class SearchBusinessAdapter extends
     }
 
     public void setItem(BusinessDTO busiDTO) {
+
+      String hashtag = null;
+      for (BusinessDTO dto: CommonMethod.busiList
+      ) {
+        if (dto.getBusiness_code() == busiDTO.getBusiness_code()){
+          hashtag = dto.getBusiness_hashtag();
+        }
+
+      }
+
+      if (hashtag.indexOf("병원") > -1) {
+        search_bLogo.setImageResource(R.drawable.main_img1);
+      } else if (hashtag.indexOf("음식점") > -1) {
+        search_bLogo.setImageResource(R.drawable.main_img2);
+      } else if (hashtag.indexOf("숙박") > -1) {
+        search_bLogo.setImageResource(R.drawable.main_img3);
+      } else if (hashtag.indexOf("미용") > -1) {
+        search_bLogo.setImageResource(R.drawable.main_img4);
+      } else if (hashtag.indexOf("카센터") > -1) {
+        search_bLogo.setImageResource(R.drawable.main_img5);
+      } else if (hashtag.indexOf("놀이공원") > -1) {
+        search_bLogo.setImageResource(R.drawable.main_img6);
+      } else if (hashtag.indexOf("박물관") > -1) {
+        search_bLogo.setImageResource(R.drawable.main_img7);
+      } else if (hashtag.indexOf("항공권") > -1) {
+        search_bLogo.setImageResource(R.drawable.main_img8);
+      }else if (hashtag.indexOf("카페") > -1) {
+        search_bLogo.setImageResource(R.drawable.main_img9);
+      }else if (hashtag.indexOf("노래방") > -1) {
+        search_bLogo.setImageResource(R.drawable.main_img10);
+      }else if (hashtag.indexOf("당구") > -1) {
+        search_bLogo.setImageResource(R.drawable.main_img11);
+      }else if (hashtag.indexOf("PC") > -1) {
+        search_bLogo.setImageResource(R.drawable.main_img12);
+      }else{
+        search_bLogo.setImageResource(R.drawable.intro2);
+      }
+
       search_bName.setText(busiDTO.getBusiness_name());
       search_bAddr.setText(busiDTO.getBusiness_addr());
       String bRateAvg = String.format("%.2f", busiDTO.getBusiness_star_avg()/20);

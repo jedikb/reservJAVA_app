@@ -6,6 +6,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 import com.example.reservjava_app.ATask.SearchBusiness;
 
 import com.example.reservjava_app.adapter.SearchBusinessAdapter;
@@ -25,8 +28,11 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
         try {
-            //CommonMethod로 많은 부분을 이동시킴
-            //import static com.example.reservjava_app.Common.CommonMethod.*; 관련 메소드 들은 시켜서 사용하면됨
+            ImageView imageView1 = findViewById(R.id.image_logo1);
+            Glide.with(this).load(R.drawable.logo_img2).into(imageView1);
+
+            ImageView imageView2 = findViewById(R.id.image_logo2);
+            Glide.with(this).load(R.drawable.move_).into(imageView2);
 
             //1.로그인 정보 불러오기
             LoginInfo(IntroActivity.this);
@@ -45,7 +51,7 @@ public class IntroActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
-            },1500);    //1000 = 1초, 인트로 화면 지속 시간
+            },2500);    //1000 = 1초, 인트로 화면 지속 시간
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

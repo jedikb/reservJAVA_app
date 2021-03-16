@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string-array name="list_status">
+            <item> 전체 </item>
+            <item> 찜 </item>
+            <item> 예약확인중 </item>
+            <item> 예약완료 </item>
+            <item> 방문완료 </item>
+            <item> 방문알림전송 </item>
+            <item> 예약취소 </item>
+        </string-array>
+
+</resources>

@@ -21,6 +21,8 @@ import com.example.reservjava_app.R;
 
 import java.util.concurrent.ExecutionException;
 
+import static com.example.reservjava_app.ui.f_profile.ProfileActivity.reviewSetItem;
+
 public class ReviewActivity extends AppCompatActivity {
 
   private static final String TAG = "main ReviewActivity";
@@ -31,7 +33,7 @@ public class ReviewActivity extends AppCompatActivity {
   RatingBar ratingBar;
   Button submitBtn, cancelBtn;
   TextView reviewName;
-
+  ReviewDTO dto ;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -41,30 +43,9 @@ public class ReviewActivity extends AppCompatActivity {
     ratingBar = findViewById(R.id.ratingBar);
     submitBtn = findViewById(R.id.submitBtn);
     reviewName = findViewById(R.id.reviewName);
+   // Intent intent = getIntent();
+   // dto = (ReviewDTO) intent.getSerializableExtra("reviewSetItem");
 
-   /* // 뒤로가기 버튼(리스트 프래그먼트로 이동)
-    findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
-
-    // 뒤로가기 버튼(리스트 프래그먼트로 이동)
-    findViewById(R.id.backQnABtn).setOnClickListener(new View.OnClickListener() {
-
-      @Override
-      public void onClick(View v) {
-        finish();
-      }
-    });
-*/
-
-    // 고객 아이디, 매장 코드와 연동// 예약한 항목과 시간)
-   /* findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        //정보 가지고 간뒤
-        finish();
-        Toast.makeText(ReviewActivity.this, "리뷰가 등록되었습니다", Toast.LENGTH_SHORT).show();
-      }
-    });*/
-    // 취소버튼(리스트 프래그먼트로 이동)
     findViewById(R.id.cancelBtn).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -80,7 +61,7 @@ public class ReviewActivity extends AppCompatActivity {
         String review = editReview.getText().toString();
         float ratingbar = ratingBar.getRating()*20;
 
-        ReviewInsert ReviewInsert = new ReviewInsert(review, ratingbar);
+        ReviewInsert ReviewInsert = new ReviewInsert(review, ratingbar, dto);
         try {
           state = ReviewInsert.execute().get().trim();   //.get() : 데이터가 도착하기 전에 조회하는 것을 방지
           Log.d(TAG, "onClick: " + state);
@@ -122,15 +103,15 @@ public class ReviewActivity extends AppCompatActivity {
     });
 
     //매장 이름 입력
-    ReviewDTO reviewDTO = null;
+
     Intent intent = getIntent();
-    reviewDTO = (ReviewDTO) intent.getSerializableExtra("reviewDTO");
-    reviewName.setText(reviewDTO.getBusiness_name());
+    dto = (ReviewDTO) intent.getSerializableExtra("reviewDTO");
+    reviewName.setText(dto.getBusiness_name());
 
     //수정으로 들어 왔을 경우
-    if(reviewDTO.getBooking_appraisal() != null) {
-      editReview.setText(reviewDTO.getBooking_appraisal());
-      ratingBar.setRating(reviewDTO.getBooking_appraisal_star());
+    if(dto.getBooking_appraisal() != null) {
+      editReview.setText(dto.getBooking_appraisal());
+      ratingBar.setRating(dto.getBooking_appraisal_star());
     }
   }
 }

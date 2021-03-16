@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,15 +27,19 @@ public class activity_cancel extends AppCompatActivity {
     TextView info_BUSINESS_NAME, info_PRODUCT_NAME, info_bookingdate, info_DateReserv,
             info_PRODUCT_NAME2, info_price, info_num, info_BUSINESS_NAME2, info_BUSINESS_ADDR,
             info_BUSINESS_TEL , tv9;
-    Button btn_cancel;
+    Button btn_cancel , rev_detail_btn;
+    LinearLayout rev_detail_rayout;
     RatingBar info_avg_star;
+    Drawable img1;
+    Drawable img2 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // ArrayList<ReviewDTO> reviewDTO =  reviewDTOS;
         setContentView(R.layout.activity_cancel);
-
+        img1 =this.getResources().getDrawable( R.drawable.btn_plus );
+        img2 =this.getResources().getDrawable( R.drawable.btn_plust );
         info_BUSINESS_NAME = findViewById(R.id.info_BUSINESS_NAME);
         info_PRODUCT_NAME = findViewById(R.id.info_PRODUCT_NAME);
         info_bookingdate = findViewById(R.id.info_bookingdate);
@@ -42,7 +50,29 @@ public class activity_cancel extends AppCompatActivity {
         info_BUSINESS_ADDR = findViewById(R.id.info_BUSINESS_ADDR);
         info_BUSINESS_TEL = findViewById(R.id.info_BUSINESS_TEL);
         btn_cancel  = findViewById(R.id.btn_cancel);
+        rev_detail_btn = findViewById(R.id.rev_detail_btn);
+        rev_detail_btn.setTag("N");
+        rev_detail_rayout = findViewById(R.id.rev_detail_rayout);
+        rev_detail_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (rev_detail_btn.getTag().toString().equals("N")){
+                    rev_detail_btn.setTag("Y");
+                    Animation animation = new AlphaAnimation(0, 1);
+                    animation.setDuration(1000);
+                    rev_detail_btn.setCompoundDrawablesWithIntrinsicBounds(null, null, img2, null);
+
+                    rev_detail_rayout.setVisibility(View.VISIBLE);
+                    rev_detail_rayout.setAnimation(animation);
+                }else{
+                    rev_detail_btn.setTag("N");
+                    rev_detail_btn.setCompoundDrawablesWithIntrinsicBounds(null, null, img1, null);
+                    findViewById(R.id.rev_detail_rayout).setVisibility(View.GONE);
+                }
+            }
+        });
         info_avg_star  = findViewById(R.id.info_avg_star);
+
         tv9 = findViewById(R.id.tv_9);
         final Intent getintent = getIntent();
         final ReviewDTO businessDTO = (ReviewDTO) getintent
@@ -57,7 +87,12 @@ public class activity_cancel extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+            if(businessDTO.getBooking_kind() == 2 ||
+                    businessDTO.getBooking_kind() == 3){
+                btn_cancel.setVisibility(View.VISIBLE);
+            }else{
+                btn_cancel.setVisibility(View.GONE);
+            }
             info_BUSINESS_NAME.setText(SetNull(info_Store.get("BUSINESS_NAME")));
             info_PRODUCT_NAME.setText(SetNull(info_Store.get("PRODUCT_NAME")));
             info_bookingdate.setText(SetNull(info_Store.get("booking_date")));
@@ -68,7 +103,7 @@ public class activity_cancel extends AppCompatActivity {
             info_BUSINESS_ADDR.setText(SetNull(info_Store.get("business_addr")));
             info_BUSINESS_TEL.setText(SetNull(info_Store.get("business_tel")));
             float istar_val = SetFloat(info_Store.get("avg_star")) / 20;
-            String sstar_val = tv9.getText() + " : " + (istar_val + "");
+            String sstar_val = tv9.getText() + "(" + (istar_val + "") + ")";
              tv9.setText(sstar_val);
           //  int star_vv = Integer.parseInt( star_val+"" );
             info_avg_star.setRating(istar_val);

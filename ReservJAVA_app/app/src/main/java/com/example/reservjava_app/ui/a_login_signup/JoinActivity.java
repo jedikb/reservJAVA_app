@@ -12,6 +12,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +26,7 @@ import java.util.concurrent.ExecutionException;
 public class JoinActivity extends AppCompatActivity {
 
     String state;
-    TextView Id_text, nick_text, Pw_text, Pwchk_text, Email_text, Phone_text , name_text;
+    EditText Id_text, nick_text, Pw_text, Pwchk_text, Email_text, Phone_text , name_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +43,13 @@ public class JoinActivity extends AppCompatActivity {
         Email_text = findViewById(R.id.Email_text);
         Phone_text = findViewById(R.id.Phone_text);
 
-        findViewById(R.id.backJoinBtn).setOnClickListener(new View.OnClickListener() {
+ /*       findViewById(R.id.backJoinBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(JoinActivity.this, MainActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         //회원가입 등록
         findViewById(R.id.signupbtn1).setOnClickListener(new View.OnClickListener() {
@@ -144,14 +145,6 @@ public class JoinActivity extends AppCompatActivity {
         //toolbar = findViewById(R.id.backJoinBtn);
         //setSupportActionBar(toolbar);
 
-        //취소버튼 누르면 로그인 화면으로 넘어갑니다
-        findViewById(R.id.resetbtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(JoinActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
 
         //비밀번호 다를 시 텍스트바 색상 변화
         Pwchk_text = findViewById(R.id.Pwchk_text);

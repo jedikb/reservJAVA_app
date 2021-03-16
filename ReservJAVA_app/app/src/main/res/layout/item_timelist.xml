@@ -4,22 +4,21 @@
     android:layout_height="wrap_content"
     android:padding="8dp"
     android:gravity="center_vertical"
-    android:layout_marginBottom="8dp"
-    android:background="@drawable/background_border"
     android:layout_gravity="center"
     android:id="@+id/time_list_lay">
 
 
         <TextView
-            android:id="@+id/time_text"
+            android:id="@+id/view_time_text"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:background="#FFF59C"
             android:gravity="center"
             android:includeFontPadding="false"
             android:text="시간"
             android:textColor="@android:color/black"
-            android:textSize="18dp"
+            android:textSize="15dp"
+            android:fontFamily="@font/soojinfont"
+            android:backgroundTint="#ffffff"
             android:textStyle="bold" />
 
 

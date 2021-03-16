@@ -268,14 +268,16 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
         View view = View.inflate(SearchActivity.this, R.layout.business_view_map, null);
         ImageView logo = view.findViewById(R.id.search_bLogo);
 
-        if(category >=200 && category < 300) {
-          logo.setImageResource(R.drawable.ramen);
-        } else if (category == 301) {
-          logo.setImageResource(R.drawable.salon);
-        } else if (category >=400 && category < 500) {
-          logo.setImageResource(R.drawable.beds);
-        } else {    // 임시
-          logo.setImageResource(R.drawable.fitness);
+        if("100".equalsIgnoreCase(String.valueOf(dto.getBusiness_category_parent_code()))) {
+          logo.setImageResource(R.drawable.hosp_img);
+        }else if("200".equalsIgnoreCase(String.valueOf(dto.getBusiness_category_parent_code()))) {
+          logo.setImageResource(R.drawable.rest_img);
+        }else if("300".equalsIgnoreCase(String.valueOf(dto.getBusiness_category_parent_code()))) {
+          logo.setImageResource(R.drawable.culture_img);
+        }else if("400".equalsIgnoreCase(String.valueOf(dto.getBusiness_category_parent_code()))) {
+          logo.setImageResource(R.drawable.hotel_img);
+        }else{
+
         }
 
         ((TextView) view.findViewById(R.id.search_bName)).setText(name);
@@ -316,16 +318,18 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
         continue;
       Marker marker = new Marker();
       marker.setTag(dto);
-      marker.setWidth(100);
-      marker.setHeight(100);
+      marker.setWidth(200);
+      marker.setHeight(200);
       marker.setPosition(markerPosition);
       // 마커 아이콘 설정
-      if("200".equalsIgnoreCase(String.valueOf(dto.getBusiness_category_parent_code()))) {
-        marker.setIcon(OverlayImage.fromResource(R.drawable.ramen));
-      } else if("301".equalsIgnoreCase(String.valueOf(dto.getBusiness_category_code()))) {
-        marker.setIcon(OverlayImage.fromResource(R.drawable.salon));
-      } else {
-        marker.setIcon(OverlayImage.fromResource(R.drawable.location));
+      if("100".equalsIgnoreCase(String.valueOf(dto.getBusiness_category_parent_code()))) {
+        marker.setIcon(OverlayImage.fromResource(R.drawable.hosp_mark_img));
+      }else if("200".equalsIgnoreCase(String.valueOf(dto.getBusiness_category_parent_code()))) {
+        marker.setIcon(OverlayImage.fromResource(R.drawable.rest_mark_img));
+      }else if("300".equalsIgnoreCase(String.valueOf(dto.getBusiness_category_parent_code()))) {
+        marker.setIcon(OverlayImage.fromResource(R.drawable.culture_mark));
+      }else if("400".equalsIgnoreCase(String.valueOf(dto.getBusiness_category_parent_code()))) {
+        marker.setIcon(OverlayImage.fromResource(R.drawable.hotel_mark_img));
       }
       marker.setAnchor(new PointF(0.5f, 1.1f));
       marker.setHideCollidedMarkers(true);  //겹치는 마커 자동으로 숨김

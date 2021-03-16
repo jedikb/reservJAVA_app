@@ -29,13 +29,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/ThemeOverlay.AppCompat"
+                android:id="@+id/main_app_bar"
                 >
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/backJoinBtn"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="#A7D8FF"
+                    android:background="@color/white"
                     app:popupTheme="@style/Widget.AppCompat.Toolbar"
                     app:titleTextColor="#000000">
                     <!-- 상단바 시작 -->
@@ -43,45 +44,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
-                        <!-- 뒤로가기 아이콘(아이콘 상단여백 조절을위해 검색입력창과 분리시킴) -->
-                <!--        <ImageView
-                            android:id="@+id/backQnABtn1"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginTop="13dp"
-                            android:src="@drawable/navigate_before" />-->
-
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_marginTop="13dp"
                             android:focusable="true"
                             android:focusableInTouchMode="true"
                             android:layout_weight="1">
-                            <!-- 검색입력창(주소or검색) -->
                             <TextView
                                 android:id="@+id/addrSearch"
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="27dp"
-                                android:layout_gravity="center"
-                                android:layout_marginRight="30dp"
+                                android:layout_gravity="center|left"
                                 android:layout_weight="1"
-                                android:background="@drawable/solid_black"
-                                android:gravity="center"
-
-                                android:hint=""
+                                android:textStyle="bold"
+                                android:hint="주소를 찾는 중입니다."
                                 android:textColor="#000"
-                                android:textSize="18sp" />
-                            <!-- 검색아이콘 -->
-                            <!--검색 주소를 누르고 주소 검색으로 넘길 때 입력한 내용을 넘길 방법이 없음..-->
-                            <!--<ImageView
-                                android:id="@+id/searchBtn"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="1dp"
-                                android:layout_marginRight="30dp"
-                                android:src="@drawable/ic_search_black_24dp" />-->
+                                android:textSize="16sp" />
                         </LinearLayout>
                     </LinearLayout>
                     <!-- 상단바 끝 -->

@@ -1,6 +1,7 @@
 package com.example.reservjava_app.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ public class TimeListAdapter extends
     static TimeItemClickListener listener;
     Context context;
     ArrayList<String> timeList;
-    private TextView time_text_view;
+    private TextView view_time_text;
 
 
     String time;
@@ -93,7 +94,7 @@ public class TimeListAdapter extends
         public ViewHolder(@NonNull final View itemView, final TimeItemClickListener listener) {
             super(itemView);
 
-            time_text = itemView.findViewById(R.id.time_text);
+            view_time_text = itemView.findViewById(R.id.view_time_text);
             parentLayout = itemView.findViewById(R.id.time_list_lay);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +110,7 @@ public class TimeListAdapter extends
         }
 
         public void onBind(String time){
-            time_text.setText(time);
+            view_time_text.setText(time);
         }
     }
 
@@ -117,8 +118,8 @@ public class TimeListAdapter extends
         return timeList.get(position);
     }
 
-    public void settime_Text(TextView time_text_view){
-        this.time_text_view = time_text_view;
+    public void settime_Text(TextView view_time_text ){
+        this.view_time_text = view_time_text;
     }
 
 }

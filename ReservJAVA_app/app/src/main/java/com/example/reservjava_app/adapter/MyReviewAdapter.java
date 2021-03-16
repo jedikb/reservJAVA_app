@@ -14,10 +14,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.DTO.ReviewDTO;
 import com.example.reservjava_app.R;
 
 import java.util.ArrayList;
+
+import static com.example.reservjava_app.Common.CommonMethod.busiList;
 
 public class MyReviewAdapter extends
     RecyclerView.Adapter<MyReviewAdapter.ItemViewHolder> {
@@ -110,9 +113,47 @@ public class MyReviewAdapter extends
     }
 
     public void setItem(ReviewDTO reviewDTO) {
+      //임시
+      String hashtag = null;
+      int status = reviewDTO.getBooking_kind();
+      for (BusinessDTO dto: busiList
+      ) {
+        if (dto.getBusiness_code() == reviewDTO.getBooking_business_code()){
+          hashtag = dto.getBusiness_hashtag();
+
+        }
+
+      }
+
+      if (hashtag.indexOf("병원") > -1) {
+        review_category.setImageResource(R.drawable.main_img1);
+      } else if (hashtag.indexOf("음식점") > -1) {
+        review_category.setImageResource(R.drawable.main_img2);
+      } else if (hashtag.indexOf("숙박") > -1) {
+        review_category.setImageResource(R.drawable.main_img3);
+      } else if (hashtag.indexOf("미용") > -1) {
+        review_category.setImageResource(R.drawable.main_img4);
+      } else if (hashtag.indexOf("카센터") > -1) {
+        review_category.setImageResource(R.drawable.main_img5);
+      } else if (hashtag.indexOf("놀이공원") > -1) {
+        review_category.setImageResource(R.drawable.main_img6);
+      } else if (hashtag.indexOf("박물관") > -1) {
+        review_category.setImageResource(R.drawable.main_img7);
+      } else if (hashtag.indexOf("항공권") > -1) {
+        review_category.setImageResource(R.drawable.main_img8);
+      }else if (hashtag.indexOf("카페") > -1) {
+        review_category.setImageResource(R.drawable.main_img9);
+      }else if (hashtag.indexOf("노래방") > -1) {
+        review_category.setImageResource(R.drawable.main_img10);
+      }else if (hashtag.indexOf("당구") > -1) {
+        review_category.setImageResource(R.drawable.main_img11);
+      }else if (hashtag.indexOf("PC") > -1) {
+        review_category.setImageResource(R.drawable.main_img12);
+      }else{
+        review_category.setImageResource(R.drawable.intro2);
+      }
 
       //임시
-      review_category.setImageResource(R.drawable.fitness);
       review_name.setText(reviewDTO.getBusiness_name());
       review_ratingBar.setRating(reviewDTO.getBooking_appraisal_star());
       review_contents.setText(reviewDTO.getBooking_appraisal());

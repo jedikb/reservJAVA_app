@@ -1,16 +1,45 @@
 package com.example.reservjava_app.DTO;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CategoryDTO implements Serializable {
   private int category_code, category_parent_code;
   private String category_name, category_info;
+  private int cnt;
+  public ArrayList<Category_SubDTO> Items;
+  public int getCnt() {
+    return cnt;
+  }
+
+  public void setCnt(int cnt) {
+    this.cnt = cnt;
+  }
+
+
+  public CategoryDTO(int category_code, int category_parent_code, String category_name, String category_info, int cnt) {
+    this.category_code = category_code;
+    this.category_parent_code = category_parent_code;
+    this.category_name = category_name;
+    this.category_info = category_info;
+    this.cnt = cnt;
+  }
+
 
   public CategoryDTO(int category_code, int category_parent_code, String category_name, String category_info) {
     this.category_code = category_code;
     this.category_parent_code = category_parent_code;
     this.category_name = category_name;
     this.category_info = category_info;
+  }
+
+  public ArrayList<Category_SubDTO> getItems() {
+    return Items;
+  }
+
+  public void setItems(ArrayList<Category_SubDTO> items) {
+    Items = items;
   }
 
   public int getCategory_code() {

@@ -1,371 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".fragment.HomeFragment"
-    android:orientation="vertical"
-    >
+    android:background="#ffffff">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="4"
-    android:orientation="vertical"
-    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_weight="3"
-        android:weightSum="4"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp">
+        android:weightSum="5">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/sliderViewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_weight="1"/>
-
-        <View
-            android:id="@+id/viewFadingEdge"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@drawable/bg_fading_edge"
-            app:layout_constraintBottom_toBottomOf="@id/sliderViewPager" />
-        <LinearLayout
-            android:layout_weight="3"
-            android:id="@+id/layoutIndicators"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:paddingBottom="8dp"/>
-
-    </LinearLayout>
-    <!--버튼구간-->
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_weight="1"
-    android:layout_margin="35dp"
-    android:background="@drawable/main_back_grad">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="카테고리"
-        android:gravity="center"
-        android:textSize="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp">
-    </TextView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:weightSum="4">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:weightSum="3">
-        <ImageView
-            android:id="@+id/imageButton1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/main_img1"
-            android:padding="7sp"
+            android:layout_height="250dp"
             android:layout_weight="2"
-            android:scaleType="fitXY">
-        </ImageView>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-
-                android:text="병원"
-                android:textAlignment="center"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="1"
-            android:weightSum="3">
-            <ImageView
-                android:id="@+id/imageButton2"
+
+            android:background="#ffffff">
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/main_img2"
-                android:padding="7sp"
-                android:layout_weight="2"
-                android:scaleType="fitXY"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                android:text="식당"
-                android:textAlignment="center"
-                android:textStyle="bold" />
+                android:layout_height="match_parent">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/sliderViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <View
+                    android:id="@+id/viewFadingEdge"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/bg_fading_edge"
+                    app:layout_constraintBottom_toBottomOf="@id/sliderViewPager" />
+
+                <LinearLayout
+                    android:id="@+id/layoutIndicators"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:layout_gravity="bottom"
+                    android:orientation="horizontal"/>
+                <View
+                    android:layout_gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/bg_fading_edge"
+                    app:layout_constraintBottom_toBottomOf="@id/layoutIndicators" />
+            </FrameLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:weightSum="3">
-            <ImageView
-                android:id="@+id/imageButton3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/main_img3"
-                android:padding="7sp"
-                android:layout_weight="2"
-                android:scaleType="fitXY"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                android:text="숙박업소"
-                android:textAlignment="center"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:weightSum="3">
-            <ImageView
-                android:id="@+id/imageButton4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/main_img4"
-                android:padding="7sp"
-                android:layout_weight="2"
-                android:scaleType="fitXY"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                android:text="미용실"
-                android:textAlignment="center"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-    </LinearLayout>
+        <!--버튼구간-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:weightSum="4">
-
-        <LinearLayout
+        android:layout_height="match_parent">
+        <ExpandableListView
+            android:id="@+id/expList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:weightSum="3">
-            <ImageView
-                android:id="@+id/imageButton5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/main_img5"
-                android:padding="7sp"
-                android:layout_weight="2"
-                android:scaleType="fitXY"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                android:text="카센터"
-                android:textAlignment="center"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:weightSum="3">
-            <ImageView
-                android:id="@+id/imageButton6"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/main_img6"
-                android:padding="7sp"
-                android:layout_weight="2"
-                android:scaleType="fitXY"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                android:text="놀이공원"
-                android:textAlignment="center"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:weightSum="3">
-            <ImageView
-                android:id="@+id/imageButton7"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/main_img7"
-                android:padding="7sp"
-                android:layout_weight="2"
-                android:scaleType="fitXY"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                android:text="박물관"
-                android:textAlignment="center"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:weightSum="3">
-            <ImageView
-                android:id="@+id/imageButton8"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/main_img8"
-                android:padding="7sp"
-                android:layout_weight="2"
-                android:scaleType="fitXY"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                android:text="항공권"
-                android:textAlignment="center"
-                android:textStyle="bold" />
-        </LinearLayout>
-
+            android:scrollbars="vertical">
+        </ExpandableListView>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:weightSum="4">
+        <ImageView
 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@drawable/bg_fading_edge"
+            android:layout_marginBottom="30dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:weightSum="3">
+            android:layout_weight="2"
+            android:background="#F6F6F6"
+            android:orientation="vertical">
             <ImageView
-                android:id="@+id/imageButton9"
+
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@drawable/bg_fading_edge"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이용약관"
+                    android:textColor="#6F6F6F"
+                    android:layout_margin="10dp"
+                    android:textSize="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="개인정보 취급방침"
+                    android:textColor="#6F6F6F"
+                    android:layout_margin="10dp"
+                    android:textSize="15dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="사업자 정보"
+                    android:textColor="#6F6F6F"
+                    android:layout_margin="10dp"
+                    android:textSize="15dp"/>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/main_img9"
-                android:padding="7sp"
-                android:layout_weight="2"
-                android:scaleType="fitXY"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                android:text="카페"
-                android:textAlignment="center"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="고객센터 1234-5678"
+                    android:textColor="#6F6F6F"
+                    android:textSize="15dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="오늘의 예약은 통신판매 중개자로서 예약 상품의 거래 당사자가 아니며, 입점판매자가 등록한 상품 정보 및 거래에 대해 챔임은 지지않습니다."
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="#BDBDBD"
+                    android:textSize="12dp"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="(주)오늘의 예약사업자정보"
+                    android:backgroundTint="#D5D5D5"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="#5D5D5D"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:weightSum="3">
-            <ImageView
-                android:id="@+id/imageButton10"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/main_img10"
-                android:padding="7sp"
-                android:layout_weight="2"
-                android:scaleType="fitXY"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                android:text="노래방"
-                android:textAlignment="center"
-                android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:weightSum="3">
-            <ImageView
-                android:id="@+id/imageButton11"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/main_img11"
-                android:padding="7sp"
-                android:layout_weight="2"
-                android:scaleType="fitXY"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                android:text="당구 볼링장"
-                android:textAlignment="center"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:weightSum="3">
-            <ImageView
-                android:id="@+id/imageButton12"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/main_img12"
-                android:padding="7sp"
-                android:layout_weight="2"
-                android:scaleType="fitXY"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                android:text="PC방 오락실"
-                android:textAlignment="center"
-                android:textStyle="bold" />
-        </LinearLayout>
-
     </LinearLayout>
-</LinearLayout>
-</LinearLayout>
 
 
-</LinearLayout>
+</ScrollView>
+
+

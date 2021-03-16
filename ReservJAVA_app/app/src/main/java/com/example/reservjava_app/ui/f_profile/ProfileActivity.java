@@ -1,46 +1,69 @@
 package com.example.reservjava_app.ui.f_profile;
 
-import android.content.Intent;
+import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
-import com.example.reservjava_app.ATask.MyReview;
 import com.example.reservjava_app.DTO.ReviewDTO;
-import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
-import com.example.reservjava_app.adapter.MyReviewAdapter;
-import com.example.reservjava_app.adapter.MyVisitAdapter;
-
-import static com.example.reservjava_app.Common.CommonMethod.loginDTO;
-import static com.example.reservjava_app.ATask.MyReview.reviewDTOS;
+import com.google.android.material.tabs.TabLayout;
 
 public class ProfileActivity extends AppCompatActivity {
   private static final String TAG = "main:ProfileActivity";
   public static ReviewDTO reviewSetItem = null;
-  RecyclerView recyclerView;
-  TextView pro_tv_name;
-  ImageView faceImg, profilebackBtn;
-
-  //리사이클러뷰
-  MyReview myReview;
-  MyReviewAdapter rAdapter;
-  MyVisitAdapter vAdapter;
-  public String member_image;
-
+  TabLayout tabs;
+  Fragment selected = null;
+  Profile_Myinfo_flag myinfo_flag;
+  Profile_MyReview_flag myReview_flag;
+  Profile_MyVisit_flag myVisit_flag;
+  //public ProgressDialog progressDialog = new ProgressDialog(ProfileActivity.this);
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_profile);
+    tabs = findViewById(R.id.tabs);
+    tabs.addTab(tabs.newTab().setText("내정보"));
+    tabs.addTab(tabs.newTab().setText("내 리뷰"));
+    tabs.addTab(tabs.newTab().setText("방문 매장 보기"));
+    myinfo_flag = new Profile_Myinfo_flag();
+    myReview_flag = new Profile_MyReview_flag();
+    myVisit_flag = new Profile_MyVisit_flag();
 
+    getSupportFragmentManager().beginTransaction()
+            .replace(R.id.container, myinfo_flag).commit();
+    tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+      @Override
+      public void onTabSelected(TabLayout.Tab tab) {
+        int position = tab.getPosition();
+        Log.d(TAG, "선택된 탭 => " + position);
+
+        if(position == 0){
+          selected = myinfo_flag;
+        }else if(position == 1){
+          selected = myReview_flag;
+        }else if(position == 2){
+          selected = myVisit_flag;
+        }
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, selected).commit();
+      }
+
+      @Override
+      public void onTabUnselected(TabLayout.Tab tab) {
+
+      }
+
+      @Override
+      public void onTabReselected(TabLayout.Tab tab) {
+
+      }
+    });
     // 이름
-    pro_tv_name = findViewById(R.id.pro_tv_name);
+   /* pro_tv_name = findViewById(R.id.pro_tv_name);
     pro_tv_name.setText("소중한 " + loginDTO.getMember_name() + "님");
 
     // 사진
@@ -63,6 +86,58 @@ public class ProfileActivity extends AppCompatActivity {
     recyclerView.setLayoutManager(layoutManager);
 
     recyclerView.setAdapter(vAdapter);
+
+
+
+
+    profile_user_btn = findViewById(R.id.profile_user_btn) ;
+    profile_detail_btn = findViewById(R.id.profile_detail_btn) ;
+    profile_user_btn.setTag("N");
+    profile_detail_btn.setTag("N");
+
+    img1 =this.getResources().getDrawable( R.drawable.btn_plus );
+    img2 =this.getResources().getDrawable( R.drawable.btn_plust );
+    profile_user_btn.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+
+        if (profile_user_btn.getTag().toString().equals("N")){
+          profile_user_btn.setTag("Y");
+          Animation animation = new AlphaAnimation(0, 1);
+          animation.setDuration(1000);
+          profile_user_btn.setCompoundDrawablesWithIntrinsicBounds(null, null, img2, null);
+          profile_detail_btn.setCompoundDrawablesWithIntrinsicBounds(null, null, img1, null);
+          findViewById(R.id.profile_ln1).setVisibility(View.VISIBLE);
+          findViewById(R.id.profile_ln2).setVisibility(View.GONE);
+        }else{
+          profile_user_btn.setTag("N");
+          profile_user_btn.setCompoundDrawablesWithIntrinsicBounds(null, null, img1, null);
+          findViewById(R.id.profile_ln1).setVisibility(View.GONE);
+        }
+
+      }
+    });
+
+    profile_detail_btn.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        findViewById(R.id.profile_ln2).setVisibility(View.VISIBLE);
+
+        if (profile_detail_btn.getTag().toString().equals("N")){
+          profile_detail_btn.setTag("Y");
+          Animation animation = new AlphaAnimation(0, 1);
+          animation.setDuration(1000);
+          profile_detail_btn.setCompoundDrawablesWithIntrinsicBounds(null, null, img2, null);
+          profile_user_btn.setCompoundDrawablesWithIntrinsicBounds(null, null, img1, null);
+          findViewById(R.id.profile_ln1).setVisibility(View.GONE);
+          findViewById(R.id.profile_ln2).setVisibility(View.VISIBLE);
+        }else{
+          profile_detail_btn.setTag("N");
+          profile_detail_btn.setCompoundDrawablesWithIntrinsicBounds(null, null, img1, null);
+          findViewById(R.id.profile_ln2).setVisibility(View.GONE);
+        }
+      }
+    });
 
     //방문한! 리스트 보여줌
     findViewById(R.id.visitListBtn).setOnClickListener(new View.OnClickListener() {
@@ -92,15 +167,12 @@ public class ProfileActivity extends AppCompatActivity {
     });
 
     //뒤로가기 버튼(메인화면으로 돌아감)
-    profilebackBtn = findViewById(R.id.profilebackBtn);
-    profilebackBtn.setOnClickListener(new View.OnClickListener() {
+    findViewById(R.id.tv_back_profile).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
-        startActivity(intent);
         finish();
       }
-    });
+    });*/
 
   }
 }

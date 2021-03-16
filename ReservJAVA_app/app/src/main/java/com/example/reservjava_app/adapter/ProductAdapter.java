@@ -1,10 +1,12 @@
 package com.example.reservjava_app.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,6 +30,8 @@ public class ProductAdapter extends
     ProductDTO dto;
 
     private TextView product_text;
+    private Button rev_item_btn;
+    private Drawable check_img ;
     private int position;
 
 
@@ -60,6 +64,7 @@ public class ProductAdapter extends
             public void onClick(View v) {
                 product_text.setText(productList.get(position).getProduct_name());
                 dto = productList.get(position);
+                rev_item_btn.setCompoundDrawablesWithIntrinsicBounds(  null,null, check_img, null);
             }
         });
     }
@@ -99,7 +104,6 @@ public class ProductAdapter extends
             product_image = itemView.findViewById(R.id.product_image);
             product_name = itemView.findViewById(R.id.product_name);
             product_price = itemView.findViewById(R.id.product_price);
-
             parentLayout = itemView.findViewById(R.id.product_list_lay);
 
 
@@ -123,5 +127,11 @@ public class ProductAdapter extends
 
     public void setproduct_text(TextView product_text){
         this.product_text = product_text;
+    }
+    public void setProduct_item(Button rev_item_btn, Drawable check_img){
+        this.rev_item_btn = rev_item_btn;
+        this.check_img = check_img;
+        rev_item_btn.setCompoundDrawablesWithIntrinsicBounds(  null,null, check_img, null);
+        product_text.setCompoundDrawablesWithIntrinsicBounds(  null,null, check_img, null);
     }
 }

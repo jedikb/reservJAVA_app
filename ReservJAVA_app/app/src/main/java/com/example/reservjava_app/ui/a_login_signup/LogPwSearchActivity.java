@@ -36,13 +36,13 @@ public class LogPwSearchActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.backQnABtn1).setOnClickListener(new View.OnClickListener() {
+  /*      findViewById(R.id.backQnABtn1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LogPwSearchActivity.this,LoginActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
     }
 }

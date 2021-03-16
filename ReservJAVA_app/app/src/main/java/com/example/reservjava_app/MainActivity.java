@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
                 if (id == R.id.nav_loginbtn) {
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
-                    finish();
+                   // finish();
                 } else if (id == R.id.nav_signupbtn) {
                     Intent intent = new Intent(MainActivity.this, JoinActivity.class);
                     startActivity(intent);
@@ -277,6 +277,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent; //액티비티 콜을 위한 지역변수 선언
                 switch (item.getItemId()) {
                     case R.id.homeItem:
+                        findViewById(R.id.main_app_bar).setVisibility(View.VISIBLE);
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.container, homeFragment).commit();
                         return true;
@@ -290,6 +291,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.listItem:
                         if (loginDTO != null) {
+
                             getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.container, listFragment).commit();
                         }else{

@@ -15,17 +15,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.reservjava_app.ATask.StroInfo;
 import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.DTO.ReviewDTO;
 import com.example.reservjava_app.R;
+import com.example.reservjava_app.activity_cancel;
 import com.example.reservjava_app.reservation.Store;
+import com.example.reservjava_app.ui.f_profile.Profile_MyVisit_flag;
 import com.example.reservjava_app.ui.f_profile.ReviewActivity;
-import com.example.reservjava_app.ui.f_profile.ReviewDetailActivity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.concurrent.ExecutionException;
 
 import static com.example.reservjava_app.Common.CommonMethod.busiList;
 import static com.example.reservjava_app.ui.f_profile.ProfileActivity.reviewSetItem;
@@ -39,11 +37,13 @@ public class MyVisitAdapter extends
   LinearLayout parentLayout;
   Button writeReview, viewStore, viewOrder;
   int position;
-
-  public MyVisitAdapter(Context mContext, ArrayList<ReviewDTO> adapterDTOS) {
+  Profile_MyVisit_flag profile_myVisit_flag;
+  public MyVisitAdapter(Context mContext, ArrayList<ReviewDTO> adapterDTOS ,  Profile_MyVisit_flag profile_myVisit_flag) {
     this.mContext = mContext;
     this.adapterDTOS = adapterDTOS;
+    this.profile_myVisit_flag = profile_myVisit_flag;
   }
+  public void refresh(){profile_myVisit_flag.Refresh();}
 
   //화면 연결
   @NonNull
@@ -77,6 +77,8 @@ public class MyVisitAdapter extends
         Intent intent = new Intent(v.getContext(), ReviewActivity.class);
         intent.putExtra("reviewDTO", reviewSetItem);
         v.getContext().startActivity(intent);
+        refresh();
+
       }
     });
 
@@ -107,9 +109,12 @@ public class MyVisitAdapter extends
     viewOrder.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent intent = new Intent(v.getContext(), ReviewDetailActivity.class);
+
+        final ReviewDTO reviewDTO = adapterDTOS.get(position);
+        Intent intent = new Intent(v.getContext(), activity_cancel.class);
         intent.putExtra("reviewDTO", reviewDTO);
         v.getContext().startActivity(intent);
+
       }
     });
 
@@ -151,7 +156,44 @@ public class MyVisitAdapter extends
 
     public void setItem(ReviewDTO reviewDTO) {
       //임시
-      visit_category.setImageResource(R.drawable.fitness);
+      String hashtag = null;
+      for (BusinessDTO dto: busiList
+      ) {
+        if (dto.getBusiness_code() == reviewDTO.getBooking_business_code()){
+          hashtag = dto.getBusiness_hashtag();
+        }
+
+      }
+
+      if (hashtag.indexOf("병원") > -1) {
+        visit_category.setImageResource(R.drawable.main_img1);
+      } else if (hashtag.indexOf("음식점") > -1) {
+        visit_category.setImageResource(R.drawable.main_img2);
+      } else if (hashtag.indexOf("숙박") > -1) {
+        visit_category.setImageResource(R.drawable.main_img3);
+      } else if (hashtag.indexOf("미용") > -1) {
+        visit_category.setImageResource(R.drawable.main_img4);
+      } else if (hashtag.indexOf("카센터") > -1) {
+        visit_category.setImageResource(R.drawable.main_img5);
+      } else if (hashtag.indexOf("놀이공원") > -1) {
+        visit_category.setImageResource(R.drawable.main_img6);
+      } else if (hashtag.indexOf("박물관") > -1) {
+        visit_category.setImageResource(R.drawable.main_img7);
+      } else if (hashtag.indexOf("항공권") > -1) {
+        visit_category.setImageResource(R.drawable.main_img8);
+      }else if (hashtag.indexOf("카페") > -1) {
+        visit_category.setImageResource(R.drawable.main_img9);
+      }else if (hashtag.indexOf("노래방") > -1) {
+        visit_category.setImageResource(R.drawable.main_img10);
+      }else if (hashtag.indexOf("당구") > -1) {
+        visit_category.setImageResource(R.drawable.main_img11);
+      }else if (hashtag.indexOf("PC") > -1) {
+        visit_category.setImageResource(R.drawable.main_img12);
+      }else{
+        visit_category.setImageResource(R.drawable.intro2);
+      }
+
+
       visit_name.setText(reviewDTO.getBusiness_name());
       visit_date.setText(reviewDTO.getBooking_date_reservation());
       visit_addr.setText(reviewDTO.getBusiness_addr());

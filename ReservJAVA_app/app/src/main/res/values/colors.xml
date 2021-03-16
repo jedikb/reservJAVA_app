@@ -11,4 +11,8 @@
     <color name="purple_1">#DA82EA</color>
     <color name="chkcolor">#BFE7FA</color>
     <color name="chkcolor2">#FFB6B1</color>
+        <color name="colorPrimary">#3F51B5</color>
+        <color name="colorPrimaryDark">#303F9F</color>
+        <color name="colorAccent">#FF4081</color>
+        <color name="colorRipple">#A9A9F5</color>
 </resources>

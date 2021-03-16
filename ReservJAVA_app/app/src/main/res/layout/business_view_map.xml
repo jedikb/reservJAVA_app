@@ -26,33 +26,35 @@
                         android:id="@+id/search_bLogo"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
+                        android:layout_gravity="center"
                         android:src="@drawable/ic_baseline_home_24" />
-
                     <TextView
                         android:id="@+id/search_bName"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        android:gravity="center_vertical"
-                        android:text="상호명"
-                        android:textColor="@color/purple_500"
-                        android:textSize="24sp" />
+                        android:layout_width="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="#000000"
+                        android:text="Name"
+                        android:textSize="18sp"/>
+
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="50dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/search_bAddr"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center_vertical"
-                        android:text="매장 주소(매장이 하고 싶은 말)"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="주소주소"
+                        android:textColor="#4C4C4C"
+                        android:textSize="15sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -70,34 +72,29 @@
                         <TextView
                             android:id="@+id/search_bSRateAvg"
                             android:layout_width="wrap_content"
-                            android:layout_height="25dp"
-                            android:layout_marginLeft="5dp"
-                            android:gravity="center_vertical"
-                            android:text="4.96"
-                            android:linksClickable="true"
-                            android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="주소주소"
+                            android:textColor="#4C4C4C"
+                            android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/search_bReview"
                             android:layout_width="wrap_content"
-                            android:layout_height="25dp"
-                            android:layout_marginLeft="100dp"
-                            android:gravity="center_vertical"
-                            android:linksClickable="true"
-                            android:text="방문자 리뷰"
-                            android:textColor="@color/black" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="주소주소"
+                            android:textColor="#4C4C4C"
+                            android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/search_bReviewNum"
                             android:layout_width="wrap_content"
-                            android:layout_height="25dp"
-                            android:layout_marginLeft="5dp"
-                            android:gravity="center_vertical"
-                            android:text="123"
-                            android:linksClickable="true"
-                            android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="주소주소"
+                            android:textColor="#4C4C4C"
+                            android:textSize="15sp"  />
 
                     </LinearLayout>
 

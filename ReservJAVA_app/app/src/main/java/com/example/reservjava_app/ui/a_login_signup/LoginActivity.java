@@ -45,14 +45,14 @@ public class LoginActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
 
-    backLoginBtn = findViewById(R.id.backLoginBtn);
+  /*  backLoginBtn = findViewById(R.id.backLoginBtn);
     backLoginBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
       }
-    });
+    });*/
 
     // 설정값 불러오기
     appData = getSharedPreferences("SAVE_LOGIN_DATA", MODE_PRIVATE);

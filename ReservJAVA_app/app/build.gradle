@@ -53,8 +53,7 @@ dependencies {
 
     /* 리사이클러 뷰 사용하기 */
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'com.android.support:design:30.0.0'
-
+    implementation 'com.android.support:design:29.0.0'
     // URL 이미지로더
     // 사용법
     // Glide.with(this).load("http://www.selphone.co.kr/homepage/img/team/3.jpg").into(imageView);
@@ -69,7 +68,6 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "androidx.navigation:navigation-runtime:$nav_version"
-
     //네이버맵 API
     implementation 'com.naver.maps:map-sdk:3.10.2'
     // 네이버 지도 위치추적
@@ -78,4 +76,7 @@ dependencies {
     //부페이지관련--
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
+    //meterial calendar
+    implementation 'com.prolificinteractive:material-calendarview:1.4.3'
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 }

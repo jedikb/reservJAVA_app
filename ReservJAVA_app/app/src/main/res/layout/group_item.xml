@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/ripple_effect"
+        android:layout_marginTop="10dp"
+        >
+        <ImageView
+            android:id="@+id/imgv_category"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:src="@drawable/hotel_img2"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            />`
+        <TextView
+            android:id="@+id/txt_category_main"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/maplefont"
+            android:text="숙박"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/category_plus"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right|center"
+            android:layout_margin="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/btn_plus" />
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#5D5D5D"/>
+
+
+
+</LinearLayout>
+
+

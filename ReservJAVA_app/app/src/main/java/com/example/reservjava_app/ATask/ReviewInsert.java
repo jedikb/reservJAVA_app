@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.util.JsonReader;
 import android.util.Log;
 
+import com.example.reservjava_app.DTO.ReviewDTO;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -18,17 +20,18 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
 import static com.example.reservjava_app.Common.CommonMethod.ipConfig;
+import static com.example.reservjava_app.Common.CommonMethod.loginDTO;
 import static com.example.reservjava_app.Common.CommonMethod.pServer;
 
 public class ReviewInsert extends AsyncTask<Void, Void, String> {
     private static final String TAG = "main ReviewInsert";;
     String review;
     float ratingbar;
-
-    public ReviewInsert(String review, float ratingbar) {
+    ReviewDTO dto;
+    public ReviewInsert(String review, float ratingbar , ReviewDTO dto) {
         this.review = review;
         this.ratingbar = ratingbar;
-
+        this.dto = dto;
     }
 
     // 데이터베이스에 삽입결과 0보다크면 삽입성공, 같거나 작으면 실패
@@ -51,6 +54,8 @@ public class ReviewInsert extends AsyncTask<Void, Void, String> {
             // 문자열 및 데이터 추가
             builder.addTextBody("review", review, ContentType.create("Multipart/related", "UTF-8"));
             builder.addTextBody("ratingbar", ratingbar+"", ContentType.create("Multipart/related", "UTF-8"));
+            builder.addTextBody("member_code", loginDTO.getMember_code()+"", ContentType.create("Multipart/related", "UTF-8"));
+             builder.addTextBody("booking_code", dto.getBooking_code()+"", ContentType.create("Multipart/related", "UTF-8"));
 
             String postURL = ipConfig + pServer + "/anMemberReview";
 
