@@ -1,6 +1,5 @@
 package com.example.reservjava_app.ui.f_profile;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -10,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import com.example.reservjava_app.DTO.ReviewDTO;
 import com.example.reservjava_app.R;
 import com.google.android.material.tabs.TabLayout;
+import static com.example.reservjava_app.Common.CommonMethod.loginDTO;
 
 public class ProfileActivity extends AppCompatActivity {
   private static final String TAG = "main:ProfileActivity";

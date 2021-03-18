@@ -29,7 +29,7 @@
         android:layout_gravity="center"
         android:paddingTop="8dp"
         android:background="@drawable/circle"
-        android:src="@drawable/susu" />
+        android:src="@drawable/user" />
 
     <TextView
 
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:textColor="#ffffff"
-        android:text="닉네임 부분"
+        android:text="닉네임"
         android:layout_marginTop="20dp"
         android:textSize="16sp"/>
     <TextView

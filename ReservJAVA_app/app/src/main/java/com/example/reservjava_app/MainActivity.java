@@ -145,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         drawer.close();
 
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -156,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
                 addrSearch.setText(address);
             }
         }, 1500);
+
+        SupporAction();
     }
 
     //햄버거, 액션바
@@ -181,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         TextView navLoginID = headerView.findViewById(R.id.header_user_id);
         if (loginDTO != null) {
             Glide.with(this).load(loginDTO.getMember_image()).error(R.drawable.user).into(imageView);
-            navLoginID.setText("반갑습니다 " + loginDTO.getMember_nick());
+            navLoginID.setText("반갑습니다 " + loginDTO.getMember_nick() + "님");
         }
 
         if (loginDTO == null) {  //로그인 안했을 때
