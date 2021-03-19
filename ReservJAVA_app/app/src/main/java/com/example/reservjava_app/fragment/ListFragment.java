@@ -88,7 +88,7 @@ public class ListFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(activity, spitems[i].toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(activity, spitems[i].toString(), Toast.LENGTH_SHORT).show();
                 int flag = 0;
                 switch (spitems[i]) {
                     case "전체":
@@ -113,13 +113,10 @@ public class ListFragment extends Fragment {
                         break;
                 }
                 setvAdapter(viewGroup_b, flag);
-
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
 

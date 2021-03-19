@@ -50,7 +50,6 @@ public class ReserveListAdapter extends
     this.adapterDTOS = adapterDTOS;
   }
 
-
   public void reFresh(){
     listFragment.Refresh();
   }
@@ -66,8 +65,6 @@ public class ReserveListAdapter extends
       viewOrder = itemView.findViewById(R.id.viewOrder);
       send_store = itemView.findViewById(R.id.store_send_btn);
       viewOrder.setText("예약 상세 정보");
-
-
 
     return new ItemViewHolder(itemView);
   }
@@ -93,7 +90,7 @@ public class ReserveListAdapter extends
           }
         }
 
-        Toast.makeText(mContext, busidto.getBusiness_name(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext, busidto.getBusiness_name(), Toast.LENGTH_SHORT).show();
       }
     });
 

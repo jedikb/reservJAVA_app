@@ -51,8 +51,8 @@ public class CommonMethod {
   //public static String  ipConfig = "http://192.168.0.116:80";
 
   //광범
-  public static String  ipConfig = "http://192.168.0.17:800";
-  //public static String ipConfig = "http://192.168.0.63:80";
+  //public static String  ipConfig = "http://192.168.0.17:800";
+  public static String ipConfig = "http://112.164.58.217:800";
 //192.168.219.103
   //경선
   //public static String  ipConfig = "http://192.168.0.61:80";

@@ -5,7 +5,10 @@ import android.os.AsyncTask;
 import android.util.JsonReader;
 import android.util.Log;
 
+import com.example.reservjava_app.Common.CommonMethod;
 import com.example.reservjava_app.DTO.ReviewDTO;
+import com.example.reservjava_app.ui.f_profile.ProfileActivity;
+import com.example.reservjava_app.ui.f_profile.ReviewActivity;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -107,9 +110,7 @@ public class ReviewInsert extends AsyncTask<Void, Void, String> {
             if(httpClient != null){
                 httpClient = null;
             }
-
         }
-
         return state;
     }
 

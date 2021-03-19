@@ -51,9 +51,6 @@ public class Profile_MyReview_flag extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(rAdapter);
 
-
         return viewGroup;
     }
-
-
 }

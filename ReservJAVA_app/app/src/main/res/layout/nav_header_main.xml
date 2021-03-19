@@ -27,7 +27,6 @@
         android:layout_width="98dp"
         android:layout_height="98dp"
         android:layout_gravity="center"
-        android:paddingTop="8dp"
         android:background="@drawable/circle"
         android:src="@drawable/user" />
 

@@ -107,7 +107,7 @@
         <EditText
             android:id="@+id/editReview"
             android:layout_width="354dp"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:layout_gravity="center"
             android:layout_marginTop="24dp"
             android:layout_weight="2"

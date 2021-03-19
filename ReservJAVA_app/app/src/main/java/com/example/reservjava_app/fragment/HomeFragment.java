@@ -66,16 +66,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
         context = rootView.getContext();
 
-
         lstView = rootView.findViewById(R.id.expList);
         lstView.setGroupIndicator(null);
         loadData();
 
-
         adpt.setOnClickListener(new OnTextClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, v.getTag().toString() + "", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, v.getTag().toString() + "", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), WhereListActivity.class);
                 searchBusiList = new ArrayList<>();
                 if (v.getTag() == null){

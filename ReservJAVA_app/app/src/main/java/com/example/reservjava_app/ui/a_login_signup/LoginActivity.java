@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
   private static final String TAG = "main:LoginActivity";
   //앞으로는 자동 로그인 기능이 이걸 대체할 것임
 
-  public static ArrayList<ReviewDTO> reviewDTOS = null;
+  //public static ArrayList<ReviewDTO> reviewDTOS = null;
   private boolean saveLoginData;
   private String member_id, member_pw;
 
@@ -72,11 +72,6 @@ public class LoginActivity extends AppCompatActivity {
       editPW.setText(member_pw);
       autoLogin.setChecked(saveLoginData);
     }
-
-
-    //(임시: 작업하는 동안 아이디, 비번 치는게 귀찮음)
-    //editID.setText("aaa");
-    //editPW.setText("aaa");
 
     //아이디 입력하는 곳에 포커스 주기
     editID.requestFocus();

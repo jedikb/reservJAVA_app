@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.reservjava_app.ATask.ReviewInsert;
+import com.example.reservjava_app.Common.CommonMethod;
 import com.example.reservjava_app.DTO.ReviewDTO;
 import com.example.reservjava_app.R;
 
@@ -64,8 +65,6 @@ public class ReviewActivity extends AppCompatActivity {
         ReviewInsert ReviewInsert = new ReviewInsert(review, ratingbar, dto);
         try {
           state = ReviewInsert.execute().get().trim();   //.get() : 데이터가 도착하기 전에 조회하는 것을 방지
-          Log.d(TAG, "onClick: " + state);
-
         } catch (ExecutionException e) {
           e.printStackTrace();
         } catch (InterruptedException e) {
@@ -75,27 +74,28 @@ public class ReviewActivity extends AppCompatActivity {
         if(state.equals("1")) {
           Log.d(TAG, "onClick: 삽입 성공");
           Toast.makeText(ReviewActivity.this, "리뷰가 등록되었습니다", Toast.LENGTH_LONG).show();
+  /*        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+          startActivity(intent);*/
           finish();
-
         } else {
           Log.d(TAG, "onClick: 삽입 실패");
           finish();
         }
+        CommonMethod.selectData(ReviewActivity.this);
       }
     });
+
+
+
 
     ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
 
       @Override
 
       public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-
-        // 저는 0개를 주기싫어서, 만약 1개미만이면 강제로 1개를 넣었습니다.
-
+        // 1개 미만이면 강제로 1개를 넣었습니다.
         if (ratingBar.getRating()<1.0f){
-
           ratingBar.setRating(1);
-
         }
 
       }

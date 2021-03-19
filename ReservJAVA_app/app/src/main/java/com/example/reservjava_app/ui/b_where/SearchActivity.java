@@ -102,20 +102,6 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
     mLocationSource =
         new FusedLocationSource(this, PERMISSIONS_REQUEST_CODE);
 
-    //지도 객체 띄우기
-/*    FragmentManager fm = getSupportFragmentManager();
-    MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map);
-    if (mapFragment == null) {   // 이거 왜 건너뛰는거지;;; null을 not null로 강제 실행 시키려 해도 안됨
-      mapFragment = MapFragment.newInstance(new NaverMapOptions()
-              .camera(new CameraPosition(new LatLng(curAddr.latitude, curAddr.longitude), 16, 0, 90))
-          //기존에 접속 했던 곳의 위치 정보가 필요함
-          );
-
-      fm.beginTransaction().add(R.id.map, mapFragment).commit();
-    }
-    mapFragment.getMapAsync(this);*/
-
-
     //상단바 - 검색버튼(whereList로 이동)
     findViewById(R.id.search_searchBtn).setOnClickListener(new View.OnClickListener() {
       @Override
@@ -262,7 +248,7 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
         String name = dto.getBusiness_name();
         String addr = dto.getBusiness_addr();
         String avg = String.valueOf((dto.getBusiness_star_avg())/20);
-        String rNum = "123";
+        String rNum = dto.getBusiness_tel();
         int category = dto.getBusiness_category_code();
 
         View view = View.inflate(SearchActivity.this, R.layout.business_view_map, null);
