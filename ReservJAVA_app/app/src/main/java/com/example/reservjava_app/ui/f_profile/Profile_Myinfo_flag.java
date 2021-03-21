@@ -1,6 +1,5 @@
 package com.example.reservjava_app.ui.f_profile;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,12 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
-import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 
 import static com.example.reservjava_app.Common.CommonMethod.loginDTO;

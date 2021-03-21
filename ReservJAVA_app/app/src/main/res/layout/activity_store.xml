@@ -62,11 +62,11 @@
 
             <RatingBar
                 android:id="@+id/business_star_avg"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:numStars="5"
                 android:isIndicator="true"
-                />
+                android:layout_marginLeft="85dp"
+                android:numStars="5" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,24 +74,61 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/business_info"
+                    android:id="@+id/business_addr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="매장정보"
+                    android:gravity="center|left"
+                    android:text="주   소 : 광주시 서구 농성동 경열로3"
                     android:textColor="#03A9F4"
                     android:textSize="18dp" />
 
-                <Button
-                    android:id="@+id/testBtn"
+                <TextView
+                    android:id="@+id/business_tel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="임시페이지전환"
-                    app:backgroundTint="#A7D8FF"
-                    app:strokeColor="#FFF490"
-                    app:strokeWidth="2dp"
-                    android:fontFamily="@font/font"/>
+                    android:gravity="center|left"
+                    android:text="연락처 : 062-000-0000"
+                    android:textColor="#03A9F4"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/business_star"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:text="평    점 : 4.5"
+                    android:textColor="#03A9F4"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/business_review_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:text="리    뷰 : 123"
+                    android:textColor="#03A9F4"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/business_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:text="점심 특선 메뉴 있음, 5천원"
+                    android:textColor="#03A9F4"
+                    android:textSize="18dp" />
+
             </LinearLayout>
+
+            <Button
+                android:id="@+id/testBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font"
+                android:text="예약하기"
+                app:backgroundTint="#A7D8FF"
+                app:strokeColor="#FFF490"
+                app:strokeWidth="2dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/store_recycler"

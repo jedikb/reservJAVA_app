@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import com.example.reservjava_app.DTO.ReviewDTO;
 import com.example.reservjava_app.R;
 import com.google.android.material.tabs.TabLayout;
-import static com.example.reservjava_app.Common.CommonMethod.loginDTO;
 
 public class ProfileActivity extends AppCompatActivity {
   private static final String TAG = "main:ProfileActivity";
@@ -19,7 +18,6 @@ public class ProfileActivity extends AppCompatActivity {
   Profile_Myinfo_flag myinfo_flag;
   Profile_MyReview_flag myReview_flag;
   Profile_MyVisit_flag myVisit_flag;
-  //public ProgressDialog progressDialog = new ProgressDialog(ProfileActivity.this);
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

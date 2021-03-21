@@ -228,8 +228,8 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, JoinActivity.class);
                     startActivity(intent);
                 } else if (id == R.id.nav_qna) {
-                    Intent intent = new Intent(getApplicationContext(), QnAMainActivity.class);
-                    startActivity(intent);
+                    /*Intent intent = new Intent(getApplicationContext(), QnAMainActivity.class);
+                    startActivity(intent);*/
                 } else if (id == R.id.nav_membershipbtn) {
                     if (loginDTO == null) {
                         Toast.makeText(MainActivity.this, "로그인 되지 않았습니다", Toast.LENGTH_SHORT).show();

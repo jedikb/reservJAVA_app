@@ -21,51 +21,40 @@ import static com.example.reservjava_app.Common.CommonMethod.loginDTO;
 
 public class QnAMainActivity extends AppCompatActivity {
 
-    Button qnabtn, drawalbtn;
-    Toolbar toolbarqna;
-    ImageView backQnAbtn;
-
-    QnAFragment qnAFragment;
-    MainActivity activity;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qn_a_main);
 
-        qnabtn = findViewById(R.id.qnabtn);
-        qnAFragment =new QnAFragment();
+      //  qnabtn = findViewById(R.id.qnabtn);
+       /* qnAFragment =new QnAFragment();
         //문의하기 화면띄우기
         qnabtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-  /*              getSupportFragmentManager().beginTransaction()
-                    .replace(MainActivity, qnAFragment).commit();*/
+  *//*              getSupportFragmentManager().beginTransaction()
+                    .replace(MainActivity, qnAFragment).commit();*//*
             }
-        });
+        });*/
 
         //회원탈퇴 화면띄우기
-        drawalbtn = findViewById(R.id.drawalbtn);
+/*        drawalbtn = findViewById(R.id.drawalbtn);
         drawalbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(QnAMainActivity.this, MemberCancelActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         //백버튼 누르면 메인으로
-        backQnAbtn = findViewById(R.id.backQnAbtn);
-        backQnAbtn.setOnClickListener(new View.OnClickListener() {
+        //backQnAbtn = findViewById(R.id.backQnAbtn);
+/*        backQnAbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
-        });
-
-        //toolbarqna = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbarqna);
-
+        });*/
 
     }
 

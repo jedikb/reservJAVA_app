@@ -32,6 +32,7 @@ public class ProductAdapter extends
     private TextView product_text;
     private Button rev_item_btn;
     private Drawable check_img ;
+    //private ImageView check_img;
     private int position;
 
 
@@ -63,6 +64,7 @@ public class ProductAdapter extends
             @Override
             public void onClick(View v) {
                 product_text.setText(productList.get(position).getProduct_name());
+                //check_img.setImageBitmap(productList.get(position).getProduct_image());
                 dto = productList.get(position);
                 rev_item_btn.setCompoundDrawablesWithIntrinsicBounds(  null,null, check_img, null);
             }

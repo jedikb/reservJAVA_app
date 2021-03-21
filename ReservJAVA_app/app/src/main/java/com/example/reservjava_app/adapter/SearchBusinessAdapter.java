@@ -1,5 +1,6 @@
 package com.example.reservjava_app.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -17,11 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.reservjava_app.Common.CommonMethod;
 import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.R;
+import com.example.reservjava_app.reservation.Reservation;
 import com.example.reservjava_app.reservation.Store;
+import com.example.reservjava_app.ui.b_where.SearchActivity;
 
 import java.util.ArrayList;
 
 import static com.example.reservjava_app.Common.CommonMethod.busiList;
+import static com.example.reservjava_app.Common.CommonMethod.loginDTO;
 import static com.example.reservjava_app.ui.b_where.SearchActivity.busiSetItem;
 
 public class SearchBusinessAdapter extends
@@ -60,10 +64,22 @@ public class SearchBusinessAdapter extends
 
         busiSetItem = busiList.get(position);
 
-        Toast.makeText(mContext, busiList.get(position).getBusiness_name() + " 매장으로 이동합니다.", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(v.getContext(), Store.class);
+        Toast.makeText(mContext, busiList.get(position).getBusiness_name() + "로 예약을 시작합니다.", Toast.LENGTH_SHORT).show();
+        //역시 매장 화면으로 가야 하는데 우선은 그냥.... ㅠㅠ
+        //Toast.makeText(mContext, busiList.get(position).getBusiness_name() + " 매장으로 이동합니다.", Toast.LENGTH_SHORT).show();
+/*        Intent intent = new Intent(v.getContext(), Store.class);
         intent.putExtra("businessdto", busiSetItem);
-        v.getContext().startActivity(intent);
+        v.getContext().startActivity(intent);*/
+
+        if(loginDTO == null) {
+          CommonMethod.LoginPageCall((Activity) v.getContext());
+        }else {
+          Intent intent = new Intent(v.getContext(), Reservation.class);
+          intent.putExtra("business_code", busiSetItem.getBusiness_code());
+          v.getContext().startActivity(intent);
+          //finish();
+        }
+
       }
     });
   }
@@ -115,12 +131,10 @@ public class SearchBusinessAdapter extends
     public void setItem(BusinessDTO busiDTO) {
 
       String hashtag = null;
-      for (BusinessDTO dto: CommonMethod.busiList
-      ) {
+      for (BusinessDTO dto: CommonMethod.busiList) {
         if (dto.getBusiness_code() == busiDTO.getBusiness_code()){
           hashtag = dto.getBusiness_hashtag();
         }
-
       }
 
       if (hashtag.indexOf("병원") > -1) {

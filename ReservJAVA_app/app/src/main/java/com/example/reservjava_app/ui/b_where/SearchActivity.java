@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,8 +19,10 @@ import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.reservjava_app.Common.CommonMethod;
 import com.example.reservjava_app.DTO.BusinessDTO;
 import com.example.reservjava_app.R;
+import com.example.reservjava_app.reservation.Reservation;
 import com.example.reservjava_app.reservation.Store;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
@@ -281,11 +284,25 @@ public class SearchActivity extends AppCompatActivity implements NaverMap.OnMapC
         Marker marker = infoWindow.getMarker();
         BusinessDTO dto = (BusinessDTO) marker.getTag();
 
-        busiSetItem = dto;
+        //원래 매장 정보로 들어가야 하는데 우선은 바로 예약 페이지로 이동하자
+        //내 어설픈 실력으로 화면 만드는건 시간낭비다..... ㅋㅋ
+        //미안 난 잘하고 싶었어.....
+/*        busiSetItem = dto;
         Toast.makeText(SearchActivity.this, busiSetItem.getBusiness_name(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(SearchActivity.this, Store.class);
         intent.putExtra("businessdto", busiSetItem);
-        startActivity(intent);
+        startActivity(intent);*/
+
+
+        if(loginDTO == null) {
+          CommonMethod.LoginPageCall(SearchActivity.this);
+        }else {
+          Intent intent = new Intent(SearchActivity.this, Reservation.class);
+          intent.putExtra("business_code", dto.getBusiness_code());
+          startActivity(intent);
+          //finish();
+        }
+
         return false;
       }
     });

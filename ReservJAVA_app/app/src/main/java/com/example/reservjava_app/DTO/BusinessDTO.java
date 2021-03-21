@@ -34,8 +34,10 @@ public class BusinessDTO implements Serializable {
   }
 
   //SearchBusiness
-  public BusinessDTO(String business_name, String business_addr, double business_star_avg, double business_lat, double business_lng) {
+  public BusinessDTO(int business_code, String business_name, String business_hashtag, String business_addr, double business_star_avg, double business_lat, double business_lng) {
+    this.business_code = business_code;
     this.business_name = business_name;
+    this.business_hashtag = business_hashtag;
     this.business_addr = business_addr;
     this.business_star_avg = business_star_avg;
     this.business_lat = business_lat;

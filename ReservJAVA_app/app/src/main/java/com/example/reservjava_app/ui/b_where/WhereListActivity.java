@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,7 +32,7 @@ public class WhereListActivity extends AppCompatActivity {
   ProgressDialog progressDialog;
   String searchText;
   EditText wl_addrSearch;
-  Toolbar toolbar;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -65,7 +64,7 @@ public class WhereListActivity extends AppCompatActivity {
 
       for(BusinessDTO dto : busiList) {
         if( dto.getBusiness_name().indexOf(searchText) >-1 || dto.getBusiness_hashtag().indexOf(searchText) >-1) {
-          adapter.addItem(new BusinessDTO(dto.getBusiness_name(), dto.getBusiness_addr(), dto.getBusiness_star_avg(), dto.getBusiness_lat(), dto.getBusiness_lng() ));
+          adapter.addItem(new BusinessDTO(dto.getBusiness_code(), dto.getBusiness_name(), dto.getBusiness_hashtag(), dto.getBusiness_addr(), dto.getBusiness_star_avg(), dto.getBusiness_lat(), dto.getBusiness_lng() ));
         }
       }
 
@@ -74,7 +73,6 @@ public class WhereListActivity extends AppCompatActivity {
         wl_addrSearch.setText(null);
       }
     });
-    //addrSearch.requestFocus();
 
     // 엔터로 검색
     wl_addrSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -92,7 +90,7 @@ public class WhereListActivity extends AppCompatActivity {
 
       for(BusinessDTO dto : busiList) {
         if( dto.getBusiness_name().indexOf(searchText) >-1 || dto.getBusiness_hashtag().indexOf(searchText) >-1) {
-          adapter.addItem(new BusinessDTO(dto.getBusiness_name(), dto.getBusiness_addr(), dto.getBusiness_star_avg(), dto.getBusiness_lat(), dto.getBusiness_lng() ));
+          adapter.addItem(new BusinessDTO(dto.getBusiness_code(), dto.getBusiness_name(), dto.getBusiness_hashtag(), dto.getBusiness_addr(), dto.getBusiness_star_avg(), dto.getBusiness_lat(), dto.getBusiness_lng() ));
         }
       }
 

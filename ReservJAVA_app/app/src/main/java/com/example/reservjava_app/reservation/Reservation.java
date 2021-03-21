@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.WallpaperManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -39,6 +41,7 @@ import com.example.reservjava_app.reservation.decorators.OneDayDecorator;
 import com.example.reservjava_app.reservation.decorators.SaturdayDecorator;
 import com.example.reservjava_app.reservation.decorators.SundayDecorator;
 import com.example.reservjava_app.ui.b_where.WhereListActivity;
+import com.example.reservjava_app.ui.f_profile.ModProfileActivity;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -450,4 +453,19 @@ public class Reservation extends AppCompatActivity implements View.OnClickListen
         }
     }
 
+    //뒤로가기 버튼
+    public void onBackPressed() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Reservation.this);
+        builder.setMessage("정말 취소하시겠습니까?");
+        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+                Toast.makeText(Reservation.this, "취소되었습니다", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNeutralButton("아니요", null);
+        builder.create().show();
+    }
 }

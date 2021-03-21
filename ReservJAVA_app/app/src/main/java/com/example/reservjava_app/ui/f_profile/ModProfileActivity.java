@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.example.reservjava_app.ATask.MemberUpdate;
 import com.example.reservjava_app.Common.CommonMethod;
 import com.example.reservjava_app.R;
+import com.example.reservjava_app.reservation.Reservation;
 
 import java.io.File;
 import java.io.IOException;
@@ -313,7 +314,6 @@ public class ModProfileActivity extends AppCompatActivity {
                         Intent.FLAG_ACTIVITY_SINGLE_TOP | // 엑티비티를 호출할 경우 호출된 엑티비티가 현재 태스크의 최상단에 존재하고 있었다면 새로운 인스턴스를 생성하지 않습니다. 예를 들어 ABC가 엑티비티 스택에 존재하는 상태에서 C를 호출하였다면 여전히 ABC가 존재하게 됩니다.
                         Intent.FLAG_ACTIVITY_CLEAR_TOP); // 만약에 엑티비티스택에 호출하려는 엑티비티의 인스턴스가 이미 존재하고 있을 경우에 새로운 인스턴스를 생성하는 것 대신에 존재하고 있는 엑티비티를 포그라운드로 가져옵니다. 그리고 엑티비티스택의 최상단 엑티비티부터 포그라운드로 가져올 엑티비티까지의 모든 엑티비티를 삭제합니다.
           startActivity(showIntent);
-
           finish();
         }else{
           // 알림창 띄움
@@ -338,9 +338,31 @@ public class ModProfileActivity extends AppCompatActivity {
 
   //취소 버튼(프로필 화면으로 돌아간다)
   public void mod_cancelBtnClicked(View view){
-    Toast.makeText(ModProfileActivity.this, "취소되었습니다", Toast.LENGTH_SHORT).show();
-    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-    startActivity(intent);
-    finish();
+    AlertDialog.Builder builder = new AlertDialog.Builder(ModProfileActivity.this);
+    builder.setMessage("정말 취소하시겠습니까?");
+    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialog, int which) {
+        finish();
+        Toast.makeText(ModProfileActivity.this, "취소되었습니다", Toast.LENGTH_SHORT).show();
+      }
+    });
+    builder.setNeutralButton("아니요", null);
+    builder.create().show();
+  }
+
+  //뒤로가기 버튼
+  public void onBackPressed() {
+
+    AlertDialog.Builder builder = new AlertDialog.Builder(ModProfileActivity.this);
+    builder.setMessage("정말 취소하시겠습니까?");
+    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialog, int which) {
+        finish();
+      }
+    });
+    builder.setNeutralButton("아니요", null);
+    builder.create().show();
   }
 }
