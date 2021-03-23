@@ -1,7 +1,10 @@
 package com.example.reservjava_app.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +17,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.reservjava_app.DTO.ProductDTO;
 import com.example.reservjava_app.Listner.OnItemClickListener;
 import com.example.reservjava_app.R;
+import com.example.reservjava_app.reservation.Reservation;
 
+import java.io.File;
 import java.util.ArrayList;
+
+import static com.example.reservjava_app.Common.CommonMethod.loginDTO;
 
 public class ProductAdapter extends
         RecyclerView.Adapter<ProductAdapter.ViewHolder>{
@@ -32,7 +40,6 @@ public class ProductAdapter extends
     private TextView product_text;
     private Button rev_item_btn;
     private Drawable check_img ;
-    //private ImageView check_img;
     private int position;
 
 
@@ -85,21 +92,12 @@ public class ProductAdapter extends
         productList.add(productDTO);
     }
 
-    //메인에서 접근하는 메소드
-//    public void setOnItemClickListener(OnItemClickListener listener){
-//        this.listener = listener;
-//    }
-
-
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView product_image;
         TextView product_name;
         TextView product_price;
 
         public LinearLayout parentLayout;
-
-
 
         public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -108,18 +106,16 @@ public class ProductAdapter extends
             product_price = itemView.findViewById(R.id.product_price);
             parentLayout = itemView.findViewById(R.id.product_list_lay);
 
-
-
         }
 
         public void onBind(ProductDTO productDTO){
-            Log.d("main: ", "onBind: " + productDTO.getProduct_name() + productDTO.getProduct_price());
             String name = productDTO.getProduct_name();
             int price = productDTO.getProduct_price();
+            Glide.with(itemView.getContext()).load(productDTO.getProduct_image_path()).error(R.drawable.food1).into(product_image);
+            //Log.d("main: ", "onBind: " + productDTO.getProduct_image_path());
             product_name.setText(name);
             product_price.setText(price + "원");
         }
-
 
     }
 

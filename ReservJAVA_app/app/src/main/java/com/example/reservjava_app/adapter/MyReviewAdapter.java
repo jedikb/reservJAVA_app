@@ -120,9 +120,7 @@ public class MyReviewAdapter extends
       ) {
         if (dto.getBusiness_code() == reviewDTO.getBooking_business_code()){
           hashtag = dto.getBusiness_hashtag();
-
         }
-
       }
 
       if (hashtag.indexOf("병원") > -1) {

@@ -6,7 +6,15 @@ public class ProductDTO implements Serializable {
   private int product_code, product_business_code;
   private String product_name;
   private int product_price, product_price_deposit, product_stock;
-  private  String product_image, product_info, product_time;
+  private  String product_image, product_info, product_time, product_image_path;
+
+  public String getProduct_image_path() {
+    return product_image_path;
+  }
+
+  public void setProduct_image_path(String product_image_path) {
+    this.product_image_path = product_image_path;
+  }
 
   public int getProduct_code() {
     return product_code;
@@ -80,7 +88,7 @@ public class ProductDTO implements Serializable {
     this.product_time = product_time;
   }
 
-  public ProductDTO(int product_code, int product_business_code, String product_name, int product_price, int product_price_deposit, int product_stock, String product_image, String product_info, String product_time) {
+  public ProductDTO(int product_code, int product_business_code, String product_name, int product_price, int product_price_deposit, int product_stock, String product_image, String product_image_path, String product_info, String product_time) {
     this.product_code = product_code;
     this.product_business_code = product_business_code;
     this.product_name = product_name;
@@ -90,6 +98,7 @@ public class ProductDTO implements Serializable {
     this.product_image = product_image;
     this.product_info = product_info;
     this.product_time = product_time;
+    this.product_image_path = product_image_path;
   }
 
 

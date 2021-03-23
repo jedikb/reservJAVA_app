@@ -250,7 +250,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id == R.id.nav_listchk) {
                     if (loginDTO != null) {
                         bottomNavigationView.setSelectedItemId(R.id.listItem);
-                        Toast.makeText(MainActivity.this, "2", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "2", Toast.LENGTH_SHORT).show();
                     }else{
                         CommonMethod.LoginPageCall(MainActivity.this);
                     }

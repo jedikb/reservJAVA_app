@@ -131,7 +131,7 @@ public class ProductSelect extends AsyncTask<Void, Void, Void> {
         int product_code = 0, product_business_code = 0;
         String product_name = "";
         int product_price =0, product_price_deposit =0, product_stock=0;
-        String product_image ="", product_info="", product_time="";
+        String product_image ="", product_image_path ="", product_info="", product_time="";
 
         reader.beginObject();
         while (reader.hasNext()){
@@ -150,6 +150,9 @@ public class ProductSelect extends AsyncTask<Void, Void, Void> {
                 product_stock = reader.nextInt();
             }else if(readStr.equals("product_image")){
                 product_image = reader.nextString();
+            }else if(readStr.equals("product_image_path")){
+                product_image_path = ipConfig +"/reserv/" + reader.nextString();
+                Log.d("aa : ", product_image_path);
             }else if(readStr.equals("product_info")){
                 product_info = reader.nextString();
             }else if(readStr.equals("product_time")){
@@ -160,6 +163,6 @@ public class ProductSelect extends AsyncTask<Void, Void, Void> {
         }
         reader.endObject();
         return new ProductDTO(product_code, product_business_code, product_name, product_price, product_price_deposit
-                , product_stock, product_image, product_info, product_time);
+                , product_stock, product_image, product_image_path, product_info, product_time);
     }
 }

@@ -6,12 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.app.WallpaperManager;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -24,6 +21,7 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +30,6 @@ import com.example.reservjava_app.ATask.ProductSelect;
 import com.example.reservjava_app.ATask.Timelist;
 import com.example.reservjava_app.DTO.ProductDTO;
 import com.example.reservjava_app.Listner.TimeItemClickListener;
-import com.example.reservjava_app.MainActivity;
 import com.example.reservjava_app.R;
 import com.example.reservjava_app.adapter.ProductAdapter;
 import com.example.reservjava_app.adapter.TimeListAdapter;
@@ -40,8 +37,6 @@ import com.example.reservjava_app.reservation.decorators.EventDecorator;
 import com.example.reservjava_app.reservation.decorators.OneDayDecorator;
 import com.example.reservjava_app.reservation.decorators.SaturdayDecorator;
 import com.example.reservjava_app.reservation.decorators.SundayDecorator;
-import com.example.reservjava_app.ui.b_where.WhereListActivity;
-import com.example.reservjava_app.ui.f_profile.ModProfileActivity;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -63,7 +58,7 @@ import static com.example.reservjava_app.Common.CommonMethod.loginDTO;
 
 
 public class Reservation extends AppCompatActivity implements View.OnClickListener {
-
+    private static final String TAG = "Reser: ";
     ProductSelect productSelect;
     Timelist timelistAsync;
     BookingInsert bookinginsert;
@@ -82,6 +77,7 @@ public class Reservation extends AppCompatActivity implements View.OnClickListen
     Button reservBtn, cancleBtn , rev_btn_date , rev_btn_time , rev_btn_item;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
     private Drawable check_img ;
+    private ImageView check_img1;
     MaterialCalendarView materialCalendarView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +86,7 @@ public class Reservation extends AppCompatActivity implements View.OnClickListen
         Intent getintent = getIntent();
         //Check img 값 선택시 이미지 변경용
         check_img = this.getResources().getDrawable( R.drawable.check_img);
+        check_img1 = findViewById(R.id.product_image);
 
         business_code = getintent.getIntExtra("business_code", -1);
         rev_btn_date = findViewById(R.id.rev_btn_date);
@@ -208,13 +205,9 @@ public class Reservation extends AppCompatActivity implements View.OnClickListen
 
                     productAdapter.setproduct_text(product_text);
                     productAdapter.setProduct_item(rev_btn_item,check_img);
-
                 }
             });
         }
-
-
-
 
         //상품리스트 표시
 
@@ -290,7 +283,6 @@ public class Reservation extends AppCompatActivity implements View.OnClickListen
                         Log.d("bookingInsert", "예약에 실패하였습니다");
                         finish();
                     }
-
                     finish();
                 }//if else
             }
@@ -339,9 +331,6 @@ public class Reservation extends AppCompatActivity implements View.OnClickListen
                 dates.add(day);
                 calendar.set(year,month-1,dayy);
             }
-
-
-
             return dates;
         }
 
