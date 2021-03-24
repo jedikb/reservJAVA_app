@@ -34,7 +34,6 @@ public class BookingDelete extends AsyncTask<Void, Void, String> {
     // 사진 정보 추가
     String booking_code;
 
-
     public BookingDelete(String booking_code, String state) {
         this.booking_code = booking_code;
         this.state = state;

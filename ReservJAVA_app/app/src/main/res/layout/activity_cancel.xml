@@ -261,16 +261,16 @@
                 android:layout_height="match_parent"
                 android:backgroundTint="#ffffff">
 
-            <RatingBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="?android:attr/ratingBarStyleSmall"
-                android:id="@+id/info_avg_star"
-                android:isIndicator="true"
-                android:stepSize="0.5"
-                android:padding="15dp"
-                android:background="#ffffff"
-                android:numStars="5"/>
+                <RatingBar
+                    android:id="@+id/info_avg_star"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:padding="15dp"
+                    android:stepSize="0.5" />
                 <TextView
                     android:id="@+id/tv_9"
                     android:layout_width="match_parent"

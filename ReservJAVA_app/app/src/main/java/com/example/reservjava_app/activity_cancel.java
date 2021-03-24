@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -107,6 +108,7 @@ public class activity_cancel extends AppCompatActivity {
              tv9.setText(sstar_val);
           //  int star_vv = Integer.parseInt( star_val+"" );
             info_avg_star.setRating(istar_val);
+        Log.d("info_avg_star : ", "onCreate: " + istar_val);
 
     /*    SearchBusiness searchBusiness = new SearchBusiness(busiList, "", progressDialog, adapter);
         searchBusiness.execute().get();*/

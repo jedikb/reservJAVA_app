@@ -32,7 +32,7 @@ public class Profile_MyVisit_flag extends Fragment {
                 .inflate(R.layout.profile__my_visit_flag, container, false);
 
         ArrayList<ReviewDTO> RevList = new ArrayList<>();
-        // 이런 거 없애야 함.. 매번 입력하면 시간이 느려짐
+
         for (ReviewDTO dto : reviewDTOS) {
             if(dto.getBooking_kind() == 4){
                 RevList.add(dto);

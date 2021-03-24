@@ -264,6 +264,7 @@ public class Reservation extends AppCompatActivity implements View.OnClickListen
                     //작동
                     bookinginsert = new BookingInsert(loginDTO.getMember_code(), business_code, productDTO.getProduct_code(), productDTO.getProduct_price(), productDTO.getProduct_price_deposit()
                             , person, Resrv_date + " " + time , edt_etc.getText() + "");
+                    //Log.d(TAG, "onClick: time : " + time);
                     try {
                         state = bookinginsert.execute().get().trim();
                     } catch (ExecutionException e) {
@@ -292,7 +293,18 @@ public class Reservation extends AppCompatActivity implements View.OnClickListen
         cancleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(Reservation.this);
+                builder.setMessage("정말 취소하시겠습니까?");
+                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                        Toast.makeText(Reservation.this, "취소되었습니다", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setNeutralButton("아니요", null);
+                builder.create().show();
             }
         });
 
